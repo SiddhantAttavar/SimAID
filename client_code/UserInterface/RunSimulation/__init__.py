@@ -14,6 +14,7 @@ class RunSimulation(RunSimulationTemplate):
     # Any code you write here will run when the form opens.
     
   def drawFrame(self, frame):
+    print(frame)
     '''This method draws a frame on the canvas'''
     self.canvas.background = 'black'
     
