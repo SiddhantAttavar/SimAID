@@ -7,6 +7,6 @@ allow_embedding: false
 name: Epidemic Simulator
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
-startup_form: Main
+startup_form: UserInterface.Main
 db_schema: []
 renamed: true
