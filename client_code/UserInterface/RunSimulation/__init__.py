@@ -16,8 +16,13 @@ class RunSimulation(RunSimulationTemplate):
   def drawFrame(self, frame):
     '''This method draws a frame on the canvas'''
     self.canvas.background = 'black'
-    self.canvas.arc(50, 50, 5)
+    
+    for person in frame.people:
+      self.canvas.arc(person.x, person.y, 5)
+      self.canvas.fill_style = 'blue'
+      self.canvas.fill()
 
   def onRunSimulationButtonClick(self, **event_args):
     '''This method is called when the button is clicked'''
-    self.drawFrame('')
+    frame = server.call('getFrame')
+    self.drawFrame(frame)
