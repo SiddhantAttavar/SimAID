@@ -13,7 +13,7 @@ class Main(MainTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
-    self.sidebar.
+    
 
   def onSimulationControlsLinkClick(self, **event_args):
     """This method is called when the simulation controls link in the navbar is clicked"""
