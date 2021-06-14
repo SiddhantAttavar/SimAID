@@ -12,3 +12,7 @@ class Frame:
 @server.portable_class('Person')
 class Person():
   pass
+
+@server.portable_class('State')
+class State():
+  pass
