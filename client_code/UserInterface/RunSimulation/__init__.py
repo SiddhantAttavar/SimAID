@@ -4,6 +4,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
+from time import sleep
 
 class RunSimulation(RunSimulationTemplate):
   def __init__(self, **properties):
@@ -11,8 +12,11 @@ class RunSimulation(RunSimulationTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
-
-  def onRunSimulationButtonClick(self, **event_args):
-    """This method is called when the button is clicked"""
+    
+  def drawFrame(self, frame):
+    '''This method draws a frame on the canvas'''
     pass
 
+  def onRunSimulationButtonClick(self, **event_args):
+    '''This method is called when the button is clicked'''
+    pass
