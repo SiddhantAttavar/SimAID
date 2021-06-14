@@ -1,3 +1,9 @@
-container: {type: ColumnPanel}
-components: []
+container:
+  type: ColumnPanel
+  properties: {col_widths: '{}'}
+components:
+- type: ColumnPanel
+  properties: {}
+  name: root
+  layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
 is_package: true

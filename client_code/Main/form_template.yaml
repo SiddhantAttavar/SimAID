@@ -31,7 +31,7 @@ components:
       icon: ''}
     name: simulationControlsLink
     layout_properties: {grid_position: 'LBMOVW,BTHRAP'}
-    event_bindings: {click: onOptionsLinkClick}
+    event_bindings: {click: onSimulationControlsLinkClick}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Run Simulation, font_size: null, wrap_on: mobile, font: '',
