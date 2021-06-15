@@ -1,6 +1,7 @@
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
+  event_bindings: {}
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
