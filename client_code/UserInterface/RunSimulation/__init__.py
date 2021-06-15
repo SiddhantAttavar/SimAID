@@ -1,3 +1,4 @@
+from ._anvil_designer import RunSimulationTemplate
 from ._anvil_designer import RunSimulationTemplate # type: ignore
 from anvil import *
 import anvil.tables as tables
