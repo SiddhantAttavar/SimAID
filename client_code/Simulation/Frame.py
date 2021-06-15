@@ -30,15 +30,3 @@ class Frame:
         # Iterate through the list and increment the state count
         for person in self.people:
             self.stateCounts[person.state] += 1
-        
-    def __serialize__(self, global_data):
-        """Serialize the data of the frame to send to anvil"""
-        return {
-            'people': [person.__serialize__('') for person in self.people],
-            'stateCounts': self.stateCounts
-        }
-
-    def __deserialize__(self, data, globalData):
-        """Deserialize the data of the frame to initialize the object"""
-        self.__init__([Person.__deserialize__(person, '') for person in data['people']],)
-        self.stateCounts = data['stateCounts']

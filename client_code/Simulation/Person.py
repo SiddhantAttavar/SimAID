@@ -68,15 +68,3 @@ class Person:
         self.x = startX
         self.y = startY
         self.state = Person.State.SUSCEPTIBLE
-
-    def __serialize__(self, globalData):
-        """Serialize the data of the person to send to anvil"""
-        return {
-            'location': [self.x, self.y],
-            'state': self.state
-        }
-    
-    def __deserialize__(self, data, globalData):
-        """Deserialize the data of the person to initialize the object"""
-        self.__init__(*data['location'])
-        self.state = data['state']
