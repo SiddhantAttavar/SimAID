@@ -1,4 +1,4 @@
-from .Person import Person
+from Person import Person
 
 class Frame:
     """Stores information about each frame in the simulation.
@@ -33,7 +33,7 @@ class Frame:
         self.people = people
         self.stateCounts = {}
 
-        for state in Person.State.states:
+        for state in Person.states:
             self.stateCounts[state] = 0
 
         # Iterate through the list and increment the state count
