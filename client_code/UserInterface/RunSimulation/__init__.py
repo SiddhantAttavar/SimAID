@@ -26,4 +26,32 @@ class RunSimulation(RunSimulationTemplate):
   def onRunSimulationButtonClick(self, **event_args):
     '''This method is called when the button is clicked'''
     frame = server.call('getFrame')
-    self.drawFrame(frame)
+    #self.drawFrame(frame)
+    print(frame.x.x)
+
+@server.portable_class('Bar')
+class Bar:
+    x = 0
+
+    def __serialize__(self, globalData):
+        return {
+            'x': self.x
+        }
+    
+    def __deserialize__(self, data, globalData):
+        self.__init__()
+        self.x = data['x']
+
+@server.portable_class('Foo')
+class Foo:
+    x = Bar()
+
+    def __serialize__(self, globalData):
+        return {
+            'x': self.x.__serialize__(globalData)
+        }
+    
+    def __deserialize__(self, data, globalData):
+        self.__init__()
+        self.x = Bar()
+        self.x.__deserialize__(data['x'], globalData)
