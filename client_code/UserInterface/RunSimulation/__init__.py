@@ -4,6 +4,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
+from time import sleep
 
 from ...Simulation.Simulation import Simulation
 
@@ -45,13 +46,9 @@ class RunSimulation(RunSimulationTemplate):
 
     # Any code you write here will run when the form opens.
     # Initialize the canvas dimensions
-    self.width = self.canvas.get_width()
-    self.height = self.canvas.get_height()
+    self.width = 460
+    self.height = 460
     
-    # Make the canvas black
-    self.canvas.background = 'black'
-    
-    print(self.runSimulationButton.width)
     
   def drawFrame(self, frame):
     """This method draws a frame on the canvas.
@@ -71,12 +68,15 @@ class RunSimulation(RunSimulationTemplate):
     -------
     None
     """
-
-    # Initialize the canvas with a black background
+    
     self.canvas.background = 'black'
+    self.canvas.clear_rect(0, 0, self.width, self.height)
     
     # Draw each person on the canvas as a dot
     for person in frame.people:
+      # Initialize the canvas with a black background
+      print(person.x, person.y)
+      self.canvas.begin_path()
       self.canvas.arc(person.x * self.width, person.y * self.height, 5)
       self.canvas.fill_style = person.state.color
       self.canvas.fill()
@@ -98,3 +98,4 @@ class RunSimulation(RunSimulationTemplate):
     simulation = Simulation()
     for frame in simulation.run():
       self.drawFrame(frame)
+      sleep(0.5)
