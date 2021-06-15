@@ -1,0 +1,37 @@
+container:
+  type: ColumnPanel
+  event_bindings: {}
+  properties: {col_widths: '{}'}
+components:
+- type: ColumnPanel
+  properties: {col_widths: '{}'}
+  name: root
+  layout_properties: {grid_position: 'MNLSTS,XPINTL'}
+  event_bindings: {}
+  components:
+  - type: Button
+    properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: Run SImulation, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: runSimulationButton
+    layout_properties:
+      col_widths: {}
+      grid_position: DUYPOC,NUOPRW
+    event_bindings: {click: onRunSimulationButtonClick}
+  - type: Plot
+    properties: {}
+    name: graph
+    layout_properties:
+      col_widths: {}
+      grid_position: PZQCLM,GKTGDR
+    event_bindings: {}
+  - type: Canvas
+    properties: {role: null, height: '450', tooltip: '', border: '', foreground: '',
+      visible: true, spacing_above: small, spacing_below: small, background: ''}
+    name: canvas
+    layout_properties:
+      col_widths: {}
+      grid_position: PZQCLM,KTRPOB
+    event_bindings: {}
+is_package: true
