@@ -73,8 +73,7 @@ class RunSimulation(RunSimulationTemplate):
     # Draw each person on the canvas as a dot
     for person in frame.people:
       self.canvas.arc(person.x * self.width, person.y * self.height, 5)
-      self.canvas.fill_style = 'blue'
-      print(person.state.color)
+      self.canvas.fill_style = person.state.color
       self.canvas.fill()
 
   def onRunSimulationButtonClick(self, **event_args):
