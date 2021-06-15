@@ -1,7 +1,7 @@
 from anvil import server
 
 class Person:
-    """Store variables and methods for Person.
+    """Stores variables and methods for Person.
 
     The person class is used to store variables
     and methods for each person / agent
@@ -19,6 +19,8 @@ class Person:
 
     Methods
     -------
+    __init__()
+        Initializes the person object with some properties
     
     Classes
     -------
@@ -27,12 +29,13 @@ class Person:
     """
 
     class State:
-        """Enum which contains various states of the disease
+        """Enum which contains various states of the disease and their colors
         
-        The disease states are:
-            SUSCEPTIBLE - The person can contract the disease
-            EXPOSED - The person has contracted the disease but is asymptomatic
-            INFECTED - The person has contracted the disease and is symptomatic
+        STATES
+        ------
+            SUSCEPTIBLE : The person can contract the disease
+            EXPOSED : The person has contracted the disease but is asymptomatic
+            INFECTED : The person has contracted the disease and is symptomatic
             RECOVERED - The person no longer has the disease and is immune
             DEAD - The person has died from the disease
             VACCINATED - The person has been vaccinated and is immune
@@ -55,7 +58,7 @@ class Person:
         ]
 
     def __init__(self, startX, startY):
-        """Set some initial parameters for the person.
+        """Sets some initial parameters for the person.
 
         Parameters
         ----------
@@ -63,6 +66,10 @@ class Person:
             The starting X coordinate
         startY : int
             The starting Y coordinate
+        
+        Returns
+        -------
+        None
         """
 
         self.x = startX
