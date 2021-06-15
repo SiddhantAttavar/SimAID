@@ -1,3 +1,4 @@
+from ._anvil_designer import RunSimulationTemplate
 from ._anvil_designer import RunSimulationTemplate # type: ignore
 from anvil import *
 import anvil.tables as tables
@@ -44,9 +45,14 @@ class RunSimulation(RunSimulationTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
-    # Initializes the canvas dimensions
+    # Initialize the canvas dimensions
     self.width = self.canvas.get_width()
     self.height = self.canvas.get_height()
+    
+    # Make the canvas black
+    self.canvas.background = 'black'
+    
+    print(self.runSimulationButton.width)
     
   def drawFrame(self, frame):
     """This method draws a frame on the canvas.

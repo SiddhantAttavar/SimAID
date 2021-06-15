@@ -1,0 +1,11 @@
+components:
+- type: ColumnPanel
+  properties: {col_widths: '{}'}
+  name: root
+  layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
+  components: []
+  event_bindings: {}
+container:
+  type: ColumnPanel
+  properties: {col_widths: '{}'}
+  event_bindings: {}
