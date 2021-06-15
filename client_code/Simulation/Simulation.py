@@ -1,7 +1,7 @@
 from random import random
 
-from Frame import Frame
-from Person import Person
+from .Frame import Frame
+from .Person import Person
 
 class Simulation:
     """Parameters and methods for the simulation.

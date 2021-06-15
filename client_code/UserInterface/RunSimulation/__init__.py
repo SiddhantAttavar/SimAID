@@ -5,7 +5,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
 
-from ...Simulation import Simulation
+from ..Simulation import Simulation
 
 class RunSimulation(RunSimulationTemplate):
   """Class which changes the UI in the RunSimulation form.
