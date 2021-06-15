@@ -18,7 +18,7 @@ class RunSimulation(RunSimulationTemplate):
   def drawFrame(self, frame):
     '''This method draws a frame on the canvas'''
     self.canvas.background = 'black'
-    
+    s
     for person in frame.people:
       self.canvas.arc(person.x, person.y, 5)
       self.canvas.fill_style = 'blue'
