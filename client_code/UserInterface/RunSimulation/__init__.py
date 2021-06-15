@@ -4,22 +4,66 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
-from time import sleep
 
 from ...Simulation import Simulation
 
 class RunSimulation(RunSimulationTemplate):
+  """Class which changes the UI in the RunSimulation form.
+  
+  Attributes
+  ----------
+
+  Methods
+  -------
+  __init__(**properties)
+    Initializes the run simulation form
+  drawFrame(frame)
+    Draws a frame on the UI
+  """
+
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
+    """Initializes the run simulation
+    
+    Called when the RunSimulation form is created.
+    Sets Form properties and Data Bindings and then
+    runs any other code for initializing the form.
+
+    Parameters
+    ----------
+    **properties
+      The UI properties of the form
+    
+    Returns
+    -------
+    None
+    """
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
     
   def drawFrame(self, frame):
-    print(frame)
-    '''This method draws a frame on the canvas'''
+    """This method draws a frame on the canvas.
+    
+    For each frame, we are doing 2 things
+    The first task is to draw each person in the frame 
+    on the grid, in its appropriate color
+    The second task is to plot the total number of people
+    from each compartment on the graph in their respective colors
+
+    Parameters
+    ----------
+    frame
+      The frame to draw
+    
+    Returns
+    -------
+    None
+    """
+
+    # Initialize the canvas with a black background
     self.canvas.background = 'black'
     
+    # Draw each person on the canvas as a dot
     for person in frame.people:
       self.canvas.arc(person.x, person.y, 5)
       self.canvas.fill_style = 'blue'
@@ -27,5 +71,5 @@ class RunSimulation(RunSimulationTemplate):
 
   def onRunSimulationButtonClick(self, **event_args):
     '''This method is called when the button is clicked'''
-    frame = Simulation.getFrame()
-    self.drawFrame(frame)
+    for frame in Simulation.run():
+      self.drawFrame(frame)

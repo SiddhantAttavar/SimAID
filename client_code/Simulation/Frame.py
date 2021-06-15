@@ -1,7 +1,7 @@
 from .Person import Person
 
 class Frame:
-    """Store information about each frame in the simulation.
+    """Stores information about each frame in the simulation.
 
     Attributes
     ----------
@@ -9,15 +9,24 @@ class Frame:
         list of people in the population
     stateCounts : dict(Person.State, int)
         A count of number of people in each state
+
+    Methods
+    -------
+    __init__(people)
+        Initializes the Frame object with some properties
     """
 
     def __init__(self, people):
-        """Set some initial parameters for the frame.
+        """Sets some initial parameters for the frame.
         
         Parameters
         ----------
         people : list(Person.State)
             list of people in the population in the current frame
+        
+        Returns
+        -------
+        None
         """
 
         # Initialize the variables and set every state in Person.State to 0
