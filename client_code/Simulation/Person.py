@@ -1,4 +1,5 @@
 from anvil import server
+from enum import Enum
 
 class Person:
     """Stores variables and methods for Person.
@@ -21,15 +22,15 @@ class Person:
     -------
     __init__()
         Initializes the person object with some properties
-    
-    Classes
-    -------
+
+    Enums
+    -----
     State
-        An enum which stores the different states a person can have
+        The state of the person
     """
 
-    class State:
-        """Enum which contains various states of the disease and their colors
+    class State(Enum):
+        """Enum which contains various states of the disease and their colors.
         
         STATES
         ------
@@ -41,21 +42,12 @@ class Person:
             VACCINATED - The person has been vaccinated and is immune
         """
 
-        SUSCEPTIBLE = '0'
-        EXPOSED = '1'
-        INFECTED = '2'
-        RECOVERED = '3'
-        DEAD = '4'
-        VACCINATED = '5'
-
-        states = [
-            SUSCEPTIBLE,
-            EXPOSED,
-            INFECTED,
-            RECOVERED,
-            DEAD,
-            VACCINATED
-        ]
+        SUSCEPTIBLE = 'green'
+        EXPOSED = 'orange'
+        INFECTED = 'red'
+        RECOVERED = 'blue'
+        DEAD = 'gray'
+        VACCINATED = 'yellow'
 
     def __init__(self, startX, startY):
         """Sets some initial parameters for the person.
