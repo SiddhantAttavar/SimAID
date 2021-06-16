@@ -3,10 +3,11 @@ from anvil import *
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import plotly.graph_objects as go
+from plotly import graph_objects as go
 from time import sleep
 
 from ...Simulation.Simulation import Simulation
+from ...Simulation.Person import Person
 
 class RunSimulation(RunSimulationTemplate):
   """Class which changes the UI in the RunSimulation form.
@@ -19,6 +20,10 @@ class RunSimulation(RunSimulationTemplate):
     The height of the canvas
   timePerFrame : float
     The number of second each frame is displayed for
+  graphXData : list(int)
+    The data in the X axis of the graph
+  graphYData : list(tuple(int))
+    The data in the Y axis of the graph
 
   Methods
   -------
@@ -49,7 +54,7 @@ class RunSimulation(RunSimulationTemplate):
     # Any code you write here will run when the form opens.
     self.timePerFrame = 0.5
     
-  def drawFrame(self, frame):
+  def drawFrame(self, frame, frameCount):
     """This method draws a frame on the canvas.
     
     For each frame, we are doing 2 things
@@ -62,6 +67,8 @@ class RunSimulation(RunSimulationTemplate):
     ----------
     frame
       The frame to draw
+    frameCount
+      The current frame count in the simulation
     
     Returns
     -------
@@ -78,6 +85,19 @@ class RunSimulation(RunSimulationTemplate):
       self.canvas.arc(person.x * self.width, person.y * self.height, 5)
       self.canvas.fill_style = person.state.color
       self.canvas.fill()
+    
+    # Plot the result on the graph
+    self.graphXData.append(frameCount)
+    for stateID, stateCount in frame.stateCounts:
+      self.graphYData[stateID].append(stateCount)
+      figure = go.Figure(
+        data = go.Scatter(
+          x = self.graphXData,
+          y = self.graphYData[stateID]
+        ),
+        color = Person.states[stateID].color
+      )
+      self.graph.data = [figure]
 
   def onRunSimulationButtonClick(self, **event_args):
     """This method is called when the button is clicked
@@ -91,11 +111,15 @@ class RunSimulation(RunSimulationTemplate):
     -------
     None
     """
+
+    # Initialize arrays for graphing the results
+    self.graphXData = []
+    self.graphYData = []
     
     # Created a simulation object and runs the simulation
     simulation = Simulation()
-    for frame in simulation.run():
-      self.drawFrame(frame)
+    for frameCount, frame in enumerate(simulation.run()):
+      self.drawFrame(frame, frameCount + 1)
       sleep(self.timePerFrame)
 
   def onCanvasShow(self, **event_args):

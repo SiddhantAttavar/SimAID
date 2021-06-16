@@ -31,11 +31,11 @@ class Frame:
 
         # Initialize the variables and set every state in Person.State to 0
         self.people = people
-        self.stateCounts = {}
+        self.stateCounts = []
 
         for state in Person.states:
-            self.stateCounts[state] = 0
+            self.stateCounts[state.id] = 0
 
         # Iterate through the list and increment the state count
         for person in self.people:
-            self.stateCounts[person.state] += 1
+            self.stateCounts[person.state.id] += 1
