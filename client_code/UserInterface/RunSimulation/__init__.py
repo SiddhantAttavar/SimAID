@@ -8,6 +8,7 @@ from time import sleep
 
 from ...Simulation.Simulation import Simulation
 from ...Simulation.Person import Person
+from ...Simulation.Params import Params
 
 class RunSimulation(RunSimulationTemplate):
   """Class which changes the UI in the RunSimulation form.
@@ -55,8 +56,8 @@ class RunSimulation(RunSimulationTemplate):
     self.timePerFrame = 0.5
     
     # Initialize the canvas dimensions
-    self.canvasWidth = 466
-    self.canvasHeight = 466
+    self.canvasWidth = self.canvas.get_width()
+    self.canvasHeight = self.canvas.get_height()
     
   def drawFrame(self, frame, frameCount):
     """This method draws a frame on the canvas.
@@ -105,7 +106,6 @@ class RunSimulation(RunSimulationTemplate):
       )
       self.graph.data.append(figure)
     self.graph.data = self.graph.data
-    print(self.graph.data)
 
   def onRunSimulationButtonClick(self, **event_args):
     """This method is called when the button is clicked
@@ -125,8 +125,9 @@ class RunSimulation(RunSimulationTemplate):
     self.graphYData = [[] for _ in Person.states]
     
     # Created a simulation object and runs the simulation
-    simulation = Simulation()
+    params = Params()
+    simulation = Simulation(params)
     for frameCount, frame in enumerate(simulation.run()):
-      self.drawFrame(frame, frameCount + 1)
+      self.drawFrame(frame, frameCount)
       sleep(self.timePerFrame)
     

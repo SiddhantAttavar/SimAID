@@ -16,6 +16,8 @@ class Person:
         An integer which stores the Y-coordinate of the person
     state : State
         A variable which stores the current state of the person
+    framesSinceInfection : int
+        The number of days since the person was infected (default -1)
 
     STATES
     ------
@@ -141,3 +143,4 @@ class Person:
         self.x = startX
         self.y = startY
         self.state = Person.SUSCEPTIBLE
+        self.framesSinceInfection = -1
