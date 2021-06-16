@@ -17,6 +17,8 @@ class Params:
         The chance of an infected person dying
     INITIAL_INFECTED : int
         The number of people who are infected at the beginning
+    MAX_MOVEMENT : float
+        The maximum distance a person can move in a direction
     """
 
     POPULATION_SIZE = 100
@@ -26,6 +28,7 @@ class Params:
     INFECTION_PERIOD = 10
     MORTALITY_RATE = 0.3
     INITIAL_INFECTED = 2
+    MAX_MOVEMENT = 0.1
 
     def __init__(self, **kwargs):
         """Initializes the parameters.

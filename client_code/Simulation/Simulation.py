@@ -1,4 +1,4 @@
-from random import random
+from random import random, uniform
 from math import sqrt
 
 from Frame import Frame # type: ignore
@@ -90,9 +90,30 @@ class Simulation:
             The next frame of the simulation
         """
 
+        frame = self.movePeople(frame)
         frame = self.findInfected(frame)
         frame = self.findRecovered(frame)
 
+        return frame
+    
+    def movePeople(self, frame):
+        """Move the people around
+        
+        Parameters
+        ----------
+        frame : Frame
+            The current frame of the simulation
+        
+        Returns
+        -------
+        Frame
+            The frame after the people have moved
+        """
+
+        for person in frame.people:
+            person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+            person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+        
         return frame
 
     def findInfected(self, frame):
