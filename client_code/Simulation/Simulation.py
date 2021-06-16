@@ -59,17 +59,14 @@ class Simulation:
 
         # Create the first frame
         # Intialize the population list with people
-        people = [Person(0, 0) for _ in range(self.PARAMS.POPULATION_SIZE)]
-        for person in people:
-            person.x = random()
-            person.y = random()
-            print(person.x, person.y)
-            person.state = Person.SUSCEPTIBLE
+        people = [Person(random(), random()) for _ in range(self.PARAMS.POPULATION_SIZE)]
 
         # There are some people who are infected at the beginning
         for infectedCount in range(self.PARAMS.INITIAL_INFECTED):
             people[infectedCount].state = Person.INFECTED
             people[infectedCount].framesSinceInfection = 0
+        for infectedCount in range(self.PARAMS.INITIAL_INFECTED, self.PARAMS.POPULATION_SIZE):
+            people[infectedCount].state = Person.SUSCEPTIBLE
 
         currFrame = Frame(people)
         yield currFrame
