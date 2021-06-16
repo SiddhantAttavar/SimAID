@@ -39,7 +39,7 @@ class Simulation:
         """
 
         self.populationSize = 100
-        self.simulationLength = 100
+        self.simulationLength = 10
 
     def run(self):
         """Run the simulation.

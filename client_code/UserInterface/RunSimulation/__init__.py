@@ -95,14 +95,16 @@ class RunSimulation(RunSimulationTemplate):
     self.graph.data = []
     for stateID, stateCount in enumerate(frame.stateCounts):
       self.graphYData[stateID].append(stateCount)
-      figure = go.Figure(
-        data = go.Scatter(
-          x = self.graphXData,
-          y = self.graphYData[stateID]
+      figure = go.Scatter(
+        x = self.graphXData,
+        y = self.graphYData[stateID],
+        marker = dict(
+          color = Person.states[stateID].color
         ),
-        color = Person.states[stateID].color
+        name = Person.states[stateID].name
       )
       self.graph.data.append(figure)
+    print(self.graph.data)
 
   def onRunSimulationButtonClick(self, **event_args):
     """This method is called when the button is clicked
