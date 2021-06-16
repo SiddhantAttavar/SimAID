@@ -44,14 +44,6 @@ class RunSimulation(RunSimulationTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
-    # Initialize the canvas dimensions
-    self.width = self.canvas.get_width()
-    self.height = self.canvas.get_height()
-    
-    # Make the canvas black
-    self.canvas.background = 'black'
-    
-    print(self.runSimulationButton.width)
     
   def drawFrame(self, frame):
     """This method draws a frame on the canvas.
@@ -71,9 +63,18 @@ class RunSimulation(RunSimulationTemplate):
     -------
     None
     """
+    
+    print('Debug')
+    return
 
     # Initialize the canvas with a black background
     self.canvas.background = 'black'
+    
+    # Initialize the canvas dimensions
+    self.width = self.canvas.get_width()
+    self.height = self.canvas.get_height()
+    
+    print(self.width, self.height)
     
     # Draw each person on the canvas as a dot
     for person in frame.people:
@@ -96,5 +97,6 @@ class RunSimulation(RunSimulationTemplate):
     
     # Created a simulation object and runs the simulation
     simulation = Simulation()
+    i = 0
     for frame in simulation.run():
-      self.drawFrame(frame)
+      #self.drawFrame(frame)
