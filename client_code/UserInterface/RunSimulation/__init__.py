@@ -14,9 +14,9 @@ class RunSimulation(RunSimulationTemplate):
   
   Attributes
   ----------
-  width : int
+  canvasWidth : int
     The width of the canvas
-  height : int
+  canvasHeight : int
     The height of the canvas
   timePerFrame : float
     The number of second each frame is displayed for
@@ -55,8 +55,8 @@ class RunSimulation(RunSimulationTemplate):
     self.timePerFrame = 0.5
     
     # Initialize the canvas dimensions
-    self.width = 466
-    self.height = 466
+    self.canvasWidth = 466
+    self.canvasHeight = 466
     
   def drawFrame(self, frame, frameCount):
     """This method draws a frame on the canvas.
@@ -81,12 +81,12 @@ class RunSimulation(RunSimulationTemplate):
     
     # Initialize the canvas with a black, empty background
     self.canvas.background = 'black'
-    self.canvas.clear_rect(0, 0, self.width, self.height)
+    self.canvas.clear_rect(0, 0, self.canvasWidth, self.canvasHeight)
     
     # Draw each person on the canvas as a dot with a particular color
     for person in frame.people:
       self.canvas.begin_path()
-      self.canvas.arc(person.x * self.width, person.y * self.height, 5)
+      self.canvas.arc(person.x * self.canvasWidth, person.y * self.canvasHeight, 5)
       self.canvas.fill_style = person.state.color
       self.canvas.fill()
     
