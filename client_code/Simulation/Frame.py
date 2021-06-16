@@ -7,7 +7,7 @@ class Frame:
     ----------
     people : list(Person.State)
         list of people in the population
-    stateCounts : dict(Person.State, int)
+    stateCounts : list(int)
         A count of number of people in each state
 
     Methods
@@ -31,10 +31,7 @@ class Frame:
 
         # Initialize the variables and set every state in Person.State to 0
         self.people = people
-        self.stateCounts = []
-
-        for state in Person.states:
-            self.stateCounts[state.id] = 0
+        self.stateCounts = [0 for _ in Person.states]
 
         # Iterate through the list and increment the state count
         for person in self.people:
