@@ -23,7 +23,7 @@ class Simulation:
         Runs the current simulation
     """
 
-    def __init__(self, dimensions = ()):
+    def __init__(self):
         """"Initialized the simulation
         
         Intializes the simulation with some basic properties
@@ -63,7 +63,7 @@ class Simulation:
         # Intialize the population list with people
         self.population = [Person(0, 0) for _ in range(self.populationSize)]
         for person in self.population:
-            person.state = Person.State.SUSCEPTIBLE
+            person.state = Person.SUSCEPTIBLE
 
         for frameCount in range(self.simulationLength):
             # For each frame of the simulation, 

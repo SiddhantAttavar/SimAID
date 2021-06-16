@@ -1,17 +1,24 @@
-from ._anvil_designer import RunSimulationTemplate
+from ._anvil_designer import RunSimulationTemplate # type: ignore
 from anvil import *
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
+from time import sleep
 
-from ...Simulation import Simulation
+from ...Simulation.Simulation import Simulation
 
 class RunSimulation(RunSimulationTemplate):
   """Class which changes the UI in the RunSimulation form.
   
   Attributes
   ----------
+  width : int
+    The width of the canvas
+  height : int
+    The height of the canvas
+  timePerFrame : float
+    The number of second each frame is displayed for
 
   Methods
   -------
@@ -40,6 +47,10 @@ class RunSimulation(RunSimulationTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
+    # Initialize the canvas dimensions
+    self.width = 460
+    self.height = 460
+    self.timePerFrame = 0.5
     
   def drawFrame(self, frame):
     """This method draws a frame on the canvas.
@@ -59,17 +70,33 @@ class RunSimulation(RunSimulationTemplate):
     -------
     None
     """
-
-    # Initialize the canvas with a black background
-    self.canvas.background = 'black'
     
-    # Draw each person on the canvas as a dot
+    # Initialize the canvas with a black, empty background
+    self.canvas.background = 'black'
+    self.canvas.clear_rect(0, 0, self.width, self.height)
+    
+    # Draw each person on the canvas as a dot with a particular color
     for person in frame.people:
-      self.canvas.arc(person.x, person.y, 5)
-      self.canvas.fill_style = 'blue'
+      self.canvas.begin_path()
+      self.canvas.arc(person.x * self.width, person.y * self.height, 5)
+      self.canvas.fill_style = person.state.color
       self.canvas.fill()
 
   def onRunSimulationButtonClick(self, **event_args):
-    '''This method is called when the button is clicked'''
-    for frame in Simulation.run():
+    """This method is called when the button is clicked
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the button is clicked
+    
+    Returns
+    -------
+    None
+    """
+    
+    # Created a simulation object and runs the simulation
+    simulation = Simulation()
+    for frame in simulation.run():
       self.drawFrame(frame)
+      sleep(self.timePerFrame)
