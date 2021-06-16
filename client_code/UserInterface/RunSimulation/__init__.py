@@ -4,6 +4,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
+from time import sleep
 
 from ...Simulation.Simulation import Simulation
 
@@ -68,14 +69,14 @@ class RunSimulation(RunSimulationTemplate):
     None
     """
     
-    print('Debug')
-
-    # Initialize the canvas with a black background
     self.canvas.background = 'black'
+    self.canvas.clear_rect(0, 0, self.width, self.height)
     
     # Draw each person on the canvas as a dot
     for person in frame.people:
+      # Initialize the canvas with a black background
       print(person.x, person.y)
+      self.canvas.begin_path()
       self.canvas.arc(person.x * self.width, person.y * self.height, 5)
       self.canvas.fill_style = person.state.color
       self.canvas.fill()
@@ -95,6 +96,6 @@ class RunSimulation(RunSimulationTemplate):
     
     # Created a simulation object and runs the simulation
     simulation = Simulation()
-    i = 0
     for frame in simulation.run():
       self.drawFrame(frame)
+      sleep(0.5)
