@@ -79,7 +79,7 @@ class RunSimulation(RunSimulationTemplate):
     self.canvas.background = 'black'
     self.canvas.clear_rect(0, 0, self.width, self.height)
     
-    # Draw each person on the canvas as a dot with a particular color
+    '''# Draw each person on the canvas as a dot with a particular color
     for person in frame.people:
       self.canvas.begin_path()
       self.canvas.arc(person.x * self.width, person.y * self.height, 5)
@@ -97,7 +97,7 @@ class RunSimulation(RunSimulationTemplate):
         ),
         color = Person.states[stateID].color
       )
-      self.graph.data = [figure]
+      self.graph.data = [figure]'''
 
   def onRunSimulationButtonClick(self, **event_args):
     """This method is called when the button is clicked
