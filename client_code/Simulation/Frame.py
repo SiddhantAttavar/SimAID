@@ -1,4 +1,4 @@
-from .Person import Person
+from Person import Person # type: ignore
 
 class Frame:
     """Stores information about each frame in the simulation.

@@ -1,7 +1,7 @@
 from random import random, randint
 
-from .Frame import Frame
-from .Person import Person
+from Frame import Frame # type: ignore
+from Person import Person # type: ignore
 
 class Simulation:
     """Parameters and methods for the simulation.
@@ -39,7 +39,7 @@ class Simulation:
         """
 
         self.populationSize = 100
-        self.simulationLength = 10
+        self.simulationLength = 50
 
     def run(self):
         """Run the simulation.
@@ -75,3 +75,49 @@ class Simulation:
             # Then we need to build the Frame object to yield
             currFrame = Frame(self.population)
             yield currFrame
+
+if __name__ == '__main__':
+    # Only performed when this file is run directly
+    from matplotlib import pyplot as plt
+
+    def drawFramesMatplotlib(frames):
+        """Draws the frame in a matplotlib graph.
+
+        Parameters
+        ----------
+        frame : list(Frame)
+            The list of frames that we have to display
+        frameCount : int
+            The current frameCount
+        
+        Returns
+        -------
+        None
+        """
+
+        # Initialize arrays for graphing the results
+        graphXData = []
+        graphYData = [[] for _ in Person.states]
+
+        # Get the data for the X and Y axes
+        for frameCount, frame in enumerate(frames):
+            graphXData.append(frameCount + 1)
+            for stateID, stateCount in enumerate(frame.stateCounts):
+                graphYData[stateID].append(stateCount)
+        
+        # Add the plots to the graph
+        for stateID, stateCountData in enumerate(graphYData):
+            plt.plot(
+                graphXData,
+                stateCountData,
+                label = Person.states[stateID].name,
+                color = Person.states[stateID].color
+            )
+        
+        # Show the matplotlib plots
+        plt.show()
+
+    # Created a simulation object and runs the simulation
+    simulation = Simulation()
+    frames = list(simulation.run())
+    drawFramesMatplotlib(frames)

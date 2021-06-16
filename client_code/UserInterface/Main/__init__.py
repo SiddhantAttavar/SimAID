@@ -1,4 +1,4 @@
-from ._anvil_designer import MainTemplate
+from ._anvil_designer import MainTemplate # type: ignore
 from anvil import *
 import anvil.server
 import anvil.tables as tables
