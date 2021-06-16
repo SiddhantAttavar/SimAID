@@ -114,7 +114,7 @@ class RunSimulation(RunSimulationTemplate):
 
     # Initialize arrays for graphing the results
     self.graphXData = []
-    self.graphYData = []
+    self.graphYData = [[] for _ in Person.states]
     
     # Created a simulation object and runs the simulation
     simulation = Simulation()
