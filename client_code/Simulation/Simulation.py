@@ -1,4 +1,4 @@
-from random import random
+from random import random, randint
 
 from .Frame import Frame
 from .Person import Person
@@ -63,7 +63,7 @@ class Simulation:
         # Intialize the population list with people
         self.population = [Person(0, 0) for _ in range(self.populationSize)]
         for person in self.population:
-            person.state = Person.SUSCEPTIBLE
+            person.state = Person.states[randint(0, 5)]
 
         for frameCount in range(self.simulationLength):
             # For each frame of the simulation, 
