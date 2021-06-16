@@ -51,9 +51,6 @@ class RunSimulation(RunSimulationTemplate):
     None
     """
     self.init_components(**properties)
-
-    # Any code you write here will run when the form opens.
-    self.timePerFrame = 0.5
     
   def drawFrame(self, frame, frameCount):
     """This method draws a frame on the canvas.
@@ -125,7 +122,7 @@ class RunSimulation(RunSimulationTemplate):
     simulation = Simulation(params)
     for frameCount, frame in enumerate(simulation.run()):
       self.drawFrame(frame, frameCount)
-      sleep(self.timePerFrame)
+      sleep(Params.TIME_PER_FRAME)
     
 
   def onCanvasShow(self, **event_args):
