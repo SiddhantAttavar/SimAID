@@ -28,7 +28,7 @@ class Params:
     INFECTION_PERIOD = 10
     MORTALITY_RATE = 0.3
     INITIAL_INFECTED = 2
-    MAX_MOVEMENT = 0.1
+    MAX_MOVEMENT = 0.05
 
     def __init__(self, **kwargs):
         """Initializes the parameters.

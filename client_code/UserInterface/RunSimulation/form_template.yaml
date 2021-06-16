@@ -20,13 +20,13 @@ components:
     properties: {role: null, height: '466', tooltip: '', border: '', foreground: '',
       visible: true, spacing_above: small, spacing_below: small, background: ''}
     name: canvas
-    layout_properties: {grid_position: 'VFAJUZ,DLRJRE'}
+    layout_properties: {grid_position: 'VFAJUZ,WALMOZ'}
     event_bindings: {show: onCanvasShow}
   - type: Plot
     properties: {spacing_above: small, spacing_below: small, height: '466', visible: true,
       tooltip: '', interactive: true}
     name: graph
-    layout_properties: {grid_position: 'VFAJUZ,NAHSUU'}
+    layout_properties: {grid_position: 'VFAJUZ,BJWFBJ'}
     event_bindings: {}
   event_bindings: {}
 is_package: true
