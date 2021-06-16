@@ -63,6 +63,7 @@ class Simulation:
         for person in people:
             person.x = random()
             person.y = random()
+            print(person.x, person.y)
             person.state = Person.SUSCEPTIBLE
 
         # There are some people who are infected at the beginning
@@ -71,7 +72,6 @@ class Simulation:
             people[infectedCount].framesSinceInfection = 0
 
         currFrame = Frame(people)
-        print(currFrame.stateCounts)
         yield currFrame
 
         for frameCount in range(self.PARAMS.SIMULATION_LENGTH):
