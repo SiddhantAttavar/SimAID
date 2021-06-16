@@ -29,6 +29,8 @@ roles:
   components: [TextBox]
 - name: selected
   components: [Link]
+- name: center-form
+  components: []
 color_scheme:
   preset_groups:
   - name: Primary Colour

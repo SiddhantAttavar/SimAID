@@ -5,9 +5,12 @@ container:
   event_bindings: {}
 components:
 - type: ColumnPanel
-  properties: {}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '', spacing_below: small,
+    background: 'theme:Gray 900'}
   name: root
   layout_properties: {slot: default}
+  event_bindings: {}
 - type: FlowPanel
   properties: {}
   name: navbar
