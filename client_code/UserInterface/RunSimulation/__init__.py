@@ -55,10 +55,6 @@ class RunSimulation(RunSimulationTemplate):
     # Any code you write here will run when the form opens.
     self.timePerFrame = 0.5
     
-    # Initialize the canvas dimensions
-    self.canvasWidth = self.canvas.get_width()
-    self.canvasHeight = self.canvas.get_height()
-    
   def drawFrame(self, frame, frameCount):
     """This method draws a frame on the canvas.
     
@@ -131,3 +127,21 @@ class RunSimulation(RunSimulationTemplate):
       self.drawFrame(frame, frameCount)
       sleep(self.timePerFrame)
     
+
+  def onCanvasShow(self, **event_args):
+    """This method is called when the Canvas is shown on the screen
+    
+    Initializes the canvas dimensions
+    
+    Parameters
+    ----------
+    **event_args
+      Details of the canvas
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.canvasWidth = self.canvas.get_width()
+    self.canvasHeight = self.canvas.get_height()
