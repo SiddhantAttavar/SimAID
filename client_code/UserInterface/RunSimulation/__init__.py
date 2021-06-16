@@ -104,6 +104,7 @@ class RunSimulation(RunSimulationTemplate):
         name = Person.states[stateID].name
       )
       self.graph.data.append(figure)
+    self.graph.data = self.graph.data
     print(self.graph.data)
 
   def onRunSimulationButtonClick(self, **event_args):
