@@ -202,7 +202,7 @@ if __name__ == '__main__':
     # Only performed when this file is run directly
     from matplotlib import pyplot as plt
 
-    def drawFramesMatplotlib(frames):
+    def drawFramesMatplotlib(frames, PARAMS):
         """Draws the frame in a matplotlib graph.
 
         Parameters
@@ -211,6 +211,8 @@ if __name__ == '__main__':
             The list of frames that we have to display
         frameCount : int
             The current frameCount
+        PARAMS : Params
+            The parameters of the simulation
 
         Returns
         -------
@@ -237,7 +239,7 @@ if __name__ == '__main__':
             )
 
         # Show the matplotlib plots
-        plt.ylim(0, Params.POPULATION_SIZE)
+        plt.ylim(0, PARAMS.POPULATION_SIZE)
         plt.show()
 
     # Created a simulation object and runs the simulation
@@ -246,4 +248,4 @@ if __name__ == '__main__':
     startTime = time()
     frames = list(simulation.run())
     print(f'Time taken: {time() - startTime:.2f}s')
-    drawFramesMatplotlib(frames)
+    drawFramesMatplotlib(frames, params)

@@ -122,7 +122,7 @@ class RunSimulation(RunSimulationTemplate):
     simulation = Simulation(params)
     for frameCount, frame in enumerate(simulation.run()):
       self.drawFrame(frame, frameCount)
-      sleep(Params.TIME_PER_FRAME)
+      sleep(params.TIME_PER_FRAME)
     
 
   def onCanvasShow(self, **event_args):
