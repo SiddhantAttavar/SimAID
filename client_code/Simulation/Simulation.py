@@ -61,9 +61,9 @@ class Simulation:
         # Intialize the population list with people
         people = [Person(random(), random()) for _ in range(self.PARAMS.POPULATION_SIZE)]
 
-        # There are some people who are infected at the beginning
+        # There are some people who are exposed at the beginning
         for infectedCount in range(self.PARAMS.INITIAL_INFECTED):
-            people[infectedCount].state = Person.INFECTED
+            people[infectedCount].state = Person.EXPOSED
             people[infectedCount].framesSinceInfection = 0
         for infectedCount in range(self.PARAMS.INITIAL_INFECTED, self.PARAMS.POPULATION_SIZE):
             people[infectedCount].state = Person.SUSCEPTIBLE
@@ -87,14 +87,15 @@ class Simulation:
         Returns
         -------
         Frame
-            The next frame of the simulation
+            The next frame in the simulation
         """
 
-        frame = self.movePeople(frame)
-        frame = self.findInfected(frame)
-        frame = self.findRecovered(frame)
+        self.movePeople(frame)
+        self.findExposed(frame)
+        self.findInfected(frame)
+        self.findRecovered(frame)
 
-        return frame
+        return Frame(frame.people)
     
     def movePeople(self, frame):
         """Move the people around
@@ -106,18 +107,15 @@ class Simulation:
         
         Returns
         -------
-        Frame
-            The frame after the people have moved
+        None
         """
 
         for person in frame.people:
             person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
             person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
-        
-        return frame
 
-    def findInfected(self, frame):
-        """Find out who will be infected next
+    def findExposed(self, frame):
+        """Find out who will be exposed to the virus next
         
         Parameters
         ----------
@@ -126,8 +124,7 @@ class Simulation:
         
         Returns
         -------
-        Frame
-            The frame after some people have been infected
+        None
         """
 
         # Find the people who are susceptible and infected
@@ -147,14 +144,32 @@ class Simulation:
                     abs(infectedPerson.y - susceptiblePerson.y) ** 2
                 )
                 if dist <= self.PARAMS.CONTACT_RADIUS and random() < self.PARAMS.INFECTION_RATE:
-                    # The disease spreads to the susceptible person
-                    susceptiblePerson.state = Person.INFECTED
+                    # The disease spreads to the susceptible person and he becomes exposed
+                    susceptiblePerson.state = Person.EXPOSED
                     susceptiblePerson.framesSinceInfection = 0
-                    frame.stateCounts[Person.SUSCEPTIBLE.id] -= 1
-                    frame.stateCounts[Person.INFECTED.id] += 1
+
+    def findInfected(self, frame):
+        """Find out who will be infected in the next frame.
+
+        Parameters
+        ----------
+        frame : Frame
+            The current frame of the simulation
         
-        return frame
-    
+        Returns
+        -------
+        None
+        """
+
+        # Iterate through all people and find those who are exposed
+        # Find if they become infected
+        for person in frame.people:
+            if person.state == Person.EXPOSED:
+                person.framesSinceInfection += 1
+                if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
+                    # The person becomes symptomatic
+                    person.state = Person.INFECTED
+
     def findRecovered(self, frame):
         """Find out who will be recovered / dead next
         
@@ -165,8 +180,7 @@ class Simulation:
         
         Returns
         -------
-        Frame
-            The frame after some people have been recovered / dead
+        None
         """
 
         # Iterate through all people and find those who are infected
@@ -177,15 +191,10 @@ class Simulation:
                 if person.framesSinceInfection >= self.PARAMS.INFECTION_PERIOD:
                     # Find if the person recovers or dies
                     person.framesSinceInfection = -1
-                    frame.stateCounts[Person.INFECTED.id] -= 1
                     if random() < self.PARAMS.MORTALITY_RATE:
                         person.state = Person.DEAD
-                        frame.stateCounts[Person.DEAD.id] += 1
                     else:
                         person.state = Person.RECOVERED
-                        frame.stateCounts[Person.RECOVERED.id] += 1
-        
-        return Frame(frame.people)
 
 if __name__ == '__main__':
     # Only performed when this file is run directly

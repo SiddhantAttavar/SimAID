@@ -11,6 +11,8 @@ class Params:
         The maximum distance between two individuals who are in contact
     INFECTION_RATE : float
         The chance of an infected person infecting a suseptible person
+    INCUBATION_PERIOD : int
+        The duration for which an infected person is asymptomatic
     INFECTION_PERIOD : int
         The duration for which an infected person has the disease
     MORTALITY_RATE : float
@@ -27,6 +29,7 @@ class Params:
     SIMULATION_LENGTH = 50
     CONTACT_RADIUS = 0.1
     INFECTION_RATE = 0.6
+    INCUBATION_PERIOD = 3
     INFECTION_PERIOD = 10
     MORTALITY_RATE = 0.3
     INITIAL_INFECTED = 2
