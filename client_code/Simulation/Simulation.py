@@ -1,5 +1,6 @@
 from random import random, uniform
 from math import sqrt
+from time import time
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
@@ -112,8 +113,8 @@ class Simulation:
 
         for person in frame.people:
             if person.state != Person.DEAD:
-              person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
-              person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+                person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+                person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
 
     def findExposed(self, frame):
         """Find out who will be exposed to the virus next
@@ -236,11 +237,13 @@ if __name__ == '__main__':
             )
 
         # Show the matplotlib plots
-        plt.ylim(0, 100)
+        plt.ylim(0, Params.POPULATION_SIZE)
         plt.show()
 
     # Created a simulation object and runs the simulation
     params = Params()
     simulation = Simulation(params)
+    startTime = time()
     frames = list(simulation.run())
+    print(f'Time taken: {time() - startTime:.2f}s')
     drawFramesMatplotlib(frames)
