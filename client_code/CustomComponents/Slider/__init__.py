@@ -13,10 +13,6 @@ class Slider(SliderTemplate):
     self.init_components(**properties)
     
     # Any code you write here will run when the form opens.
-    '''self.level = 0
-    self.slider_min = 0
-    self.slider_max = 0
-    self.step = 0'''
     
   @property
   def level(self):
@@ -63,6 +59,15 @@ class Slider(SliderTemplate):
     self._level = value
     self.update()
     
+  @property
+  def default(self):
+    return self._default
+  
+  @default.setter
+  def default(self, value):
+    self._default = value
+    self.update()
+    
   def slider_change(self, value, **event_args):
     self._level = int(value)
     self.raise_event("change", level=self.level)
@@ -75,4 +80,5 @@ class Slider(SliderTemplate):
   def form_show(self, **event_args):
     """This method is called when the HTML panel is shown on the screen"""
     self._shown = True
+    self.level = self.default
     self.update()

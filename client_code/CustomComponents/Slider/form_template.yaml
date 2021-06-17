@@ -3,9 +3,11 @@ properties:
 - {name: slider_min, type: number, default_value: 0}
 - {name: slider_max, type: number, default_value: 10}
 - {name: step, type: number, default_value: 1}
+- {name: default, type: number, default_value: 0}
 is_package: true
 events:
 - {name: change, default_event: true, description: When the slider is moved}
+- {name: show, description: When the slider is shown on screen}
 custom_component: true
 components: []
 container:
