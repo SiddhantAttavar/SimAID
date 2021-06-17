@@ -19,22 +19,26 @@ components:
   - type: Label
     properties: {}
     name: simulationLengthLabel
-    layout_properties: {grid_position: 'QLSJMY,LWFYLH'}
+    layout_properties: {grid_position: 'TOICVG,SPTCSK'}
+  - type: form:CustomComponents.Slider
+    properties: {slider_min: 10, slider_max: 500, step: 15, default: 0}
+    name: simulationLengthSlider
+    layout_properties: {grid_position: 'ZQKEQD,TNAJYA'}
+    event_bindings: {change: onSimulationLengthChange}
+  - type: Label
+    properties: {}
+    name: infectionRateLabel
+    layout_properties: {grid_position: 'YXFZVY,XAWLCO'}
+  - type: form:CustomComponents.Slider
+    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    name: infectionRateSlider
+    layout_properties: {grid_position: 'KMNHRO,XUESKP'}
+    event_bindings: {change: onInfectionRateChange}
+  - type: Label
+    properties: {}
+    name: incubationPeriodLabel
+    layout_properties: {grid_position: 'LKTWEQ,ITSUHG'}
   event_bindings: {}
-- type: form:CustomComponents.Slider
-  properties: {slider_min: 10, slider_max: 500, step: 15, default: 0}
-  name: simulationLengthSlider
-  layout_properties: {grid_position: 'SQLMKB,AJXPGA'}
-  event_bindings: {change: onSimulationLengthChange}
-- type: Label
-  properties: {}
-  name: infectionRateLabel
-  layout_properties: {grid_position: 'MNZEKN,QHDZYF'}
-- type: form:CustomComponents.Slider
-  properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
-  name: infectionRateSlider
-  layout_properties: {grid_position: 'QXUYMQ,IEDLMA'}
-  event_bindings: {change: onInfectionRateChange}
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
