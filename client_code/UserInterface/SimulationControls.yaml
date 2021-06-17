@@ -3,8 +3,16 @@ components:
   properties: {col_widths: '{}'}
   name: root
   layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
-  components: []
+  components:
+  - type: Label
+    properties: {}
+    name: populationSizeLabel
+    layout_properties: {grid_position: 'NNQBXC,FFEROJ'}
   event_bindings: {}
+- type: form:CustomComponents.Slider
+  properties: {}
+  name: slider_1
+  layout_properties: {grid_position: 'CJDZYQ,GTRREW'}
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}
