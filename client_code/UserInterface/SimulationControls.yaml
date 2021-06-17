@@ -11,12 +11,30 @@ components:
       icon: ''}
     name: populationSizeLabel
     layout_properties: {grid_position: 'UFZKNU,OFAXMB'}
+  - type: form:CustomComponents.Slider
+    properties: {slider_min: 10, slider_max: 1000, step: 10, default: 0}
+    name: populationSizeSlider
+    layout_properties: {grid_position: 'KPRQOB,VURHAF'}
+    event_bindings: {change: onPopulationSizeChange}
+  - type: Label
+    properties: {}
+    name: simulationLengthLabel
+    layout_properties: {grid_position: 'QLSJMY,LWFYLH'}
   event_bindings: {}
 - type: form:CustomComponents.Slider
-  properties: {level: 1, slider_min: 10, slider_max: 1000, step: 10, default: 0}
-  name: populationSizeSlider
-  layout_properties: {grid_position: 'ISLGGC,TDYVYH'}
-  event_bindings: {change: onPopulationSizeSliderChange}
+  properties: {slider_min: 10, slider_max: 500, step: 15, default: 0}
+  name: simulationLengthSlider
+  layout_properties: {grid_position: 'SQLMKB,AJXPGA'}
+  event_bindings: {change: onSimulationLengthChange}
+- type: Label
+  properties: {}
+  name: infectionRateLabel
+  layout_properties: {grid_position: 'MNZEKN,QHDZYF'}
+- type: form:CustomComponents.Slider
+  properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+  name: infectionRateSlider
+  layout_properties: {grid_position: 'QXUYMQ,IEDLMA'}
+  event_bindings: {change: onInfectionRateChange}
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}

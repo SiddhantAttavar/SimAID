@@ -1,5 +1,4 @@
 properties:
-- {name: level, type: number, default_value: 1, default_binding_prop: true}
 - {name: slider_min, type: number, default_value: 0}
 - {name: slider_max, type: number, default_value: 10}
 - {name: step, type: number, default_value: 1}
