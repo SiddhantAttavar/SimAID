@@ -25,6 +25,8 @@ class RunSimulation(RunSimulationTemplate):
     The data in the X axis of the graph
   graphYData : list(tuple(int))
     The data in the Y axis of the graph
+  params : Params
+    The parameters of the simulation
 
   Methods
   -------
@@ -34,7 +36,7 @@ class RunSimulation(RunSimulationTemplate):
     Draws a frame on the UI
   """
 
-  def __init__(self, **properties):
+  def __init__(self, params = Params(), **properties):
     """Initializes the run simulation
     
     Called when the RunSimulation form is created.
@@ -50,7 +52,12 @@ class RunSimulation(RunSimulationTemplate):
     -------
     None
     """
+    
+    # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    
+    # Any code you write here will run when the form opens.
+    self.params = params
     
   def drawFrame(self, frame, frameCount):
     """This method draws a frame on the canvas.
@@ -118,11 +125,10 @@ class RunSimulation(RunSimulationTemplate):
     self.graphYData = [[] for _ in Person.states]
     
     # Created a simulation object and runs the simulation
-    params = Params()
-    simulation = Simulation(params)
+    simulation = Simulation(self.params)
     for frameCount, frame in enumerate(simulation.run()):
       self.drawFrame(frame, frameCount)
-      sleep(params.TIME_PER_FRAME)
+      sleep(self.params.TIME_PER_FRAME)
     
 
   def onCanvasShow(self, **event_args):

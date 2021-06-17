@@ -41,4 +41,4 @@ components:
       icon: ''}
     name: runSimulationLink
     layout_properties: {grid_position: 'CTDROU,HNGBTW'}
-    event_bindings: {click: onSimulationLinkClick}
+    event_bindings: {click: onRunSimulationLinkClick}

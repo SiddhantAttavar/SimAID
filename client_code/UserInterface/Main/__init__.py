@@ -14,15 +14,17 @@ class Main(MainTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
-    self.root.add_component(SimulationControls(), full_width_row = True)
+    self.simulationControlsForm = SimulationControls()
+    self.root.add_component(self.simulationControlsForm, full_width_row = True)
     
 
   def onSimulationControlsLinkClick(self, **event_args):
     '''This method is called when the simulation controls link in the navbar is clicked'''
     self.root.clear()
-    self.root.add_component(SimulationControls(), full_width_row = True)
+    self.simulationControlsForm = SimulationControls()
+    self.root.add_component(self.simulationControlsForm, full_width_row = True)
 
-  def onSimulationLinkClick(self, **event_args):
+  def onRunSimulationLinkClick(self, **event_args):
     '''This method is called when the simulation link in the navbar is clicked'''
     self.root.clear()
-    self.root.add_component(RunSimulation(), full_width_row = True)
+    self.root.add_component(RunSimulation(params = self.simulationControlsForm.params), full_width_row = True)

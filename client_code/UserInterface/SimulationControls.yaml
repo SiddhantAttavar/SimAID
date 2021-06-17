@@ -37,7 +37,30 @@ components:
   - type: Label
     properties: {}
     name: incubationPeriodLabel
-    layout_properties: {grid_position: 'LKTWEQ,ITSUHG'}
+    layout_properties: {grid_position: 'YCAQKS,DSREBT'}
+  - type: form:CustomComponents.Slider
+    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    name: incubationPeriodSlider
+    layout_properties: {grid_position: 'UNPUSE,WMIOPH'}
+    event_bindings: {change: onIncubationPeriodChange}
+  - type: Label
+    properties: {}
+    name: infectionPeriodLabel
+    layout_properties: {grid_position: 'OABENW,PSSXPX'}
+  - type: form:CustomComponents.Slider
+    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    name: infectionPeriodSlider
+    layout_properties: {grid_position: 'KWABUM,ZPQQYG'}
+    event_bindings: {change: onInfectionPeriodChange}
+  - type: Label
+    properties: {}
+    name: mortalityRateLabel
+    layout_properties: {grid_position: 'UBMEWT,WJTEAG'}
+  - type: form:CustomComponents.Slider
+    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    name: mortalityRateSlider
+    layout_properties: {grid_position: 'VIXNSD,SFNHUX'}
+    event_bindings: {change: onMortalityRateChange}
   event_bindings: {}
 container:
   type: ColumnPanel

@@ -25,6 +25,15 @@ class SimulationControls(SimulationControlsTemplate):
     
     self.infectionRateSlider.default = int(self.params.INFECTION_RATE * 100)
     self.infectionRateLabel.text = f'Infection Rate (1 - 100): {self.infectionRateSlider.default}'
+  
+    self.incubationPeriodSlider.default = self.params.INCUBATION_PERIOD
+    self.incubationPeriodLabel.text = f'Incubation Period (1 - 100): {self.incubationPeriodSlider.default}'
+    
+    self.infectionPeriodSlider.default = self.params.INFECTION_PERIOD
+    self.infectionPeriodLabel.text = f'Infection Period (1 - 100): {self.infectionPeriodSlider.default}'
+    
+    self.mortalityRateSlider.default = int(self.params.MORTALITY_RATE * 100)
+    self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.default}'
     
   def onPopulationSizeChange(self, **event_args):
     """This method is called when the population size slider is moved"""
@@ -41,3 +50,18 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.INFECTION_RATE = self.infectionRateSlider.level / 100
     self.infectionRateLabel.text = f'Infection Rate (1 - 100): {self.infectionRateSlider.level}'
 
+  def onIncubationPeriodChange(self, **event_args):
+    """This method is called when the incubation period slider is moved"""
+    self.params.INCUBATION_PERIOD = self.incubationPeriodSlider.level
+    self.incubationPeriodLabel.text = f'Incubation Period (1 - 100): {self.incubationPeriodSlider.level}'
+
+  def onInfectionPeriodChange(self, **event_args):
+    """This method is called when the infection period slider is moved"""
+    self.params.INCUBATION_PERIOD = self.incubationPeriodSlider.level
+    self.incubationPeriodLabel.text = f'Infection Period (1 - 100): {self.incubationPeriodSlider.level}'
+
+  def onMortalityRateChange(self, **event_args):
+    """This method is called when the mortality rate slider is moved"""
+    self.params.INFECTION_RATE = self.mortalityRateSlider.level / 100
+    self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.level}'
+    
