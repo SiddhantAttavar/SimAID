@@ -111,8 +111,9 @@ class Simulation:
         """
 
         for person in frame.people:
-            person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
-            person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+            if person.state != Person.DEAD:
+              person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+              person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
 
     def findExposed(self, frame):
         """Find out who will be exposed to the virus next
