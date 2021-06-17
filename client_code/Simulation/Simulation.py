@@ -113,8 +113,13 @@ class Simulation:
 
         for person in frame.people:
             if person.state != Person.DEAD:
+                # Change the position of the person by a random amount
                 person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
                 person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+                
+                # Make sure it doesn't excedd the bounds
+                person.x = max(0, min(1, person.x))
+                person.y = max(0, min(1, person.y))
 
     def findExposed(self, frame):
         """Find out who will be exposed to the virus next
