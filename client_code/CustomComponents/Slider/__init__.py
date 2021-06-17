@@ -1,4 +1,4 @@
-from ._anvil_designer import SliderTemplate
+from ._anvil_designer import SliderTemplate # type: ignore
 from anvil import *
 import anvil.server
 import anvil.tables as tables
