@@ -12,7 +12,7 @@ components:
 - type: form:CustomComponents.Slider
   properties: {}
   name: slider_1
-  layout_properties: {grid_position: 'CJDZYQ,GTRREW'}
+  layout_properties: {grid_position: 'ZOLPMY,IKAIIE'}
 container:
   type: ColumnPanel
   properties: {col_widths: '{}'}

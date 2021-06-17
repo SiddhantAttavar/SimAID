@@ -14,6 +14,7 @@ class Main(MainTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
+    self.root.add_component(SimulationControls(), full_width_row = True)
     
 
   def onSimulationControlsLinkClick(self, **event_args):

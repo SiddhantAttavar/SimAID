@@ -1,4 +1,9 @@
+from ._anvil_designer import SliderTemplate
 from anvil import *
+import anvil.server
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 
 class Slider(SliderTemplate):
   def __init__(self, **properties):
@@ -8,6 +13,10 @@ class Slider(SliderTemplate):
     self.init_components(**properties)
     
     # Any code you write here will run when the form opens.
+    '''self.level = 0
+    self.slider_min = 0
+    self.slider_max = 0
+    self.step = 0'''
     
   @property
   def level(self):

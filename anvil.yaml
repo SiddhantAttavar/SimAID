@@ -8,6 +8,25 @@ name: Epidemic Simulator
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
 startup_form: UserInterface.Main
-native_deps: {head_html: ''}
+native_deps: {head_html: "<style>\n.box{\n  padding: 10px;\n}\n\ninput[type=\"range\"\
+    ]\n{\n    width: 100%;\n    margin: 0px;\n    padding: 8px 0px;\n    outline:\
+    \ none;\n    background-color: transparent;\n    -webkit-appearance: none;\n}\n\
+    \ninput[type=\"range\"]:focus\n{\n    outline: none;\n}\n\ninput[type=\"range\"\
+    ]::-webkit-slider-runnable-track\n{\n    width: 100%;\n    height: 4px;\n    background:\
+    \ #CCC;\n    border-radius: 7px;\n    cursor: pointer;\n}\n\ninput[type=\"range\"\
+    ]:focus::-webkit-slider-runnable-track\n{\n    background: #1976D2;\n}\n\ninput[type=\"\
+    range\"]::-webkit-slider-thumb\n{\n    height: 18px;\n    width: 18px;\n    margin-top:\
+    \ -7px;\n    border:1px solid #2196F3;\n    background: #2196F3;\n    border-radius:\
+    \ 50%;\n    cursor: pointer;\n    -webkit-appearance: none;\n}\n\ninput[type=\"\
+    range\"]::-moz-range-thumb\n{\n    height: 18px;\n    width: 18px;\n    border:1px\
+    \ solid #2196F3;\n    background: #2196F3;\n    border-radius: 50%;\n    cursor:\
+    \ pointer;\n}\n\ninput[type=\"range\"]::-moz-range-track\n{\n    width: 100%;\n\
+    \    height: 4px;\n    background: #CCC;\n    border-radius: 4px;\n    cursor:\
+    \ pointer;\n}\n\ninput[type=\"range\"]::-ms-thumb\n{\n  \tmargin-top: 0px;\n \
+    \   height: 18px;\n    width: 18px;\n    border: 0px solid #1976D2;\n    background:\
+    \ #2196F3;\n    border-radius: 50%;\n    cursor: pointer;\n}\n\ninput[type=\"\
+    range\"]::-ms-track\n{\n    width: 100%;\n    height: 4px;\n    color: transparent;\n\
+    \    border-width: 16px 0;\n    border-color: transparent;\n    background: transparent;\n\
+    \    cursor: pointer;\n}\n\n\n</style>"}
 db_schema: []
 renamed: true
