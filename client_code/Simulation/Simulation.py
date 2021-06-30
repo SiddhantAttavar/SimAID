@@ -95,6 +95,9 @@ class Simulation:
     self.findExposed(frame)
     self.findInfected(frame)
     self.findRecovered(frame)
+    
+    if self.PARAMS.VACCINATION_ENABLED:
+      self.vaccinate(frame)
 
     return Frame(frame.people)
   
@@ -203,6 +206,24 @@ class Simulation:
           else:
             person.state = Person.RECOVERED
 
+  def vaccinate(self, frame):
+    """"Find ou who is vaccinated
+
+    Parameters
+    ----------
+    frame : Frame
+      The current frame of the simulation
+    
+    Returns
+    -------
+    None
+    """
+
+    for person in frame.people:
+      if person.state == Person.SUSCEPTIBLE:
+        if random() < self.PARAMS.VACCINATION_RATE:
+          person.state = Person.VACCINATED
+
 if __name__ == '__main__':
   # Only performed when this file is run directly
   from matplotlib import pyplot as plt
@@ -249,6 +270,7 @@ if __name__ == '__main__':
 
   # Created a simulation object and runs the simulation
   params = Params()
+  params.VACCINATION_ENABLED = True
   simulation = Simulation(params)
   startTime = time()
   frames = list(simulation.run())

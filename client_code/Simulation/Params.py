@@ -21,7 +21,7 @@ class Params:
     The number of people who are infected at the beginning
   MAX_MOVEMENT : float
     The maximum distance a person can move in a direction
-  TIME_PER_FRAME : float
+  TIME_PER_FRAME : floatq
     Time taken per frame
   """
 
@@ -35,6 +35,9 @@ class Params:
   INITIAL_INFECTED = 2
   MAX_MOVEMENT = 0.05
   TIME_PER_FRAME = 0.2
+
+  VACCINATION_ENABLED = False
+  VACCINATION_RATE = 0.01
 
   def __init__(self, **kwargs):
     """Initializes the parameters.
