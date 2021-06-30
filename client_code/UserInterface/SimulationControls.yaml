@@ -31,6 +31,7 @@ components:
         step: 10}
       name: populationSizeSlider
       layout_properties: {grid_position: 'EPRLKS,YLMLXR'}
+      event_bindings: {slide: onPopulationSizeChange}
     - type: Label
       properties: {}
       name: simulationLengthLabel
@@ -43,6 +44,7 @@ components:
         step: 10}
       name: simulationLengthSlider
       layout_properties: {grid_position: 'HDXEKJ,OPJXOS'}
+      event_bindings: {slide: onSimulationLengthChange}
     - type: Label
       properties: {}
       name: infectionRateLabel
@@ -55,6 +57,7 @@ components:
         step: 5}
       name: infectionRateSlider
       layout_properties: {grid_position: 'NWMLLL,IHIEEK'}
+      event_bindings: {slide: onInfectionRateChange}
     - type: Label
       properties: {}
       name: incubationPeriodLabel
@@ -67,6 +70,7 @@ components:
         step: 5}
       name: incubationPeriodSlider
       layout_properties: {grid_position: 'NQVQKG,MPMGVP'}
+      event_bindings: {slide: onIncubationPeriodChange}
     - type: Label
       properties: {}
       name: infectionPeriodLabel
@@ -79,6 +83,7 @@ components:
         step: 5}
       name: infectionPeriodSlider
       layout_properties: {grid_position: 'VCALMB,EUSMQJ'}
+      event_bindings: {slide: onInfectionPeriodChange}
     - type: Label
       properties: {}
       name: mortalityRateLabel
@@ -91,22 +96,31 @@ components:
         step: 5}
       name: mortalityRateSlider
       layout_properties: {grid_position: 'BQIYLA,ZFFMEM'}
+      event_bindings: {slide: onMortalityRateChange}
   - type: ColumnPanel
-    properties: {col_widths: '{}'}
+    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15}'}
     name: column_panel_1
     layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
     components:
     - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: Intervention Controls, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
         underline: false, icon: ''}
-      name: label_1
+      name: interventionControlsLabel
       layout_properties: {grid_position: 'YJWTHM,LIYUBV'}
     - type: Label
-      properties: {}
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: 'Vaccination: ', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
       name: vaccinationLabel
       layout_properties: {grid_position: 'VUYFQP,OWKGTY'}
+    - type: form:C6ZZPAPN4YYF5NVJ:Switch
+      properties: {}
+      name: vaccinationSwitch
+      layout_properties: {grid_position: 'VUYFQP,GTEAGC'}
+      event_bindings: {change: onVaccinationSwitchChange}
   event_bindings: {}
 container:
   type: ColumnPanel
