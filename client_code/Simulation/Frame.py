@@ -7,8 +7,8 @@ class Frame:
   ----------
   people : list(Person.State)
     list of people in the population
-  stateCounts : list(int)
-    A count of number of people in each state
+  stateGroupss : list(list(int))
+    list of indexes of the people in each states
 
   Methods
   -------
@@ -29,10 +29,10 @@ class Frame:
     None
     """
 
-    # Initialize the variables and set every state in Person.State to 0
+    # Initialize the variables and set every state in Person.State to an empty list
     self.people = people
-    self.stateCounts = [0 for _ in Person.states]
+    self.stateGroups = [[] for _ in Person.states]
 
-    # Iterate through the list and increment the state count
-    for person in self.people:
-      self.stateCounts[person.state.id] += 1
+    # Iterate through the list and add the person to the state group
+    for personCount, person in enumerate(self.people):
+      self.stateGroups[person.state.id].append(personCount)

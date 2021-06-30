@@ -138,13 +138,8 @@ class Simulation:
     """
 
     # Find the people who are susceptible and infected
-    suseptibleGroup = []
-    infectedGroup = []
-    for person in frame.people:
-      if person.state == Person.SUSCEPTIBLE:
-        suseptibleGroup.append(person)
-      elif person.state == Person.INFECTED:
-        infectedGroup.append(person)
+    suseptibleGroup = [frame.people[i] for i in frame.stateGroups[Person.SUSCEPTIBLE.id]]
+    infectedGroup = [frame.people[i] for i in frame.stateGroups[Person.INFECTED.id]]
     
     # Find if any of the two groups are in contact and the disease spreads
     for infectedPerson in infectedGroup:
@@ -173,12 +168,12 @@ class Simulation:
 
     # Iterate through all people and find those who are exposed
     # Find if they become infected
-    for person in frame.people:
-      if person.state == Person.EXPOSED:
-        person.framesSinceInfection += 1
-        if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
-          # The person becomes symptomatic
-          person.state = Person.INFECTED
+    for personCount in frame.stateGroups[Person.EXPOSED.id]:
+      person = frame.people[personCount]
+      person.framesSinceInfection += 1
+      if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
+        # The person becomes symptomatic
+        person.state = Person.INFECTED
 
   def findRecovered(self, frame):
     """Find out who will be recovered / dead next
@@ -195,16 +190,16 @@ class Simulation:
 
     # Iterate through all people and find those who are infected
     # Find if they have no time left for disease
-    for person in frame.people:
-      if person.state == Person.INFECTED:
-        person.framesSinceInfection += 1
-        if person.framesSinceInfection >= self.PARAMS.INFECTION_PERIOD:
-          # Find if the person recovers or dies
-          person.framesSinceInfection = -1
-          if random() < self.PARAMS.MORTALITY_RATE:
-            person.state = Person.DEAD
-          else:
-            person.state = Person.RECOVERED
+    for personCount in frame.stateGroups[Person.INFECTED.id]:
+      person = frame.people[personCount]
+      person.framesSinceInfection += 1
+      if person.framesSinceInfection >= self.PARAMS.INFECTION_PERIOD:
+        # Find if the person recovers or dies
+        person.framesSinceInfection = -1
+        if random() < self.PARAMS.MORTALITY_RATE:
+          person.state = Person.DEAD
+        else:
+          person.state = Person.RECOVERED
 
   def vaccinate(self, frame):
     """"Find ou who is vaccinated
@@ -219,10 +214,10 @@ class Simulation:
     None
     """
 
-    for person in frame.people:
-      if person.state == Person.SUSCEPTIBLE:
-        if random() < self.PARAMS.VACCINATION_RATE:
-          person.state = Person.VACCINATED
+    for personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
+      person = frame.people[personCount]
+      if random() < self.PARAMS.VACCINATION_RATE:
+        person.state = Person.VACCINATED
 
 if __name__ == '__main__':
   # Only performed when this file is run directly
@@ -252,8 +247,8 @@ if __name__ == '__main__':
     # Get the data for the X and Y axes
     for frameCount, frame in enumerate(frames):
       graphXData.append(frameCount)
-      for stateID, stateCount in enumerate(frame.stateCounts):
-        graphYData[stateID].append(stateCount)
+      for stateID, stateGroup in enumerate(frame.stateGroups):
+        graphYData[stateID].append(len(stateGroup))
 
     # Add the plots to the graph
     for stateID, stateCountData in enumerate(graphYData):
@@ -270,6 +265,7 @@ if __name__ == '__main__':
 
   # Created a simulation object and runs the simulation
   params = Params()
+  params.POPULATION_SIZE = 1000
   params.VACCINATION_ENABLED = True
   simulation = Simulation(params)
   startTime = time()
