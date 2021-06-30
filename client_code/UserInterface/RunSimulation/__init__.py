@@ -95,8 +95,8 @@ class RunSimulation(RunSimulationTemplate):
     # Plot the result on the graph
     self.graphXData.append(frameCount)
     self.graph.data = []
-    for stateID, stateCount in enumerate(frame.stateCounts):
-      self.graphYData[stateID].append(stateCount)
+    for stateID, stateGroup in enumerate(frame.stateGroups):
+      self.graphYData[stateID].append(len(stateGroup))
       figure = go.Scatter(
         x = self.graphXData,
         y = self.graphYData[stateID],
