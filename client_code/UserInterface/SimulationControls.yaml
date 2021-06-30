@@ -99,7 +99,7 @@ components:
       event_bindings: {slide: onMortalityRateChange}
   - type: ColumnPanel
     properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15}'}
-    name: column_panel_1
+    name: interventionControlsColumnPanel
     layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
     components:
     - type: Label
