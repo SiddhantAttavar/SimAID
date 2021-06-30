@@ -23,56 +23,74 @@ components:
         underline: false, icon: ''}
       name: populationSizeLabel
       layout_properties: {grid_position: 'LXBGFD,HLBETO'}
-    - type: form:CustomComponents.Slider
-      properties: {slider_min: 10, slider_max: 1000, step: 10, default: 0}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 10, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 10}
       name: populationSizeSlider
-      layout_properties: {grid_position: 'TMGRPB,CSLWTY'}
-      event_bindings: {change: onPopulationSizeChange}
+      layout_properties: {grid_position: 'EPRLKS,YLMLXR'}
     - type: Label
       properties: {}
       name: simulationLengthLabel
       layout_properties: {grid_position: 'DZOKOU,XFCTEM'}
-    - type: form:CustomComponents.Slider
-      properties: {slider_min: 10, slider_max: 500, step: 15, default: 0}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 10, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 500, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 10}
       name: simulationLengthSlider
-      layout_properties: {grid_position: 'QVDYEH,ASJPKI'}
-      event_bindings: {change: onSimulationLengthChange}
+      layout_properties: {grid_position: 'HDXEKJ,OPJXOS'}
     - type: Label
       properties: {}
       name: infectionRateLabel
       layout_properties: {grid_position: 'ERUVHD,NZDOWB'}
-    - type: form:CustomComponents.Slider
-      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 5}
       name: infectionRateSlider
-      layout_properties: {grid_position: 'ZGIWRR,ASTRJK'}
-      event_bindings: {change: onInfectionRateChange}
+      layout_properties: {grid_position: 'NWMLLL,IHIEEK'}
     - type: Label
       properties: {}
       name: incubationPeriodLabel
       layout_properties: {grid_position: 'OZSAZQ,FHZBRE'}
-    - type: form:CustomComponents.Slider
-      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 5}
       name: incubationPeriodSlider
-      layout_properties: {grid_position: 'OQLKXN,NJGBGY'}
-      event_bindings: {change: onIncubationPeriodChange}
+      layout_properties: {grid_position: 'NQVQKG,MPMGVP'}
     - type: Label
       properties: {}
       name: infectionPeriodLabel
       layout_properties: {grid_position: 'IDBIOY,IWPAOV'}
-    - type: form:CustomComponents.Slider
-      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 5}
       name: infectionPeriodSlider
-      layout_properties: {grid_position: 'EEZLEW,WJTTAP'}
-      event_bindings: {change: onInfectionPeriodChange}
+      layout_properties: {grid_position: 'VCALMB,EUSMQJ'}
     - type: Label
       properties: {}
       name: mortalityRateLabel
       layout_properties: {grid_position: 'RRRETZ,QUUAOR'}
-    - type: form:CustomComponents.Slider
-      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 5}
       name: mortalityRateSlider
-      layout_properties: {grid_position: 'VPZEFO,DBPNGD'}
-      event_bindings: {change: onMortalityRateChange}
+      layout_properties: {grid_position: 'BQIYLA,ZFFMEM'}
   - type: ColumnPanel
     properties: {col_widths: '{}'}
     name: column_panel_1
