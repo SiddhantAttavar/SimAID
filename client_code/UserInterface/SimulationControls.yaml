@@ -4,63 +4,91 @@ components:
   name: root
   layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
   components:
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: populationSizeLabel
-    layout_properties: {grid_position: 'UFZKNU,OFAXMB'}
-  - type: form:CustomComponents.Slider
-    properties: {slider_min: 10, slider_max: 1000, step: 10, default: 0}
-    name: populationSizeSlider
-    layout_properties: {grid_position: 'KPRQOB,VURHAF'}
-    event_bindings: {change: onPopulationSizeChange}
-  - type: Label
-    properties: {}
-    name: simulationLengthLabel
-    layout_properties: {grid_position: 'TOICVG,SPTCSK'}
-  - type: form:CustomComponents.Slider
-    properties: {slider_min: 10, slider_max: 500, step: 15, default: 0}
-    name: simulationLengthSlider
-    layout_properties: {grid_position: 'ZQKEQD,TNAJYA'}
-    event_bindings: {change: onSimulationLengthChange}
-  - type: Label
-    properties: {}
-    name: infectionRateLabel
-    layout_properties: {grid_position: 'YXFZVY,XAWLCO'}
-  - type: form:CustomComponents.Slider
-    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
-    name: infectionRateSlider
-    layout_properties: {grid_position: 'KMNHRO,XUESKP'}
-    event_bindings: {change: onInfectionRateChange}
-  - type: Label
-    properties: {}
-    name: incubationPeriodLabel
-    layout_properties: {grid_position: 'YCAQKS,DSREBT'}
-  - type: form:CustomComponents.Slider
-    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
-    name: incubationPeriodSlider
-    layout_properties: {grid_position: 'UNPUSE,WMIOPH'}
-    event_bindings: {change: onIncubationPeriodChange}
-  - type: Label
-    properties: {}
-    name: infectionPeriodLabel
-    layout_properties: {grid_position: 'OABENW,PSSXPX'}
-  - type: form:CustomComponents.Slider
-    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
-    name: infectionPeriodSlider
-    layout_properties: {grid_position: 'KWABUM,ZPQQYG'}
-    event_bindings: {change: onInfectionPeriodChange}
-  - type: Label
-    properties: {}
-    name: mortalityRateLabel
-    layout_properties: {grid_position: 'UBMEWT,WJTEAG'}
-  - type: form:CustomComponents.Slider
-    properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
-    name: mortalityRateSlider
-    layout_properties: {grid_position: 'VIXNSD,SFNHUX'}
-    event_bindings: {change: onMortalityRateChange}
+  - type: ColumnPanel
+    properties: {col_widths: '{}'}
+    name: diseaseControlsColumnPanel
+    layout_properties: {grid_position: 'UFDNSY,SPPTKA'}
+    components:
+    - type: Label
+      properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: Disease Controls, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: diseaseControlsLabel
+      layout_properties: {grid_position: 'OWVIXJ,NZVFVX'}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: '', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: populationSizeLabel
+      layout_properties: {grid_position: 'LXBGFD,HLBETO'}
+    - type: form:CustomComponents.Slider
+      properties: {slider_min: 10, slider_max: 1000, step: 10, default: 0}
+      name: populationSizeSlider
+      layout_properties: {grid_position: 'TMGRPB,CSLWTY'}
+      event_bindings: {change: onPopulationSizeChange}
+    - type: Label
+      properties: {}
+      name: simulationLengthLabel
+      layout_properties: {grid_position: 'DZOKOU,XFCTEM'}
+    - type: form:CustomComponents.Slider
+      properties: {slider_min: 10, slider_max: 500, step: 15, default: 0}
+      name: simulationLengthSlider
+      layout_properties: {grid_position: 'QVDYEH,ASJPKI'}
+      event_bindings: {change: onSimulationLengthChange}
+    - type: Label
+      properties: {}
+      name: infectionRateLabel
+      layout_properties: {grid_position: 'ERUVHD,NZDOWB'}
+    - type: form:CustomComponents.Slider
+      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+      name: infectionRateSlider
+      layout_properties: {grid_position: 'ZGIWRR,ASTRJK'}
+      event_bindings: {change: onInfectionRateChange}
+    - type: Label
+      properties: {}
+      name: incubationPeriodLabel
+      layout_properties: {grid_position: 'OZSAZQ,FHZBRE'}
+    - type: form:CustomComponents.Slider
+      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+      name: incubationPeriodSlider
+      layout_properties: {grid_position: 'OQLKXN,NJGBGY'}
+      event_bindings: {change: onIncubationPeriodChange}
+    - type: Label
+      properties: {}
+      name: infectionPeriodLabel
+      layout_properties: {grid_position: 'IDBIOY,IWPAOV'}
+    - type: form:CustomComponents.Slider
+      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+      name: infectionPeriodSlider
+      layout_properties: {grid_position: 'EEZLEW,WJTTAP'}
+      event_bindings: {change: onInfectionPeriodChange}
+    - type: Label
+      properties: {}
+      name: mortalityRateLabel
+      layout_properties: {grid_position: 'RRRETZ,QUUAOR'}
+    - type: form:CustomComponents.Slider
+      properties: {slider_min: 1, slider_max: 100, step: 1, default: 0}
+      name: mortalityRateSlider
+      layout_properties: {grid_position: 'VPZEFO,DBPNGD'}
+      event_bindings: {change: onMortalityRateChange}
+  - type: ColumnPanel
+    properties: {col_widths: '{}'}
+    name: column_panel_1
+    layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
+    components:
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: Intervention Controls, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: label_1
+      layout_properties: {grid_position: 'YJWTHM,LIYUBV'}
+    - type: Label
+      properties: {}
+      name: vaccinationLabel
+      layout_properties: {grid_position: 'VUYFQP,OWKGTY'}
   event_bindings: {}
 container:
   type: ColumnPanel

@@ -1,9 +1,6 @@
 from ._anvil_designer import MainTemplate # type: ignore
 from anvil import *
 import anvil.server
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
 
 from ..RunSimulation import RunSimulation
 from ..SimulationControls import SimulationControls
