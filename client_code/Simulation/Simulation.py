@@ -59,8 +59,14 @@ class Simulation:
     """
 
     # Create the first frame
-    # Intialize the population list with people
-    people = [Person(random(), random()) for _ in range(self.PARAMS.POPULATION_SIZE)]
+    # Intialize the population list with people and whether they follow rules
+    people = []
+    for _ in range(self.PARAMS.POPULATION_SIZE):
+      people.append(Person(
+        random(), 
+        random(), 
+        random() < self.PARAMS.FOLLOWS_RULES_RATE
+      ))
 
     # There are some people who are exposed at the beginning
     for infectedCount in range(self.PARAMS.INITIAL_INFECTED):
@@ -114,11 +120,18 @@ class Simulation:
     None
     """
 
+    # Iterate through all people and move them to a random location close by
     for person in frame.people:
       if person.state != Person.DEAD:
+        # If social distancing is enabled, reduce the movement
+        if self.PARAMS.SOCIAL_DISTANCING_ENABLED and person.followsRules:
+          maxMovement = self.PARAMS.SOCIAL_DISTANCING_MAX_MOVEMENT
+        else:
+          maxMovement = self.PARAMS.MAX_MOVEMENT
+
         # Change the position of the person by a random amount
-        person.x += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
-        person.y += uniform(-self.PARAMS.MAX_MOVEMENT, self.PARAMS.MAX_MOVEMENT)
+        person.x += uniform(-maxMovement, maxMovement)
+        person.y += uniform(-maxMovement, maxMovement)
         
         # Make sure it doesn't excedd the bounds
         person.x = max(0, min(1, person.x))
@@ -264,9 +277,11 @@ if __name__ == '__main__':
     plt.show()
 
   # Created a simulation object and runs the simulation
-  params = Params()
-  params.POPULATION_SIZE = 1000
-  params.VACCINATION_ENABLED = True
+  params = Params(
+    POPULATION_SIZE = 1000,
+    VACCINATION_ENABLED = True,
+    SOCIAL_DISTANCING_ENABLED = False
+  )
   simulation = Simulation(params)
   startTime = time()
   frames = list(simulation.run())

@@ -25,19 +25,30 @@ class Params:
     Time taken per frame
   """
 
+  # Basic model related parameters
   POPULATION_SIZE = 100
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
+  MAX_MOVEMENT = 0.05
+  TIME_PER_FRAME = 0.2
+
+  # Person related parameters
+  FOLLOWS_RULES_RATE = 0.9
+
+  # State transition related parameters
+  INITIAL_INFECTED = 2
   INFECTION_RATE = 0.6
   INCUBATION_PERIOD = 3
   INFECTION_PERIOD = 10
   MORTALITY_RATE = 0.3
-  INITIAL_INFECTED = 2
-  MAX_MOVEMENT = 0.05
-  TIME_PER_FRAME = 0.2
 
+  # Vaccination related parameters
   VACCINATION_ENABLED = False
   VACCINATION_RATE = 0.01
+
+  # Social distancing related parameters
+  SOCIAL_DISTANCING_ENABLED = False
+  SOCIAL_DISTANCING_MAX_MOVEMENT = 0.3 * MAX_MOVEMENT
 
   def __init__(self, **kwargs):
     """Initializes the parameters.
@@ -54,4 +65,4 @@ class Params:
 
     # Change the value for each parameter in kwargs from default
     for param, value in kwargs.items():
-      exec(f'{param} = {value}')
+      exec(f'self.{param} = {value}')

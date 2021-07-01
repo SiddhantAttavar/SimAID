@@ -18,6 +18,8 @@ class Person:
     A variable which stores the current state of the person
   framesSinceInfection : int
     The number of days since the person was infected (default -1)
+  followsRules : bool
+    whether the person follows rules like social distancing and wearing mask
 
   STATES
   ------
@@ -125,7 +127,7 @@ class Person:
     VACCINATED
   ]
 
-  def __init__(self, startX, startY):
+  def __init__(self, startX, startY, followsRules):
     """Sets some initial parameters for the person.
 
     Parameters
@@ -144,3 +146,4 @@ class Person:
     self.y = startY
     self.state = Person.SUSCEPTIBLE
     self.framesSinceInfection = -1
+    self.followsRules = followsRules
