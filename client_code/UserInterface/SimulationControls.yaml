@@ -1,6 +1,6 @@
 components:
 - type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"MWNYEK":45,"HUPFUY":15}'}
   name: root
   layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
   components:
@@ -100,7 +100,7 @@ components:
   - type: ColumnPanel
     properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15}'}
     name: interventionControlsColumnPanel
-    layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
+    layout_properties: {grid_position: 'UFDNSY,UJJMNW LSERIZ,RBYGCL'}
     components:
     - type: Label
       properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
@@ -133,7 +133,19 @@ components:
       properties: {}
       name: vaccinationSwitch
       layout_properties: {grid_position: 'VUYFQP,GTEAGC'}
-      event_bindings: {change: onVaccinationSwitchChange}
+      event_bindings: {change: onVaccinationChange}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Social distancing: ', font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: socialDistancingLabel
+    layout_properties: {grid_position: 'UFDNSY,UJJMNW BUIUEM,MWNYEK'}
+  - type: form:C6ZZPAPN4YYF5NVJ:Switch
+    properties: {}
+    name: socialDistancingSwitch
+    layout_properties: {grid_position: 'UFDNSY,UJJMNW BUIUEM,HUPFUY'}
+    event_bindings: {change: onSocialDistancingChange}
   event_bindings: {}
 container:
   type: ColumnPanel
