@@ -33,7 +33,7 @@ class Params:
   TIME_PER_FRAME = 0.2
 
   # Person related parameters
-  FOLLOWS_RULES_RATE = 0.9
+  RULE_COMPLIANCE_RATE = 0.9
 
   # State transition related parameters
   INITIAL_INFECTED = 2

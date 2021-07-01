@@ -65,7 +65,7 @@ class Simulation:
       people.append(Person(
         random(), 
         random(), 
-        random() < self.PARAMS.FOLLOWS_RULES_RATE
+        random() < self.PARAMS.RULE_COMPLIANCE_RATE
       ))
 
     # There are some people who are exposed at the beginning

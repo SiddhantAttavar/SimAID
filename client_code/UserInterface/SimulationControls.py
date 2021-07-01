@@ -172,3 +172,18 @@ class SimulationControls(SimulationControlsTemplate):
     """
     
     self.params.VACCINATION_ENABLED = not self.params.VACCINATION_ENABLED
+
+  def onRuleComplianceRateChange(self, handle, **event_args):
+    """"This method is called when the rule compliance rate slider is moved
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the slider is moved
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.params.FOLLO
