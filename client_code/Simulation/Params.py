@@ -21,7 +21,7 @@ class Params:
     The number of people who are infected at the beginning
   MAX_MOVEMENT : float
     The maximum distance a person can move in a direction
-  TIME_PER_FRAME : floatq
+  TIME_PER_FRAME : float
     Time taken per frame
   """
 
