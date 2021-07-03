@@ -1,18 +1,20 @@
 from random import random, uniform
-from math import sqrt
-from time import time
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
 from Params import Params # type: ignore
+from Transitions import Transitions # type: ignore
+from Utils import Utils # type: ignore
 
 class Simulation:
   """Parameters and methods for the simulation.
 
   Attributes
   ----------
-  self.PARAMS : Params
+  PARAMS : Params
     The parameters of the simulation
+  transitions : Transitions
+    The methods for the transitions of the simulation
 
   Methods
   -------
@@ -20,6 +22,8 @@ class Simulation:
     Initialized the simulation with some properties
   run()
     Runs the current simulation
+  nextFrame(frame)
+    Calculates the next frame of the simulation
   """
 
   def __init__(self, PARAMS):
@@ -38,6 +42,7 @@ class Simulation:
     """
 
     self.PARAMS = PARAMS
+    self.transitions = Transitions(self.PARAMS)
 
   def run(self):
     """Run the simulation.
@@ -111,9 +116,9 @@ class Simulation:
     """
 
     self.movePeople(frame)
-    self.findExposed(frame)
-    self.findInfected(frame)
-    self.findRecovered(frame)
+    self.transitions.findExposed(frame)
+    self.transitions.findInfected(frame)
+    self.transitions.findRecovered(frame)
     
     if self.PARAMS.VACCINATION_ENABLED:
       self.vaccinate(frame)
@@ -168,91 +173,8 @@ class Simulation:
           person.x = max(0, min(1, person.x))
           person.y = max(0, min(1, person.y))
 
-  def findExposed(self, frame):
-    """Find out who will be exposed to the virus next
-    
-    Parameters
-    ----------
-    frame : Frame
-      The current frame of the simulation
-    
-    Returns
-    -------
-    None
-    """
-
-    # Find the people who are susceptible and infected
-    suseptibleGroup = [frame.people[i] for i in frame.stateGroups[Person.SUSCEPTIBLE.id]]
-    infectedGroup = [frame.people[i] for i in frame.stateGroups[Person.INFECTED.id]] # + \
-                    #[frame.people[i] for i in frame.stateGroups[Person.EXPOSED.id]]
-    
-    # Find if any of the two groups are in contact and the disease spreads
-    for infectedPerson in infectedGroup:
-      for susceptiblePerson in suseptibleGroup:
-        dist = sqrt(
-          abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
-          abs(infectedPerson.y - susceptiblePerson.y) ** 2
-        )
-        if dist <= self.PARAMS.CONTACT_RADIUS and random() < self.PARAMS.INFECTION_RATE:
-          # The disease spreads to the susceptible person and he becomes exposed
-          susceptiblePerson.state = Person.EXPOSED
-          susceptiblePerson.framesSinceInfection = 0
-
-  def findInfected(self, frame):
-    """Find out who will be infected in the next frame.
-
-    Parameters
-    ----------
-    frame : Frame
-      The current frame of the simulation
-    
-    Returns
-    -------
-    None
-    """
-
-    # Iterate through all people and find those who are exposed
-    # Find if they become infected
-    for personCount in frame.stateGroups[Person.EXPOSED.id]:
-      person = frame.people[personCount]
-      person.framesSinceInfection += 1
-      if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
-        # The person becomes symptomatic
-        person.state = Person.INFECTED
-        if self.PARAMS.QUARANTINE_ENABLED and random() < self.PARAMS.QUARANTINE_RATE:
-          person.isQuarantined = True
-          person.x = uniform(0, self.PARAMS.QUARANTINE_SIZE)
-          person.y = uniform(0, self.PARAMS.QUARANTINE_SIZE)
-
-  def findRecovered(self, frame):
-    """Find out who will be recovered / dead next
-    
-    Parameters
-    ----------
-    frame : Frame
-      The current frame of the simulation
-    
-    Returns
-    -------
-    None
-    """
-
-    # Iterate through all people and find those who are infected
-    # Find if they have no time left for disease
-    for personCount in frame.stateGroups[Person.INFECTED.id]:
-      person = frame.people[personCount]
-      person.framesSinceInfection += 1
-      if person.framesSinceInfection >= self.PARAMS.INFECTION_PERIOD:
-        # Find if the person recovers or dies
-        person.framesSinceInfection = -1
-        person.isQuarantined = False
-        if random() < self.PARAMS.MORTALITY_RATE:
-          person.state = Person.DEAD
-        else:
-          person.state = Person.RECOVERED
-
   def vaccinate(self, frame):
-    """"Find ou who is vaccinated
+    """"Find out who is vaccinated
 
     Parameters
     ----------
@@ -271,57 +193,18 @@ class Simulation:
 
 if __name__ == '__main__':
   # Only performed when this file is run directly
-  from matplotlib import pyplot as plt
-
-  def drawFramesMatplotlib(frames, PARAMS):
-    """Draws the frame in a matplotlib graph.
-
-    Parameters
-    ----------
-    frame : list(Frame)
-      The list of frames that we have to display
-    frameCount : int
-      The current frameCount
-    PARAMS : Params
-      The parameters of the simulation
-
-    Returns
-    -------
-    None
-    """
-
-    # Initialize arrays for graphing the results
-    graphXData = []
-    graphYData = [[] for _ in Person.states]
-
-    # Get the data for the X and Y axes
-    for frameCount, frame in enumerate(frames):
-      graphXData.append(frameCount)
-      for stateID, stateGroup in enumerate(frame.stateGroups):
-        graphYData[stateID].append(len(stateGroup))
-
-    # Add the plots to the graph
-    for stateID, stateCountData in enumerate(graphYData):
-      plt.plot(
-        graphXData,
-        stateCountData,
-        label = Person.states[stateID].name,
-        color = Person.states[stateID].color,
-      )
-
-    # Show the matplotlib plots
-    plt.ylim(0, PARAMS.POPULATION_SIZE)
-    plt.show()
-
-  # Created a simulation object and runs the simulation
+  # Create a simulation object and runs the simulation
+  from time import time # type: ignore
   params = Params(
     POPULATION_SIZE = 1000,
     VACCINATION_ENABLED = False,
     SOCIAL_DISTANCING_ENABLED = False,
-    QUARANTINE_ENABLED = True
+    QUARANTINE_ENABLED = False
   )
+  
   simulation = Simulation(params)
   startTime = time()
   frames = list(simulation.run())
   print(f'Time taken: {time() - startTime:.2f}s')
-  drawFramesMatplotlib(frames, params)
+
+  Utils.drawFramesMatplotlib(frames, params)

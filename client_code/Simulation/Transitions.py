@@ -1,0 +1,121 @@
+from random import random, uniform
+from math import sqrt
+
+from Person import Person # type: ignore
+
+class Transitions:
+  """This class contiains functions for the transition between states
+
+  Attributes
+  ----------
+
+  Methods
+  -------
+  __init__()
+    Initializes the transition object
+  findExposed(frame)
+    Finds out who will be exposed to the virus
+  findInfected(frame)
+    Finds out who will be infected
+  findRemoved(frame)
+    Finds out who will be recovered / dead
+  vaccinate(frame)
+    Finds out who is vaccinated
+  """
+
+  def __init__(self, PARAMS):
+    """Initializes the transition object with parameters
+    
+    Parameters
+    ----------
+    PARAMS : Params
+      The parameters of the simulation
+    
+    Returns
+    -------
+    None
+    """
+
+    self.PARAMS = PARAMS
+
+  def findExposed(self, frame):
+    """Find out who will be exposed to the virus next
+    
+    Parameters
+    ----------
+    frame : Frame
+      The current frame of the simulation
+    
+    Returns
+    -------
+    None
+    """
+
+    # Find the people who are susceptible and infected
+    suseptibleGroup = [frame.people[i] for i in frame.stateGroups[Person.SUSCEPTIBLE.id]]
+    infectedGroup = [frame.people[i] for i in frame.stateGroups[Person.INFECTED.id]]
+    
+    # Find if any of the two groups are in contact and the disease spreads
+    for infectedPerson in infectedGroup:
+      for susceptiblePerson in suseptibleGroup:
+        dist = sqrt(
+          abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
+          abs(infectedPerson.y - susceptiblePerson.y) ** 2
+        )
+        if dist <= self.PARAMS.CONTACT_RADIUS and random() < self.PARAMS.INFECTION_RATE:
+          # The disease spreads to the susceptible person and he becomes exposed
+          susceptiblePerson.state = Person.EXPOSED
+          susceptiblePerson.framesSinceInfection = 0
+
+  def findInfected(self, frame):
+    """Find out who will be infected in the next frame.
+
+    Parameters
+    ----------
+    frame : Frame
+      The current frame of the simulation
+    
+    Returns
+    -------
+    None
+    """
+
+    # Iterate through all people and find those who are exposed
+    # Find if they become infected
+    for personCount in frame.stateGroups[Person.EXPOSED.id]:
+      person = frame.people[personCount]
+      person.framesSinceInfection += 1
+      if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
+        # The person becomes symptomatic
+        person.state = Person.INFECTED
+        if self.PARAMS.QUARANTINE_ENABLED and random() < self.PARAMS.QUARANTINE_RATE:
+          person.isQuarantined = True
+          person.x = uniform(0, self.PARAMS.QUARANTINE_SIZE)
+          person.y = uniform(0, self.PARAMS.QUARANTINE_SIZE)
+    
+  def findRecovered(self, frame):
+    """Find out who will be recovered / dead next
+    
+    Parameters
+    ----------
+    frame : Frame
+      The current frame of the simulation
+    
+    Returns
+    -------
+    None
+    """
+
+    # Iterate through all people and find those who are infected
+    # Find if they have no time left for disease
+    for personCount in frame.stateGroups[Person.INFECTED.id]:
+      person = frame.people[personCount]
+      person.framesSinceInfection += 1
+      if person.framesSinceInfection >= self.PARAMS.INFECTION_PERIOD:
+        # Find if the person recovers or dies
+        person.framesSinceInfection = -1
+        person.isQuarantined = False
+        if random() < self.PARAMS.MORTALITY_RATE:
+          person.state = Person.DEAD
+        else:
+          person.state = Person.RECOVERED
