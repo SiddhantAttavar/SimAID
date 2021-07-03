@@ -123,6 +123,7 @@ class RunSimulation(RunSimulationTemplate):
     self.graphYData = [[] for _ in Person.states]
     
     # Created a simulation object and runs the simulation
+    self.params.QUARANTINE_ENABLED = True
     simulation = Simulation(self.params)
     for frameCount, frame in enumerate(simulation.run()):
       self.drawFrame(frame, frameCount)
