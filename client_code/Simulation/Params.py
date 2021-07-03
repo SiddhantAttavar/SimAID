@@ -30,7 +30,7 @@ class Params:
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
   MAX_MOVEMENT = 0.05
-  TIME_PER_FRAME = 0.2
+  TIME_PER_FRAME = 0.5
 
   # Person related parameters
   RULE_COMPLIANCE_RATE = 0.9

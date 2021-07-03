@@ -183,8 +183,8 @@ class Simulation:
 
     # Find the people who are susceptible and infected
     suseptibleGroup = [frame.people[i] for i in frame.stateGroups[Person.SUSCEPTIBLE.id]]
-    infectedGroup = [frame.people[i] for i in frame.stateGroups[Person.INFECTED.id]] + \
-                    [frame.people[i] for i in frame.stateGroups[Person.EXPOSED.id]]
+    infectedGroup = [frame.people[i] for i in frame.stateGroups[Person.INFECTED.id]] # + \
+                    #[frame.people[i] for i in frame.stateGroups[Person.EXPOSED.id]]
     
     # Find if any of the two groups are in contact and the disease spreads
     for infectedPerson in infectedGroup:
