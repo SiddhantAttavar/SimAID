@@ -53,7 +53,7 @@ class Params:
   # Quarantine related parameters
   QUARANTINE_ENABLED = False
   QUARANTINE_SIZE = 1 / 3
-  QUARANTINE_RATE = 0.8
+  QUARANTINE_RATE = 0.5
 
   def __init__(self, **kwargs):
     """Initializes the parameters.
