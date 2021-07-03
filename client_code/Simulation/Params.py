@@ -50,6 +50,11 @@ class Params:
   SOCIAL_DISTANCING_ENABLED = False
   SOCIAL_DISTANCING_MAX_MOVEMENT = 0.3 * MAX_MOVEMENT
 
+  # Quarantine related parameters
+  QUARANTINE_ENABLED = False
+  QUARANTINE_SIZE = 1 / 3
+  QUARANTINE_RATE = 0.8
+
   def __init__(self, **kwargs):
     """Initializes the parameters.
 

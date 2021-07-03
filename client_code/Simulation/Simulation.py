@@ -62,11 +62,18 @@ class Simulation:
     # Intialize the population list with people and whether they follow rules
     people = []
     for _ in range(self.PARAMS.POPULATION_SIZE):
-      people.append(Person(
-        random(), 
-        random(), 
-        random() < self.PARAMS.RULE_COMPLIANCE_RATE
-      ))
+      if self.PARAMS.QUARANTINE_ENABLED:
+        people.append(Person(
+          uniform(self.PARAMS.QUARANTINE_SIZE, 1), 
+          uniform(self.PARAMS.QUARANTINE_SIZE, 1), 
+          random() < self.PARAMS.RULE_COMPLIANCE_RATE
+        ))
+      else:
+        people.append(Person(
+          random(), 
+          random(), 
+          random() < self.PARAMS.RULE_COMPLIANCE_RATE
+        ))
 
     # There are some people who are exposed at the beginning
     for infectedCount in range(self.PARAMS.INITIAL_INFECTED):
@@ -134,8 +141,15 @@ class Simulation:
         person.y += uniform(-maxMovement, maxMovement)
         
         # Make sure it doesn't excedd the bounds
-        person.x = max(0, min(1, person.x))
-        person.y = max(0, min(1, person.y))
+        if person.isQuarantined:
+          person.x = max(0, min(self.PARAMS.QUARANTINE_SIZE, person.x))
+          person.y = max(0, min(self.PARAMS.QUARANTINE_SIZE, person.y))
+        elif self.PARAMS.QUARANTINE_ENABLED:
+          person.x = max(self.PARAMS.QUARANTINE_SIZE, min(1, person.x))
+          person.y = max(self.PARAMS.QUARANTINE_SIZE, min(1, person.y))
+        else:
+          person.x = max(0, min(1, person.x))
+          person.y = max(0, min(1, person.y))
 
   def findExposed(self, frame):
     """Find out who will be exposed to the virus next
@@ -187,6 +201,7 @@ class Simulation:
       if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
         # The person becomes symptomatic
         person.state = Person.INFECTED
+        person.isQuarantined = self.PARAMS.QUARANTINE_ENABLED and random() < self.PARAMS.QUARANTINE_RATE
 
   def findRecovered(self, frame):
     """Find out who will be recovered / dead next
@@ -209,6 +224,7 @@ class Simulation:
       if person.framesSinceInfection >= self.PARAMS.INFECTION_PERIOD:
         # Find if the person recovers or dies
         person.framesSinceInfection = -1
+        person.isQuarantined = False
         if random() < self.PARAMS.MORTALITY_RATE:
           person.state = Person.DEAD
         else:
@@ -280,7 +296,8 @@ if __name__ == '__main__':
   params = Params(
     POPULATION_SIZE = 1000,
     VACCINATION_ENABLED = True,
-    SOCIAL_DISTANCING_ENABLED = False
+    SOCIAL_DISTANCING_ENABLED = False,
+    QUARANTINE_ENABLED = True
   )
   simulation = Simulation(params)
   startTime = time()

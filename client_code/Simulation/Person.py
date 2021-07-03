@@ -20,6 +20,8 @@ class Person:
     The number of days since the person was infected (default -1)
   followsRules : bool
     whether the person follows rules like social distancing and wearing mask
+  isQuarantined : bool
+    whether the person is quarantined when on getting infected
 
   STATES
   ------
@@ -117,6 +119,7 @@ class Person:
   RECOVERED = State('RECOVERED', 3, 'blue')
   DEAD = State('DEAD', 4, 'gray')
   VACCINATED = State('VACCINATED', 5, 'yellow')
+  QUARANTINED = State('QUARANTINED', 6, 'purple')
 
   states = [
     SUSCEPTIBLE,
@@ -124,7 +127,8 @@ class Person:
     INFECTED,
     RECOVERED,
     DEAD,
-    VACCINATED
+    VACCINATED,
+    QUARANTINED
   ]
 
   def __init__(self, startX, startY, followsRules):
@@ -147,3 +151,4 @@ class Person:
     self.state = Person.SUSCEPTIBLE
     self.framesSinceInfection = -1
     self.followsRules = followsRules
+    self.isQuarantined = False
