@@ -1,6 +1,6 @@
 components:
 - type: ColumnPanel
-  properties: {col_widths: '{"MWNYEK":45,"HUPFUY":15}'}
+  properties: {col_widths: '{}'}
   name: root
   layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
   components:
@@ -98,9 +98,9 @@ components:
       layout_properties: {grid_position: 'BQIYLA,ZFFMEM'}
       event_bindings: {slide: onMortalityRateChange}
   - type: ColumnPanel
-    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15}'}
+    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"CZYXNC":45,"JARXFX":15,"UPQTNJ":45,"KQHDKG":15}'}
     name: interventionControlsColumnPanel
-    layout_properties: {grid_position: 'UFDNSY,UJJMNW LSERIZ,RBYGCL'}
+    layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
     components:
     - type: Label
       properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
@@ -116,7 +116,7 @@ components:
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '80',
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 5}
       name: ruleComplianceRateSlider
@@ -134,18 +134,39 @@ components:
       name: vaccinationSwitch
       layout_properties: {grid_position: 'VUYFQP,GTEAGC'}
       event_bindings: {change: onVaccinationChange}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Social distancing: ', font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: ''}
-    name: socialDistancingLabel
-    layout_properties: {grid_position: 'UFDNSY,UJJMNW BUIUEM,MWNYEK'}
-  - type: form:C6ZZPAPN4YYF5NVJ:Switch
-    properties: {}
-    name: socialDistancingSwitch
-    layout_properties: {grid_position: 'UFDNSY,UJJMNW BUIUEM,HUPFUY'}
-    event_bindings: {change: onSocialDistancingChange}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: 'Social distancing: ', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: socialDistancingLabel
+      layout_properties: {grid_position: 'ARQLOP,CZYXNC'}
+    - type: form:C6ZZPAPN4YYF5NVJ:Switch
+      properties: {}
+      name: socialDistancingSwitch
+      layout_properties: {grid_position: 'ARQLOP,JARXFX'}
+      event_bindings: {change: onSocialDistancingChange}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: 'Quarantine: ', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: quarantineLabel
+      layout_properties: {grid_position: 'PLSWUO,UPQTNJ'}
+    - type: form:C6ZZPAPN4YYF5NVJ:Switch
+      properties: {}
+      name: quarantineSwitch
+      layout_properties: {grid_position: 'PLSWUO,KQHDKG'}
+      event_bindings: {change: onQuarantineChange}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 5}
+      name: quarantineSlider
+      layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
+      event_bindings: {slide: onQuarantineRateChange}
   event_bindings: {}
 container:
   type: ColumnPanel

@@ -119,7 +119,6 @@ class Person:
   RECOVERED = State('RECOVERED', 3, 'blue')
   DEAD = State('DEAD', 4, 'gray')
   VACCINATED = State('VACCINATED', 5, 'yellow')
-  QUARANTINED = State('QUARANTINED', 6, 'purple')
 
   states = [
     SUSCEPTIBLE,
@@ -127,8 +126,7 @@ class Person:
     INFECTED,
     RECOVERED,
     DEAD,
-    VACCINATED,
-    QUARANTINED
+    VACCINATED
   ]
 
   def __init__(self, startX, startY, followsRules):

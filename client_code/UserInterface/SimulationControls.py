@@ -61,10 +61,16 @@ class SimulationControls(SimulationControlsTemplate):
     self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.start}'
     
     self.ruleComplianceRateSlider.start = int(self.params.RULE_COMPLIANCE_RATE * 100)
-    self.ruleComplianceRateLabel.text = self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.start}'
+    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.start}'
     
     self.vaccinationSwitch.checked = self.params.VACCINATION_ENABLED
+    
     self.socialDistancingSwitch.checked = self.params.SOCIAL_DISTANCING_ENABLED
+    
+    self.quarantineSwitch.checked = self.params.QUARANTINE_ENABLED
+    self.quarantineSlider.enabled = self.params.QUARANTINE_ENABLED
+    self.quarantineSlider.start = int(self.params.QUARANTINE_RATE * 100)
+    self.quarantineLabel.text = f'Quarantine Rate (0 - 100): {self.quarantineSlider.start}'
     
   def onPopulationSizeChange(self, **event_args):
     """This method is called when the population size slider is moved
@@ -191,7 +197,7 @@ class SimulationControls(SimulationControlsTemplate):
     None
     """
     
-    self.params.VACCINATION_ENABLED = not self.params.VACCINATION_ENABLED
+    self.params.VACCINATION_ENABLED = self.vaccinationSwitch.checked
 
   def onSocialDistancingChange(self, **event_args):
     """This method is called when the social distancing switch is checked or unchecked
@@ -206,4 +212,40 @@ class SimulationControls(SimulationControlsTemplate):
     None
     """
     
-    self.params.SOCIAL_DISTANCING_ENABLED = not self.params.SOCIAL_DISTANCING_ENABLED
+    self.params.SOCIAL_DISTANCING_ENABLED = self.socialDistancingSwitch.checked
+
+  def onQuarantineChange(self, **event_args):
+    """This method is called when the quaraninte switch is checked or unchecked
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the switch is checked
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.params.QUARANTINE_ENABLED = self.quarantineSwitch.checked
+    self.quarantineSlider.enabled = self.params.QUARANTINE_ENABLED
+    if self.params.QUARANTINE_ENABLED:
+      self.quarantineLabel.text = f'Quarantine Rate (0 - 100): {self.quarantineSlider.value}'
+    else:
+      self.quarantineLabel.text = 'Quarantine Rate: '
+
+  def onQuarantineRateChange(self, handle, **event_args):
+    """"This method is called when the quarantine rate slider is moved
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the slider is moved
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.params.QUARANTINE_RATE = self.quarantineSlider.value / 100
+    self.quarantineLabel.text = f'Quarantine Rate (0 - 100): {self.quarantineSlider.value}'

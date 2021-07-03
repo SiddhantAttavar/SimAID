@@ -85,16 +85,17 @@ class RunSimulation(RunSimulationTemplate):
     # If quarantine is enabled, draw the quarantine box
     if self.params.QUARANTINE_ENABLED:
       self.canvas.begin_path()
-      self.canvas.move_to(0, 0)
-      self.canvas.line_to(0, self.params.QUARANTINE_SIZE * self.canvasHeight)
+      lineWidth = 3
+      self.canvas.move_to(lineWidth / 2, lineWidth / 2)
+      self.canvas.line_to(lineWidth / 2, self.params.QUARANTINE_SIZE * self.canvasHeight)
       self.canvas.line_to(
         self.params.QUARANTINE_SIZE * self.canvasWidth, 
         self.params.QUARANTINE_SIZE * self.canvasHeight
       )
-      self.canvas.line_to(self.params.QUARANTINE_SIZE * self.canvasWidth, 0)
+      self.canvas.line_to(self.params.QUARANTINE_SIZE * self.canvasWidth, lineWidth / 2)
       self.canvas.close_path()
       self.canvas.stroke_style = "#2196F3"
-      self.canvas.line_width = 3
+      self.canvas.line_width = lineWidth
       self.canvas.stroke()
     
     # Draw each person on the canvas as a dot with a particular color
@@ -138,7 +139,6 @@ class RunSimulation(RunSimulationTemplate):
     self.graphYData = [[] for _ in Person.states]
     
     # Created a simulation object and runs the simulation
-    self.params.QUARANTINE_ENABLED = True
     simulation = Simulation(self.params)
     for frameCount, frame in enumerate(simulation.run()):
       self.drawFrame(frame, frameCount)
