@@ -60,7 +60,11 @@ class SimulationControls(SimulationControlsTemplate):
     self.mortalityRateSlider.start = int(self.params.MORTALITY_RATE * 100)
     self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.start}'
     
+    self.ruleComplianceRateSlider.start = int(self.params.RULE_COMPLIANCE_RATE * 100)
+    self.ruleComplianceRateLabel.text = self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.start}'
+    
     self.vaccinationSwitch.checked = self.params.VACCINATION_ENABLED
+    self.socialDistancingSwitch.checked = self.params.SOCIAL_DISTANCING_ENABLED
     
   def onPopulationSizeChange(self, **event_args):
     """This method is called when the population size slider is moved
@@ -158,21 +162,6 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.INFECTION_RATE = self.mortalityRateSlider.value / 100
     self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.value}'
     
-  def onVaccinationSwitchChange(self, **event_args):
-    """This method is called when this switch is checked or unchecked
-    
-    Parameters
-    ----------
-    **event_args
-      Details about how the switch is checked
-    
-    Returns
-    -------
-    None
-    """
-    
-    self.params.VACCINATION_ENABLED = not self.params.VACCINATION_ENABLED
-
   def onRuleComplianceRateChange(self, handle, **event_args):
     """"This method is called when the rule compliance rate slider is moved
     
@@ -186,4 +175,35 @@ class SimulationControls(SimulationControlsTemplate):
     None
     """
     
-    self.params.FOLLO
+    self.params.RULE_COMPLIANCE_RATE = self.ruleComplianceRateSlider.value / 100
+    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.value}'
+    
+  def onVaccinationChange(self, **event_args):
+    """This method is called when the vaccination switch is checked or unchecked
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the switch is checked
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.params.VACCINATION_ENABLED = not self.params.VACCINATION_ENABLED
+
+  def onSocialDistancingChange(self, **event_args):
+    """This method is called when the social distancing switch is checked or unchecked
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the switch is checked
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.params.SOCIAL_DISTANCING_ENABLED = not self.params.SOCIAL_DISTANCING_ENABLED
