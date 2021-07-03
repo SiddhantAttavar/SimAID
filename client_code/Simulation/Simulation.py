@@ -63,9 +63,15 @@ class Simulation:
     people = []
     for _ in range(self.PARAMS.POPULATION_SIZE):
       if self.PARAMS.QUARANTINE_ENABLED:
+        # Keep moving the person until we find a location 
+        # not in the quarantine zone
+        initLoc = (random(), random())
+        while (initLoc[0] < self.PARAMS.QUARANTINE_SIZE and 
+              initLoc[1] < self.PARAMS.QUARANTINE_SIZE):
+          initLoc = (random(), random())
+        
         people.append(Person(
-          uniform(self.PARAMS.QUARANTINE_SIZE, 1), 
-          uniform(self.PARAMS.QUARANTINE_SIZE, 1), 
+          *initLoc,
           random() < self.PARAMS.RULE_COMPLIANCE_RATE
         ))
       else:
@@ -145,8 +151,19 @@ class Simulation:
           person.x = max(0, min(self.PARAMS.QUARANTINE_SIZE, person.x))
           person.y = max(0, min(self.PARAMS.QUARANTINE_SIZE, person.y))
         elif self.PARAMS.QUARANTINE_ENABLED:
-          person.x = max(self.PARAMS.QUARANTINE_SIZE, min(1, person.x))
-          person.y = max(self.PARAMS.QUARANTINE_SIZE, min(1, person.y))
+          person.x = min(1, person.x)
+          person.y = min(1, person.y)
+
+          # If the person is in the quarantined zone move the person out
+          if (person.x < self.PARAMS.QUARANTINE_SIZE and 
+              person.y < self.PARAMS.QUARANTINE_SIZE):
+            xDiff = self.PARAMS.QUARANTINE_SIZE - person.x
+            yDiff = self.PARAMS.QUARANTINE_SIZE - person.y
+
+            if xDiff < yDiff:
+              person.x = self.PARAMS.QUARANTINE_SIZE
+            else:
+              person.y = self.PARAMS.QUARANTINE_SIZE
         else:
           person.x = max(0, min(1, person.x))
           person.y = max(0, min(1, person.y))
@@ -201,7 +218,10 @@ class Simulation:
       if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
         # The person becomes symptomatic
         person.state = Person.INFECTED
-        person.isQuarantined = self.PARAMS.QUARANTINE_ENABLED and random() < self.PARAMS.QUARANTINE_RATE
+        if self.PARAMS.QUARANTINE_ENABLED and random() < self.PARAMS.QUARANTINE_RATE:
+          person.isQuarantined = True
+          person.x = uniform(0, self.PARAMS.QUARANTINE_SIZE)
+          person.y = uniform(0, self.PARAMS.QUARANTINE_SIZE)
 
   def findRecovered(self, frame):
     """Find out who will be recovered / dead next
@@ -295,7 +315,7 @@ if __name__ == '__main__':
   # Created a simulation object and runs the simulation
   params = Params(
     POPULATION_SIZE = 1000,
-    VACCINATION_ENABLED = True,
+    VACCINATION_ENABLED = False,
     SOCIAL_DISTANCING_ENABLED = False,
     QUARANTINE_ENABLED = True
   )
