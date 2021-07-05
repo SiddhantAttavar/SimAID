@@ -19,6 +19,8 @@ class Params:
     The size of the side of each cell
   MAX_MOVEMENT : float
     The maximum distance a person can move in a direction
+  TRAVEL_RATE : float
+    The probability of a person travelling to another cell
   
   Pathogen Parameters
   -------------------
@@ -76,6 +78,7 @@ class Params:
   GRID_PROBABILITIES = []
   CELL_SIZE = 1 / GRID_SIZE
   MAX_MOVEMENT = 0.05
+  TRAVEL_RATE = 0.2
 
   # Person related parameters
   RULE_COMPLIANCE_RATE = 0.9

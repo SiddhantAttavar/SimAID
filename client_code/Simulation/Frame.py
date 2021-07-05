@@ -7,6 +7,8 @@ class Frame:
   ----------
   grid : list(list(list(Person)))
     list of people in each cell of the grid
+  visitingGrid : list(list(list(Person)))
+    list of people in each cell of the grid who are visiting the cell
   stateGroupss : list(list(int))
     list of indexes of the people in each states
 
@@ -38,3 +40,6 @@ class Frame:
       for col in range(params.GRID_SIZE):
         for personCount, person in enumerate(self.grid[row][col]):
           self.stateGroups[person.state.id].append((row, col, personCount))
+    
+    # Initialize the visiting grid
+    self.visitingGrid = [[[] for i in range(params.GRID_SIZE)] for j in range(params.GRID_SIZE)]

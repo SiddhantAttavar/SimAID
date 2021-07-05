@@ -25,7 +25,9 @@ class Person:
   followsRules : bool
     whether the person follows rules like social distancing and wearing mask
   isQuarantined : bool
-    whether the person is quarantined when on getting infected
+    Whether the person is quarantined when on getting infected
+  isVisiting : bool
+    Whether the person is visiting another cell
 
   STATES
   ------

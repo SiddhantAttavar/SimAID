@@ -147,6 +147,11 @@ class Simulation:
     None
     """
 
+    # Clear the visiting grid
+    for rowCount in range(self.params.GRID_SIZE):
+      for colCount in range(self.params.GRID_SIZE):
+        frame.visitingGrid[rowCount][colCount].clear()
+
     # Iterate through all cells
     for rowCount, row in enumerate(frame.grid):
       # Find the limits of the row
@@ -163,6 +168,15 @@ class Simulation:
           if person.state == Person.DEAD:
             # Dead people do not move
             continue
+
+          if random() < self.params.TRAVEL_RATE:
+            # The person is travelling to a different cell
+            cellRow, cellCol = Utils.getRandomCell(self.params)
+            frame.visitingGrid[cellRow][cellCol].append(person)
+            person.isVisiting = True
+            continue
+          else:
+            person.isVisiting = False
           
           # If social distancing is enabled, reduce the movement
           if self.params.SOCIAL_DISTANCING_ENABLED and person.followsRules:

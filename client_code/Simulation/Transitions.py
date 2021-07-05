@@ -37,31 +37,42 @@ class Transitions:
     None
     """
 
-    # Find the people who are susceptible and infected
-    suseptibleGroup = []
-    for ind in frame.stateGroups[Person.SUSCEPTIBLE.id]:
-      suseptibleGroup.append(frame.grid[ind[0]][ind[1]][ind[2]])
-    
-    infectedGroup = []
-    for ind in frame.stateGroups[Person.INFECTED.id]:
-      infectedGroup.append(frame.grid[ind[0]][ind[1]][ind[2]])
-    
-    # Find if any of the two groups are in contact and the disease spreads
-    for infectedPerson in infectedGroup:
-      for susceptiblePerson in suseptibleGroup:
-        dist = sqrt(
-          abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
-          abs(infectedPerson.y - susceptiblePerson.y) ** 2
-        )
+    # Iterate through all cells
+    for rowCount, row in enumerate(frame.grid):
+      for colCount, cell in enumerate(row):
+        # Find the people who are susceptible and infected
+        susceptibleGroup = []
+        infectedGroup = []
 
-        infectionRate = params.INFECTION_RATE
-        if params.HYGIENE_ENABLED and susceptiblePerson.followsRules and infectedPerson.followsRules:
-          infectionRate *= params.HYGIENE_RATE
+        for person in cell:
+          if not person.isVisiting:
+            if person.state == Person.SUSCEPTIBLE:
+              susceptibleGroup.append(person)
+            elif person.state == Person.INFECTED:
+              infectedGroup.append(person)
+        for person in frame.visitingGrid[rowCount][colCount]:
+          if person.state == Person.SUSCEPTIBLE:
+            susceptibleGroup.append(person)
+          elif person.state == Person.INFECTED:
+            infectedGroup.append(person)
 
-        if dist <= params.CONTACT_RADIUS and random() < infectionRate:
-          # The disease spreads to the susceptible person and he becomes exposed
-          susceptiblePerson.state = Person.EXPOSED
-          susceptiblePerson.framesSinceInfection = 0
+        # Iterate through all pairs of infected and susceptible movePeople
+        # Find when the infection is transmitted
+        for susceptiblePerson in susceptibleGroup:
+          for infectedPerson in infectedGroup:
+            dist = sqrt(
+              abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
+              abs(infectedPerson.y - susceptiblePerson.y) ** 2
+            )
+
+            infectionRate = params.INFECTION_RATE
+            if params.HYGIENE_ENABLED and susceptiblePerson.followsRules and infectedPerson.followsRules:
+              infectionRate *= params.HYGIENE_RATE
+
+            if dist <= params.CONTACT_RADIUS and random() < infectionRate:
+              # The disease spreads to the susceptible person and he becomes exposed
+              susceptiblePerson.state = Person.EXPOSED
+              susceptiblePerson.framesSinceInfection = 0
 
   @staticmethod
   def findInfected(frame, params):
