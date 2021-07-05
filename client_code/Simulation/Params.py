@@ -54,6 +54,11 @@ class Params:
     Size of the side of the quarantine area
   QUARANTINE_RATE : float
     The percentage of infected population which is quarantined
+  
+  Hygeine measures Parameters
+  ---------------------------
+  HYGEINE_ENABLED : bool
+    Whether hygeine measures are enabled
   """
 
   # Basic model related parameters
@@ -85,6 +90,10 @@ class Params:
   QUARANTINE_ENABLED = False
   QUARANTINE_SIZE = 1 / 3
   QUARANTINE_RATE = 0.5
+
+  # Hygeine related parameters
+  HYGEINE_ENABLED = False
+  HYGEINE_RATE = 0.6
 
   def __init__(self, **kwargs):
     """Initializes the parameters.

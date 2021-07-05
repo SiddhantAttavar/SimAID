@@ -48,7 +48,12 @@ class Transitions:
           abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
           abs(infectedPerson.y - susceptiblePerson.y) ** 2
         )
-        if dist <= params.CONTACT_RADIUS and random() < params.INFECTION_RATE:
+
+        infectionRate = params.INFECTION_RATE
+        if params.HYGEINE_ENABLED and susceptiblePerson.followsRules and infectedPerson.followsRules:
+          infectionRate *= params.HYGEINE_RATE
+
+        if dist <= params.CONTACT_RADIUS and random() < infectionRate:
           # The disease spreads to the susceptible person and he becomes exposed
           susceptiblePerson.state = Person.EXPOSED
           susceptiblePerson.framesSinceInfection = 0

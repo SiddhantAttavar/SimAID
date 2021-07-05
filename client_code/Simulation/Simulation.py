@@ -172,33 +172,18 @@ class Simulation:
           person.x = max(0, min(1, person.x))
           person.y = max(0, min(1, person.y))
 
-  def vaccinate(self, frame):
-    """"Find out who is vaccinated
-
-    Parameters
-    ----------
-    frame : Frame
-      The current frame of the simulation
-    
-    Returns
-    -------
-    None
-    """
-
-    for personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
-      person = frame.people[personCount]
-      if random() < self.params.VACCINATION_RATE:
-        person.state = Person.VACCINATED
-
 if __name__ == '__main__':
   # Only performed when this file is run directly
   # Create a simulation object and runs the simulation
-  from time import time # type: ignore
+  from time import time
+
+  # Parameters for running the simulation
   params = Params(
     POPULATION_SIZE = 1000,
     VACCINATION_ENABLED = False,
     SOCIAL_DISTANCING_ENABLED = False,
-    QUARANTINE_ENABLED = False
+    QUARANTINE_ENABLED = False,
+    HYGEINE_ENABLED = False
   )
   
   simulation = Simulation(params)
