@@ -11,7 +11,7 @@ class Simulation:
 
   Attributes
   ----------
-  PARAMS : Params
+  params : Params
     The parameters of the simulation
   transitions : Transitions
     The methods for the transitions of the simulation
@@ -26,14 +26,14 @@ class Simulation:
     Calculates the next frame of the simulation
   """
 
-  def __init__(self, PARAMS):
+  def __init__(self, params):
     """"Initialized the simulation
 
     Intializes the simulation with some basic properties
 
     Parameters
     ----------
-    PARAMS : Params
+    params : Params
       The parameters of the simulation
 
     Returns
@@ -41,8 +41,7 @@ class Simulation:
     None
     """
 
-    self.PARAMS = PARAMS
-    self.transitions = Transitions(self.PARAMS)
+    self.params = params
 
   def run(self):
     """Run the simulation.
@@ -66,37 +65,37 @@ class Simulation:
     # Create the first frame
     # Intialize the population list with people and whether they follow rules
     people = []
-    for _ in range(self.PARAMS.POPULATION_SIZE):
-      if self.PARAMS.QUARANTINE_ENABLED:
+    for _ in range(self.params.POPULATION_SIZE):
+      if self.params.QUARANTINE_ENABLED:
         # Keep moving the person until we find a location 
         # not in the quarantine zone
         initLoc = (random(), random())
-        while (initLoc[0] < self.PARAMS.QUARANTINE_SIZE and 
-              initLoc[1] < self.PARAMS.QUARANTINE_SIZE):
+        while (initLoc[0] < self.params.QUARANTINE_SIZE and 
+              initLoc[1] < self.params.QUARANTINE_SIZE):
           initLoc = (random(), random())
         
         people.append(Person(
           *initLoc,
-          random() < self.PARAMS.RULE_COMPLIANCE_RATE
+          random() < self.params.RULE_COMPLIANCE_RATE
         ))
       else:
         people.append(Person(
           random(), 
           random(), 
-          random() < self.PARAMS.RULE_COMPLIANCE_RATE
+          random() < self.params.RULE_COMPLIANCE_RATE
         ))
 
     # There are some people who are exposed at the beginning
-    for infectedCount in range(self.PARAMS.INITIAL_INFECTED):
+    for infectedCount in range(self.params.INITIAL_INFECTED):
       people[infectedCount].state = Person.EXPOSED
       people[infectedCount].framesSinceInfection = 0
-    for infectedCount in range(self.PARAMS.INITIAL_INFECTED, self.PARAMS.POPULATION_SIZE):
+    for infectedCount in range(self.params.INITIAL_INFECTED, self.params.POPULATION_SIZE):
       people[infectedCount].state = Person.SUSCEPTIBLE
 
     currFrame = Frame(people)
     yield currFrame
 
-    for frameCount in range(self.PARAMS.SIMULATION_LENGTH):
+    for frameCount in range(self.params.SIMULATION_LENGTH):
       # Then we need to build the Frame object to yield
       currFrame = self.nextFrame(currFrame)
       yield currFrame
@@ -116,11 +115,11 @@ class Simulation:
     """
 
     self.movePeople(frame)
-    self.transitions.findExposed(frame)
-    self.transitions.findInfected(frame)
-    self.transitions.findRecovered(frame)
+    Transitions.findExposed(frame, self.params)
+    Transitions.findInfected(frame, self.params)
+    Transitions.findRecovered(frame, self.params)
     
-    if self.PARAMS.VACCINATION_ENABLED:
+    if self.params.VACCINATION_ENABLED:
       self.vaccinate(frame)
 
     return Frame(frame.people)
@@ -142,10 +141,10 @@ class Simulation:
     for person in frame.people:
       if person.state != Person.DEAD:
         # If social distancing is enabled, reduce the movement
-        if self.PARAMS.SOCIAL_DISTANCING_ENABLED and person.followsRules:
-          maxMovement = self.PARAMS.SOCIAL_DISTANCING_MAX_MOVEMENT
+        if self.params.SOCIAL_DISTANCING_ENABLED and person.followsRules:
+          maxMovement = self.params.SOCIAL_DISTANCING_MAX_MOVEMENT
         else:
-          maxMovement = self.PARAMS.MAX_MOVEMENT
+          maxMovement = self.params.MAX_MOVEMENT
 
         # Change the position of the person by a random amount
         person.x += uniform(-maxMovement, maxMovement)
@@ -153,22 +152,22 @@ class Simulation:
         
         # Make sure it doesn't excedd the bounds
         if person.isQuarantined:
-          person.x = max(0, min(self.PARAMS.QUARANTINE_SIZE, person.x))
-          person.y = max(0, min(self.PARAMS.QUARANTINE_SIZE, person.y))
-        elif self.PARAMS.QUARANTINE_ENABLED:
+          person.x = max(0, min(self.params.QUARANTINE_SIZE, person.x))
+          person.y = max(0, min(self.params.QUARANTINE_SIZE, person.y))
+        elif self.params.QUARANTINE_ENABLED:
           person.x = min(1, person.x)
           person.y = min(1, person.y)
 
           # If the person is in the quarantined zone move the person out
-          if (person.x < self.PARAMS.QUARANTINE_SIZE and 
-              person.y < self.PARAMS.QUARANTINE_SIZE):
-            xDiff = self.PARAMS.QUARANTINE_SIZE - person.x
-            yDiff = self.PARAMS.QUARANTINE_SIZE - person.y
+          if (person.x < self.params.QUARANTINE_SIZE and 
+              person.y < self.params.QUARANTINE_SIZE):
+            xDiff = self.params.QUARANTINE_SIZE - person.x
+            yDiff = self.params.QUARANTINE_SIZE - person.y
 
             if xDiff < yDiff:
-              person.x = self.PARAMS.QUARANTINE_SIZE
+              person.x = self.params.QUARANTINE_SIZE
             else:
-              person.y = self.PARAMS.QUARANTINE_SIZE
+              person.y = self.params.QUARANTINE_SIZE
         else:
           person.x = max(0, min(1, person.x))
           person.y = max(0, min(1, person.y))
@@ -188,7 +187,7 @@ class Simulation:
 
     for personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
       person = frame.people[personCount]
-      if random() < self.PARAMS.VACCINATION_RATE:
+      if random() < self.params.VACCINATION_RATE:
         person.state = Person.VACCINATED
 
 if __name__ == '__main__':

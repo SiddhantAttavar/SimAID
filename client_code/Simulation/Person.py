@@ -6,7 +6,7 @@ class Person:
   The person class is used to store variables
   and methods for each person / agent
   This includes properties like position, infection status,
-  comorbidities, etc. and functions like move etc.
+  comorbidities, etc. and methods like move etc.
 
   Attributes
   ----------

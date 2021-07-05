@@ -17,7 +17,7 @@ class Utils:
   """
   
   @staticmethod
-  def drawFramesMatplotlib(frames, PARAMS):
+  def drawFramesMatplotlib(frames, params):
     """Draws the frame in a matplotlib graph.
 
     Parameters
@@ -26,7 +26,7 @@ class Utils:
       The list of frames that we have to display
     frameCount : int
       The current frameCount
-    PARAMS : Params
+    params : Params
       The parameters of the simulation
 
     Returns
@@ -54,5 +54,5 @@ class Utils:
       )
 
     # Show the matplotlib plots
-    plt.ylim(0, PARAMS.POPULATION_SIZE)
+    plt.ylim(0, params.POPULATION_SIZE)
     plt.show()

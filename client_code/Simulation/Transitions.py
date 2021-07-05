@@ -11,40 +11,26 @@ class Transitions:
 
   Methods
   -------
-  __init__()
-    Initializes the transition object
-  findExposed(frame)
+  findExposed(frame, params)
     Finds out who will be exposed to the virus
-  findInfected(frame)
+  findInfected(frame, params)
     Finds out who will be infected
-  findRemoved(frame)
+  findRemoved(frame, params)
     Finds out who will be recovered / dead
-  vaccinate(frame)
+  vaccinate(frame, params)
     Finds out who is vaccinated
   """
 
-  def __init__(self, PARAMS):
-    """Initializes the transition object with parameters
-    
-    Parameters
-    ----------
-    PARAMS : Params
-      The parameters of the simulation
-    
-    Returns
-    -------
-    None
-    """
-
-    self.PARAMS = PARAMS
-
-  def findExposed(self, frame):
+  @staticmethod
+  def findExposed(frame, params):
     """Find out who will be exposed to the virus next
     
     Parameters
     ----------
     frame : Frame
       The current frame of the simulation
+    params : Params
+      The parameters of the simulation
     
     Returns
     -------
@@ -62,18 +48,21 @@ class Transitions:
           abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
           abs(infectedPerson.y - susceptiblePerson.y) ** 2
         )
-        if dist <= self.PARAMS.CONTACT_RADIUS and random() < self.PARAMS.INFECTION_RATE:
+        if dist <= params.CONTACT_RADIUS and random() < params.INFECTION_RATE:
           # The disease spreads to the susceptible person and he becomes exposed
           susceptiblePerson.state = Person.EXPOSED
           susceptiblePerson.framesSinceInfection = 0
 
-  def findInfected(self, frame):
+  @staticmethod
+  def findInfected(frame, params):
     """Find out who will be infected in the next frame.
 
     Parameters
     ----------
     frame : Frame
       The current frame of the simulation
+    params : Params
+      The parameters of the simulation
     
     Returns
     -------
@@ -85,21 +74,24 @@ class Transitions:
     for personCount in frame.stateGroups[Person.EXPOSED.id]:
       person = frame.people[personCount]
       person.framesSinceInfection += 1
-      if person.framesSinceInfection >= self.PARAMS.INCUBATION_PERIOD:
+      if person.framesSinceInfection >= params.INCUBATION_PERIOD:
         # The person becomes symptomatic
         person.state = Person.INFECTED
-        if self.PARAMS.QUARANTINE_ENABLED and random() < self.PARAMS.QUARANTINE_RATE:
+        if params.QUARANTINE_ENABLED and random() < params.QUARANTINE_RATE:
           person.isQuarantined = True
-          person.x = uniform(0, self.PARAMS.QUARANTINE_SIZE)
-          person.y = uniform(0, self.PARAMS.QUARANTINE_SIZE)
-    
-  def findRecovered(self, frame):
+          person.x = uniform(0, params.QUARANTINE_SIZE)
+          person.y = uniform(0, params.QUARANTINE_SIZE)
+  
+  @staticmethod
+  def findRecovered(frame, params):
     """Find out who will be recovered / dead next
     
     Parameters
     ----------
     frame : Frame
       The current frame of the simulation
+    params : Params
+      The parameters of the simulation
     
     Returns
     -------
@@ -111,11 +103,11 @@ class Transitions:
     for personCount in frame.stateGroups[Person.INFECTED.id]:
       person = frame.people[personCount]
       person.framesSinceInfection += 1
-      if person.framesSinceInfection >= self.PARAMS.INFECTION_PERIOD:
+      if person.framesSinceInfection >= params.INFECTION_PERIOD:
         # Find if the person recovers or dies
         person.framesSinceInfection = -1
         person.isQuarantined = False
-        if random() < self.PARAMS.MORTALITY_RATE:
+        if random() < params.MORTALITY_RATE:
           person.state = Person.DEAD
         else:
           person.state = Person.RECOVERED
