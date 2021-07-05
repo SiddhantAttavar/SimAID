@@ -82,7 +82,22 @@ class RunSimulation(RunSimulationTemplate):
     self.canvas.background = 'black'
     self.canvas.clear_rect(0, 0, self.canvasWidth, self.canvasHeight)
     
-    # If quarantine is enabled, draw the quarantine box
+    # Draw the boxes for the cells
+    # First draw the rows
+    self.canvas.begin_path()
+    for rowCount in range(self.params.GRID_SIZE):
+      self.canvas.move_to(0, rowCount * self.params.CELL_SIZE * self.canvasHeight)
+      self.canvas.line_to(self.canvasWidth, rowCount * self.params.CELL_SIZE * self.canvasHeight)
+    
+    # Then draw the columns
+    for colCount in range(self.params.GRID_SIZE):
+      self.canvas.move_to(colCount * self.params.CELL_SIZE * self.canvasWidth, 0)
+      self.canvas.line_to(colCount * self.params.CELL_SIZE * self.canvasWidth, self.canvasHeight)
+
+    self.canvas.stroke_style = "#2196F3"
+    self.canvas.line_width = 3
+    self.canvas.stroke()
+    
     if self.params.QUARANTINE_ENABLED:
       self.canvas.begin_path()
       lineWidth = 3
@@ -94,9 +109,6 @@ class RunSimulation(RunSimulationTemplate):
       )
       self.canvas.line_to(self.params.QUARANTINE_SIZE * self.canvasWidth, lineWidth / 2)
       self.canvas.close_path()
-      self.canvas.stroke_style = "#2196F3"
-      self.canvas.line_width = lineWidth
-      self.canvas.stroke()
     
     # Draw each person on the canvas as a dot with a particular color
     for row in frame.grid:
