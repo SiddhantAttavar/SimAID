@@ -1,5 +1,4 @@
 from time import time
-from matplotlib import pyplot as plt
 
 from Person import Person # type: ignore
 from Params import Params # type: ignore
@@ -33,6 +32,9 @@ class Utils:
     -------
     None
     """
+    
+    # Import matplotlib
+    from matplotlib import pyplot as plt
 
     # Initialize arrays for graphing the results
     graphXData = []

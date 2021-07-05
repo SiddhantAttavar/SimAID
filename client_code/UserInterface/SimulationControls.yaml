@@ -178,6 +178,7 @@ components:
       properties: {}
       name: hygieneSwitch
       layout_properties: {grid_position: 'RBBXOB,VHAZKC'}
+      event_bindings: {change: onHygieneChange}
   event_bindings: {}
 container:
   type: ColumnPanel
