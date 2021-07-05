@@ -16,6 +16,8 @@ class Person:
     An integer which stores the X-coordinate of the person
   y : int
     An integer which stores the Y-coordinate of the person
+  home : tuple(int)
+    The location of the home of the person
   state : State
     A variable which stores the current state of the person
   framesSinceInfection : int
@@ -149,6 +151,7 @@ class Person:
     self.cell = cell
     self.x = x
     self.y = y
+    self.home = (self.x, self.y)
     self.state = state
     self.framesSinceInfection = -1
     self.followsRules = followsRules

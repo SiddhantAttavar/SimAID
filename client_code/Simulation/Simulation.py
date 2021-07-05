@@ -170,6 +170,9 @@ class Simulation:
           else:
             maxMovement = self.params.MAX_MOVEMENT
 
+          # Reset the person's location to home
+          person.x, person.y = person.home
+
           # Change the position of the person by a random amount
           person.x += uniform(-maxMovement, maxMovement)
           person.y += uniform(-maxMovement, maxMovement)
