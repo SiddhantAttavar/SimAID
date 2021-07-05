@@ -1,7 +1,7 @@
-from time import time
+from random import random
+from bisect import bisect_left as insertLeft
 
 from Person import Person # type: ignore
-from Params import Params # type: ignore
 
 class Utils:
   """This class contains utility functions
@@ -11,8 +11,10 @@ class Utils:
 
   Methods
   -------
-  drawFramesMatplotlib()
+  drawFramesMatplotlib(frames, params)
     Creates a matplotlib graph and displays it locally
+  getRandomCell(params)
+    Gets a random cell from the grid
   """
   
   @staticmethod
@@ -58,3 +60,26 @@ class Utils:
     # Show the matplotlib plots
     plt.ylim(0, params.POPULATION_SIZE)
     plt.show()
+
+  @staticmethod
+  def getRandomCell(params):
+    """Generates a random cell in the grid
+
+    Parameters
+    ----------
+    params : Params   
+      The parameters of the simulation
+    
+    Returns
+    -------
+    cellRow : int
+      The row of the generated cell
+    cellCol : int
+      The column of the generated cell
+    """
+
+    cellNum = insertLeft(params.GRID_PROBABILITIES, random())
+    cellRow = cellNum // params.GRID_SIZE
+    cellCol = cellNum % params.GRID_SIZE
+
+    return cellRow, cellCol

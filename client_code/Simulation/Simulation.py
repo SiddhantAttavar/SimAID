@@ -1,9 +1,10 @@
-from random import random, uniform
+from random import random, uniform, randrange
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
 from Params import Params # type: ignore
 from Transitions import Transitions # type: ignore
+from Interventions import Interventions # type: ignore
 from Utils import Utils # type: ignore
 
 class Simulation:
@@ -62,40 +63,49 @@ class Simulation:
     None
     """
 
+    # Create the probability matrix for the grid
+    self.params.GRID_PROBABILITIES = [random() for _ in range(self.params.GRID_SIZE ** 2)]
+
+    # Find the cumulative sum for each cell
+    for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
+      self.params.GRID_PROBABILITIES[i] += self.params.GRID_PROBABILITIES[i - 1]
+
+    # Scale all probabilities by the sum of probabilities
+    for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+      self.params.GRID_PROBABILITIES[i] /= self.params.GRID_PROBABILITIES[-1]
+
     # Create the first frame
     # Intialize the population list with people and whether they follow rules
-    people = []
+    grid = [[[] for i in range(self.params.GRID_SIZE)] for j in range(self.params.GRID_SIZE)]
     for _ in range(self.params.POPULATION_SIZE):
-      if self.params.QUARANTINE_ENABLED:
-        # Keep moving the person until we find a location 
-        # not in the quarantine zone
-        initLoc = (random(), random())
-        while (initLoc[0] < self.params.QUARANTINE_SIZE and 
-              initLoc[1] < self.params.QUARANTINE_SIZE):
-          initLoc = (random(), random())
-        
-        people.append(Person(
-          *initLoc,
-          random() < self.params.RULE_COMPLIANCE_RATE
-        ))
-      else:
-        people.append(Person(
-          random(), 
-          random(), 
-          random() < self.params.RULE_COMPLIANCE_RATE
-        ))
+      # Find a random cell for the person
+      cellRow, cellCol = Utils.getRandomCell(self.params)
+
+      # Add the person to the grid
+      grid[cellRow][cellCol].append(Person(
+        (cellRow, cellCol),
+        self.params.CELL_SIZE * cellCol + random() / self.params.GRID_SIZE,
+        self.params.CELL_SIZE * cellRow + random() / self.params.GRID_SIZE,
+        random() < self.params.RULE_COMPLIANCE_RATE,
+        Person.SUSCEPTIBLE
+      ))
 
     # There are some people who are exposed at the beginning
-    for infectedCount in range(self.params.INITIAL_INFECTED):
-      people[infectedCount].state = Person.EXPOSED
-      people[infectedCount].framesSinceInfection = 0
-    for infectedCount in range(self.params.INITIAL_INFECTED, self.params.POPULATION_SIZE):
-      people[infectedCount].state = Person.SUSCEPTIBLE
+    done = set()
+    for _ in range(self.params.INITIAL_INFECTED):
+      cellRow, cellCol = Utils.getRandomCell(self.params)
+      personCount = randrange(len(grid[cellRow][cellCol]))
+      key = (cellRow, cellCol, personCount)
 
-    currFrame = Frame(people)
+      if key not in done:
+        done.add(key)
+        grid[cellRow][cellCol][personCount].state = Person.EXPOSED
+        grid[cellRow][cellCol][personCount].framesSinceInfection = 0
+
+    currFrame = Frame(grid, self.params)
     yield currFrame
 
-    for frameCount in range(self.params.SIMULATION_LENGTH):
+    for _ in range(self.params.SIMULATION_LENGTH):
       # Then we need to build the Frame object to yield
       currFrame = self.nextFrame(currFrame)
       yield currFrame
@@ -120,9 +130,9 @@ class Simulation:
     Transitions.findRecovered(frame, self.params)
     
     if self.params.VACCINATION_ENABLED:
-      self.vaccinate(frame)
+      Interventions.vaccinate(frame, self.params)
 
-    return Frame(frame.people)
+    return Frame(frame.grid, self.params)
   
   def movePeople(self, frame):
     """Move the people around
@@ -137,40 +147,35 @@ class Simulation:
     None
     """
 
-    # Iterate through all people and move them to a random location close by
-    for person in frame.people:
-      if person.state != Person.DEAD:
-        # If social distancing is enabled, reduce the movement
-        if self.params.SOCIAL_DISTANCING_ENABLED and person.followsRules:
-          maxMovement = self.params.SOCIAL_DISTANCING_MAX_MOVEMENT
-        else:
-          maxMovement = self.params.MAX_MOVEMENT
-
-        # Change the position of the person by a random amount
-        person.x += uniform(-maxMovement, maxMovement)
-        person.y += uniform(-maxMovement, maxMovement)
+    # Iterate through all cells
+    for rowCount, row in enumerate(frame.grid):
+      # Find the limits of the row
+      yMin = rowCount * self.params.CELL_SIZE
+      yMax = yMin + self.params.CELL_SIZE
+      
+      for colCount, cell in enumerate(row):
+        # Find the limits for the cell
+        xMin = colCount * self.params.CELL_SIZE
+        xMax = xMin + self.params.CELL_SIZE
         
-        # Make sure it doesn't excedd the bounds
-        if person.isQuarantined:
-          person.x = max(0, min(self.params.QUARANTINE_SIZE, person.x))
-          person.y = max(0, min(self.params.QUARANTINE_SIZE, person.y))
-        elif self.params.QUARANTINE_ENABLED:
-          person.x = min(1, person.x)
-          person.y = min(1, person.y)
+        # Iterate through all people and move them to a random location in the same cell
+        for person in cell:
+          if person.state == Person.DEAD:
+            # Dead people do not move
+            continue
+          
+          # If social distancing is enabled, reduce the movement
+          if self.params.SOCIAL_DISTANCING_ENABLED and person.followsRules:
+            maxMovement = self.params.SOCIAL_DISTANCING_MAX_MOVEMENT
+          else:
+            maxMovement = self.params.MAX_MOVEMENT
 
-          # If the person is in the quarantined zone move the person out
-          if (person.x < self.params.QUARANTINE_SIZE and 
-              person.y < self.params.QUARANTINE_SIZE):
-            xDiff = self.params.QUARANTINE_SIZE - person.x
-            yDiff = self.params.QUARANTINE_SIZE - person.y
+          # Change the position of the person by a random amount
+          person.x += uniform(-maxMovement, maxMovement)
+          person.y += uniform(-maxMovement, maxMovement)
 
-            if xDiff < yDiff:
-              person.x = self.params.QUARANTINE_SIZE
-            else:
-              person.y = self.params.QUARANTINE_SIZE
-        else:
-          person.x = max(0, min(1, person.x))
-          person.y = max(0, min(1, person.y))
+          person.x = min(xMax, max(xMin, person.x))
+          person.y = min(yMax, max(yMin, person.y))
 
 if __name__ == '__main__':
   # Only performed when this file is run directly

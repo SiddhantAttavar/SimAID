@@ -38,8 +38,13 @@ class Transitions:
     """
 
     # Find the people who are susceptible and infected
-    suseptibleGroup = [frame.people[i] for i in frame.stateGroups[Person.SUSCEPTIBLE.id]]
-    infectedGroup = [frame.people[i] for i in frame.stateGroups[Person.INFECTED.id]]
+    suseptibleGroup = []
+    for ind in frame.stateGroups[Person.SUSCEPTIBLE.id]:
+      suseptibleGroup.append(frame.grid[ind[0]][ind[1]][ind[2]])
+    
+    infectedGroup = []
+    for ind in frame.stateGroups[Person.INFECTED.id]:
+      infectedGroup.append(frame.grid[ind[0]][ind[1]][ind[2]])
     
     # Find if any of the two groups are in contact and the disease spreads
     for infectedPerson in infectedGroup:
@@ -76,8 +81,8 @@ class Transitions:
 
     # Iterate through all people and find those who are exposed
     # Find if they become infected
-    for personCount in frame.stateGroups[Person.EXPOSED.id]:
-      person = frame.people[personCount]
+    for row, col, personCount in frame.stateGroups[Person.EXPOSED.id]:
+      person = frame.grid[row][col][personCount]
       person.framesSinceInfection += 1
       if person.framesSinceInfection >= params.INCUBATION_PERIOD:
         # The person becomes symptomatic
@@ -105,8 +110,8 @@ class Transitions:
 
     # Iterate through all people and find those who are infected
     # Find if they have no time left for disease
-    for personCount in frame.stateGroups[Person.INFECTED.id]:
-      person = frame.people[personCount]
+    for row, col, personCount in frame.stateGroups[Person.INFECTED.id]:
+      person = frame.grid[row][col][personCount]
       person.framesSinceInfection += 1
       if person.framesSinceInfection >= params.INFECTION_PERIOD:
         # Find if the person recovers or dies

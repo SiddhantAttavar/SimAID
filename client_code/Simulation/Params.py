@@ -9,10 +9,16 @@ class Params:
     The number of frams in the simulation
   CONTACT_RADIUS : float
     The maximum distance between two individuals who are in contact
-  MAX_MOVEMENT : float
-    The maximum distance a person can move in a direction
   TIME_PER_FRAME : float
     Time taken per frame
+  GRID_SIZE : int
+    The number of rows and columns of the grid
+  GRID_PROBABILITIES : list(list(float))
+    The probability of a person landing in each cell
+  CELL_SIZE : float
+    The size of the side of each cell
+  MAX_MOVEMENT : float
+    The maximum distance a person can move in a direction
   
   Pathogen Parameters
   -------------------
@@ -65,8 +71,11 @@ class Params:
   POPULATION_SIZE = 100
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
-  MAX_MOVEMENT = 0.05
   TIME_PER_FRAME = 0.5
+  GRID_SIZE = 5
+  GRID_PROBABILITIES = []
+  CELL_SIZE = 1 / GRID_SIZE
+  MAX_MOVEMENT = 0.05
 
   # Person related parameters
   RULE_COMPLIANCE_RATE = 0.9

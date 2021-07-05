@@ -10,6 +10,8 @@ class Person:
 
   Attributes
   ----------
+  cell : tuple(int)
+    The home cell of the person
   x : int
     An integer which stores the X-coordinate of the person
   y : int
@@ -129,7 +131,7 @@ class Person:
     VACCINATED
   ]
 
-  def __init__(self, startX, startY, followsRules):
+  def __init__(self, cell, x, y, followsRules, state):
     """Sets some initial parameters for the person.
 
     Parameters
@@ -144,9 +146,10 @@ class Person:
     None
     """
 
-    self.x = startX
-    self.y = startY
-    self.state = Person.SUSCEPTIBLE
+    self.cell = cell
+    self.x = x
+    self.y = y
+    self.state = state
     self.framesSinceInfection = -1
     self.followsRules = followsRules
     self.isQuarantined = False
