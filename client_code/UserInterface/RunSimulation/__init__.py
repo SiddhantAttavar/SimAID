@@ -99,11 +99,13 @@ class RunSimulation(RunSimulationTemplate):
       self.canvas.stroke()
     
     # Draw each person on the canvas as a dot with a particular color
-    for person in frame.people:
-      self.canvas.begin_path()
-      self.canvas.arc(person.x * self.canvasWidth, person.y * self.canvasHeight, 5)
-      self.canvas.fill_style = person.state.color
-      self.canvas.fill()
+    for row in frame.grid:
+      for cell in row:
+        for person in cell:
+          self.canvas.begin_path()
+          self.canvas.arc(person.x * self.canvasWidth, person.y * self.canvasHeight, 5)
+          self.canvas.fill_style = person.state.color
+          self.canvas.fill()
     
     # Plot the result on the graph
     self.graphXData.append(frameCount)
