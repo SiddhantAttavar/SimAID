@@ -98,7 +98,7 @@ components:
       layout_properties: {grid_position: 'BQIYLA,ZFFMEM'}
       event_bindings: {slide: onMortalityRateChange}
   - type: ColumnPanel
-    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"CZYXNC":45,"JARXFX":15,"UPQTNJ":45,"KQHDKG":15}'}
+    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"CZYXNC":45,"JARXFX":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15}'}
     name: interventionControlsColumnPanel
     layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
     components:
@@ -167,6 +167,17 @@ components:
       name: quarantineSlider
       layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
       event_bindings: {slide: onQuarantineRateChange}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: 'Hygiene Measures: ', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: hygieneLabel
+      layout_properties: {grid_position: 'RBBXOB,IBMFAV'}
+    - type: form:C6ZZPAPN4YYF5NVJ:Switch
+      properties: {}
+      name: hygieneSwitch
+      layout_properties: {grid_position: 'RBBXOB,VHAZKC'}
   event_bindings: {}
 container:
   type: ColumnPanel

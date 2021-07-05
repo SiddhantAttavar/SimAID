@@ -228,7 +228,7 @@ class SimulationControls(SimulationControlsTemplate):
     """
     
     self.params.QUARANTINE_ENABLED = self.quarantineSwitch.checked
-    self.quarantineSlider.enabled = self.params.QUARANTINE_ENABLED
+    self.quarantineSlider.visible = self.params.QUARANTINE_ENABLED
     if self.params.QUARANTINE_ENABLED:
       self.quarantineLabel.text = f'Quarantine Rate (0 - 100): {self.quarantineSlider.value}'
     else:

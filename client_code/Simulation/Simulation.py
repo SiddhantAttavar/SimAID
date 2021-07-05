@@ -183,7 +183,7 @@ if __name__ == '__main__':
     VACCINATION_ENABLED = False,
     SOCIAL_DISTANCING_ENABLED = False,
     QUARANTINE_ENABLED = False,
-    HYGEINE_ENABLED = False
+    HYGIENE_ENABLED = False
   )
   
   simulation = Simulation(params)
