@@ -201,7 +201,7 @@ if __name__ == '__main__':
 
   # Parameters for running the simulation
   params = Params(
-    POPULATION_SIZE = 1000,
+    POPULATION_SIZE = 5000,
     VACCINATION_ENABLED = False,
     SOCIAL_DISTANCING_ENABLED = False,
     QUARANTINE_ENABLED = False,
