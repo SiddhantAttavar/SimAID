@@ -88,27 +88,19 @@ class RunSimulation(RunSimulationTemplate):
     for rowCount in range(self.params.GRID_SIZE):
       self.canvas.move_to(0, rowCount * self.params.CELL_SIZE * self.canvasHeight)
       self.canvas.line_to(self.canvasWidth, rowCount * self.params.CELL_SIZE * self.canvasHeight)
+    self.canvas.move_to(0, self.canvasHeight)
+    self.canvas.line_to(self.canvasWidth, self.canvasHeight)
     
     # Then draw the columns
     for colCount in range(self.params.GRID_SIZE):
       self.canvas.move_to(colCount * self.params.CELL_SIZE * self.canvasWidth, 0)
       self.canvas.line_to(colCount * self.params.CELL_SIZE * self.canvasWidth, self.canvasHeight)
+    self.canvas.move_to(self.canvasWidth, 0)
+    self.canvas.line_to(self.canvasWidth, self.canvasHeight)
 
     self.canvas.stroke_style = "#2196F3"
     self.canvas.line_width = 3
     self.canvas.stroke()
-    
-    if self.params.QUARANTINE_ENABLED:
-      self.canvas.begin_path()
-      lineWidth = 3
-      self.canvas.move_to(lineWidth / 2, lineWidth / 2)
-      self.canvas.line_to(lineWidth / 2, self.params.QUARANTINE_SIZE * self.canvasHeight)
-      self.canvas.line_to(
-        self.params.QUARANTINE_SIZE * self.canvasWidth, 
-        self.params.QUARANTINE_SIZE * self.canvasHeight
-      )
-      self.canvas.line_to(self.params.QUARANTINE_SIZE * self.canvasWidth, lineWidth / 2)
-      self.canvas.close_path()
     
     # Draw each person on the canvas as a dot with a particular color
     for row in frame.grid:
