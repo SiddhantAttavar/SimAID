@@ -1,7 +1,10 @@
 dependencies:
 - app_id: C6ZZPAPN4YYF5NVJ
   version: {dev: false}
-services: []
+services:
+- source: /runtime/services/tables.yml
+  client_config: {}
+  server_config: {auto_create_missing_columns: false}
 package_name: Epidemic_Simulator
 allow_embedding: false
 name: Epidemic Simulator
@@ -28,5 +31,15 @@ native_deps: {head_html: "<style>\n.box{\n  padding: 10px;\n}\n\ninput[type=\"ra
     range\"]::-ms-track\n{\n    width: 100%;\n    height: 4px;\n    color: transparent;\n\
     \    border-width: 16px 0;\n    border-color: transparent;\n    background: transparent;\n\
     \    cursor: pointer;\n}\n\n\n</style>"}
-db_schema: []
+db_schema:
+- name: Graphs
+  id: 139756
+  python_name: graphs
+  columns:
+    FGjIpNVBotA=:
+      name: User
+      type: string
+      admin_ui: {order: 0, width: 200}
+  access: {python_name: graphs, app_id: NJSPOPJBWLJEXUWD, server: full, client: none,
+    table_mapping_name: null, table_mapping_id: null, table_id: 139756}
 renamed: true
