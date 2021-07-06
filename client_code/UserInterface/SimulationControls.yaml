@@ -11,11 +11,11 @@ components:
     components:
     - type: Label
       properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Disease Controls, font_size: null, font: '', spacing_above: small,
+        visible: true, text: General Controls, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
         underline: false, icon: ''}
-      name: diseaseControlsLabel
-      layout_properties: {grid_position: 'OWVIXJ,NZVFVX'}
+      name: generalControlsLabel
+      layout_properties: {grid_position: 'GIZZNI,FNYBTX'}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: '', font_size: null, font: '', spacing_above: small,
@@ -24,7 +24,7 @@ components:
       name: populationSizeLabel
       layout_properties: {grid_position: 'LXBGFD,HLBETO'}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 10, tooltips: null, margin: null, pips_stepped: true,
+      properties: {pips_mode: '', min: 10, tooltips: false, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
@@ -43,12 +43,37 @@ components:
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 10}
       name: simulationLengthSlider
-      layout_properties: {grid_position: 'HDXEKJ,OPJXOS'}
+      layout_properties: {grid_position: 'BCEXCV,IANVID'}
       event_bindings: {slide: onSimulationLengthChange}
     - type: Label
       properties: {}
+      name: gridSizeLabel
+      layout_properties: {grid_position: 'BQCPFJ,ETTODI'}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 10, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 1}
+      name: gridSizeSlider
+      layout_properties: {grid_position: 'HDVOGH,WIICIH'}
+      event_bindings: {slide: onGridSizeChange}
+  - type: ColumnPanel
+    properties: {col_widths: '{}'}
+    name: column_panel_1
+    layout_properties: {grid_position: 'UFDNSY,BYDXQF'}
+    components:
+    - type: Label
+      properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: Disease Controls, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: diseaseControlsLabel
+      layout_properties: {grid_position: 'WFEZQZ,JNMZBB'}
+    - type: Label
+      properties: {}
       name: infectionRateLabel
-      layout_properties: {grid_position: 'ERUVHD,NZDOWB'}
+      layout_properties: {grid_position: 'VRZRHT,XSQRIA'}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
@@ -56,12 +81,12 @@ components:
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 5}
       name: infectionRateSlider
-      layout_properties: {grid_position: 'NWMLLL,IHIEEK'}
+      layout_properties: {grid_position: 'SSSBAX,IAUUHJ'}
       event_bindings: {slide: onInfectionRateChange}
     - type: Label
       properties: {}
       name: incubationPeriodLabel
-      layout_properties: {grid_position: 'OZSAZQ,FHZBRE'}
+      layout_properties: {grid_position: 'VFIPRO,WQOBPG'}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
@@ -69,12 +94,12 @@ components:
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 5}
       name: incubationPeriodSlider
-      layout_properties: {grid_position: 'NQVQKG,MPMGVP'}
+      layout_properties: {grid_position: 'XIYAPI,NVLASM'}
       event_bindings: {slide: onIncubationPeriodChange}
     - type: Label
       properties: {}
       name: infectionPeriodLabel
-      layout_properties: {grid_position: 'IDBIOY,IWPAOV'}
+      layout_properties: {grid_position: 'GGYEGB,XFHMFH'}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
@@ -82,12 +107,12 @@ components:
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 5}
       name: infectionPeriodSlider
-      layout_properties: {grid_position: 'VCALMB,EUSMQJ'}
+      layout_properties: {grid_position: 'RCWNKO,BUQGWG'}
       event_bindings: {slide: onInfectionPeriodChange}
     - type: Label
       properties: {}
       name: mortalityRateLabel
-      layout_properties: {grid_position: 'RRRETZ,QUUAOR'}
+      layout_properties: {grid_position: 'FGDMXR,GVECDP'}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
@@ -95,7 +120,7 @@ components:
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 5}
       name: mortalityRateSlider
-      layout_properties: {grid_position: 'BQIYLA,ZFFMEM'}
+      layout_properties: {grid_position: 'VDPOMI,HUZNWD'}
       event_bindings: {slide: onMortalityRateChange}
   - type: ColumnPanel
     properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"CZYXNC":45,"JARXFX":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15}'}

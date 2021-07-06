@@ -48,6 +48,9 @@ class SimulationControls(SimulationControlsTemplate):
     self.simulationLengthSlider.start = self.params.SIMULATION_LENGTH
     self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.start}'
     
+    self.gridSizeSlider.start = self.params.GRID_SIZE
+    self.gridSizeLabel.text = f'Grid Size (1 - 10): {self.gridSizeSlider.start}'
+    
     self.infectionRateSlider.start = int(self.params.INFECTION_RATE * 100)
     self.infectionRateLabel.text = f'Infection Rate (1 - 100): {self.infectionRateSlider.start}'
   
@@ -105,6 +108,23 @@ class SimulationControls(SimulationControlsTemplate):
 
     self.params.SIMULATION_LENGTH = self.simulationLengthSlider.value
     self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.value}'
+  
+  
+  def onGridSizeChange(self, handle, **event_args):
+    """This method is called when the grid size slider is moved
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the slider is moved
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.params.GRID_SIZE = self.gridSizeSlider.value
+    self.gridSizeLabel.text = f'Grid Size (1 - 10): {self.gridSizeSlider.value}'
 
   def onInfectionRateChange(self, **event_args):
     """This method is called when the infection rate slider is moved
@@ -266,3 +286,4 @@ class SimulationControls(SimulationControlsTemplate):
     """
     
     self.params.HYGIENE_ENABLED = self.hygieneSwitch.checked
+
