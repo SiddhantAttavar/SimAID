@@ -2,7 +2,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 class Params:
-  """Parameters for the simulation.
+  '''Parameters for the simulation.
   
   Simulation Parameters
   ---------------------
@@ -65,7 +65,7 @@ class Params:
   ---------------------------
   HYGIENE_ENABLED : bool
     Whether hygiene measures are enabled
-  """
+  '''
 
   # Basic model related parameters
   POPULATION_SIZE = 100
@@ -104,7 +104,7 @@ class Params:
   HYGIENE_RATE = 0.6
 
   def __init__(self, **kwargs):
-    """Initializes the parameters.
+    '''Initializes the parameters.
 
     Parameters
     ----------
@@ -114,7 +114,7 @@ class Params:
     Returns
     -------
     None
-    """
+    '''
 
     # Change the value for each parameter in kwargs from default
     for param, value in kwargs.items():

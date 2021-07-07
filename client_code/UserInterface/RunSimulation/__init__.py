@@ -11,7 +11,7 @@ from ...Simulation.Person import Person
 from ...Simulation.Params import Params
 
 class RunSimulation(RunSimulationTemplate):
-  """Class which changes the UI in the RunSimulation form.
+  '''Class which changes the UI in the RunSimulation form.
   
   Attributes
   ----------
@@ -34,10 +34,10 @@ class RunSimulation(RunSimulationTemplate):
     Initializes the run simulation form
   drawFrame(frame)
     Draws a frame on the UI
-  """
+  '''
 
   def __init__(self, params = Params(), **properties):
-    """Initializes the run simulation
+    '''Initializes the run simulation
     
     Called when the RunSimulation form is created.
     Sets Form properties and Data Bindings and then
@@ -53,7 +53,7 @@ class RunSimulation(RunSimulationTemplate):
     Returns
     -------
     None
-    """
+    '''
     
     self.init_components(**properties)
     
@@ -61,7 +61,7 @@ class RunSimulation(RunSimulationTemplate):
     self.params = params
     
   def drawFrame(self, frame, frameCount):
-    """This method draws a frame on the canvas.
+    '''This method draws a frame on the canvas.
     
     For each frame, we are doing 2 things
     The first task is to draw each person in the frame 
@@ -79,7 +79,7 @@ class RunSimulation(RunSimulationTemplate):
     Returns
     -------
     None
-    """
+    '''
     
     # Initialize the canvas with a black, empty background
     self.canvas.background = 'black'
@@ -131,7 +131,7 @@ class RunSimulation(RunSimulationTemplate):
     self.graph.data = self.graph.data
 
   def onRunSimulationButtonClick(self, **event_args):
-    """This method is called when the button is clicked
+    '''This method is called when the button is clicked
     
     Parameters
     ----------
@@ -141,7 +141,7 @@ class RunSimulation(RunSimulationTemplate):
     Returns
     -------
     None
-    """
+    '''
 
     # Initialize arrays for graphing the results
     self.graphXData = []
@@ -155,7 +155,7 @@ class RunSimulation(RunSimulationTemplate):
     
 
   def onCanvasShow(self, **event_args):
-    """This method is called when the Canvas is shown on the screen
+    '''This method is called when the Canvas is shown on the screen
     
     Initializes the canvas dimensions
     
@@ -167,7 +167,7 @@ class RunSimulation(RunSimulationTemplate):
     Returns
     -------
     None
-    """
+    '''
     
     self.canvasWidth = self.canvas.get_width()
     self.canvasHeight = self.canvas.get_height()

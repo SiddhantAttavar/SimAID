@@ -7,7 +7,7 @@ from math import sqrt
 from Person import Person # type: ignore
 
 class Transitions:
-  """This class contiains functions for the transition between states
+  '''This class contiains functions for the transition between states
 
   Attributes
   ----------
@@ -22,11 +22,11 @@ class Transitions:
     Finds out who will be recovered / dead
   vaccinate(frame, params)
     Finds out who is vaccinated
-  """
+  '''
 
   @staticmethod
   def findExposed(frame, params):
-    """Find out who will be exposed to the virus next
+    '''Find out who will be exposed to the virus next
     
     Parameters
     ----------
@@ -38,7 +38,7 @@ class Transitions:
     Returns
     -------
     None
-    """
+    '''
 
     # Iterate through all cells
     for rowCount, row in enumerate(frame.grid):
@@ -79,7 +79,7 @@ class Transitions:
 
   @staticmethod
   def findInfected(frame, params):
-    """Find out who will be infected in the next frame.
+    '''Find out who will be infected in the next frame.
 
     Parameters
     ----------
@@ -91,7 +91,7 @@ class Transitions:
     Returns
     -------
     None
-    """
+    '''
 
     # Iterate through all people and find those who are exposed
     # Find if they become infected
@@ -104,7 +104,7 @@ class Transitions:
   
   @staticmethod
   def findRecovered(frame, params):
-    """Find out who will be recovered / dead next
+    '''Find out who will be recovered / dead next
     
     Parameters
     ----------
@@ -116,7 +116,7 @@ class Transitions:
     Returns
     -------
     None
-    """
+    '''
 
     # Iterate through all people and find those who are infected
     # Find if they have no time left for disease

@@ -6,7 +6,7 @@ from random import random
 from Person import Person # type: ignore
 
 class Interventions:
-  """This class contains the functions for the intervention strategies
+  '''This class contains the functions for the intervention strategies
 
   Attributes
   ----------
@@ -15,11 +15,11 @@ class Interventions:
   -------
   vaccinate(frame, params)
     Find out who is vaccinated
-  """
+  '''
 
   @staticmethod
   def vaccinate(frame, params):
-    """"Find out who is vaccinated
+    '''Find out who is vaccinated
 
     Parameters
     ----------
@@ -29,7 +29,7 @@ class Interventions:
     Returns
     -------
     None
-    """
+    '''
 
     for personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
       person = frame.people[personCount]

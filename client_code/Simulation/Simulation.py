@@ -11,7 +11,7 @@ from Interventions import Interventions # type: ignore
 from Utils import Utils # type: ignore
 
 class Simulation:
-  """Parameters and methods for the simulation.
+  '''Parameters and methods for the simulation.
 
   Attributes
   ----------
@@ -28,10 +28,10 @@ class Simulation:
     Runs the current simulation
   nextFrame(frame)
     Calculates the next frame of the simulation
-  """
+  '''
 
   def __init__(self, params):
-    """"Initialized the simulation
+    '''Initialized the simulation
 
     Intializes the simulation with some basic properties
 
@@ -43,12 +43,12 @@ class Simulation:
     Returns
     -------
     None
-    """
+    '''
 
     self.params = params
 
   def run(self):
-    """Run the simulation.
+    '''Run the simulation.
 
     Run an agent based simulation based on the
     configuration of the current simulation.
@@ -64,7 +64,7 @@ class Simulation:
     Returns
     -------
     None
-    """
+    '''
 
     # Create the probability matrix for the grid
     self.params.GRID_PROBABILITIES = [random() for _ in range(self.params.GRID_SIZE ** 2)]
@@ -114,7 +114,7 @@ class Simulation:
       yield currFrame
 
   def nextFrame(self, frame):
-    """Calculate the next frame of the simulation.
+    '''Calculate the next frame of the simulation.
 
     Parameters
     ----------
@@ -125,7 +125,7 @@ class Simulation:
     -------
     Frame
       The next frame in the simulation
-    """
+    '''
 
     self.movePeople(frame)
     Transitions.findExposed(frame, self.params)
@@ -138,7 +138,7 @@ class Simulation:
     return Frame(frame.grid, self.params)
   
   def movePeople(self, frame):
-    """Move the people around
+    '''Move the people around
     
     Parameters
     ----------
@@ -148,7 +148,7 @@ class Simulation:
     Returns
     -------
     None
-    """
+    '''
 
     # Clear the visiting grid
     for rowCount in range(self.params.GRID_SIZE):

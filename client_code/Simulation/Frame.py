@@ -4,7 +4,7 @@ from anvil.tables import app_tables
 from Person import Person # type: ignore
 
 class Frame:
-  """Stores information about each frame in the simulation.
+  '''Stores information about each frame in the simulation.
 
   Attributes
   ----------
@@ -19,10 +19,10 @@ class Frame:
   -------
   __init__(people)
     Initializes the Frame object with some properties
-  """
+  '''
 
   def __init__(self, grid, params):
-    """Sets some initial parameters for the frame.
+    '''Sets some initial parameters for the frame.
     
     Parameters
     ----------
@@ -32,7 +32,7 @@ class Frame:
     Returns
     -------
     None
-    """
+    '''
 
     # Initialize the variables and set every state in Person.State to an empty list
     self.grid = grid

@@ -7,7 +7,7 @@ from bisect import bisect_left as insertLeft
 from Person import Person # type: ignore
 
 class Utils:
-  """This class contains utility functions
+  '''This class contains utility functions
   
   Attributes
   ----------
@@ -18,11 +18,11 @@ class Utils:
     Creates a matplotlib graph and displays it locally
   getRandomCell(params)
     Gets a random cell from the grid
-  """
+  '''
   
   @staticmethod
   def drawFramesMatplotlib(frames, params):
-    """Draws the frame in a matplotlib graph.
+    '''Draws the frame in a matplotlib graph.
 
     Parameters
     ----------
@@ -36,7 +36,7 @@ class Utils:
     Returns
     -------
     None
-    """
+    '''
     
     # Import matplotlib
     from matplotlib import pyplot as plt
@@ -66,7 +66,7 @@ class Utils:
 
   @staticmethod
   def getRandomCell(params):
-    """Generates a random cell in the grid
+    '''Generates a random cell in the grid
 
     Parameters
     ----------
@@ -79,7 +79,7 @@ class Utils:
       The row of the generated cell
     cellCol : int
       The column of the generated cell
-    """
+    '''
 
     cellNum = insertLeft(params.GRID_PROBABILITIES, random())
     cellRow = cellNum // params.GRID_SIZE

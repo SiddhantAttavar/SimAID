@@ -4,7 +4,7 @@ from anvil.tables import app_tables
 from anvil import server
 
 class Person:
-  """Stores variables and methods for Person.
+  '''Stores variables and methods for Person.
 
   The person class is used to store variables
   and methods for each person / agent
@@ -48,10 +48,10 @@ class Person:
   -------
   State
     The state of the person
-  """
+  '''
 
   class State:
-    """Enum which contains various states of the disease and their colors.
+    '''Enum which contains various states of the disease and their colors.
     
     Attributes
     ----------
@@ -70,10 +70,10 @@ class Person:
       Checks if two states are the same
     __hash__()
       Hashes the state
-    """
+    '''
 
     def __init__(self, name, stateID, color):
-      """Sets some initial parameters for the state
+      '''Sets some initial parameters for the state
       
       Parameters
       ----------
@@ -83,14 +83,14 @@ class Person:
       Returns
       -------
       None
-      """
+      '''
 
       self.name = name
       self.id = stateID
       self.color = color
     
     def __eq__(self, other):
-      """Checks if 2 states are equal
+      '''Checks if 2 states are equal
       
       Parameters
       ----------
@@ -101,12 +101,12 @@ class Person:
       -------
       bool
         Whether the states are equal
-      """
+      '''
 
       return self.id == other.id
     
     def __hash__(self):
-      """Hashes the state for use in dict or set
+      '''Hashes the state for use in dict or set
       
       Parameters
       ----------
@@ -115,7 +115,7 @@ class Person:
       -------
       int
         The hash value
-      """
+      '''
 
       return self.id
   
@@ -137,7 +137,7 @@ class Person:
   ]
 
   def __init__(self, cell, x, y, followsRules, state):
-    """Sets some initial parameters for the person.
+    '''Sets some initial parameters for the person.
 
     Parameters
     ----------
@@ -149,7 +149,7 @@ class Person:
     Returns
     -------
     None
-    """
+    '''
 
     self.cell = cell
     self.x = x
