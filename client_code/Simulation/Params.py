@@ -8,6 +8,8 @@ class Params:
   ---------------------
   POPULATION_SIZE
     The size of the population in the simulation
+  POPULATION_DEMOGRAPHICS
+    The spread of population amongst different ages
   SIMULATION_LENGTH
     The number of frams in the simulation
   CONTACT_RADIUS : float
@@ -65,6 +67,7 @@ class Params:
 
   # Basic model related parameters
   POPULATION_SIZE = 100
+  POPULATION_DEMOGRAPHICS = [0.35, 0.45, 0.15, 0.05]
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
   TIME_PER_FRAME = 0.5

@@ -48,7 +48,20 @@ class SimulationControls(SimulationControlsTemplate):
     self.populationSizeSlider.start = self.params.POPULATION_SIZE
     self.populationSizeLabel.text = f'Population Size (10 - 1000): {self.populationSizeSlider.start}'
     
-    self.simulationLengthSlider.start = self.params.SIMULATION_LENGTH
+    currSum = int(self.params.POPULATION_DEMOGRAPHICS[0] * 100)
+    self.populationDemographicsSlider.start = [currSum]
+    for i in range(1, len(self.params.POPULATION_DEMOGRAPHICS) - 1):
+      self.populationDemographicsSlider.start.append(currSum)
+      currSum += int(self.params.POPULATION_DEMOGRAPHICS[i] * 100)
+      
+    self.populationDemographicsSlider.connect = [True, False, True, False]
+    self.populationDemographicsLabel.text = f'''Population Demographics: 
+    0 - 15: {self.populationDemographicsSlider.start[0]}
+    15 - 45: {self.populationDemographicsSlider.start[1]}
+    45 - 65: {self.populationDemographicsSlider.start[2]}
+    65+: {1 - sum(self.populationDemographicsSlider.start[2])}'''
+    
+    self.simulationLengthSlider.start = self.params.POPULATION_DEMOGRAPHICS
     self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.start}'
     
     self.gridSizeSlider.start = self.params.GRID_SIZE
