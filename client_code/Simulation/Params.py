@@ -68,16 +68,16 @@ class Params:
   '''
 
   # Basic model related parameters
-  POPULATION_SIZE = 100
+  POPULATION_SIZE = 500
   POPULATION_DEMOGRAPHICS = [0.35, 0.45, 0.15, 0.05]
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
   TIME_PER_FRAME = 0.5
-  GRID_SIZE = 5
+  GRID_SIZE = 3
   GRID_PROBABILITIES = []
   CELL_SIZE = 1 / GRID_SIZE
   MAX_MOVEMENT = 0.05
-  TRAVEL_RATE = 0.2
+  TRAVEL_RATE = 0.4
 
   # Intervention related parameters
   RULE_COMPLIANCE_RATE = 0.9
