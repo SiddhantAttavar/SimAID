@@ -44,6 +44,8 @@ class Params:
   -----------------------
   RULE_COMPLIANCE_RATE : float
     The percentage of the population that follows rules
+  HOSPITALITY_RATE : float
+    The percentage of the population that can be supported by hospitals
   
   Vaccination Parameters
   ----------------------
@@ -77,8 +79,9 @@ class Params:
   MAX_MOVEMENT = 0.05
   TRAVEL_RATE = 0.2
 
-  # Person related parameters
+  # Intervention related parameters
   RULE_COMPLIANCE_RATE = 0.9
+  HOSPITAL_CAPACITY = 0.3
 
   # State transition related parameters
   INITIAL_INFECTED = 2

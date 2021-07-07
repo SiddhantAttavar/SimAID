@@ -86,12 +86,17 @@ class SimulationControls(SimulationControlsTemplate):
     self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.start}'
     
     self.vaccinationSwitch.checked = self.params.VACCINATION_ENABLED
+    self.vaccinationRateSlider.visible = self.params.VACCINATION_ENABLED
+    self.vaccinationRateSlider.start = round(self.params.VACCINATION_RATE * 30 * 100)
     
     self.lockdownSwitch.checked = self.params.LOCKDOWN_ENABLED
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownSlider.start = round(self.params.LOCKDOWN_LEVEL * 100)
     
     self.hygieneSwitch.checked = self.params.HYGIENE_ENABLED
+    
+    self.hospitalCapacitySlider.start = round(self.params.HOSPITAL_CAPACITY * 100)
+    self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.start}'
     
   def onPopulationSizeChange(self, **event_args):
     """This method is called when the population size slider is moved
@@ -276,6 +281,27 @@ class SimulationControls(SimulationControlsTemplate):
     """
     
     self.params.VACCINATION_ENABLED = self.vaccinationSwitch.checked
+    self.vaccinationRateSlider.visible = self.params.VACCINATION_ENABLED
+    if self.params.VACCINATION_ENABLED:
+      self.vaccinationLabel.text = f'Vaccination Rate (5 - 50): {self.vaccinationRateSlider.value}'
+    else:
+      self.vaccinationLabel.text = 'Vaccination: '
+    
+  def onVaccinationRateChange(self, handle, **event_args):
+    """"This method is called when the vaccination rate slider is moved
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the slider is moved
+    
+    Returns
+    -------
+    None
+    """
+    
+    self.params.VACCINATION_RATE = self.vaccinationRateSlider.value / 30 / 100
+    self.vaccinationLabel.text = f'Vaccination Rate (5 - 50): {self.vaccinationRateSlider.value}'
 
   def onLockdownChange(self, **event_args):
     """This method is called when the lockdown switch is checked or unchecked
@@ -297,7 +323,7 @@ class SimulationControls(SimulationControlsTemplate):
     else:
       self.lockdownLabel.text = 'Lockdown: '
 
-  def onLockdownRateChange(self, handle, **event_args):
+  def onLockdownLevelChange(self, handle, **event_args):
     """"This method is called when the lockdown rate slider is moved
     
     Parameters
@@ -310,7 +336,7 @@ class SimulationControls(SimulationControlsTemplate):
     None
     """
     
-    self.params.LOCKDOWN_RATE = self.lockdownSlider.value / 100
+    self.params.LOCKDOWN_LEVEL = self.lockdownSlider.value / 100
     self.lockdownLabel.text = f'Lockdown Rate (0 - 100): {self.lockdownSlider.value}'
 
   def onHygieneChange(self, **event_args):
@@ -327,3 +353,20 @@ class SimulationControls(SimulationControlsTemplate):
     """
     
     self.params.HYGIENE_ENABLED = self.hygieneSwitch.checked
+
+  def onHospitalityRateChange(self, handle, **event_args):
+    """"This method is called when the hospital rate slider is moved
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the slider is moved
+    
+    Returns
+    -------
+    None
+    """
+
+    self.params.HOSPITAL_CAPACITY = self.hospitalCapacitySlider.value / 100
+    self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.value}'
+    
