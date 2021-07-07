@@ -68,4 +68,5 @@ class Interventions:
           infectedCount += person.state == Person.INFECTED
         
         # Check whether the cell should be under lockdown
-        frame.isLockedDown[rowCount][colCount] = infectedCount / len(cell) >= params.LOCKDOWN_LEVEL
+        frame.isLockedDown[rowCount][colCount] = (len(cell) > 0 and 
+                                                  infectedCount / len(cell) >= params.LOCKDOWN_LEVEL)
