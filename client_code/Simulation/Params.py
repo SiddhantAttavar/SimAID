@@ -8,6 +8,8 @@ class Params:
   ---------------------
   POPULATION_SIZE
     The size of the population in the simulation
+  POPULATION_DEMOGRAPHICS
+    The spread of population amongst different ages
   SIMULATION_LENGTH
     The number of frams in the simulation
   CONTACT_RADIUS : float
@@ -42,6 +44,8 @@ class Params:
   -----------------------
   RULE_COMPLIANCE_RATE : float
     The percentage of the population that follows rules
+  HOSPITALITY_RATE : float
+    The percentage of the population that can be supported by hospitals
   
   Vaccination Parameters
   ----------------------
@@ -65,6 +69,7 @@ class Params:
 
   # Basic model related parameters
   POPULATION_SIZE = 100
+  POPULATION_DEMOGRAPHICS = [0.35, 0.45, 0.15, 0.05]
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
   TIME_PER_FRAME = 0.5
@@ -74,8 +79,9 @@ class Params:
   MAX_MOVEMENT = 0.05
   TRAVEL_RATE = 0.2
 
-  # Person related parameters
+  # Intervention related parameters
   RULE_COMPLIANCE_RATE = 0.9
+  HOSPITAL_CAPACITY = 0.3
 
   # State transition related parameters
   INITIAL_INFECTED = 2
@@ -83,6 +89,7 @@ class Params:
   INCUBATION_PERIOD = 3
   INFECTION_PERIOD = 10
   MORTALITY_RATE = 0.3
+  IMMUNITY_PERIOD = 30
 
   # Vaccination related parameters
   VACCINATION_ENABLED = False
