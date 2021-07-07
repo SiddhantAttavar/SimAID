@@ -181,7 +181,8 @@ class Simulation:
             # Dead people do not move
             continue
 
-          if random() < self.params.TRAVEL_RATE:
+          if ((not person.followsRules or not self.params.LOCKDOWN_ENABLED) and 
+              random() < self.params.TRAVEL_RATE):
             # The person is travelling to a different cell
             cellRow, cellCol = Utils.getRandomCell(self.params)
             frame.visitingGrid[cellRow][cellCol].append(person)
