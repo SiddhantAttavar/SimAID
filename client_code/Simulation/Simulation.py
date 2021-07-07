@@ -144,7 +144,10 @@ class Simulation:
         for person in cell:
           person.framesSinceLastState += 1
 
-    return Frame(frame.grid, self.params)
+    res = Frame(frame.grid, self.params)
+    res.isLockedDown = frame.isLockedDown.copy()
+
+    return res
   
   def movePeople(self, frame):
     '''Move the people around

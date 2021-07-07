@@ -110,12 +110,12 @@ class RunSimulation(RunSimulationTemplate):
       for colCount, cell in enumerate(row):
         # If the cell is locked down, shade it gray
         if frame.isLockedDown[rowCount][colCount]:
-          self.canvas.fill_style = 'green'
+          self.canvas.fill_style = 'grey'
           self.canvas.fill_rect(
-            rowCount * self.params.CELL_SIZE, 
-            colCount * self.params.CELL_SIZE, 
-            self.params.CELL_SIZE, 
-            self.params.CELL_SIZE
+            colCount * self.params.CELL_SIZE * self.canvasWidth, 
+            rowCount * self.params.CELL_SIZE * self.canvasHeight, 
+            self.params.CELL_SIZE * self.canvasWidth, 
+            self.params.CELL_SIZE * self.canvasHeight
           )
         
         for person in cell:
