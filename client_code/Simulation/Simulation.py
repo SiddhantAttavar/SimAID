@@ -103,7 +103,6 @@ class Simulation:
       if key not in done:
         done.add(key)
         grid[cellRow][cellCol][personCount].state = Person.EXPOSED
-        grid[cellRow][cellCol][personCount].framesSinceInfection = 0
 
     currFrame = Frame(grid, self.params)
     yield currFrame
@@ -128,12 +127,20 @@ class Simulation:
     '''
 
     self.movePeople(frame)
+
     Transitions.findExposed(frame, self.params)
     Transitions.findInfected(frame, self.params)
     Transitions.findRecovered(frame, self.params)
+    Transitions.findSusceptible(frame, self.params)
     
     if self.params.VACCINATION_ENABLED:
       Interventions.vaccinate(frame, self.params)
+
+    # Iterate through all people and increment the frames since last state
+    for row in frame.grid:
+      for cell in row:
+        for person in cell:
+          person.framesSinceLastState += 1
 
     return Frame(frame.grid, self.params)
   

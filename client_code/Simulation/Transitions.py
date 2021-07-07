@@ -20,8 +20,8 @@ class Transitions:
     Finds out who will be infected
   findRemoved(frame, params)
     Finds out who will be recovered / dead
-  vaccinate(frame, params)
-    Finds out who is vaccinated
+  findSusceptible(frame, params)
+    Find out who loses immunity
   '''
 
   @staticmethod
@@ -69,13 +69,14 @@ class Transitions:
             )
 
             infectionRate = params.INFECTION_RATE
-            if params.HYGIENE_ENABLED and susceptiblePerson.followsRules and infectedPerson.followsRules:
+            if (params.HYGIENE_ENABLED and 
+                (susceptiblePerson.followsRules and infectedPerson.followsRules)):
               infectionRate *= params.HYGIENE_RATE
 
             if dist <= params.CONTACT_RADIUS and random() < infectionRate:
               # The disease spreads to the susceptible person and he becomes exposed
               susceptiblePerson.state = Person.EXPOSED
-              susceptiblePerson.framesSinceInfection = 0
+              susceptiblePerson.framesSinceLastState = 0
 
   @staticmethod
   def findInfected(frame, params):
@@ -97,10 +98,10 @@ class Transitions:
     # Find if they become infected
     for row, col, personCount in frame.stateGroups[Person.EXPOSED.id]:
       person = frame.grid[row][col][personCount]
-      person.framesSinceInfection += 1
-      if person.framesSinceInfection >= params.INCUBATION_PERIOD:
+      if person.framesSinceLastState >= params.INCUBATION_PERIOD:
         # The person becomes symptomatic
         person.state = Person.INFECTED
+        person.framesSinceLastState = 0
   
   @staticmethod
   def findRecovered(frame, params):
@@ -122,11 +123,37 @@ class Transitions:
     # Find if they have no time left for disease
     for row, col, personCount in frame.stateGroups[Person.INFECTED.id]:
       person = frame.grid[row][col][personCount]
-      person.framesSinceInfection += 1
-      if person.framesSinceInfection >= params.INFECTION_PERIOD:
+      person.framesSinceLastState += 1
+      if person.framesSinceLastState >= params.INFECTION_PERIOD:
         # Find if the person recovers or dies
-        person.framesSinceInfection = -1
+        person.framesSinceLastState = 0
         if random() < params.MORTALITY_RATE:
           person.state = Person.DEAD
         else:
           person.state = Person.RECOVERED
+  
+  def findSusceptible(frame, params):
+    '''Find out who loses immunity from recovery or vaccination
+    
+    Parameters
+    ----------
+    frame : Frame
+      The current frame of the simulation
+    params : Params
+      The parameters of the simulation
+    
+    Returns
+    -------
+    None
+    '''
+
+    # Iterate through all people and find those who are recovered or vaccinated
+    # Find if they have lost immunity
+    for row, col, personCount in (frame.stateGroups[Person.RECOVERED.id] + 
+                                  frame.stateGroups[Person.VACCINATED.id]):
+      person = frame.grid[row][col][personCount]
+      person.framesSinceLastState += 1
+      if person.framesSinceLastState >= params.IMMUNITY_PERIOD:
+        # The person loses immunity and becomes susceptible again
+        person.state = Person.SUSCEPTIBLE
+        person.framesSinceLastState = 0

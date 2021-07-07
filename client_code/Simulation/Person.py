@@ -23,7 +23,7 @@ class Person:
     The location of the home of the person
   state : State
     A variable which stores the current state of the person
-  framesSinceInfection : int
+  framesSinceLastState : int
     The number of days since the person was infected (default -1)
   followsRules : bool
     whether the person follows rules like social distancing and wearing mask
@@ -156,5 +156,5 @@ class Person:
     self.y = y
     self.home = (self.x, self.y)
     self.state = state
-    self.framesSinceInfection = -1
+    self.framesSinceLastState = 0
     self.followsRules = followsRules

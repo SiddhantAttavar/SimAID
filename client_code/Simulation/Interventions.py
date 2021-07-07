@@ -14,7 +14,7 @@ class Interventions:
   Methods
   -------
   vaccinate(frame, params)
-    Find out who is vaccinated
+    Finds out who is vaccinated
   '''
 
   @staticmethod
@@ -35,3 +35,4 @@ class Interventions:
       person = frame.people[personCount]
       if random() < params.VACCINATION_RATE:
         person.state = Person.VACCINATED
+        person.framesSinceLastState = 0
