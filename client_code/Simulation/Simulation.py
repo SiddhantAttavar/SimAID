@@ -180,19 +180,13 @@ class Simulation:
             continue
           else:
             person.isVisiting = False
-          
-          # If social distancing is enabled, reduce the movement
-          if self.params.SOCIAL_DISTANCING_ENABLED and person.followsRules:
-            maxMovement = self.params.SOCIAL_DISTANCING_MAX_MOVEMENT
-          else:
-            maxMovement = self.params.MAX_MOVEMENT
 
           # Reset the person's location to home
           person.x, person.y = person.home
 
           # Change the position of the person by a random amount
-          person.x += uniform(-maxMovement, maxMovement)
-          person.y += uniform(-maxMovement, maxMovement)
+          person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+          person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
 
           person.x = min(xMax, max(xMin, person.x))
           person.y = min(yMax, max(yMin, person.y))
@@ -206,7 +200,6 @@ if __name__ == '__main__':
   params = Params(
     POPULATION_SIZE = 5000,
     VACCINATION_ENABLED = False,
-    SOCIAL_DISTANCING_ENABLED = False,
     QUARANTINE_ENABLED = False,
     HYGIENE_ENABLED = False
   )

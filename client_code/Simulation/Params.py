@@ -49,13 +49,6 @@ class Params:
     Whether vaccination is enabled
   VACCINATION_RATE : float
     The percentage of suseptible population which gets vaccinated in a day
-  
-  Social distancing Parameters
-  ----------------------------
-  SOCIAL_DISTANCING_ENABLED : bool
-    Whether social distancing is enabled
-  SOCIAL_DISTANCING_MAX_MOVEMENT : float
-    The percentage by which movement is reduced
 
   QUARANTINE Parameters
   ---------------------
@@ -96,10 +89,6 @@ class Params:
   # Vaccination related parameters
   VACCINATION_ENABLED = False
   VACCINATION_RATE = 0.01
-
-  # Social distancing related parameters
-  SOCIAL_DISTANCING_ENABLED = False
-  SOCIAL_DISTANCING_MAX_MOVEMENT = 0.3 * MAX_MOVEMENT
 
   # Quarantine related parameters
   QUARANTINE_ENABLED = False

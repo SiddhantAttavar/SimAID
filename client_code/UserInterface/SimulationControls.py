@@ -71,8 +71,6 @@ class SimulationControls(SimulationControlsTemplate):
     
     self.vaccinationSwitch.checked = self.params.VACCINATION_ENABLED
     
-    self.socialDistancingSwitch.checked = self.params.SOCIAL_DISTANCING_ENABLED
-    
     self.quarantineSwitch.checked = self.params.QUARANTINE_ENABLED
     self.quarantineSlider.visible = self.params.QUARANTINE_ENABLED
     self.quarantineSlider.start = int(self.params.QUARANTINE_RATE * 100)
@@ -223,21 +221,6 @@ class SimulationControls(SimulationControlsTemplate):
     """
     
     self.params.VACCINATION_ENABLED = self.vaccinationSwitch.checked
-
-  def onSocialDistancingChange(self, **event_args):
-    """This method is called when the social distancing switch is checked or unchecked
-    
-    Parameters
-    ----------
-    **event_args
-      Details about how the switch is checked
-    
-    Returns
-    -------
-    None
-    """
-    
-    self.params.SOCIAL_DISTANCING_ENABLED = self.socialDistancingSwitch.checked
 
   def onQuarantineChange(self, **event_args):
     """This method is called when the quaraninte switch is checked or unchecked
