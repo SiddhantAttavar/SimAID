@@ -147,7 +147,7 @@ components:
       name: immunityPeriodSlider
       layout_properties: {grid_position: 'KXRRSY,MWOIRK'}
   - type: ColumnPanel
-    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"CZYXNC":45,"JARXFX":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15}'}
+    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15,"KVEXYP":40,"MTEOIO":20}'}
     name: interventionControlsColumnPanel
     layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
     components:
@@ -193,26 +193,14 @@ components:
       layout_properties: {grid_position: 'LIYMDL,TCFOYM'}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'Social distancing: ', font_size: null, font: '', spacing_above: small,
+        visible: true, text: 'Lockdown: ', font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
         underline: false, icon: ''}
-      name: socialDistancingLabel
-      layout_properties: {grid_position: 'ARQLOP,CZYXNC'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Switch
-      properties: {}
-      name: socialDistancingSwitch
-      layout_properties: {grid_position: 'ARQLOP,JARXFX'}
-      event_bindings: {change: onSocialDistancingChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'Quarantine: ', font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-        underline: false, icon: ''}
-      name: quarantineLabel
+      name: lockdownLabel
       layout_properties: {grid_position: 'PLSWUO,UPQTNJ'}
     - type: form:C6ZZPAPN4YYF5NVJ:Switch
       properties: {}
-      name: quarantineSwitch
+      name: lockdownSwitch
       layout_properties: {grid_position: 'PLSWUO,KQHDKG'}
       event_bindings: {change: onQuarantineChange}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
@@ -221,7 +209,7 @@ components:
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 5}
-      name: quarantineSlider
+      name: lockdownSlider
       layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
       event_bindings: {slide: onQuarantineRateChange}
     - type: Label
@@ -236,6 +224,32 @@ components:
       name: hygieneSwitch
       layout_properties: {grid_position: 'RBBXOB,VHAZKC'}
       event_bindings: {change: onHygieneChange}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: Travel Restrictions, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: travelLabel
+      layout_properties: {grid_position: 'DGQYQP,KVEXYP'}
+    - type: form:C6ZZPAPN4YYF5NVJ:Switch
+      properties: {}
+      name: travelSwitch
+      layout_properties: {grid_position: 'DGQYQP,MTEOIO'}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: '', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: ''}
+      name: hospitalCapacityLabel
+      layout_properties: {grid_position: 'FFCXSN,HOCYDB'}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 10, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 10}
+      name: hospitalCapacitySlider
+      layout_properties: {grid_position: 'GFVBTF,CPCRYT'}
   event_bindings: {}
 container:
   type: ColumnPanel
