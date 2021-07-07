@@ -106,8 +106,18 @@ class RunSimulation(RunSimulationTemplate):
     self.canvas.stroke()
     
     # Draw each person on the canvas as a dot with a particular color
-    for row in frame.grid:
-      for cell in row:
+    for rowCount, row in enumerate(frame.grid):
+      for colCount, cell in enumerate(row):
+        # If the cell is locked down, shade it gray
+        if frame.isLockedDown[rowCount][colCount]:
+          self.canvas.fill_style = 'green'
+          self.canvas.fill_rect(
+            rowCount * self.params.CELL_SIZE, 
+            colCount * self.params.CELL_SIZE, 
+            self.params.CELL_SIZE, 
+            self.params.CELL_SIZE
+          )
+        
         for person in cell:
           self.canvas.begin_path()
           self.canvas.arc(person.x * self.canvasWidth, person.y * self.canvasHeight, 5)

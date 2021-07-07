@@ -355,7 +355,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.HYGIENE_ENABLED = self.hygieneSwitch.checked
 
   def onHospitalityRateChange(self, handle, **event_args):
-    '''"This method is called when the hospital rate slider is moved
+    '''This method is called when the hospital rate slider is moved
     
     Parameters
     ----------
