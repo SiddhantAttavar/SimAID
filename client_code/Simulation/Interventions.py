@@ -15,6 +15,8 @@ class Interventions:
   -------
   vaccinate(frame, params)
     Finds out who is vaccinated
+  lockdown(frame, params)
+    Lockdown cells in the grid
   '''
 
   @staticmethod
@@ -25,14 +27,45 @@ class Interventions:
     ----------
     frame : Frame
       The current frame of the simulation
+    params : Params
+      The parameters of the simulation
     
     Returns
     -------
     None
     '''
 
+    # Iterate through all susceptible people
+    # And find out who is vaccinated
     for personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
       person = frame.people[personCount]
       if random() < params.VACCINATION_RATE:
         person.state = Person.VACCINATED
         person.framesSinceLastState = 0
+  
+  @staticmethod
+  def lockdown(frame, params):
+    '''Find out which cells are under lockdown
+    
+    Parameters
+    ----------
+    frame : Frame
+      The current frame of the simulation
+    params : Params
+      The parameters of the simulation
+    
+    Returns
+    -------
+    None
+    '''
+
+    # Iterate through all cells and find out which are under lockdown
+    for rowCount, row in enumerate(frame.grid):
+      for colCount, cell in enumerate(row):
+        # Find the number of infected people in the cell
+        infectedCount = 0
+        for person in cell:
+          infectedCount += person.state == Person.INFECTED
+        
+        # Check whether the cell should be under lockdown
+        frame.isLockedDown[rowCount][colCount] = infectedCount / len(cell) >= params.LOCKDOWN_LEVEL

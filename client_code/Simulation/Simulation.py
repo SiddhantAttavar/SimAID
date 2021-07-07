@@ -128,13 +128,15 @@ class Simulation:
 
     self.movePeople(frame)
 
+    if self.params.VACCINATION_ENABLED:
+      Interventions.vaccinate(frame, self.params)
+    if self.params.LOCKDOWN_ENABLED:
+      Interventions.lockdown(frame, self.params)
+
     Transitions.findExposed(frame, self.params)
     Transitions.findInfected(frame, self.params)
     Transitions.findRecovered(frame, self.params)
     Transitions.findSusceptible(frame, self.params)
-    
-    if self.params.VACCINATION_ENABLED:
-      Interventions.vaccinate(frame, self.params)
 
     # Iterate through all people and increment the frames since last state
     for row in frame.grid:
@@ -207,7 +209,7 @@ if __name__ == '__main__':
   params = Params(
     POPULATION_SIZE = 5000,
     VACCINATION_ENABLED = False,
-    LOCKDOWN_ENABLED = False,
+    LOCKDOWN_ENABLED = True,
     HYGIENE_ENABLED = False
   )
   

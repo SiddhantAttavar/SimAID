@@ -12,6 +12,8 @@ class Frame:
     list of people in each cell of the grid
   visitingGrid : list(list(list(Person)))
     list of people in each cell of the grid who are visiting the cell
+  isLockedDown : list(list(bool))
+    Whether the cell is under lockdown
   stateGroupss : list(list(int))
     list of indexes of the people in each states
 
@@ -36,6 +38,8 @@ class Frame:
 
     # Initialize the variables and set every state in Person.State to an empty list
     self.grid = grid
+    self.visitingGrid = [[[] for i in range(params.GRID_SIZE)] for j in range(params.GRID_SIZE)]
+    self.isLockedDown = [[False for i in range(params.GRID_SIZE)] for j in range(params.GRID_SIZE)]
     self.stateGroups = [[] for _ in Person.states]
 
     # Iterate through the list and add the person to the state group
@@ -43,6 +47,3 @@ class Frame:
       for col in range(params.GRID_SIZE):
         for personCount, person in enumerate(self.grid[row][col]):
           self.stateGroups[person.state.id].append((row, col, personCount))
-    
-    # Initialize the visiting grid
-    self.visitingGrid = [[[] for i in range(params.GRID_SIZE)] for j in range(params.GRID_SIZE)]
