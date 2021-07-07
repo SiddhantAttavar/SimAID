@@ -50,14 +50,12 @@ class Params:
   VACCINATION_RATE : float
     The percentage of suseptible population which gets vaccinated in a day
 
-  QUARANTINE Parameters
+  Lockdown Parameters
   ---------------------
-  QUARANTINE_ENABLED : bool
-    Whether quarantine is enabled
-  QUARANTINE_SIZE : float
-    Size of the side of the quarantine area
-  QUARANTINE_RATE : float
-    The percentage of infected population which is quarantined
+  LOCKDOWN_ENABLED : bool
+    Whether lockdown is enabled
+  LOCKDOWN_LEVEL : float
+    The percentage of infected population at which lockdown is enabled
   
   Hygiene measures Parameters
   ---------------------------
@@ -90,10 +88,9 @@ class Params:
   VACCINATION_ENABLED = False
   VACCINATION_RATE = 0.01
 
-  # Quarantine related parameters
-  QUARANTINE_ENABLED = False
-  QUARANTINE_SIZE = 1 / 3
-  QUARANTINE_RATE = 0.5
+  # Lockdown related parameters
+  LOCKDOWN_ENABLED = False
+  LOCKDOWN_LEVEL = 0.5
 
   # Hygiene related parameters
   HYGIENE_ENABLED = False

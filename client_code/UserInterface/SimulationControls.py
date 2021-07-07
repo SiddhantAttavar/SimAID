@@ -71,10 +71,9 @@ class SimulationControls(SimulationControlsTemplate):
     
     self.vaccinationSwitch.checked = self.params.VACCINATION_ENABLED
     
-    self.lockdownSwitch.checked = self.params.QUARANTINE_ENABLED
-    self.lockdownSlider.visible = self.params.QUARANTINE_ENABLED
-    self.lockdownSlider.start = int(self.params.QUARANTINE_RATE * 100)
-    self.lockdownLabel.text = 'Quarantine:'
+    self.lockdownSwitch.checked = self.params.LOCKDOWN_ENABLED
+    self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
+    self.lockdownSlider.start = int(self.params.LOCKDOWN_LEVEL * 100)
     
     self.hygieneSwitch.checked = self.params.HYGIENE_ENABLED
     
@@ -238,9 +237,9 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.LOCKDOWN_ENABLED = self.lockdownSwitch.checked
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     if self.params.LOCKDOWN_ENABLED:
-      self.lockdownLabel.text = f'Quarantine Rate (0 - 100): {self.lockdownSlider.value}'
+      self.lockdownLabel.text = f'Lockdown Level (0 - 100): {self.lockdownSlider.value}'
     else:
-      self.lockdownLabel.text = 'Quarantine '
+      self.lockdownLabel.text = 'Lockdown: '
 
   def onLockdownRateChange(self, handle, **event_args):
     """"This method is called when the lockdown rate slider is moved
@@ -256,7 +255,7 @@ class SimulationControls(SimulationControlsTemplate):
     """
     
     self.params.LOCKDOWN_RATE = self.lockdownSlider.value / 100
-    self.lockdownLabel.text = f'Quarantine Rate (0 - 100): {self.lockdownSlider.value}'
+    self.lockdownLabel.text = f'Lockdown Rate (0 - 100): {self.lockdownSlider.value}'
 
   def onHygieneChange(self, **event_args):
     """This method is called when the hygiene switch is checked or unchecked

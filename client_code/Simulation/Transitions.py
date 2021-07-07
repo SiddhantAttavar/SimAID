@@ -101,10 +101,6 @@ class Transitions:
       if person.framesSinceInfection >= params.INCUBATION_PERIOD:
         # The person becomes symptomatic
         person.state = Person.INFECTED
-        if params.QUARANTINE_ENABLED and random() < params.QUARANTINE_RATE:
-          person.isQuarantined = True
-          person.x = uniform(0, params.QUARANTINE_SIZE)
-          person.y = uniform(0, params.QUARANTINE_SIZE)
   
   @staticmethod
   def findRecovered(frame, params):
@@ -130,7 +126,6 @@ class Transitions:
       if person.framesSinceInfection >= params.INFECTION_PERIOD:
         # Find if the person recovers or dies
         person.framesSinceInfection = -1
-        person.isQuarantined = False
         if random() < params.MORTALITY_RATE:
           person.state = Person.DEAD
         else:
