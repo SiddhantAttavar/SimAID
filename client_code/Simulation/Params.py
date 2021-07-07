@@ -68,7 +68,7 @@ class Params:
   '''
 
   # Basic model related parameters
-  POPULATION_SIZE = 500
+  POPULATION_SIZE = 300
   POPULATION_DEMOGRAPHICS = [0.35, 0.45, 0.15, 0.05]
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
@@ -97,7 +97,7 @@ class Params:
 
   # Lockdown related parameters
   LOCKDOWN_ENABLED = False
-  LOCKDOWN_LEVEL = 0.5
+  LOCKDOWN_LEVEL = 0.7
 
   # Hygiene related parameters
   HYGIENE_ENABLED = False
