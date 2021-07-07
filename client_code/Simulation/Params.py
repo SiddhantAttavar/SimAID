@@ -86,6 +86,7 @@ class Params:
   INCUBATION_PERIOD = 3
   INFECTION_PERIOD = 10
   MORTALITY_RATE = 0.3
+  IMMUNITY_PERIOD = 30
 
   # Vaccination related parameters
   VACCINATION_ENABLED = False
