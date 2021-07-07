@@ -200,7 +200,7 @@ if __name__ == '__main__':
   params = Params(
     POPULATION_SIZE = 5000,
     VACCINATION_ENABLED = False,
-    QUARANTINE_ENABLED = False,
+    LOCKDOWN_ENABLED = False,
     HYGIENE_ENABLED = False
   )
   
