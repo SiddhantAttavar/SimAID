@@ -27,8 +27,6 @@ class Person:
     The number of days since the person was infected (default -1)
   followsRules : bool
     whether the person follows rules like social distancing and wearing mask
-  isQuarantined : bool
-    Whether the person is quarantined when on getting infected
   isVisiting : bool
     Whether the person is visiting another cell
 
@@ -160,4 +158,3 @@ class Person:
     self.state = state
     self.framesSinceInfection = -1
     self.followsRules = followsRules
-    self.isQuarantined = False
