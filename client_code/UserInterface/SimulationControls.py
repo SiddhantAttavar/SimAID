@@ -51,15 +51,15 @@ class SimulationControls(SimulationControlsTemplate):
     currSum = int(self.params.POPULATION_DEMOGRAPHICS[0] * 100)
     self.populationDemographicsSlider.start = [currSum]
     for i in range(1, len(self.params.POPULATION_DEMOGRAPHICS) - 1):
-      self.populationDemographicsSlider.start.append(currSum)
       currSum += int(self.params.POPULATION_DEMOGRAPHICS[i] * 100)
-      
+      self.populationDemographicsSlider.start.append(currSum)
+    self.populationDemographicsSlider.start = self.populationDemographicsSlider.start
     self.populationDemographicsSlider.connect = [True, False, True, False]
     self.populationDemographicsLabel.text = f'''Population Demographics: 
-    0 - 15: {self.populationDemographicsSlider.start[0]}
-    15 - 45: {self.populationDemographicsSlider.start[1]}
-    45 - 65: {self.populationDemographicsSlider.start[2]}
-    65+: {1 - sum(self.populationDemographicsSlider.start[2])}'''
+    0 - 15: {int(self.params.POPULATION_DEMOGRAPHICS[0] * 100)}
+    15 - 45: {int(self.params.POPULATION_DEMOGRAPHICS[1] * 100)}
+    45 - 65: {int(self.params.POPULATION_DEMOGRAPHICS[2] * 100)}
+    65+: {int(self.params.POPULATION_DEMOGRAPHICS[3] * 100)}'''
     
     self.simulationLengthSlider.start = self.params.POPULATION_DEMOGRAPHICS
     self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.start}'
