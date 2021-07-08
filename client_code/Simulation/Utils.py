@@ -65,13 +65,15 @@ class Utils:
     plt.show()
 
   @staticmethod
-  def getRandomCell(params):
+  def getRandomCell(params, probabilities):
     '''Generates a random cell in the grid
 
     Parameters
     ----------
     params : Params   
       The parameters of the simulation
+    Probabilities
+      The list of probabilities to choose a cell from
     
     Returns
     -------

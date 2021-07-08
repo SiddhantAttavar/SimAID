@@ -77,12 +77,35 @@ class Simulation:
     for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
       self.params.GRID_PROBABILITIES[i] /= self.params.GRID_PROBABILITIES[-1]
 
+    # Create the probability matrix for travel between cells
+    # Iterate through all cells
+    self.params.TRAVEL_PROBABILITES = []
+    for rowCount in range(self.params.GRID_SIZE):
+      self.params.TRAVEL_PROBABILITES.append([])
+      for colCount in range(self.params.GRID_SIZE):
+        # For each cell create probabilities
+        self.params.TRAVEL_PROBABILITES[rowCount].append(
+          [random() for _ in range(self.params.GRID_SIZE ** 2)]
+        )
+
+        # The probability of travelling from a cell to itself is 0
+        cellNum = rowCount * self.params.GRID_SIZE + colCount
+        self.random.TRAVEL_PROBABILITES[rowCount][colCount][cellNum] = 0
+
+        # Find the cumulative sum for each cell
+        for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
+          self.params.TRAVEL_PROBABILITES[i] += self.params.TRAVEL_PROBABILITES[i - 1]
+        
+        # Scale all probabilities by the sum of probabilities
+        for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+          self.params.TRAVEL_PROBABILITES[i] /= self.params.TRAVEL_PROBABILITES[-1]
+
     # Create the first frame
     # Intialize the population list with people and whether they follow rules
     grid = [[[] for i in range(self.params.GRID_SIZE)] for j in range(self.params.GRID_SIZE)]
     for _ in range(self.params.POPULATION_SIZE):
       # Find a random cell for the person
-      cellRow, cellCol = Utils.getRandomCell(self.params)
+      cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
 
       # Add the person to the grid
       grid[cellRow][cellCol].append(Person(
@@ -96,7 +119,7 @@ class Simulation:
     # There are some people who are exposed at the beginning
     done = set()
     for _ in range(self.params.INITIAL_INFECTED):
-      cellRow, cellCol = Utils.getRandomCell(self.params)
+      cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
       personCount = randrange(len(grid[cellRow][cellCol]))
       key = (cellRow, cellCol, personCount)
 
@@ -187,9 +210,14 @@ class Simulation:
           if ((not person.followsRules or not self.params.LOCKDOWN_ENABLED) and 
               random() < self.params.TRAVEL_RATE):
             # The person is travelling to a different cell
-            cellRow, cellCol = Utils.getRandomCell(self.params)
+            cellRow, cellCol = Utils.getRandomCell(
+              self.params, 
+              self.params.TRAVEL_PROBABILITES[rowCount][colCount]
+            )
             frame.visitingGrid[cellRow][cellCol].append(person)
             person.isVisiting = True
+
+            # Continue to the next cell, because there is no movement
             continue
           else:
             person.isVisiting = False
