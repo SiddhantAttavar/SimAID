@@ -100,7 +100,7 @@ class Params:
 
   # Lockdown related parameters
   LOCKDOWN_ENABLED = False
-  LOCKDOWN_LEVEL = 0.7
+  LOCKDOWN_LEVEL = 0.5
 
   # Hygiene related parameters
   HYGIENE_ENABLED = False
