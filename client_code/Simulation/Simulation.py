@@ -89,6 +89,10 @@ class Simulation:
         # The probability of travelling from a cell to itself is 0
         travelProbabilites[rowCount * self.params.GRID_SIZE + colCount] = 0
 
+        # Add probability factor to the probability matrix
+        for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+          travelProbabilites[i] *= self.params.GRID_PROBABILITIES[i]
+
         # Find the cumulative sum for each cell
         for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
           travelProbabilites[i] += travelProbabilites[i - 1]
