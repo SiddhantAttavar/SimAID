@@ -46,7 +46,7 @@ class Params:
   -----------------------
   RULE_COMPLIANCE_RATE : float
     The percentage of the population that follows rules
-  HOSPITALITY_RATE : float
+  HOSPITALITY_CAPACITY : float
     The percentage of the population that can be supported by hospitals
   
   Vaccination Parameters
