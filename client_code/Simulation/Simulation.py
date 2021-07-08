@@ -84,21 +84,21 @@ class Simulation:
       self.params.TRAVEL_PROBABILITES.append([])
       for colCount in range(self.params.GRID_SIZE):
         # For each cell create probabilities
-        self.params.TRAVEL_PROBABILITES[rowCount].append(
-          [random() for _ in range(self.params.GRID_SIZE ** 2)]
-        )
+        travelProbabilites = [random() for _ in range(self.params.GRID_SIZE ** 2)]
 
         # The probability of travelling from a cell to itself is 0
-        cellNum = rowCount * self.params.GRID_SIZE + colCount
-        self.random.TRAVEL_PROBABILITES[rowCount][colCount][cellNum] = 0
+        travelProbabilites[rowCount * self.params.GRID_SIZE + colCount] = 0
 
         # Find the cumulative sum for each cell
         for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
-          self.params.TRAVEL_PROBABILITES[i] += self.params.TRAVEL_PROBABILITES[i - 1]
+          travelProbabilites[i] += travelProbabilites[i - 1]
         
         # Scale all probabilities by the sum of probabilities
         for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
-          self.params.TRAVEL_PROBABILITES[i] /= self.params.TRAVEL_PROBABILITES[-1]
+          travelProbabilites[i] /= travelProbabilites[-1]
+        
+        # Add the probabilities to the probability matrix
+        self.params.TRAVEL_PROBABILITES[rowCount].append(travelProbabilites)
 
     # Create the first frame
     # Intialize the population list with people and whether they follow rules
