@@ -37,8 +37,8 @@ class Interventions:
 
     # Iterate through all susceptible people
     # And find out who is vaccinated
-    for personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
-      person = frame.people[personCount]
+    for row, col, personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
+      person = frame.grid[row][col][personCount]
       if random() < params.VACCINATION_RATE:
         person.state = Person.VACCINATED
         person.framesSinceLastState = 0

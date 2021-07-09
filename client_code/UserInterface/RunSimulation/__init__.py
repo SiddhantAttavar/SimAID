@@ -101,6 +101,7 @@ class RunSimulation(RunSimulationTemplate):
     self.canvas.move_to(self.canvasWidth, 0)
     self.canvas.line_to(self.canvasWidth, self.canvasHeight)
 
+    # Commit the changes to the canvas
     self.canvas.stroke_style = "#2196F3"
     self.canvas.line_width = 3
     self.canvas.stroke()
