@@ -216,8 +216,8 @@ class SimulationControls(SimulationControlsTemplate):
     None
     '''
 
-    self.params.INFECTION_PERIOD = self.incubationPeriodSlider.value
-    self.infectionPeriodLabel.text = f'Infection Period (1 - 100): {self.incubationPeriodSlider.value}'
+    self.params.INFECTION_PERIOD = self.infectionPeriodSlider.value
+    self.infectionPeriodLabel.text = f'Infection Period (1 - 100): {self.infectionPeriodSlider.value}'
     
   def onImmunityPeriodChange(self, handle, **event_args):
     '''This method is called when the immunity period slider is moved
