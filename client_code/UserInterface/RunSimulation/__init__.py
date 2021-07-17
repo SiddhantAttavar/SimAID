@@ -152,6 +152,36 @@ class RunSimulation(RunSimulationTemplate):
     ))
     
     self.graph.data = self.graph.data
+    
+    # Draw a box for the daily counts in the corner
+    if frameCount > 0:
+      self.canvas.fill_style = 'blue'
+      self.canvas.stroke_style = 'white'
+      self.canvas.fill_rect(self.canvasWidth - 20 - 100, 20, 100, 40)
+      self.canvas.stroke_rect(self.canvasWidth - 20 - 100, 20, 100, 40)
+      self.canvas.fill()
+      self.canvas.stroke()
+      
+      self.canvas.line_width = 1
+      self.canvas.fill_style = 'white'
+      self.canvas.font = '12px montserrat'
+      self.canvas.text_align = 'center'
+      self.canvas.text_baseline = 'center'
+      
+      newInfected = self.graphYData[Person.INFECTED.id][-1] - self.graphYData[Person.INFECTED.id][-2]
+      newDead = self.graphYData[Person.DEAD.id][-1] - self.graphYData[Person.DEAD.id][-2]
+      self.canvas.fill_text(
+        f'Daily Infected: {newInfected}',
+        self.canvasWidth - 20 - 50,
+        20 + 15
+      )
+      self.canvas.fill_text(
+        f'Daily Dead: {newDead}',
+        self.canvasWidth - 20 - 50,
+        20 + 30
+      )
+      
+      self.canvas.fill()
 
   def onRunSimulationButtonClick(self, **event_args):
     '''This method is called when the button is clicked
