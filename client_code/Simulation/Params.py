@@ -67,6 +67,13 @@ class Params:
   ---------------------------
   HYGIENE_ENABLED : bool
     Whether hygiene measures are enabled
+  HYGIENE_RATE : float
+    Rate by which infection decreases when hygiene measures are enabled
+  
+  Travel Restrictions Parameters
+  ------------------------------
+  TRAVEL_RESTRICTIONS_ENABLED : bool
+    Whether travel restrictions are enabled
   '''
 
   # Basic model related parameters
@@ -105,6 +112,9 @@ class Params:
   # Hygiene related parameters
   HYGIENE_ENABLED = False
   HYGIENE_RATE = 0.6
+
+  # Travel restrictions related parameters
+  TRAVEL_RESTRICTIONS_ENABLED = False
 
   def __init__(self, **kwargs):
     '''Initializes the parameters.

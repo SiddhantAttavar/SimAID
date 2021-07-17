@@ -193,6 +193,9 @@ class Simulation:
     for rowCount in range(self.params.GRID_SIZE):
       for colCount in range(self.params.GRID_SIZE):
         frame.visitingGrid[rowCount][colCount].clear()
+    
+    # Find the number of cells not under lockdown
+    cellsToTravelTo = sum(sum(row) for row in frame.isLockedDown)
 
     # Iterate through all cells
     for rowCount, row in enumerate(frame.grid):
@@ -211,13 +214,21 @@ class Simulation:
             # Dead people do not move
             continue
 
-          if ((not person.followsRules or not self.params.LOCKDOWN_ENABLED) and 
+          if (((not person.followsRules or not self.params.TRAVEL_RESTRICTIONS_ENABLED) or 
+              cellsToTravelTo - (not frame.isLockedDown[rowCount][colCount]) > 0) and 
               random() < self.params.TRAVEL_RATE):
             # The person is travelling to a different cell
             cellRow, cellCol = Utils.getRandomCell(
               self.params, 
               self.params.TRAVEL_PROBABILITES[rowCount][colCount]
             )
+            if self.params.TRAVEL_RESTRICTIONS_ENABLED:
+              while frame.isLockedDown[cellCol][cellRow]:
+                cellRow, cellCol = Utils.getRandomCell(
+                  self.params, 
+                  self.params.TRAVEL_PROBABILITES[rowCount][colCount]
+                )
+            
             frame.visitingGrid[cellRow][cellCol].append(person)
             person.isVisiting = True
 
@@ -246,7 +257,8 @@ if __name__ == '__main__':
     POPULATION_SIZE = 5000,
     VACCINATION_ENABLED = False,
     LOCKDOWN_ENABLED = True,
-    HYGIENE_ENABLED = False
+    HYGIENE_ENABLED = False,
+    TRAVEL_RESTRICTIONS_ENABLED = False
   )
   
   simulation = Simulation(params)
