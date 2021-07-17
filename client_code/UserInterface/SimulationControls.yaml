@@ -238,6 +238,7 @@ components:
       properties: {}
       name: travelSwitch
       layout_properties: {grid_position: 'DGQYQP,MTEOIO'}
+      event_bindings: {change: onTravelRestrictionsChange}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: '', font_size: null, font: '', spacing_above: small,
