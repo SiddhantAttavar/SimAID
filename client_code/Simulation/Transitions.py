@@ -132,6 +132,7 @@ class Transitions:
         else:
           person.state = Person.RECOVERED
   
+  @staticmethod
   def findSusceptible(frame, params):
     '''Find out who loses immunity from recovery or vaccination
     

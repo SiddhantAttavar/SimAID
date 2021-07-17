@@ -139,6 +139,18 @@ class RunSimulation(RunSimulationTemplate):
         name = Person.states[stateID].name
       )
       self.graph.data.append(figure)
+    
+    # Add the hospital capacity line
+    self.graph.data.append(go.Scatter(
+      x = self.graphXData,
+      y = [int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE) 
+            for _ in range(self.params.SIMULATION_LENGTH)],
+      marker = dict(
+        color = 'orange'
+      ),
+      name = 'HOSPITAL_CAPACITY'
+    ))
+    
     self.graph.data = self.graph.data
 
   def onRunSimulationButtonClick(self, **event_args):
