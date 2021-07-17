@@ -91,6 +91,8 @@ class SimulationControls(SimulationControlsTemplate):
     
     self.hygieneSwitch.checked = self.params.HYGIENE_ENABLED
     
+    self.travelSwitch.checked = self.params.TRAVEL_RESTRICTIONS_ENABLED
+    
     self.hospitalCapacitySlider.start = round(self.params.HOSPITAL_CAPACITY * 100)
     self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.start}'
     
@@ -362,4 +364,20 @@ class SimulationControls(SimulationControlsTemplate):
 
     self.params.HOSPITAL_CAPACITY = self.hospitalCapacitySlider.value / 100
     self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.value}'
+    
+
+  def onTravelRestrictionsChange(self, **event_args):
+    '''This method is called when the travel restrictions switch is checked or unchecked
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the switch is checked
+    
+    Returns
+    -------
+    None
+    '''
+    
+    self.params.TRAVEL_RESTRICTIONS_ENABLED = self.travelSwitch.checked
     
