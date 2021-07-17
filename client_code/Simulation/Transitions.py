@@ -127,7 +127,7 @@ class Transitions:
       if person.framesSinceLastState >= params.INFECTION_PERIOD:
         # Find if the person recovers or dies
         person.framesSinceLastState = 0
-        if random() < params.MORTALITY_RATE:
+        if random() < params.MORTALITY_RATE * params.COMORBIDITY_COEFFICIENTS[person.age]:
           person.state = Person.DEAD
         else:
           person.state = Person.RECOVERED

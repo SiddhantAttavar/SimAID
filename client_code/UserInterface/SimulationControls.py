@@ -48,18 +48,14 @@ class SimulationControls(SimulationControlsTemplate):
     self.populationSizeSlider.start = self.params.POPULATION_SIZE
     self.populationSizeLabel.text = f'Population Size (10 - 1000): {self.populationSizeSlider.start}'
     
-    currSum = round(self.params.POPULATION_DEMOGRAPHICS[0] * 100)
-    self.populationDemographicsSlider.start = [currSum]
-    for i in range(1, len(self.params.POPULATION_DEMOGRAPHICS) - 1):
-      currSum += round(self.params.POPULATION_DEMOGRAPHICS[i] * 100)
-      self.populationDemographicsSlider.start.append(currSum)
-    self.populationDemographicsSlider.start = self.populationDemographicsSlider.start
+    demographicsStart = [round(i * 100) for i in self.params.POPULATION_DEMOGRAPHICS]
+    self.populationDemographicsSlider.start = demographicsStart
     self.populationDemographicsSlider.connect = [True, False, True, False]
     self.populationDemographicsLabel.text = f'''Population Demographics: 
-    0 - 15: {round(self.params.POPULATION_DEMOGRAPHICS[0] * 100)}
-    15 - 45: {round(self.params.POPULATION_DEMOGRAPHICS[1] * 100)}
-    45 - 65: {round(self.params.POPULATION_DEMOGRAPHICS[2] * 100)}
-    65+: {round(self.params.POPULATION_DEMOGRAPHICS[3] * 100)}'''
+    0 - 15: {demographicsStart[0]}
+    15 - 45: {demographicsStart[1] - demographicsStart[0]}
+    45 - 65: {demographicsStart[2] - demographicsStart[1]}
+    65+: {demographicsStart[3] - demographicsStart[2]}'''
     
     self.simulationLengthSlider.start = self.params.SIMULATION_LENGTH
     self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.start}'
@@ -127,17 +123,14 @@ class SimulationControls(SimulationControlsTemplate):
     None
     '''
     
-    self.params.POPULATION_DEMOGRAPHICS = [self.populationDemographicsSlider.values[0] / 100]
-    for i in range(1, len(self.populationDemographicsSlider.values)):
-      self.params.POPULATION_DEMOGRAPHICS.append((self.populationDemographicsSlider.values[i] - 
-                                                self.populationDemographicsSlider.values[i - 1]) / 100)
+    demographicsValues = self.populationSizeSlider.values
+    self.params.POPULATION_DEMOGRAPHICS = [demographicsValues[0] / 100]
     self.params.POPULATION_DEMOGRAPHICS.append(1 - sum(self.params.POPULATION_DEMOGRAPHICS))
-    print(self.params.POPULATION_DEMOGRAPHICS)
     self.populationDemographicsLabel.text = f'''Population Demographics: 
-    0 - 15: {round(self.params.POPULATION_DEMOGRAPHICS[0] * 100)}
-    15 - 45: {round(self.params.POPULATION_DEMOGRAPHICS[1] * 100)}
-    45 - 65: {round(self.params.POPULATION_DEMOGRAPHICS[2] * 100)}
-    65+: {round(self.params.POPULATION_DEMOGRAPHICS[3] * 100)}'''
+    0 - 15: {demographicsValues[0]}
+    15 - 45: {demographicsValues[1] - demographicsValues[0]}
+    45 - 65: {demographicsValues[2] - demographicsValues[1]}
+    65+: {demographicsValues[3] - demographicsValues[2]}'''
 
   def onSimulationLengthChange(self, **event_args):
     '''This method is called when the simulation length slider is moved

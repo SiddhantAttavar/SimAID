@@ -29,6 +29,8 @@ class Person:
     whether the person follows rules like social distancing and wearing mask
   isVisiting : bool
     Whether the person is visiting another cell
+  age : int
+    The age category of the person
 
   STATES
   ------
@@ -136,7 +138,7 @@ class Person:
     VACCINATED
   ]
 
-  def __init__(self, cell, x, y, followsRules, state):
+  def __init__(self, cell, x, y, followsRules, state, age):
     '''Sets some initial parameters for the person.
 
     Parameters
@@ -158,3 +160,4 @@ class Person:
     self.state = state
     self.framesSinceLastState = 0
     self.followsRules = followsRules
+    self.age = age

@@ -2,6 +2,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from random import random, uniform, randrange
+from bisect import bisect_left as insertLeft
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
@@ -117,7 +118,8 @@ class Simulation:
         self.params.CELL_SIZE * cellCol + random() / self.params.GRID_SIZE,
         self.params.CELL_SIZE * cellRow + random() / self.params.GRID_SIZE,
         random() < self.params.RULE_COMPLIANCE_RATE,
-        Person.SUSCEPTIBLE
+        Person.SUSCEPTIBLE,
+        insertLeft(self.params.POPULATION_DEMOGRAPHICS, random())
       ))
 
     # There are some people who are exposed at the beginning

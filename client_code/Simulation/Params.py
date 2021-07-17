@@ -78,7 +78,7 @@ class Params:
 
   # Basic model related parameters
   POPULATION_SIZE = 300
-  POPULATION_DEMOGRAPHICS = [0.35, 0.45, 0.15, 0.05]
+  POPULATION_DEMOGRAPHICS = [0.35, 0.8, 0.95, 1]
   SIMULATION_LENGTH = 50
   CONTACT_RADIUS = 0.1
   TIME_PER_FRAME = 0.5
@@ -88,6 +88,7 @@ class Params:
   MAX_MOVEMENT = 0.05
   TRAVEL_RATE = 0.4
   TRAVEL_PROBABILITES = []
+  COMORBIDITY_COEFFICIENTS = [0.5, 0.7, 0.9, 1]
 
   # Intervention related parameters
   RULE_COMPLIANCE_RATE = 0.9
