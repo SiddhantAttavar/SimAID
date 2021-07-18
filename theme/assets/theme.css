@@ -798,3 +798,7 @@ textarea.anvil-component[disabled] {
 https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-material-design-elevations
 */
 
+.anvil-role-background-image {
+  background: url('_/theme/map.png');
+  background-size:contain;
+}

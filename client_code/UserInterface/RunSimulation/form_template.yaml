@@ -17,7 +17,7 @@ components:
     layout_properties: {grid_position: 'RNILPH,KWCHVG'}
     event_bindings: {click: onRunSimulationButtonClick}
   - type: Canvas
-    properties: {role: null, height: '466', tooltip: '', border: '', foreground: '',
+    properties: {role: background-image, height: '466', tooltip: '', border: '', foreground: '',
       visible: true, spacing_above: small, spacing_below: small, background: ''}
     name: canvas
     layout_properties: {grid_position: 'VFAJUZ,WALMOZ'}
