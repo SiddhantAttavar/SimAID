@@ -164,6 +164,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.GRID_SIZE = self.gridSizeSlider.value
+    self.params.CELL_SIZE = 1 / self.params.GRID_SIZE
     self.gridSizeLabel.text = f'Grid Size (1 - 10): {self.gridSizeSlider.value}'
 
   def onInfectionRateChange(self, **event_args):
