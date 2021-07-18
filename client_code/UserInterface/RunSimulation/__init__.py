@@ -82,8 +82,8 @@ class RunSimulation(RunSimulationTemplate):
     '''
     
     # Initialize the canvas with a black, empty background
-    self.canvas.background = 'black'
     self.canvas.clear_rect(0, 0, self.canvasWidth, self.canvasHeight)
+    self.canvas.draw_image(URLMedia('_/theme/map.png'), 0, 0, self.canvasWidth, self.canvasHeight)
     
     # Draw the boxes for the cells
     # First draw the rows
