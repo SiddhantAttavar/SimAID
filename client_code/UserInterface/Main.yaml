@@ -1,4 +1,4 @@
-is_package: true
+is_package: false
 container:
   type: HtmlTemplate
   properties: {html: '@theme:standard-page.html'}

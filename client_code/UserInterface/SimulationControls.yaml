@@ -289,4 +289,4 @@ container:
   properties: {col_widths: '{}'}
   event_bindings: {}
   data_bindings: []
-is_package: true
+is_package: false
