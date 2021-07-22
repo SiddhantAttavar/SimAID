@@ -40,10 +40,26 @@ db_schema:
   id: 143338
   python_name: users
   columns:
+    DR1F9PokRNI=:
+      name: signed_up
+      type: datetime
+      admin_ui: {order: 2, width: 200}
+    J6Ko3OokrkQ=:
+      name: password_hash
+      type: string
+      admin_ui: {order: 3, width: 200}
     PWNEbRYCxws=:
       name: enabled
       type: bool
       admin_ui: {order: 1, width: 100}
+    jaj6_Z5K1HU=:
+      name: last_login
+      type: datetime
+      admin_ui: {order: 4, width: 200}
+    kpI2FcUM3B8=:
+      name: remembered_logins
+      type: simpleObject
+      admin_ui: {order: 5, width: 200}
     sIsza2jtdQY=:
       name: email
       type: string

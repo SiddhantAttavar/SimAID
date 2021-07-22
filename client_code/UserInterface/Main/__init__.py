@@ -1,6 +1,5 @@
 from ._anvil_designer import MainTemplate # type: ignore
 from anvil import *
-import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -42,7 +41,6 @@ class Main(MainTemplate):
     self.simulationControlsForm = SimulationControls()
     self.root.add_component(self.simulationControlsForm, full_width_row = True)		
     
-    # Check if the user is logged in
     if users.get_user() is None:
       self.signInButton.text = 'Login / Signup'
     else:
@@ -94,16 +92,16 @@ class Main(MainTemplate):
     None
     '''
 
-    if users.get_user() is None:
+    if anvil.users.get_user() is None:
       # We have to login the user
-      users.login_with_form()
+      anvil.users.login_with_form()
       
-      if users.get_user() is not None:
+      if anvil.users.get_user() is not None:
         # The user is now logged in
         self.signInButton.text = 'Logout'
     else:
       # The user is logged in and we have to log the user out
-      users.logout()
+      anvil.users.logout()
       self.signInButton.text = 'Login / Signup'
       
       
