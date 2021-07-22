@@ -182,9 +182,28 @@ class RunSimulation(RunSimulationTemplate):
       )
       
       self.canvas.fill()
+      
+  def onCanvasShow(self, **event_args):
+    '''This method is called when the Canvas is shown on the screen
+    
+    Initializes the canvas dimensions
+    
+    Parameters
+    ----------
+    **event_args
+      Details of the canvas
+    
+    Returns
+    -------
+    None
+    '''
+    
+    self.canvasWidth = self.canvas.get_width()
+    self.canvasHeight = self.canvas.get_height()
+    self.canvas.background = 'black'
 
   def onRunSimulationButtonClick(self, **event_args):
-    '''This method is called when the button is clicked
+    '''This method is called when the run simulation button is clicked
     
     Parameters
     ----------
@@ -205,23 +224,18 @@ class RunSimulation(RunSimulationTemplate):
     for frameCount, frame in enumerate(simulation.run()):
       self.drawFrame(frame, frameCount)
       sleep(self.params.TIME_PER_FRAME)
-    
 
-  def onCanvasShow(self, **event_args):
-    '''This method is called when the Canvas is shown on the screen
-    
-    Initializes the canvas dimensions
+  def onSaveSimulationButtonClick(self, **event_args):
+    '''This method is called when the save simulation button is clicked
     
     Parameters
     ----------
     **event_args
-      Details of the canvas
+      Details about how the button is clicked
     
     Returns
     -------
     None
     '''
-    
-    self.canvasWidth = self.canvas.get_width()
-    self.canvasHeight = self.canvas.get_height()
-    self.canvas.background = 'black'
+
+    pass    

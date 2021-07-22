@@ -16,6 +16,14 @@ components:
     name: runSimulationButton
     layout_properties: {grid_position: 'RNILPH,KWCHVG'}
     event_bindings: {click: onRunSimulationButtonClick}
+  - type: Button
+    properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: false,
+      foreground: '', visible: true, text: Save Simulation, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: saveSimulationButton
+    layout_properties: {grid_position: 'RNILPH,TEPOLT'}
+    event_bindings: {click: onSaveSimulationButtonClick}
   - type: Canvas
     properties: {role: background-image, height: '466', tooltip: '', border: '', foreground: '',
       visible: true, spacing_above: small, spacing_below: small, background: ''}
