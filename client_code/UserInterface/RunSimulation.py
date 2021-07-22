@@ -249,7 +249,7 @@ class RunSimulation(RunSimulationTemplate):
 
     # Save the simulation to the database
     row = app_tables.simulations.add_row(
-      anvil.users.get_user(),
-      self.params.__dict__,
-      self.simulationFrames
+      user = anvil.users.get_user().get_id(),
+      params = self.params.__dict__,
+      simulationData = self.simulationData
     )
