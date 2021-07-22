@@ -12,11 +12,11 @@ from ..SimulationControls import SimulationControls
 class Main(MainTemplate):
   '''Class which changes the UI in the main page
   
-  Attributes:
-  -----------
+  Attributes
+  ----------
   
-  Methods:
-  --------
+  Methods
+  -------
   __init__(**properties)
     Initializes the main page
   '''
@@ -24,13 +24,13 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     '''Initializes the main page
     
-    Parameters:
-    -----------
+    Parameters
+    ----------
     **properties
       The UI properties of the page
     
-    Returns:
-    --------
+    Returns
+    -------
     None
     '''
 

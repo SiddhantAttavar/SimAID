@@ -36,6 +36,24 @@ native_deps: {head_html: "<style>\n.box{\n  padding: 10px;\n}\n\ninput[type=\"ra
     \    border-width: 16px 0;\n    border-color: transparent;\n    background: transparent;\n\
     \    cursor: pointer;\n}\n\n\n</style>"}
 db_schema:
+- name: Simulations
+  id: 143341
+  python_name: simulations
+  columns:
+    GT9XSwsWpVM=:
+      name: params
+      type: simpleObject
+      admin_ui: {order: 2, width: 200}
+    SQl35GC_Okk=:
+      name: simulation_data
+      type: simpleObject
+      admin_ui: {order: 3, width: 200}
+    aVANWSZAk3s=:
+      name: user
+      type: string
+      admin_ui: {order: 1, width: 200}
+  access: {python_name: simulations, app_id: NJSPOPJBWLJEXUWD, server: full, client: none,
+    table_mapping_name: null, table_mapping_id: null, table_id: 143341}
 - name: Users
   id: 143338
   python_name: users
