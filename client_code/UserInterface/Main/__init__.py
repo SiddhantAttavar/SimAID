@@ -41,7 +41,7 @@ class Main(MainTemplate):
     self.simulationControlsForm = SimulationControls()
     self.root.add_component(self.simulationControlsForm, full_width_row = True)		
     
-    if users.get_user() is None:
+    if anvil.users.get_user() is None:
       self.signInButton.text = 'Login / Signup'
     else:
       self.signInButton.text = 'Logout'
