@@ -83,7 +83,7 @@ class Utils:
       The column of the generated cell
     '''
 
-    cellNum = insertLeft(params.GRID_PROBABILITIES, random())
+    cellNum = insertLeft(probabilities, random())
     cellRow = cellNum // params.GRID_SIZE
     cellCol = cellNum % params.GRID_SIZE
 
