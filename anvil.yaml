@@ -40,10 +40,14 @@ db_schema:
   id: 143341
   python_name: simulations
   columns:
-    ZC97Lp1Hxyo=:
-      name: id
-      type: number
-      admin_ui: {order: 1, width: 200}
+    GT9XSwsWpVM=:
+      name: params
+      type: simpleObject
+      admin_ui: {order: 2, width: 200}
+    SQl35GC_Okk=:
+      name: simulation_data
+      type: simpleObject
+      admin_ui: {order: 3, width: 200}
     aVANWSZAk3s=:
       name: user
       type: string
