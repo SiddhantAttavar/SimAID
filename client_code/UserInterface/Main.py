@@ -6,8 +6,8 @@ from anvil.tables import app_tables
 import anvil.server
 import anvil.users
 
-from ..RunSimulation import RunSimulation
-from ..SimulationControls import SimulationControls
+from .RunSimulation import RunSimulation
+from .SimulationControls import SimulationControls
 
 class Main(MainTemplate):
   '''Class which changes the UI in the main page
