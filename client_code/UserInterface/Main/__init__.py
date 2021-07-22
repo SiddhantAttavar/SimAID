@@ -1,9 +1,11 @@
 from ._anvil_designer import MainTemplate # type: ignore
 from anvil import *
+import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+import anvil.users
 
 from ..RunSimulation import RunSimulation
 from ..SimulationControls import SimulationControls
@@ -86,14 +88,16 @@ class Main(MainTemplate):
     None
     '''
 
-    if anvil.users.get_user() is None:
+    if users.get_user() is None:
       # We have to login the user
-      anvil.users.login_with_form()
+      users.login_with_form()
       
-      if anvil.users.get_user() is not None:
+      if users.get_user() is not None:
         # The user is now logged in
         self.signInButton.text = 'Logout'
     else:
       # The user is logged in and we have to log the user out
-      anvil.users.logout()
+      users.logout()
       self.signInButton.text = 'Login / Signup'
+      
+      

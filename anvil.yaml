@@ -5,6 +5,10 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {auto_create_missing_columns: false}
+- source: /runtime/services/anvil/users.yml
+  client_config: {allow_signup: false, enable_automatically: true, use_email: true,
+    confirm_email: true}
+  server_config: {user_table: users}
 package_name: Epidemic_Simulator
 allow_embedding: false
 name: Epidemic Simulator
@@ -35,7 +39,49 @@ db_schema:
 - name: Users
   id: 143336
   python_name: users
-  columns: {}
+  columns:
+    mvX99bfOkWE=:
+      name: email
+      type: string
+      admin_ui: {order: 0, width: 200}
   access: {python_name: users, app_id: NJSPOPJBWLJEXUWD, server: full, client: none,
     table_mapping_name: null, table_mapping_id: null, table_id: 143336}
+- name: Users
+  id: 143337
+  python_name: users
+  columns:
+    BNhaz5lQKzo=:
+      name: password_hash
+      type: string
+      admin_ui: {order: 3, width: 200}
+    F+XFcs3Pa54=:
+      name: email_confirmation_key
+      type: string
+      admin_ui: {order: 5, width: 200}
+    I9AoM8Hmuk8=:
+      name: last_login
+      type: datetime
+      admin_ui: {order: 6, width: 200}
+    VV1GrAmeSBA=:
+      name: email
+      type: string
+      admin_ui: {order: 0, width: 200}
+    X4RCCGUhX+4=:
+      name: enabled
+      type: bool
+      admin_ui: {order: 1, width: 200}
+    imhaZ1tF7AQ=:
+      name: confirmed_email
+      type: string
+      admin_ui: {order: 4, width: 200}
+    uXEIX_eH4U8=:
+      name: signed_up
+      type: datetime
+      admin_ui: {order: 2, width: 200}
+    yR7ODKGPoJA=:
+      name: remembered_logins
+      type: simpleObject
+      admin_ui: {order: 7, width: 200}
+  access: {python_name: users, app_id: NJSPOPJBWLJEXUWD, server: full, client: none,
+    table_mapping_name: null, table_mapping_id: null, table_id: 143337}
 renamed: true
