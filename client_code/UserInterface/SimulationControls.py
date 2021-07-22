@@ -23,7 +23,7 @@ class SimulationControls(SimulationControlsTemplate):
   '''
 
   def __init__(self, **properties):
-    '''Initializes the run simulation
+    '''Initializes the simulation controls page
     
     Called when the SimulationControls form is created.
     Sets Form properties and Data Bindings and then

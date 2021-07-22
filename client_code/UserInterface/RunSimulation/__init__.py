@@ -37,7 +37,7 @@ class RunSimulation(RunSimulationTemplate):
   '''
 
   def __init__(self, params = Params(), **properties):
-    '''Initializes the run simulation
+    '''Initializes the run simulation page
     
     Called when the RunSimulation form is created.
     Sets Form properties and Data Bindings and then
