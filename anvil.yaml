@@ -9,12 +9,12 @@ services:
   client_config: {allow_signup: true, enable_automatically: true, use_email: true,
     confirm_email: false, allow_remember_me: true, remember_me_days: 365}
   server_config: {user_table: users}
+startup: {type: form, module: UserInterface.Main}
 package_name: Epidemic_Simulator
 allow_embedding: false
 name: Epidemic Simulator
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
-startup_form: UserInterface.Main
 native_deps: {head_html: "<style>\n.box{\n  padding: 10px;\n}\n\ninput[type=\"range\"\
     ]\n{\n    width: 100%;\n    margin: 0px;\n    padding: 8px 0px;\n    outline:\
     \ none;\n    background-color: transparent;\n    -webkit-appearance: none;\n}\n\
