@@ -12,6 +12,15 @@ components:
   properties: {}
   name: navbar
   layout_properties: {slot: nav-right}
+  components:
+  - type: Button
+    properties: {role: secondary-color, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: SIGN UP / IN, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: signInButton
+    layout_properties: {}
+    event_bindings: {click: onSignInClick}
 - type: Label
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
     text: Epidemic Simulator, font_size: null, font: '', spacing_above: small, icon_align: left,

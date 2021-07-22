@@ -27,3 +27,7 @@ class Main(MainTemplate):
     '''This method is called when the simulation link in the navbar is clicked'''
     self.root.clear()
     self.root.add_component(RunSimulation(params = self.simulationControlsForm.params), full_width_row = True)
+
+  def onSignInClick(self, **event_args):
+    '''This method is called when '''
+
