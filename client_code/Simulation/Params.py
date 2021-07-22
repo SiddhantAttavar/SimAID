@@ -77,47 +77,6 @@ class Params:
     Whether travel restrictions are enabled
   '''
 
-  # Basic model related parameters
-  POPULATION_SIZE = 300
-  POPULATION_DEMOGRAPHICS = [0.35, 0.8, 0.95, 1]
-  SIMULATION_LENGTH = 50
-  CONTACT_RADIUS = 0.1
-  TIME_PER_FRAME = 0.5
-  GRID_SIZE = 3
-  GRID_PROBABILITIES = []
-  CELL_SIZE = 1 / GRID_SIZE
-  MAX_MOVEMENT = 0.05
-  TRAVEL_RATE = 0.4
-  TRAVEL_PROBABILITES = []
-  COMORBIDITY_COEFFICIENTS = [0.5, 0.7, 0.9, 1]
-
-  # Intervention related parameters
-  RULE_COMPLIANCE_RATE = 0.9
-  HOSPITAL_CAPACITY = 0.3
-
-  # State transition related parameters
-  INITIAL_INFECTED = 2
-  INFECTION_RATE = 0.6
-  INCUBATION_PERIOD = 3
-  INFECTION_PERIOD = 10
-  MORTALITY_RATE = 0.3
-  IMMUNITY_PERIOD = 30
-
-  # Vaccination related parameters
-  VACCINATION_ENABLED = False
-  VACCINATION_RATE = 0.01
-
-  # Lockdown related parameters
-  LOCKDOWN_ENABLED = False
-  LOCKDOWN_LEVEL = 0.5
-
-  # Hygiene related parameters
-  HYGIENE_ENABLED = False
-  HYGIENE_RATE = 0.6
-
-  # Travel restrictions related parameters
-  TRAVEL_RESTRICTIONS_ENABLED = False
-
   def __init__(self, **kwargs):
     '''Initializes the parameters.
 
@@ -130,6 +89,47 @@ class Params:
     -------
     None
     '''
+
+    # Basic model related parameters
+    self.POPULATION_SIZE = 300
+    self.POPULATION_DEMOGRAPHICS = [0.35, 0.8, 0.95, 1]
+    self.SIMULATION_LENGTH = 50
+    self.CONTACT_RADIUS = 0.1
+    self.TIME_PER_FRAME = 0.5
+    self.GRID_SIZE = 3
+    self.GRID_PROBABILITIES = []
+    self.CELL_SIZE = 1 / self.GRID_SIZE
+    self.MAX_MOVEMENT = 0.05
+    self.TRAVEL_RATE = 0.4
+    self.TRAVEL_PROBABILITES = []
+    self.COMORBIDITY_COEFFICIENTS = [0.5, 0.7, 0.9, 1]
+
+    # Intervention related parameters
+    self.RULE_COMPLIANCE_RATE = 0.9
+    self.HOSPITAL_CAPACITY = 0.3
+
+    # State transition related parameters
+    self.INITIAL_INFECTED = 2
+    self.INFECTION_RATE = 0.6
+    self.INCUBATION_PERIOD = 3
+    self.INFECTION_PERIOD = 10
+    self.MORTALITY_RATE = 0.3
+    self.IMMUNITY_PERIOD = 30
+
+    # Vaccination related parameters
+    self.VACCINATION_ENABLED = False
+    self.VACCINATION_RATE = 0.01
+
+    # Lockdown related parameters
+    self.LOCKDOWN_ENABLED = False
+    self.LOCKDOWN_LEVEL = 0.5
+
+    # Hygiene related parameters
+    self.HYGIENE_ENABLED = False
+    self.HYGIENE_RATE = 0.6
+
+    # Travel restrictions related parameters
+    self.TRAVEL_RESTRICTIONS_ENABLED = False
 
     # Change the value for each parameter in kwargs from default
     for param, value in kwargs.items():
