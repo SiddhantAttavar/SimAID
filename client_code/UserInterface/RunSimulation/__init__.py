@@ -221,9 +221,14 @@ class RunSimulation(RunSimulationTemplate):
     
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)
+    self.simulationFrames = []
     for frameCount, frame in enumerate(simulation.run()):
+      self.simulationFrames.append(frame)
       self.drawFrame(frame, frameCount)
       sleep(self.params.TIME_PER_FRAME)
+    
+    # Once the simulation is over, allow the user to save it
+    self.saveSimulationButton.enabled = True
 
   def onSaveSimulationButtonClick(self, **event_args):
     '''This method is called when the save simulation button is clicked
@@ -238,4 +243,13 @@ class RunSimulation(RunSimulationTemplate):
     None
     '''
 
-    pass    
+    # Check if the user is signed in
+    if anvil.users.get_user() is None:
+      return
+
+    # Save the simulation to the database
+    row = app_tables.Simulation.add_row(
+      anvil.users.get_user(),
+      self.params.__dict__,
+      self.simulationFrames
+    )
