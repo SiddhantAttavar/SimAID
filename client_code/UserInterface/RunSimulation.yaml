@@ -37,4 +37,4 @@ components:
     layout_properties: {grid_position: 'VFAJUZ,BJWFBJ'}
     event_bindings: {}
   event_bindings: {}
-is_package: true
+is_package: false
