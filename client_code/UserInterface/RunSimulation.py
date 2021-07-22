@@ -130,6 +130,7 @@ class RunSimulation(RunSimulationTemplate):
     self.graph.data = []
     for stateID, stateGroup in enumerate(frame.stateGroups):
       self.graphYData[stateID].append(len(stateGroup))
+      self.simulationData[stateID].append(len(stateGroup))
       figure = go.Scatter(
         x = self.graphXData,
         y = self.graphYData[stateID],
@@ -221,9 +222,8 @@ class RunSimulation(RunSimulationTemplate):
     
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)
-    self.simulationFrames = []
+    self.simulationData = [[] for _ in Person.states]
     for frameCount, frame in enumerate(simulation.run()):
-      self.simulationFrames.append(frame)
       self.drawFrame(frame, frameCount)
       sleep(self.params.TIME_PER_FRAME)
     
@@ -248,7 +248,7 @@ class RunSimulation(RunSimulationTemplate):
       return
 
     # Save the simulation to the database
-    row = app_tables.Simulation.add_row(
+    row = app_tables.simulations.add_row(
       anvil.users.get_user(),
       self.params.__dict__,
       self.simulationFrames
