@@ -26,7 +26,7 @@ class Main(MainTemplate):
     
     Parameters
     ----------
-    **properties
+    **properties : dict
       The UI properties of the page
     
     Returns

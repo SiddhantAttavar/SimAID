@@ -32,7 +32,7 @@ class SimulationControls(SimulationControlsTemplate):
 
     Parameters
     ----------
-    **properties		
+    **properties : dict
       The UI properties of the form
     
     Returns
@@ -40,6 +40,7 @@ class SimulationControls(SimulationControlsTemplate):
     None
     '''
 
+    # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.

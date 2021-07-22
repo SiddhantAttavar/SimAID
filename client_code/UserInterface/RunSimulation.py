@@ -48,7 +48,7 @@ class RunSimulation(RunSimulationTemplate):
     ----------
     params : Params
       The parameters of the simulation
-    **properties
+    **properties : dict
       The UI properties of the form
     
     Returns
@@ -56,6 +56,7 @@ class RunSimulation(RunSimulationTemplate):
     None
     '''
     
+    # Set Form properties and Data Bindings.
     self.init_components(**properties)
     
     # Any code you write here will run when the form opens.
