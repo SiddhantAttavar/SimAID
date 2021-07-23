@@ -46,14 +46,14 @@ db_schema:
       type: simpleObject
       admin_ui: {order: 2, width: 200}
     SQl35GC_Okk=:
-      name: simulation_data
+      name: simulationData
       type: simpleObject
       admin_ui: {order: 3, width: 200}
-    aVANWSZAk3s=:
+    hm2D5Eopomk=:
       name: user
       type: string
-      admin_ui: {order: 1, width: 200}
-  access: {python_name: simulations, app_id: NJSPOPJBWLJEXUWD, server: full, client: none,
+      admin_ui: {order: 0, width: 200}
+  access: {python_name: simulations, app_id: NJSPOPJBWLJEXUWD, server: full, client: full,
     table_mapping_name: null, table_mapping_id: null, table_id: 143341}
 - name: Users
   id: 143338

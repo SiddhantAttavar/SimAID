@@ -16,6 +16,14 @@ components:
     name: runSimulationButton
     layout_properties: {grid_position: 'RNILPH,KWCHVG'}
     event_bindings: {click: onRunSimulationButtonClick}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Cost: ₹0', font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: costLabel
+    layout_properties: {grid_position: 'RNILPH,XAHWQP'}
+    event_bindings: {}
   - type: Button
     properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: false,
       foreground: '', visible: true, text: Save Simulation, font_size: null, font: '',
