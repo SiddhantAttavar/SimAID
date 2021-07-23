@@ -4,6 +4,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from random import random, uniform, randrange
 from bisect import bisect_left as insertLeft
+from copy import deepcopy
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
@@ -19,8 +20,8 @@ class Simulation:
   ----------
   params : Params
     The parameters of the simulation
-  transitions : Transitions
-    The methods for the transitions of the simulation
+  interventionCost : int
+    The total cost of all interventions
 
   Methods
   -------
@@ -48,6 +49,7 @@ class Simulation:
     '''
 
     self.params = params
+    self.interventionCost = 0
 
   def run(self):
     '''Run the simulation.
@@ -158,12 +160,13 @@ class Simulation:
 
     self.movePeople(frame)
 
+    # Run different intervention functions if they are enabled
     if self.params.VACCINATION_ENABLED:
-      Interventions.vaccinate(frame, self.params)
+      self.interventionCost += Interventions.vaccinate(frame, self.params)
     if self.params.LOCKDOWN_ENABLED:
-      Interventions.lockdown(frame, self.params)
+      self.interventionCost += Interventions.lockdown(frame, self.params)
 
-    Transitions.findExposed(frame, self.params)
+    self.interventionCost += Transitions.findExposed(frame, self.params)
     Transitions.findInfected(frame, self.params)
     Transitions.findRecovered(frame, self.params)
     Transitions.findSusceptible(frame, self.params)
@@ -173,9 +176,16 @@ class Simulation:
       for cell in row:
         for person in cell:
           person.framesSinceLastState += 1
+    
+    # Add to hospitalization cost
+    self.interventionCost += round(
+      len(frame.stateGroups[Person.INFECTED.id]) * 
+      self.params.HOSPITALIZATION_COST * 
+      self.params.HOSPITALIZATION_RATE
+    )
 
     res = Frame(frame.grid, self.params)
-    res.isLockedDown = frame.isLockedDown.copy()
+    res.isLockedDown = deepcopy(frame.isLockedDown)
 
     return res
   
@@ -217,27 +227,35 @@ class Simulation:
             # Dead people do not move
             continue
 
-          if (((not person.followsRules or not self.params.TRAVEL_RESTRICTIONS_ENABLED) or 
-              cellsToTravelTo - (not frame.isLockedDown[rowCount][colCount]) > 0) and 
+          # Check if the person can travel
+          if (cellsToTravelTo - (not frame.isLockedDown[rowCount][colCount]) > 0 and 
               random() < self.params.TRAVEL_RATE):
-            # The person is travelling to a different cell
-            cellRow, cellCol = Utils.getRandomCell(
-              self.params, 
-              self.params.TRAVEL_PROBABILITES[rowCount][colCount]
-            )
-            if self.params.TRAVEL_RESTRICTIONS_ENABLED:
-              while frame.isLockedDown[cellCol][cellRow]:
+              if person.followsRules and self.params.TRAVEL_RESTRICTIONS_ENABLED:
+                # The person cannot travel
+                # Update the cost
+                self.interventionCost += self.params.TRAVEL_COST
+                person.isVisiting = False
+              else:
+                # The person can travel
+                person.isVisiting = True
+
+                # The person is travelling to a different cell
                 cellRow, cellCol = Utils.getRandomCell(
                   self.params, 
                   self.params.TRAVEL_PROBABILITES[rowCount][colCount]
                 )
-            
-            frame.visitingGrid[cellRow][cellCol].append(person)
-            person.isVisiting = True
-
-            # Continue to the next cell, because there is no movement
-            continue
+                if self.params.TRAVEL_RESTRICTIONS_ENABLED:
+                  while frame.isLockedDown[cellCol][cellRow]:
+                    cellRow, cellCol = Utils.getRandomCell(
+                      self.params, 
+                      self.params.TRAVEL_PROBABILITES[rowCount][colCount]
+                    )
+                
+                frame.visitingGrid[cellRow][cellCol].append(person)
+                # Continue to the next cell, because there is no movement
+                continue
           else:
+            # The person does not travel
             person.isVisiting = False
 
           # Reset the person's location to home

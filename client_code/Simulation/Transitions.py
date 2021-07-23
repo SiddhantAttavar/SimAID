@@ -38,10 +38,12 @@ class Transitions:
     
     Returns
     -------
-    None
+    int
+      Cost of hygiene measures if enabled
     '''
 
     # Iterate through all cells
+    cost = 0
     for rowCount, row in enumerate(frame.grid):
       for colCount, cell in enumerate(row):
         # Find the people who are susceptible and infected
@@ -78,6 +80,12 @@ class Transitions:
               # The disease spreads to the susceptible person and he becomes exposed
               susceptiblePerson.state = Person.EXPOSED
               susceptiblePerson.framesSinceLastState = 0
+
+              # Add to cost
+              cost += params.HYGIENE_COST
+    
+    # Return cost
+    return cost
 
   @staticmethod
   def findInfected(frame, params):

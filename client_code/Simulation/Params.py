@@ -50,6 +50,10 @@ class Params:
     The percentage of the population that follows rules
   HOSPITALITY_CAPACITY : float
     The percentage of the population that can be supported by hospitals
+  HOSPITALIZATION_RATE : float
+    The percentage of the infected population that is hospitalised
+  HOSPITALIZATION_COST : int
+    The cost of a person being in hospital per person per day
   
   Vaccination Parameters
   ----------------------
@@ -57,6 +61,8 @@ class Params:
     Whether vaccination is enabled
   VACCINATION_RATE : float
     The percentage of suseptible population which gets vaccinated in a day
+  VACCINATION_COST : int
+    The cost of one vaccination
 
   Lockdown Parameters
   ---------------------
@@ -64,6 +70,8 @@ class Params:
     Whether lockdown is enabled
   LOCKDOWN_LEVEL : float
     The percentage of infected population at which lockdown is enabled
+  LOCKDOWN_COST : int
+    The cost of lockdown per person per day
   
   Hygiene measures Parameters
   ---------------------------
@@ -71,11 +79,15 @@ class Params:
     Whether hygiene measures are enabled
   HYGIENE_RATE : float
     Rate by which infection decreases when hygiene measures are enabled
+  HYGIENE_COST : int
+    Cost of implementing hygiene measures
   
   Travel Restrictions Parameters
   ------------------------------
   TRAVEL_RESTRICTIONS_ENABLED : bool
     Whether travel restrictions are enabled
+  TRAVEL_RESTRICTIONS_COST : int
+    Cost of travel restrictions per person who doesnt travel per day
   '''
 
   def __init__(self, **kwargs):
@@ -105,10 +117,6 @@ class Params:
     self.TRAVEL_PROBABILITES = []
     self.COMORBIDITY_COEFFICIENTS = [0.5, 0.7, 0.9, 1]
 
-    # Intervention related parameters
-    self.RULE_COMPLIANCE_RATE = 0.9
-    self.HOSPITAL_CAPACITY = 0.3
-
     # State transition related parameters
     self.INITIAL_INFECTED = 2
     self.INFECTION_RATE = 0.6
@@ -117,20 +125,30 @@ class Params:
     self.MORTALITY_RATE = 0.3
     self.IMMUNITY_PERIOD = 30
 
+    # Intervention related parameters
+    self.RULE_COMPLIANCE_RATE = 0.9
+    self.HOSPITAL_CAPACITY = 0.3
+    self.HOSPITALIZATION_RATE = 5 * self.MORTALITY_RATE
+    self.HOSPITALIZATION_COST = 5000
+
     # Vaccination related parameters
     self.VACCINATION_ENABLED = False
     self.VACCINATION_RATE = 0.01
+    self.VACCINATION_COST = 1000
 
     # Lockdown related parameters
     self.LOCKDOWN_ENABLED = False
     self.LOCKDOWN_LEVEL = 0.5
+    self.LOCKDOWN_COST = 500
 
     # Hygiene related parameters
     self.HYGIENE_ENABLED = False
     self.HYGIENE_RATE = 0.6
+    self.HYGIENE_COST = 100
 
     # Travel restrictions related parameters
     self.TRAVEL_RESTRICTIONS_ENABLED = False
+    self.TRAVEL_RESTRICTIONS_COST = 200
 
     # Change the value for each parameter in kwargs from default
     for param, value in kwargs.items():

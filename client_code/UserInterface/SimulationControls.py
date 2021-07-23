@@ -127,14 +127,14 @@ class SimulationControls(SimulationControlsTemplate):
     None
     '''
     
-    demographicsValues = self.populationSizeSlider.values
+    demographicsValues = self.populationDemographicsSlider.values
     self.params.POPULATION_DEMOGRAPHICS = [demographicsValues[0] / 100]
     self.params.POPULATION_DEMOGRAPHICS.append(1 - sum(self.params.POPULATION_DEMOGRAPHICS))
     self.populationDemographicsLabel.text = f'''Population Demographics: 
     0 - 15: {demographicsValues[0]}
     15 - 45: {demographicsValues[1] - demographicsValues[0]}
     45 - 65: {demographicsValues[2] - demographicsValues[1]}
-    65+: {demographicsValues[3] - demographicsValues[2]}'''
+    65+: {100 - demographicsValues[2]}'''
 
   def onSimulationLengthChange(self, **event_args):
     '''This method is called when the simulation length slider is moved

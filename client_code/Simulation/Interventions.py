@@ -33,16 +33,22 @@ class Interventions:
     
     Returns
     -------
-    None
+    int
+      Cost of the vaccinations and hospitalization   in the frame
     '''
 
     # Iterate through all susceptible people
     # And find out who is vaccinated
+    cost = 0
     for row, col, personCount in frame.stateGroups[Person.SUSCEPTIBLE.id]:
       person = frame.grid[row][col][personCount]
       if random() < params.VACCINATION_RATE:
         person.state = Person.VACCINATED
         person.framesSinceLastState = 0
+        cost += params.VACCINATION_COST
+    
+    # Return cost
+    return cost
   
   @staticmethod
   def lockdown(frame, params):
@@ -57,10 +63,12 @@ class Interventions:
     
     Returns
     -------
-    None
+    cost : int
+      Cost of the lockdown of cells in the frame
     '''
 
     # Iterate through all cells and find out which are under lockdown
+    cost = 0
     for rowCount, row in enumerate(frame.grid):
       for colCount, cell in enumerate(row):
         # Find the number of infected people in the cell
@@ -69,5 +77,14 @@ class Interventions:
           infectedCount += person.state == Person.INFECTED
         
         # Check whether the cell should be under lockdown
-        frame.isLockedDown[rowCount][colCount] = (len(cell) > 0 and 
-                                                  infectedCount / len(cell) >= params.LOCKDOWN_LEVEL)
+        frame.isLockedDown[rowCount][colCount] = (
+          len(cell) > 0 and
+          infectedCount / len(cell) >= params.LOCKDOWN_LEVEL
+        )
+
+        # Add to the cost if the cell is under lockdown
+        if frame.isLockedDown[rowCount][colCount]:
+          cost += params.LOCKDOWN_COST * len(cell)
+    
+    # Return cost
+    return cost
