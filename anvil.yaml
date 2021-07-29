@@ -11,7 +11,7 @@ services:
   server_config: {user_table: users}
 startup: {type: form, module: UserInterface.Main}
 package_name: Epidemic_Simulator
-allow_embedding: false
+allow_embedding: true
 name: Epidemic Simulator
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
