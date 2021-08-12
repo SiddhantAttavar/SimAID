@@ -270,6 +270,7 @@ class Simulation:
 
 if __name__ == '__main__':
   # Only performed when this file is run directly
+  # Used for testing locally
   # Create a simulation object and runs the simulation
   from time import time
 
