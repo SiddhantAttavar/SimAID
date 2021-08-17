@@ -8,7 +8,7 @@ class Params:
   
   Simulation Parameters
   ---------------------
-  POPULATION_SIZE
+  POPULATION_SIZE : int
     The size of the population in the simulation
   POPULATION_DEMOGRAPHICS
     The spread of population amongst different ages
@@ -20,7 +20,7 @@ class Params:
     Time taken per frame
   GRID_SIZE : int
     The number of rows and columns of the grid
-  GRID_PROBABILITIES : list(list(float))
+  GRID_PROBABILITIES : List[List[float]]
     The probability of a person landing in each cell
   CELL_SIZE : float
     The size of the side of each cell
@@ -28,7 +28,7 @@ class Params:
     The maximum distance a person can move in a direction
   TRAVEL_RATE : float
     The probability of a person travelling to another cell
-  TRAVEL_PROBABILITES : list(list(list(list(float))))
+  TRAVEL_PROBABILITES : List[List[List[List[float]]]]
     The list of probabilities of going from one cell to another cell
   
   Pathogen Parameters

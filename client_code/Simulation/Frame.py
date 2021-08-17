@@ -9,13 +9,13 @@ class Frame:
 
   Attributes
   ----------
-  grid : list(list(list(Person)))
+  grid : List[List[List[Person]]]
     list of people in each cell of the grid
-  visitingGrid : list(list(list(Person)))
+  visitingGrid : List[List[List[Person]]]
     list of people in each cell of the grid who are visiting the cell
-  isLockedDown : list(list(bool))
+  isLockedDown : List[List[bool]]
     Whether the cell is under lockdown
-  stateGroupss : list(list(int))
+  stateGroupss : List[List[int]]
     list of indexes of the people in each states
 
   Methods

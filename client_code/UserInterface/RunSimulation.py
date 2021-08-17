@@ -22,9 +22,9 @@ class RunSimulation(RunSimulationTemplate):
     The height of the canvas
   timePerFrame : float
     The number of second each frame is displayed for
-  graphXData : list(int)
+  graphXData : List[int]
     The data in the X axis of the graph
-  graphYData : list(tuple(int))
+  graphYData : List[Tuple[int]]
     The data in the Y axis of the graph
   params : Params
     The parameters of the simulation
