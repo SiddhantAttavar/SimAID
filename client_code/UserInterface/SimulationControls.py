@@ -48,40 +48,40 @@ class SimulationControls(SimulationControlsTemplate):
     self.params = Params()
     
     self.populationSizeSlider.start = self.params.POPULATION_SIZE
-    self.populationSizeLabel.text = f'Population Size (10 - 1000): {self.populationSizeSlider.start}'
+    self.populationSizeLabel.text = f'Population Size (10 - 1000): {self.populationSizeSlider.start} people'
     
     demographicsStart = [round(i * 100) for i in self.params.POPULATION_DEMOGRAPHICS]
     self.populationDemographicsSlider.start = demographicsStart
     self.populationDemographicsSlider.connect = [True, False, True, False]
     self.populationDemographicsLabel.text = f'''Population Demographics: 
-    0 - 15: {demographicsStart[0]}
-    15 - 45: {demographicsStart[1] - demographicsStart[0]}
-    45 - 65: {demographicsStart[2] - demographicsStart[1]}
-    65+: {demographicsStart[3] - demographicsStart[2]}'''
+    0 - 15: {demographicsStart[0]}%
+    15 - 45: {demographicsStart[1] - demographicsStart[0]}%
+    45 - 65: {demographicsStart[2] - demographicsStart[1]}%
+    65+: {demographicsStart[3] - demographicsStart[2]}%'''
     
     self.simulationLengthSlider.start = self.params.SIMULATION_LENGTH
-    self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.start}'
+    self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.start} days'
     
     self.gridSizeSlider.start = self.params.GRID_SIZE
     self.gridSizeLabel.text = f'Grid Size (1 - 10): {self.gridSizeSlider.start}'
     
     self.infectionRateSlider.start = round(self.params.INFECTION_RATE * 100)
-    self.infectionRateLabel.text = f'Infection Rate (1 - 100): {self.infectionRateSlider.start}'
+    self.infectionRateLabel.text = f'Infection Rate (1 - 100): {self.infectionRateSlider.start}%'
   
     self.incubationPeriodSlider.start = self.params.INCUBATION_PERIOD
-    self.incubationPeriodLabel.text = f'Incubation Period (1 - 100): {self.incubationPeriodSlider.start}'
+    self.incubationPeriodLabel.text = f'Incubation Period (1 - 100): {self.incubationPeriodSlider.start} days'
     
     self.infectionPeriodSlider.start = self.params.INFECTION_PERIOD
-    self.infectionPeriodLabel.text = f'Infection Period (1 - 100): {self.infectionPeriodSlider.start}'
+    self.infectionPeriodLabel.text = f'Infection Period (1 - 100): {self.infectionPeriodSlider.start} days'
     
     self.immunityPeriodSlider.start = self.params.IMMUNITY_PERIOD
-    self.immunityPeriodLabel.text = f'Immunity Period (1 - 100): {self.immunityPeriodSlider.start}'
+    self.immunityPeriodLabel.text = f'Immunity Period (1 - 100): {self.immunityPeriodSlider.start} days'
     
     self.mortalityRateSlider.start = round(self.params.MORTALITY_RATE * 100)
-    self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.start}'
+    self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.start}%'
     
     self.ruleComplianceRateSlider.start = round(self.params.RULE_COMPLIANCE_RATE * 100)
-    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.start}'
+    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.start}%'
     
     self.vaccinationSwitch.checked = self.params.VACCINATION_ENABLED
     self.vaccinationRateSlider.visible = self.params.VACCINATION_ENABLED
@@ -96,7 +96,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.travelSwitch.checked = self.params.TRAVEL_RESTRICTIONS_ENABLED
     
     self.hospitalCapacitySlider.start = round(self.params.HOSPITAL_CAPACITY * 100)
-    self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.start}'
+    self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.start}%'
     
   def onPopulationSizeChange(self, **event_args):
     '''This method is called when the population size slider is moved
@@ -112,7 +112,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.POPULATION_SIZE = self.populationSizeSlider.value
-    self.populationSizeLabel.text = f'Population Size (10 - 1000): {self.populationSizeSlider.value}'
+    self.populationSizeLabel.text = f'Population Size (10 - 1000): {self.populationSizeSlider.value} people'
   
   def onPopulationDemographicsChange(self, handle, **event_args):
     '''This method is called when the population demographic sliders are moved
@@ -131,10 +131,10 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.POPULATION_DEMOGRAPHICS = [demographicsValues[0] / 100]
     self.params.POPULATION_DEMOGRAPHICS.append(1 - sum(self.params.POPULATION_DEMOGRAPHICS))
     self.populationDemographicsLabel.text = f'''Population Demographics: 
-    0 - 15: {demographicsValues[0]}
-    15 - 45: {demographicsValues[1] - demographicsValues[0]}
-    45 - 65: {demographicsValues[2] - demographicsValues[1]}
-    65+: {100 - demographicsValues[2]}'''
+    0 - 15: {demographicsValues[0]}%
+    15 - 45: {demographicsValues[1] - demographicsValues[0]}%
+    45 - 65: {demographicsValues[2] - demographicsValues[1]}%
+    65+: {100 - demographicsValues[2]}%'''
 
   def onSimulationLengthChange(self, **event_args):
     '''This method is called when the simulation length slider is moved
@@ -150,7 +150,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
 
     self.params.SIMULATION_LENGTH = self.simulationLengthSlider.value
-    self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.value}'
+    self.simulationLengthLabel.text = f'Simulation Length (10 - 500): {self.simulationLengthSlider.value} days'
   
   def onGridSizeChange(self, handle, **event_args):
     '''This method is called when the grid size slider is moved
@@ -183,7 +183,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
 
     self.params.INFECTION_RATE = self.infectionRateSlider.value / 100
-    self.infectionRateLabel.text = f'Infection Rate (1 - 100): {self.infectionRateSlider.value}'
+    self.infectionRateLabel.text = f'Infection Rate (1 - 100): {self.infectionRateSlider.value}%'
 
   def onIncubationPeriodChange(self, **event_args):
     '''This method is called when the incubation period slider is moved
@@ -199,7 +199,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
 
     self.params.INCUBATION_PERIOD = self.incubationPeriodSlider.value
-    self.incubationPeriodLabel.text = f'Incubation Period (1 - 100): {self.incubationPeriodSlider.value}'
+    self.incubationPeriodLabel.text = f'Incubation Period (1 - 100): {self.incubationPeriodSlider.value} days'
 
   def onInfectionPeriodChange(self, **event_args):
     '''This method is called when the infection period slider is moved
@@ -215,7 +215,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
 
     self.params.INFECTION_PERIOD = self.infectionPeriodSlider.value
-    self.infectionPeriodLabel.text = f'Infection Period (1 - 100): {self.infectionPeriodSlider.value}'
+    self.infectionPeriodLabel.text = f'Infection Period (1 - 100): {self.infectionPeriodSlider.value} days'
     
   def onImmunityPeriodChange(self, handle, **event_args):
     '''This method is called when the immunity period slider is moved
@@ -231,7 +231,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.IMMUNITY_PERIOD = self.immunityPeriodSlider.value
-    self.immunityPeriodLabel.text = f'Immunity Period (1 - 100): {self.immunityPeriodSlider.value}'
+    self.immunityPeriodLabel.text = f'Immunity Period (1 - 100): {self.immunityPeriodSlider.value} days'
 
   def onMortalityRateChange(self, **event_args):
     '''This method is called when the mortality rate slider is moved
@@ -247,7 +247,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.INFECTION_RATE = self.mortalityRateSlider.value / 100
-    self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.value}'
+    self.mortalityRateLabel.text = f'Mortality Rate (1 - 100): {self.mortalityRateSlider.value}%'
     
   def onRuleComplianceRateChange(self, handle, **event_args):
     '''"This method is called when the rule compliance rate slider is moved
@@ -263,7 +263,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.RULE_COMPLIANCE_RATE = self.ruleComplianceRateSlider.value / 100
-    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.value}'
+    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate (0 - 100): {self.ruleComplianceRateSlider.value}%'
     
   def onVaccinationChange(self, **event_args):
     '''This method is called when the vaccination switch is checked or unchecked
@@ -281,7 +281,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.VACCINATION_ENABLED = self.vaccinationSwitch.checked
     self.vaccinationRateSlider.visible = self.params.VACCINATION_ENABLED
     if self.params.VACCINATION_ENABLED:
-      self.vaccinationLabel.text = f'Vaccination Rate (5 - 50): {self.vaccinationRateSlider.value}'
+      self.vaccinationLabel.text = f'Vaccination Rate (5 - 50): {self.vaccinationRateSlider.value}%'
     else:
       self.vaccinationLabel.text = 'Vaccination: '
     
@@ -299,7 +299,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.VACCINATION_RATE = self.vaccinationRateSlider.value / 30 / 100
-    self.vaccinationLabel.text = f'Vaccination Rate (5 - 50): {self.vaccinationRateSlider.value}'
+    self.vaccinationLabel.text = f'Vaccination Rate (5 - 50): {self.vaccinationRateSlider.value}%'
 
   def onLockdownChange(self, **event_args):
     '''This method is called when the lockdown switch is checked or unchecked
@@ -317,7 +317,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.LOCKDOWN_ENABLED = self.lockdownSwitch.checked
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     if self.params.LOCKDOWN_ENABLED:
-      self.lockdownLabel.text = f'Lockdown Level (0 - 100): {self.lockdownSlider.value}'
+      self.lockdownLabel.text = f'Lockdown Level (0 - 100): {self.lockdownSlider.value}%'
     else:
       self.lockdownLabel.text = 'Lockdown: '
 
@@ -335,7 +335,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.LOCKDOWN_LEVEL = self.lockdownSlider.value / 100
-    self.lockdownLabel.text = f'Lockdown Rate (0 - 100): {self.lockdownSlider.value}'
+    self.lockdownLabel.text = f'Lockdown Rate (0 - 100): {self.lockdownSlider.value}%'
 
   def onHygieneChange(self, **event_args):
     '''This method is called when the hygiene switch is checked or unchecked
@@ -366,7 +366,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''
 
     self.params.HOSPITAL_CAPACITY = self.hospitalCapacitySlider.value / 100
-    self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.value}'
+    self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.value}%'
     
 
   def onTravelRestrictionsChange(self, **event_args):
