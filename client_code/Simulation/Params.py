@@ -113,7 +113,7 @@ class Params:
     self.GRID_PROBABILITIES = []
     self.CELL_SIZE = 1 / self.GRID_SIZE
     self.MAX_MOVEMENT = 0.05
-    self.TRAVEL_RATE = 0.4
+    self.TRAVEL_RATE = 0.2
     self.TRAVEL_PROBABILITES = []
     self.COMORBIDITY_COEFFICIENTS = [0.5, 0.7, 0.9, 1]
 

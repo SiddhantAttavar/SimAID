@@ -212,7 +212,7 @@ class Simulation:
         frame.visitingGrid[rowCount][colCount].clear()
     
     # Find the number of cells not under lockdown
-    cellsToTravelTo = sum(sum(row) for row in frame.isLockedDown)
+    cellsToTravelTo = sum(len(row) - sum(row) for row in frame.isLockedDown)
 
     # Iterate through all cells
     for rowCount, row in enumerate(frame.grid):
@@ -255,13 +255,16 @@ class Simulation:
                       self.params.TRAVEL_PROBABILITES[rowCount][colCount]
                     )
                 
+                # Move the person to a random position in the new cell
                 frame.visitingGrid[cellRow][cellCol].append(person)
+                person.x = uniform(xMin, xMax)
+                person.y = uniform(yMin, yMax)
+
                 # Continue to the next cell, because there is no movement
                 continue
           else:
             # The person does not travel
             person.isVisiting = False
-
           # Reset the person's location to home
           person.x, person.y = person.home
 
