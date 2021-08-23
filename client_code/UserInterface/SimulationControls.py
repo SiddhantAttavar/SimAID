@@ -98,6 +98,9 @@ class SimulationControls(SimulationControlsTemplate):
     self.hospitalCapacitySlider.start = round(self.params.HOSPITAL_CAPACITY * 100)
     self.hospitalCapacityLabel.text = f'Hospital Capacity (0 - 100): {self.hospitalCapacitySlider.start}%'
     
+    self.hospitalzationCostSlider.start = self.params.HOSPITALIZATION_COST
+    self.hospitalzationCostSlider.text = f'Hospitalization Cost (0 - 1,00,000)'
+    
   def onPopulationSizeChange(self, **event_args):
     '''This method is called when the population size slider is moved
     
