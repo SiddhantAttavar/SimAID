@@ -222,6 +222,15 @@ components:
       name: vaccinationRateSlider
       layout_properties: {grid_position: 'LIYMDL,TCFOYM'}
       event_bindings: {slide: onVaccinationRateChange}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 500, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '100',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 50}
+      name: vaccinationCostSlider
+      layout_properties: {grid_position: 'DNPITR,PQKWEQ'}
+      event_bindings: {}
     - type: Label
       properties: {role: null, align: left, tooltip: Percentage of infected population at which the cell is locked down,
         border: '', foreground: '', visible: true, text: 'Lockdown: ', font_size: null,
@@ -229,6 +238,7 @@ components:
         background: '', bold: false, underline: false, icon: ''}
       name: lockdownLabel
       layout_properties: {grid_position: 'PLSWUO,UPQTNJ'}
+      event_bindings: {}
     - type: form:C6ZZPAPN4YYF5NVJ:Switch
       properties: {}
       name: lockdownSwitch
