@@ -227,8 +227,7 @@ class RunSimulation(RunSimulationTemplate):
       self.simulationFrames.append(frame)
       self.drawFrame(frame, frameCount)
       sleep(self.params.TIME_PER_FRAME)
-      #self.costLabel.text = f'Cost: ₹{simulation.interventionCost}' # Remove for now
-      self.costLabel.text = ''
+      self.costLabel.text = f'Cost: ₹{simulation.interventionCost}'
     
     # Once the simulation is over, allow the user to save it
     self.saveSimulationButton.enabled = True
