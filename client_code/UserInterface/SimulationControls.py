@@ -52,7 +52,6 @@ class SimulationControls(SimulationControlsTemplate):
     self.populationSizeLabel.text = f'Population Size: {self.populationSizeSlider.start} people'
     demographicsStart = [round(i * 100) for i in self.params.POPULATION_DEMOGRAPHICS]
     self.populationDemographicsSlider.start = demographicsStart
-    self.populationDemographicsSlider.connect = [True, False, True, False]
     self.populationDemographicsLabel.text = f'''Population Demographics: 
     0 - 15: {demographicsStart[0]}%
     15 - 45: {demographicsStart[1] - demographicsStart[0]}%
@@ -70,18 +69,18 @@ class SimulationControls(SimulationControlsTemplate):
     # Infection rate UI initialization
     self.infectionRateSlider.start = round(self.params.INFECTION_RATE * 100)
     self.infectionRateLabel.text = f'Infection Rate: {self.infectionRateSlider.start}%'
-  
-    # Incubation period UI initialization
-    self.incubationPeriodSlider.start = self.params.INCUBATION_PERIOD
-    self.incubationPeriodLabel.text = f'Incubation Period: {self.incubationPeriodSlider.start} days'
     
-    # Infection period UI initialization
-    self.infectionPeriodSlider.start = self.params.INFECTION_PERIOD
-    self.infectionPeriodLabel.text = f'Infection Period: {self.infectionPeriodSlider.start} days'
-    
-    # Immunity period UI initialization
-    self.immunityPeriodSlider.start = self.params.IMMUNITY_PERIOD
-    self.immunityPeriodLabel.text = f'Immunity Period: {self.immunityPeriodSlider.start} days'
+    # Disease timeline parameters UI initialization
+    self.diseaseTimelineSlider.max = self.simulationLengthSlider.start
+    self.diseaseTimelineSlider.start = [
+      self.params.INCUBATION_PERIOD,
+      self.params.INCUBATION_PERIOD + self.params.INFECTION_PERIOD,
+      self.params.INCUBATION_PERIOD + self.params.INFECTION_PERIOD + self.params.IMMUNITY_PERIOD
+    ]
+    self.diseaseTimelineLabel.text = f'''Disease Timeline: 
+    Incubation Period: {self.params.INCUBATION_PERIOD} days
+    Infection Period: {self.params.INFECTION_PERIOD} days
+    Immunity Period: {self.params.IMMUNITY_PERIOD} days'''
     
     # Morality rate UI initialization
     self.mortalityRateSlider.start = round(self.params.MORTALITY_RATE * 100)
@@ -142,6 +141,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the simulation length slider is moved'''
 
     self.params.SIMULATION_LENGTH = self.simulationLengthSlider.value
+    self.diseaseTimelineSlider.max = self.params.SIMULATION_LENGTH
     self.simulationLengthLabel.text = f'Simulation Length: {self.simulationLengthSlider.value} days'
   
   def onGridSizeChange(self, handle, **event_args):
@@ -156,25 +156,19 @@ class SimulationControls(SimulationControlsTemplate):
 
     self.params.INFECTION_RATE = self.infectionRateSlider.value / 100
     self.infectionRateLabel.text = f'Infection Rate: {self.infectionRateSlider.value}%'
-
-  def onIncubationPeriodChange(self, **event_args):
-    '''This method is called when the incubation period slider is moved'''
-
-    self.params.INCUBATION_PERIOD = self.incubationPeriodSlider.value
-    self.incubationPeriodLabel.text = f'Incubation Period: {self.incubationPeriodSlider.value} days'
-
-  def onInfectionPeriodChange(self, **event_args):
-    '''This method is called when the infection period slider is moved'''
-
-    self.params.INFECTION_PERIOD = self.infectionPeriodSlider.value
-    self.infectionPeriodLabel.text = f'Infection Period: {self.infectionPeriodSlider.value} days'
     
-  def onImmunityPeriodChange(self, handle, **event_args):
-    '''This method is called when the immunity period slider is moved'''
+  def onDiseaseTimelineChange(self, **event_args):
+    '''This method is called when the disease timline sliders are moved'''
     
-    self.params.IMMUNITY_PERIOD = self.immunityPeriodSlider.value
-    self.immunityPeriodLabel.text = f'Immunity Period: {self.immunityPeriodSlider.value} days'
-
+    timeline = self.diseaseTimelineSlider.values
+    self.params.INCUBATION_PERIOD = max(1, timeline[0])
+    self.params.INFECTION_PERIOD = max(1, timeline[1] - timeline[0])
+    self.params.IMMUNITY_PERIOD = max(1, timeline[2] - timeline[1])
+    self.diseaseTimelineLabel.text = f'''Disease Timeline: 
+    Incubation Period: {self.params.INCUBATION_PERIOD} days
+    Infection Period: {self.params.INFECTION_PERIOD} days
+    Immunity Period: {self.params.IMMUNITY_PERIOD} days'''
+  
   def onMortalityRateChange(self, **event_args):
     '''This method is called when the mortality rate slider is moved'''
     

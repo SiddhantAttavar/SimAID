@@ -40,6 +40,7 @@ components:
         underline: false, icon: ''}
       name: populationDemographicsLabel
       layout_properties: {grid_position: 'GAJZWU,GCNCUW'}
+      event_bindings: {}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
@@ -58,7 +59,7 @@ components:
       layout_properties: {grid_position: 'DZOKOU,XFCTEM'}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 10, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 500, padding: '', enabled: true, pips_density: null,
+        pips: false, pips_values: '', max: 250, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 10}
@@ -110,60 +111,13 @@ components:
       layout_properties: {grid_position: 'SSSBAX,IAUUHJ'}
       event_bindings: {slide: onInfectionRateChange}
     - type: Label
-      properties: {role: null, align: left, tooltip: Period before person shows symptoms,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: incubationPeriodLabel
-      layout_properties: {grid_position: 'VFIPRO,WQOBPG'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
-      name: incubationPeriodSlider
-      layout_properties: {grid_position: 'XIYAPI,NVLASM'}
-      event_bindings: {slide: onIncubationPeriodChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Period during which the person shows symptoms,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: infectionPeriodLabel
-      layout_properties: {grid_position: 'GGYEGB,XFHMFH'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
-      name: infectionPeriodSlider
-      layout_properties: {grid_position: 'RCWNKO,BUQGWG'}
-      event_bindings: {slide: onInfectionPeriodChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Period before recovered person loses immunity,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: immunityPeriodLabel
-      layout_properties: {grid_position: 'DWELXR,BWDMMW'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
-      name: immunityPeriodSlider
-      layout_properties: {grid_position: 'MRXSLD,ONDKLN'}
-      event_bindings: {slide: onImmunityPeriodChange}
-    - type: Label
       properties: {role: null, align: left, tooltip: Chance of infected person dying from disease,
         border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: false, underline: false, icon: ''}
       name: mortalityRateLabel
-      layout_properties: {grid_position: 'JBIBGC,TLRSSO'}
+      layout_properties: {grid_position: 'EYJUCM,TZBNSI'}
+      event_bindings: {}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
@@ -171,8 +125,23 @@ components:
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
         step: 5}
       name: mortalityRateSlider
-      layout_properties: {grid_position: 'VDPOMI,HUZNWD'}
+      layout_properties: {grid_position: 'OWBHSA,HSZLIZ'}
       event_bindings: {slide: onMortalityRateChange}
+    - type: Label
+      properties: {}
+      name: diseaseTimelineLabel
+      layout_properties: {grid_position: 'PZHWKY,IYDSSN'}
+      event_bindings: {}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 500, padding: '', enabled: true, pips_density: null,
+        limit: '', animate: true, visible: true, connect: 'True, True, True, False',
+        start: '0, 0, 0', behaviour: tap, spacing_above: small, spacing_below: small,
+        color: null, format: .2f, step: 1}
+      name: diseaseTimelineSlider
+      layout_properties: {grid_position: 'MKRLCU,RPKSGX'}
+      event_bindings: {slide: onDiseaseTimelineChange}
+    event_bindings: {}
   - type: ColumnPanel
     properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15,"KVEXYP":45,"MTEOIO":15}'}
     name: interventionControlsColumnPanel
