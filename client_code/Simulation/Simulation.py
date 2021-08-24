@@ -237,7 +237,7 @@ class Simulation:
               if person.followsRules and self.params.TRAVEL_RESTRICTIONS_ENABLED:
                 # The person cannot travel
                 # Update the cost
-                self.interventionCost += self.params.TRAVEL_COST
+                self.interventionCost += self.params.TRAVEL_RESTRICTIONS_COST
                 person.isVisiting = False
               else:
                 # The person can travel

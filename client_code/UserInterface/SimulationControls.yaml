@@ -43,7 +43,7 @@ components:
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: '', animate: true, visible: true, connect: 'True, False, True, False',
+        limit: '', animate: true, visible: true, connect: 'True, True, True, True',
         start: '0, 0, 0', behaviour: tap, spacing_above: small, spacing_below: small,
         color: null, format: .2f, step: 5}
       name: populationDemographicsSlider
@@ -224,13 +224,13 @@ components:
       event_bindings: {slide: onVaccinationRateChange}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 500, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '100',
+        pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 50}
+        step: 100}
       name: vaccinationCostSlider
       layout_properties: {grid_position: 'DNPITR,PQKWEQ'}
-      event_bindings: {}
+      event_bindings: {slide: onVaccinationCostChange}
     - type: Label
       properties: {role: null, align: left, tooltip: Percentage of infected population at which the cell is locked down,
         border: '', foreground: '', visible: true, text: 'Lockdown: ', font_size: null,
@@ -253,6 +253,15 @@ components:
       name: lockdownSlider
       layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
       event_bindings: {slide: onLockdownLevelChange}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 100}
+      name: lockdownCostSlider
+      layout_properties: {grid_position: 'SJOBZE,OLNIKZ'}
+      event_bindings: {slide: onLockdownCostChange}
     - type: Label
       properties: {role: null, align: left, tooltip: Reduces the chance of infection,
         border: '', foreground: '', visible: true, text: 'Hygiene Measures: ', font_size: null,
@@ -260,11 +269,21 @@ components:
         background: '', bold: false, underline: false, icon: ''}
       name: hygieneLabel
       layout_properties: {grid_position: 'RBBXOB,IBMFAV'}
+      event_bindings: {}
     - type: form:C6ZZPAPN4YYF5NVJ:Switch
       properties: {}
       name: hygieneSwitch
       layout_properties: {grid_position: 'RBBXOB,VHAZKC'}
       event_bindings: {change: onHygieneChange}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 50}
+      name: hygieneCostSlider
+      layout_properties: {grid_position: 'GHZZUH,WAAXJQ'}
+      event_bindings: {slide: onHygieneCostChange}
     - type: Label
       properties: {role: null, align: left, tooltip: Restricts travel to and from locked down regions,
         border: '', foreground: '', visible: true, text: Travel Restrictions, font_size: null,
@@ -278,6 +297,15 @@ components:
       name: travelSwitch
       layout_properties: {grid_position: 'DGQYQP,MTEOIO'}
       event_bindings: {change: onTravelRestrictionsChange}
+    - type: form:C6ZZPAPN4YYF5NVJ:Slider
+      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+        pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+        step: 50}
+      name: travelRestrictionsCostSlider
+      layout_properties: {grid_position: 'HSLFPJ,QRNBOA'}
+      event_bindings: {slide: onTravelRestrictionsCostChange}
     - type: Label
       properties: {role: null, align: left, tooltip: Percentage of the population that hospitals can handle at a time,
         border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
@@ -285,6 +313,7 @@ components:
         background: '', bold: false, underline: false, icon: ''}
       name: hospitalCapacityLabel
       layout_properties: {grid_position: 'FFCXSN,HOCYDB'}
+      event_bindings: {}
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
@@ -297,12 +326,12 @@ components:
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100000, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '1000',
+        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 100}
-      name: hospitalzationCostSlider
+        step: 1000}
+      name: hospitalizationCostSlider
       layout_properties: {grid_position: 'ILRKGG,GKAOCW'}
-      event_bindings: {change: onHospitalizationCostChange}
+      event_bindings: {slide: onHospitalizationCostChange}
     event_bindings: {}
   event_bindings: {}
 container:
