@@ -8,6 +8,7 @@ import anvil.users
 
 from .RunSimulation import RunSimulation
 from .SimulationControls import SimulationControls
+from .LoadSimulation import LoadSimulation
 
 class Main(MainTemplate):
   '''Class which changes the UI in the main page
@@ -60,7 +61,6 @@ class Main(MainTemplate):
     '''
 
     self.root.clear()
-    self.simulationControlsForm = SimulationControls()
     self.root.add_component(self.simulationControlsForm, full_width_row = True)
 
   def onRunSimulationLinkClick(self, **event_args):
@@ -78,6 +78,22 @@ class Main(MainTemplate):
 
     self.root.clear()
     self.root.add_component(RunSimulation(params = self.simulationControlsForm.params), full_width_row = True)
+
+  def onLoadSimulationLinkClick(self, **event_args):
+    '''This method is called when the load simulation link in the navbar is clicked
+    
+    Parameters
+    ----------
+    **event_args
+      Details about how the slider is moved
+    
+    Returns
+    -------
+    None
+    '''
+    
+    self.root.clear()
+    self.root.add_component(LoadSimulation(), full_width_row = True)
 
   def onSignInClick(self, **event_args):
     '''This method is called when the sign in button is clicked
@@ -103,5 +119,3 @@ class Main(MainTemplate):
       # The user is logged in and we have to log the user out
       anvil.users.logout()
       self.signInButton.text = 'Login / Signup'
-      
-      

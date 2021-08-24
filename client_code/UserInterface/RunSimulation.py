@@ -250,7 +250,7 @@ class RunSimulation(RunSimulationTemplate):
       return
 
     # Save the simulation to the database
-    row = app_tables.Simulation.add_row(
+    row = app_tables.simulations.add_row(
       anvil.users.get_user(),
       self.params.__dict__,
       self.simulationFrames
