@@ -386,4 +386,3 @@ class SimulationControls(SimulationControlsTemplate):
     '''
     
     self.params.TRAVEL_RESTRICTIONS_ENABLED = self.travelSwitch.checked
-    

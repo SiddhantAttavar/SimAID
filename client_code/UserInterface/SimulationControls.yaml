@@ -302,7 +302,7 @@ components:
         step: 100}
       name: hospitalzationCostSlider
       layout_properties: {grid_position: 'ILRKGG,GKAOCW'}
-      event_bindings: {}
+      event_bindings: {change: onHospitalizationCostChange}
     event_bindings: {}
   event_bindings: {}
 container:
