@@ -46,7 +46,7 @@ components:
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
         limit: '', animate: true, visible: true, connect: 'True, True, True, True',
         start: '0, 0, 0', behaviour: tap, spacing_above: small, spacing_below: small,
-        color: null, format: .2f, step: 5}
+        color: null, format: .2f, step: 1}
       name: populationDemographicsSlider
       layout_properties: {grid_position: 'ORHTKA,DVPMQR'}
       event_bindings: {slide: onPopulationDemographicsChange}
@@ -62,7 +62,7 @@ components:
         pips: false, pips_values: '', max: 250, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 10}
+        step: 1}
       name: simulationLengthSlider
       layout_properties: {grid_position: 'BCEXCV,IANVID'}
       event_bindings: {slide: onSimulationLengthChange}
@@ -106,7 +106,7 @@ components:
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
+        step: 1}
       name: infectionRateSlider
       layout_properties: {grid_position: 'SSSBAX,IAUUHJ'}
       event_bindings: {slide: onInfectionRateChange}
@@ -123,7 +123,7 @@ components:
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
+        step: 1}
       name: mortalityRateSlider
       layout_properties: {grid_position: 'OWBHSA,HSZLIZ'}
       event_bindings: {slide: onMortalityRateChange}
@@ -166,7 +166,7 @@ components:
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
+        step: 1}
       name: ruleComplianceRateSlider
       layout_properties: {grid_position: 'ZYKONC,RXGEGX'}
       event_bindings: {slide: onRuleComplianceRateChange}
@@ -187,7 +187,7 @@ components:
         pips: false, pips_values: '', max: 50, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '5',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
+        step: 1}
       name: vaccinationRateSlider
       layout_properties: {grid_position: 'LIYMDL,TCFOYM'}
       event_bindings: {slide: onVaccinationRateChange}
@@ -196,7 +196,7 @@ components:
         pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 100}
+        step: 50}
       name: vaccinationCostSlider
       layout_properties: {grid_position: 'DNPITR,PQKWEQ'}
       event_bindings: {slide: onVaccinationCostChange}
@@ -218,7 +218,7 @@ components:
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
+        step: 1}
       name: lockdownSlider
       layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
       event_bindings: {slide: onLockdownLevelChange}
@@ -227,7 +227,7 @@ components:
         pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 100}
+        step: 50}
       name: lockdownCostSlider
       layout_properties: {grid_position: 'SJOBZE,OLNIKZ'}
       event_bindings: {slide: onLockdownCostChange}
@@ -249,7 +249,7 @@ components:
         pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 50}
+        step: 10}
       name: hygieneCostSlider
       layout_properties: {grid_position: 'GHZZUH,WAAXJQ'}
       event_bindings: {slide: onHygieneCostChange}
@@ -288,7 +288,7 @@ components:
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
         limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
         behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 5}
+        step: 1}
       name: hospitalCapacitySlider
       layout_properties: {grid_position: 'GFVBTF,CPCRYT'}
       event_bindings: {slide: onHospitalityRateChange}

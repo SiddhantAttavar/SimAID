@@ -67,6 +67,10 @@ db_schema:
       name: password_hash
       type: string
       admin_ui: {order: 3, width: 200}
+    JACiNVlaZQY=:
+      name: n_password_failures
+      type: number
+      admin_ui: {order: 6, width: 200}
     PWNEbRYCxws=:
       name: enabled
       type: bool
