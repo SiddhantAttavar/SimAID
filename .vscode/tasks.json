@@ -6,7 +6,12 @@
         {
             "label": "Start App Server",
             "type": "shell",
-            "command": "anvil-app-server --app ${workspaceFolder} --dep-id C6ZZPAPN4YYF5NVJ=Anvil_Extras --auto-migrate"
+            "command": "anvil-app-server --app ${workspaceFolder} --dep-id C6ZZPAPN4YYF5NVJ=Anvil_Extras --auto-migrate",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
