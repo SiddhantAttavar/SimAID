@@ -130,6 +130,10 @@ class RunSimulation(RunSimulationTemplate):
     self.graphXData.append(frameCount)
     self.graph.data = []
     for stateID, stateGroup in enumerate(frame.stateGroups):
+      if stateID == Person.VACCINATED.id and not self.params.VACCINATION_ENABLED:
+        # No need to show vaccination group if vaccination is not enabled
+        continue
+
       self.graphYData[stateID].append(len(stateGroup))
       figure = go.Scatter(
         x = self.graphXData,
