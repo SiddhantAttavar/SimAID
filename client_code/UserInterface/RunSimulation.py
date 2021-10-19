@@ -226,6 +226,7 @@ class RunSimulation(RunSimulationTemplate):
     
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)
+    print(self.params.TRAVEL_PROBABILITES)
     self.simulationFrames = []
     for frameCount, frame in enumerate(simulation.run()):
       self.simulationFrames.append(frame)
