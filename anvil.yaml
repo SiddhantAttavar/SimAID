@@ -37,56 +37,44 @@ native_deps: {head_html: "<style>\n.box{\n  padding: 10px;\n}\n\ninput[type=\"ra
     \    border-width: 16px 0;\n    border-color: transparent;\n    background: transparent;\n\
     \    cursor: pointer;\n}\n\n\n</style>"}
 db_schema:
-- name: Simulations
-  id: 143341
-  python_name: simulations
-  columns:
-    GT9XSwsWpVM=:
-      name: params
-      type: simpleObject
-      admin_ui: {order: 2, width: 200}
-    SQl35GC_Okk=:
-      name: simulationData
-      type: simpleObject
-      admin_ui: {order: 3, width: 200}
-    hm2D5Eopomk=:
-      name: user
+  users:
+    title: Users
+    client: none
+    server: full
+    columns:
+    - name: email
+      admin_ui: {width: 200}
       type: string
-      admin_ui: {order: 0, width: 200}
-  access: {python_name: simulations, app_id: NJSPOPJBWLJEXUWD, server: full, client: full,
-    table_mapping_name: null, table_mapping_id: null, table_id: 143341}
-- name: Users
-  id: 143338
-  python_name: users
-  columns:
-    DR1F9PokRNI=:
-      name: signed_up
-      type: datetime
-      admin_ui: {order: 2, width: 200}
-    J6Ko3OokrkQ=:
-      name: password_hash
-      type: string
-      admin_ui: {order: 3, width: 200}
-    JACiNVlaZQY=:
-      name: n_password_failures
-      type: number
-      admin_ui: {order: 6, width: 200}
-    PWNEbRYCxws=:
-      name: enabled
+    - name: enabled
+      admin_ui: {width: 100}
       type: bool
-      admin_ui: {order: 1, width: 100}
-    jaj6_Z5K1HU=:
-      name: last_login
+    - name: signed_up
+      admin_ui: {width: 200}
       type: datetime
-      admin_ui: {order: 4, width: 200}
-    kpI2FcUM3B8=:
-      name: remembered_logins
-      type: simpleObject
-      admin_ui: {order: 5, width: 200}
-    sIsza2jtdQY=:
-      name: email
+    - name: password_hash
+      admin_ui: {width: 200}
       type: string
-      admin_ui: {order: 0, width: 200}
-  access: {python_name: users, app_id: NJSPOPJBWLJEXUWD, server: full, client: none,
-    table_mapping_name: null, table_mapping_id: null, table_id: 143338}
+    - name: last_login
+      admin_ui: {width: 200}
+      type: datetime
+    - name: remembered_logins
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: n_password_failures
+      admin_ui: {width: 200}
+      type: number
+  simulations:
+    title: Simulations
+    client: full
+    server: full
+    columns:
+    - name: user
+      admin_ui: {width: 200}
+      type: string
+    - name: params
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: simulationData
+      admin_ui: {width: 200}
+      type: simpleObject
 renamed: true
