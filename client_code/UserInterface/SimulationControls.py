@@ -117,7 +117,7 @@ class SimulationControls(SimulationControlsTemplate):
     # Hospital parameters UI initialization
     self.hospitalCapacitySlider.start = round(self.params.HOSPITAL_CAPACITY * 100)
     self.hospitalizationCostSlider.start = self.params.HOSPITALIZATION_COST
-    self.hospitalCapacityLabel.text = f'Hospital Capacity: {self.hospitalCapacitySlider.start}%, Cost: ₹{self.hospitalizationCostSlider.start}'
+    self.hospitalCapacityLabel.text = f'Hospital Capacity: {self.hospitalCapacitySlider.start}%, Cost: Rs. {self.hospitalizationCostSlider.start}'
     
   def onPopulationSizeChange(self, **event_args):
     '''This method is called when the population size slider is moved'''
@@ -188,7 +188,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.vaccinationRateSlider.visible = self.params.VACCINATION_ENABLED
     self.vaccinationCostSlider.visible = self.params.VACCINATION_ENABLED
     if self.params.VACCINATION_ENABLED:
-      self.vaccinationLabel.text = f'Vaccination Rate: {self.vaccinationRateSlider.value}%, Cost: ₹{self.vaccinationCostSlider.value}'
+      self.vaccinationLabel.text = f'Vaccination Rate: {self.vaccinationRateSlider.value}%, Cost: Rs. {self.vaccinationCostSlider.value}'
     else:
       self.vaccinationLabel.text = 'Vaccination: '
     
@@ -196,13 +196,13 @@ class SimulationControls(SimulationControlsTemplate):
     '''"This method is called when the vaccination rate slider is moved'''
     
     self.params.VACCINATION_RATE = self.vaccinationRateSlider.value / 30 / 100
-    self.vaccinationLabel.text = f'Vaccination Rate: {self.vaccinationRateSlider.value}%, Cost: ₹{self.vaccinationCostSlider.value}'
+    self.vaccinationLabel.text = f'Vaccination Rate: {self.vaccinationRateSlider.value}%, Cost: Rs. {self.vaccinationCostSlider.value}'
     
   def onVaccinationCostChange(self, handle, **event_args):
     '''"This method is called when the vaccination cost slider is moved'''
     
     self.params.VACCINATION_COST = self.vaccinationCostSlider.value
-    self.vaccinationLabel.text = f'Vaccination Rate: {self.vaccinationRateSlider.value}%, Cost: ₹{self.vaccinationCostSlider.value}'
+    self.vaccinationLabel.text = f'Vaccination Rate: {self.vaccinationRateSlider.value}%, Cost: Rs. {self.vaccinationCostSlider.value}'
 
   def onLockdownChange(self, **event_args):
     '''This method is called when the lockdown switch is checked or unchecked'''
@@ -211,7 +211,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     if self.params.LOCKDOWN_ENABLED:
-      self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: ₹{self.lockdownCostSlider.value}'
+      self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: Rs. {self.lockdownCostSlider.value}'
     else:
       self.lockdownLabel.text = 'Lockdown: '
 
@@ -219,13 +219,13 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the lockdown rate slider is moved'''
     
     self.params.LOCKDOWN_LEVEL = self.lockdownSlider.value / 100
-    self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: ₹{self.lockdownCostSlider.value}'
+    self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: Rs. {self.lockdownCostSlider.value}'
   
   def onLockdownCostChange(self, handle, **event_args):
     '''This method is called when the lockdown cost slider is moved'''
 
     self.params.LOCKDOWN_COST = self.lockdownCostSlider.value
-    self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: ₹{self.lockdownCostSlider.value}'
+    self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: Rs. {self.lockdownCostSlider.value}'
 
   def onHygieneChange(self, **event_args):
     '''This method is called when the hygiene switch is checked or unchecked'''
@@ -233,7 +233,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.HYGIENE_ENABLED = self.hygieneSwitch.checked
     self.hygieneCostSlider.visible = self.params.HYGIENE_ENABLED
     if self.params.HYGIENE_ENABLED:
-      self.hygieneLabel.text = f'Hygiene Measures Cost: ₹{self.hygieneCostSlider.value}'
+      self.hygieneLabel.text = f'Hygiene Measures Cost: Rs. {self.hygieneCostSlider.value}'
     else:
       self.hygieneLabel.text = 'Hygiene Measures: '
   
@@ -241,19 +241,19 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the hygiene cost slider is moved'''
     
     self.params.HYGIENE_COST = self.hygieneCostSlider.value
-    self.hygieneLabel.text = f'Hygiene Measures Cost: ₹{self.hygieneCostSlider.value}'
+    self.hygieneLabel.text = f'Hygiene Measures Cost: Rs. {self.hygieneCostSlider.value}'
 
   def onHospitalityRateChange(self, handle, **event_args):
     '''This method is called when the hospital rate slider is moved'''
 
     self.params.HOSPITAL_CAPACITY = self.hospitalCapacitySlider.value / 100
-    self.hospitalCapacityLabel.text = f'Hospital Capacity: {self.hospitalCapacitySlider.value}%, Cost: ₹{self.hospitalizationCostSlider.value}'
+    self.hospitalCapacityLabel.text = f'Hospital Capacity: {self.hospitalCapacitySlider.value}%, Cost: Rs. {self.hospitalizationCostSlider.value}'
     
   def onHospitalizationCostChange(self, handle, **event_args):
     '''This method is called when the hospitalization cost slider is moved'''
     
     self.params.HOSPITALIZATION_COST = self.hospitalizationCostSlider.value
-    self.hospitalCapacityLabel.text = f'Hospital Capacity: {self.hospitalCapacitySlider.value}%, Cost: ₹{self.hospitalizationCostSlider.value}'
+    self.hospitalCapacityLabel.text = f'Hospital Capacity: {self.hospitalCapacitySlider.value}%, Cost: Rs. {self.hospitalizationCostSlider.value}'
 
   def onTravelRestrictionsChange(self, **event_args):
     '''This method is called when the travel restrictions switch is checked or unchecked'''
@@ -261,7 +261,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.params.TRAVEL_RESTRICTIONS_ENABLED = self.travelSwitch.checked
     self.travelRestrictionsCostSlider.visible = self.params.TRAVEL_RESTRICTIONS_ENABLED
     if self.params.TRAVEL_RESTRICTIONS_ENABLED:
-      self.travelLabel.text = f'Travel Restrictions Cost: ₹{self.travelRestrictionsCostSlider.value}'
+      self.travelLabel.text = f'Travel Restrictions Cost: Rs. {self.travelRestrictionsCostSlider.value}'
     else:
       self.travelLabel.text = 'Travel Restrictions: : '
   
@@ -269,4 +269,4 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the travel restrictions cost slider is moved'''
     
     self.params.TRAVEL_RESTRICTIONS_COST = self.travelRestrictionsCostSlider.value
-    self.travelLabel.text = f'Travel Restrictions Cost: ₹{self.travelRestrictionsCostSlider.value}'
+    self.travelLabel.text = f'Travel Restrictions Cost: Rs. {self.travelRestrictionsCostSlider.value}'

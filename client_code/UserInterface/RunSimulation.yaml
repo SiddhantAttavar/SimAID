@@ -18,7 +18,7 @@ components:
     event_bindings: {click: onRunSimulationButtonClick}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Cost: ₹0', font_size: null, font: '', spacing_above: small,
+      visible: true, text: 'Cost: Rs. 0', font_size: null, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
       underline: false, icon: ''}
     name: costLabel
