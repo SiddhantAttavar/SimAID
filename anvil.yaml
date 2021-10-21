@@ -10,9 +10,9 @@ services:
     confirm_email: false, allow_remember_me: true, remember_me_days: 365}
   server_config: {user_table: users}
 startup: {type: form, module: UserInterface.Main}
-package_name: Epidemic_Simulator
+package_name: SimAID
 allow_embedding: true
-name: Epidemic Simulator
+name: SimAID
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
 startup_form: UserInterface.Main
