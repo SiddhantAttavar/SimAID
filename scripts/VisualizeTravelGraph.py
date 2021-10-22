@@ -9,18 +9,18 @@ cellSize = len(travelProbabilites)
 
 # Create nodes
 for i in range(cellSize):
-        for j in range(cellSize):
-                # Add node
-                cellNum = i * cellSize + j
-                graph.add_node(cellNum, pos = (i, j))
+    for j in range(cellSize):
+        # Add node
+        cellNum = i * cellSize + j
+        graph.add_node(cellNum, pos = (i, j))
 
 # Add edges
 for i in range(cellSize):
-        for j in range(cellSize):
-                cellNum = i * cellSize + j
-                for k in range(cellSize * cellSize):
-                        if cellNum != k:
-                                graph.add_weighted_edges_from([(cellNum, k, f'{travelProbabilites[i][j][k] * 100:.2f}%')])
+    for j in range(cellSize):
+        cellNum = i * cellSize + j
+        for k in range(cellSize * cellSize):
+            if cellNum != k:
+                graph.add_weighted_edges_from([(cellNum, k, f'{travelProbabilites[i][j][k] * 100:.2f}%')])
 
 # Display the graph
 positions = nx.get_node_attributes(graph, 'pos')
