@@ -8,84 +8,84 @@ from bisect import bisect_left as insertLeft
 from Person import Person # type: ignore
 
 class Utils:
-  '''This class contains utility functions
-  
-  Attributes
-  ----------
-
-  Methods
-  -------
-  drawFramesMatplotlib(frames, params)
-    Creates a matplotlib graph and displays it locally
-  getRandomCell(params)
-    Gets a random cell from the grid
-  '''
-  
-  @staticmethod
-  def drawFramesMatplotlib(frames, params):
-    '''Draws the frame in a matplotlib graph.
-
-    Parameters
+    '''This class contains utility functions
+    
+    Attributes
     ----------
-    frame : list(Frame)
-      The list of frames that we have to display
-    frameCount : int
-      The current frameCount
-    params : Params
-      The parameters of the simulation
 
-    Returns
+    Methods
     -------
-    None
+    drawFramesMatplotlib(frames, params)
+        Creates a matplotlib graph and displays it locally
+    getRandomCell(params)
+        Gets a random cell from the grid
     '''
     
-    # Import matplotlib
-    from matplotlib import pyplot as plt
+    @staticmethod
+    def drawFramesMatplotlib(frames, params):
+        '''Draws the frame in a matplotlib graph.
 
-    # Initialize arrays for graphing the results
-    graphXData = []
-    graphYData = [[] for _ in Person.states]
+        Parameters
+        ----------
+        frame : list(Frame)
+            The list of frames that we have to display
+        frameCount : int
+            The current frameCount
+        params : Params
+            The parameters of the simulation
 
-    # Get the data for the X and Y axes
-    for frameCount, frame in enumerate(frames):
-      graphXData.append(frameCount)
-      for stateID, stateGroup in enumerate(frame.stateGroups):
-        graphYData[stateID].append(len(stateGroup))
+        Returns
+        -------
+        None
+        '''
+        
+        # Import matplotlib
+        from matplotlib import pyplot as plt
 
-    # Add the plots to the graph
-    for stateID, stateCountData in enumerate(graphYData):
-      plt.plot(
-        graphXData,
-        stateCountData,
-        label = Person.states[stateID].name,
-        color = Person.states[stateID].color,
-      )
+        # Initialize arrays for graphing the results
+        graphXData = []
+        graphYData = [[] for _ in Person.states]
 
-    # Show the matplotlib plots
-    plt.ylim(0, params.POPULATION_SIZE)
-    plt.show()
+        # Get the data for the X and Y axes
+        for frameCount, frame in enumerate(frames):
+            graphXData.append(frameCount)
+            for stateID, stateGroup in enumerate(frame.stateGroups):
+                graphYData[stateID].append(len(stateGroup))
 
-  @staticmethod
-  def getRandomCell(params, probabilities):
-    '''Generates a random cell in the grid
+        # Add the plots to the graph
+        for stateID, stateCountData in enumerate(graphYData):
+            plt.plot(
+                graphXData,
+                stateCountData,
+                label = Person.states[stateID].name,
+                color = Person.states[stateID].color,
+            )
 
-    Parameters
-    ----------
-    params : Params   
-      The parameters of the simulation
-    Probabilities
-      The list of probabilities to choose a cell from
-    
-    Returns
-    -------
-    cellRow : int
-      The row of the generated cell
-    cellCol : int
-      The column of the generated cell
-    '''
+        # Show the matplotlib plots
+        plt.ylim(0, params.POPULATION_SIZE)
+        plt.show()
 
-    cellNum = insertLeft(probabilities, random())
-    cellRow = cellNum // params.GRID_SIZE
-    cellCol = cellNum % params.GRID_SIZE
+    @staticmethod
+    def getRandomCell(params, probabilities):
+        '''Generates a random cell in the grid
 
-    return cellRow, cellCol
+        Parameters
+        ----------
+        params : Params 
+            The parameters of the simulation
+        Probabilities
+            The list of probabilities to choose a cell from
+        
+        Returns
+        -------
+        cellRow : int
+            The row of the generated cell
+        cellCol : int
+            The column of the generated cell
+        '''
+
+        cellNum = insertLeft(probabilities, random())
+        cellRow = cellNum // params.GRID_SIZE
+        cellCol = cellNum % params.GRID_SIZE
+
+        return cellRow, cellCol

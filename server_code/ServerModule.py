@@ -9,4 +9,4 @@ import anvil.server
 
 @anvil.server.callable
 def getSimulations(user):
-  return app_tables.simulations.search(user = user)
+    return app_tables.simulations.search(user = user)

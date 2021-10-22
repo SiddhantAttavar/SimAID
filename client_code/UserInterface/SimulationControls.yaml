@@ -1,311 +1,311 @@
 components:
 - type: ColumnPanel
-  properties: {col_widths: '{}'}
-  name: root
-  layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
-  components:
-  - type: ColumnPanel
     properties: {col_widths: '{}'}
-    name: diseaseControlsColumnPanel
-    layout_properties: {grid_position: 'UFDNSY,SPPTKA'}
+    name: root
+    layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
     components:
-    - type: Label
-      properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: General Controls, font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-        underline: false, icon: ''}
-      name: generalControlsLabel
-      layout_properties: {grid_position: 'GIZZNI,FNYBTX'}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Number of people in the simulation,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: populationSizeLabel
-      layout_properties: {grid_position: 'LXBGFD,HLBETO'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 10, tooltips: false, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 10}
-      name: populationSizeSlider
-      layout_properties: {grid_position: 'AYQMIQ,XKQRMH'}
-      event_bindings: {slide: onPopulationSizeChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: 'Demographics of the population.
-          Age groups: 0 - 15, 15 - 45, 45 - 65, 65+', border: '', foreground: '',
-        visible: true, text: '', font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-        underline: false, icon: ''}
-      name: populationDemographicsLabel
-      layout_properties: {grid_position: 'GAJZWU,GCNCUW'}
-      event_bindings: {}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: '', animate: true, visible: true, connect: 'True, True, True, True',
-        start: '0, 0, 0', behaviour: tap, spacing_above: small, spacing_below: small,
-        color: null, format: .2f, step: 1}
-      name: populationDemographicsSlider
-      layout_properties: {grid_position: 'ORHTKA,DVPMQR'}
-      event_bindings: {slide: onPopulationDemographicsChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Number of days the simulation runs for,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: simulationLengthLabel
-      layout_properties: {grid_position: 'DZOKOU,XFCTEM'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 10, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 250, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: simulationLengthSlider
-      layout_properties: {grid_position: 'BCEXCV,IANVID'}
-      event_bindings: {slide: onSimulationLengthChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Number of rows and columns in the simulation grid,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: gridSizeLabel
-      layout_properties: {grid_position: 'BQCPFJ,ETTODI'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 10, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: gridSizeSlider
-      layout_properties: {grid_position: 'HDVOGH,WIICIH'}
-      event_bindings: {slide: onGridSizeChange}
-  - type: ColumnPanel
-    properties: {col_widths: '{}'}
-    name: column_panel_1
-    layout_properties: {grid_position: 'UFDNSY,BYDXQF'}
-    components:
-    - type: Label
-      properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Pathogen Controls, font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-        underline: false, icon: ''}
-      name: pathogenControlsLabel
-      layout_properties: {grid_position: 'WFEZQZ,JNMZBB'}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Chance of infection spreading on interaction,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: infectionRateLabel
-      layout_properties: {grid_position: 'VRZRHT,XSQRIA'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: infectionRateSlider
-      layout_properties: {grid_position: 'SSSBAX,IAUUHJ'}
-      event_bindings: {slide: onInfectionRateChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Chance of infected person dying from disease,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: mortalityRateLabel
-      layout_properties: {grid_position: 'EYJUCM,TZBNSI'}
-      event_bindings: {}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: mortalityRateSlider
-      layout_properties: {grid_position: 'OWBHSA,HSZLIZ'}
-      event_bindings: {slide: onMortalityRateChange}
-    - type: Label
-      properties: {}
-      name: diseaseTimelineLabel
-      layout_properties: {grid_position: 'PZHWKY,IYDSSN'}
-      event_bindings: {}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 500, padding: '', enabled: true, pips_density: null,
-        limit: '', animate: true, visible: true, connect: 'True, True, True, False',
-        start: '0, 0, 0', behaviour: tap, spacing_above: small, spacing_below: small,
-        color: null, format: .2f, step: 1}
-      name: diseaseTimelineSlider
-      layout_properties: {grid_position: 'MKRLCU,RPKSGX'}
-      event_bindings: {slide: onDiseaseTimelineChange}
+    - type: ColumnPanel
+        properties: {col_widths: '{}'}
+        name: diseaseControlsColumnPanel
+        layout_properties: {grid_position: 'UFDNSY,SPPTKA'}
+        components:
+        - type: Label
+            properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
+                visible: true, text: General Controls, font_size: null, font: '', spacing_above: small,
+                icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+                underline: false, icon: ''}
+            name: generalControlsLabel
+            layout_properties: {grid_position: 'GIZZNI,FNYBTX'}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Number of people in the simulation,
+                border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
+                spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: populationSizeLabel
+            layout_properties: {grid_position: 'LXBGFD,HLBETO'}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 10, tooltips: false, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 10}
+            name: populationSizeSlider
+            layout_properties: {grid_position: 'AYQMIQ,XKQRMH'}
+            event_bindings: {slide: onPopulationSizeChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: 'Demographics of the population.
+                    Age groups: 0 - 15, 15 - 45, 45 - 65, 65+', border: '', foreground: '',
+                visible: true, text: '', font_size: null, font: '', spacing_above: small,
+                icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+                underline: false, icon: ''}
+            name: populationDemographicsLabel
+            layout_properties: {grid_position: 'GAJZWU,GCNCUW'}
+            event_bindings: {}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+                limit: '', animate: true, visible: true, connect: 'True, True, True, True',
+                start: '0, 0, 0', behaviour: tap, spacing_above: small, spacing_below: small,
+                color: null, format: .2f, step: 1}
+            name: populationDemographicsSlider
+            layout_properties: {grid_position: 'ORHTKA,DVPMQR'}
+            event_bindings: {slide: onPopulationDemographicsChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Number of days the simulation runs for,
+                border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
+                spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: simulationLengthLabel
+            layout_properties: {grid_position: 'DZOKOU,XFCTEM'}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 10, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 250, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: simulationLengthSlider
+            layout_properties: {grid_position: 'BCEXCV,IANVID'}
+            event_bindings: {slide: onSimulationLengthChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Number of rows and columns in the simulation grid,
+                border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
+                spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: gridSizeLabel
+            layout_properties: {grid_position: 'BQCPFJ,ETTODI'}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 10, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: gridSizeSlider
+            layout_properties: {grid_position: 'HDVOGH,WIICIH'}
+            event_bindings: {slide: onGridSizeChange}
+    - type: ColumnPanel
+        properties: {col_widths: '{}'}
+        name: column_panel_1
+        layout_properties: {grid_position: 'UFDNSY,BYDXQF'}
+        components:
+        - type: Label
+            properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
+                visible: true, text: Pathogen Controls, font_size: null, font: '', spacing_above: small,
+                icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+                underline: false, icon: ''}
+            name: pathogenControlsLabel
+            layout_properties: {grid_position: 'WFEZQZ,JNMZBB'}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Chance of infection spreading on interaction,
+                border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
+                spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: infectionRateLabel
+            layout_properties: {grid_position: 'VRZRHT,XSQRIA'}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: infectionRateSlider
+            layout_properties: {grid_position: 'SSSBAX,IAUUHJ'}
+            event_bindings: {slide: onInfectionRateChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Chance of infected person dying from disease,
+                border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
+                spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: mortalityRateLabel
+            layout_properties: {grid_position: 'EYJUCM,TZBNSI'}
+            event_bindings: {}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 1, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: mortalityRateSlider
+            layout_properties: {grid_position: 'OWBHSA,HSZLIZ'}
+            event_bindings: {slide: onMortalityRateChange}
+        - type: Label
+            properties: {}
+            name: diseaseTimelineLabel
+            layout_properties: {grid_position: 'PZHWKY,IYDSSN'}
+            event_bindings: {}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 500, padding: '', enabled: true, pips_density: null,
+                limit: '', animate: true, visible: true, connect: 'True, True, True, False',
+                start: '0, 0, 0', behaviour: tap, spacing_above: small, spacing_below: small,
+                color: null, format: .2f, step: 1}
+            name: diseaseTimelineSlider
+            layout_properties: {grid_position: 'MKRLCU,RPKSGX'}
+            event_bindings: {slide: onDiseaseTimelineChange}
+        event_bindings: {}
+    - type: ColumnPanel
+        properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15,"KVEXYP":45,"MTEOIO":15}'}
+        name: interventionControlsColumnPanel
+        layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
+        components:
+        - type: Label
+            properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
+                visible: true, text: Intervention Controls, font_size: null, font: '', spacing_above: small,
+                icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+                underline: false, icon: ''}
+            name: interventionControlsLabel
+            layout_properties: {grid_position: 'YJWTHM,LIYUBV'}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Percentage of population which follows rules,
+                border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
+                spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: ruleComplianceRateLabel
+            layout_properties: {grid_position: 'LEKQMR,GDUCUO'}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: ruleComplianceRateSlider
+            layout_properties: {grid_position: 'ZYKONC,RXGEGX'}
+            event_bindings: {slide: onRuleComplianceRateChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Percentage of population which is vaccinated in a month,
+                border: '', foreground: '', visible: true, text: 'Vaccination: ', font_size: null,
+                font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: vaccinationLabel
+            layout_properties: {grid_position: 'VUYFQP,OWKGTY'}
+        - type: form:C6ZZPAPN4YYF5NVJ:Switch
+            properties: {}
+            name: vaccinationSwitch
+            layout_properties: {grid_position: 'VUYFQP,GTEAGC'}
+            event_bindings: {change: onVaccinationChange}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 5, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 50, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '5',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: vaccinationRateSlider
+            layout_properties: {grid_position: 'LIYMDL,TCFOYM'}
+            event_bindings: {slide: onVaccinationRateChange}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 50}
+            name: vaccinationCostSlider
+            layout_properties: {grid_position: 'DNPITR,PQKWEQ'}
+            event_bindings: {slide: onVaccinationCostChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Percentage of infected population at which the cell is locked down,
+                border: '', foreground: '', visible: true, text: 'Lockdown: ', font_size: null,
+                font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: lockdownLabel
+            layout_properties: {grid_position: 'PLSWUO,UPQTNJ'}
+            event_bindings: {}
+        - type: form:C6ZZPAPN4YYF5NVJ:Switch
+            properties: {}
+            name: lockdownSwitch
+            layout_properties: {grid_position: 'PLSWUO,KQHDKG'}
+            event_bindings: {change: onLockdownChange}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: lockdownSlider
+            layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
+            event_bindings: {slide: onLockdownLevelChange}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 50}
+            name: lockdownCostSlider
+            layout_properties: {grid_position: 'SJOBZE,OLNIKZ'}
+            event_bindings: {slide: onLockdownCostChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Reduces the chance of infection,
+                border: '', foreground: '', visible: true, text: 'Hygiene Measures: ', font_size: null,
+                font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: hygieneLabel
+            layout_properties: {grid_position: 'RBBXOB,IBMFAV'}
+            event_bindings: {}
+        - type: form:C6ZZPAPN4YYF5NVJ:Switch
+            properties: {}
+            name: hygieneSwitch
+            layout_properties: {grid_position: 'RBBXOB,VHAZKC'}
+            event_bindings: {change: onHygieneChange}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 10}
+            name: hygieneCostSlider
+            layout_properties: {grid_position: 'GHZZUH,WAAXJQ'}
+            event_bindings: {slide: onHygieneCostChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Restricts travel to and from locked down regions,
+                border: '', foreground: '', visible: true, text: Travel Restrictions, font_size: null,
+                font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: travelLabel
+            layout_properties: {grid_position: 'DGQYQP,KVEXYP'}
+            event_bindings: {}
+        - type: form:C6ZZPAPN4YYF5NVJ:Switch
+            properties: {}
+            name: travelSwitch
+            layout_properties: {grid_position: 'DGQYQP,MTEOIO'}
+            event_bindings: {change: onTravelRestrictionsChange}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 50}
+            name: travelRestrictionsCostSlider
+            layout_properties: {grid_position: 'HSLFPJ,QRNBOA'}
+            event_bindings: {slide: onTravelRestrictionsCostChange}
+        - type: Label
+            properties: {role: null, align: left, tooltip: Percentage of the population that hospitals can handle at a time,
+                border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
+                spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+                background: '', bold: false, underline: false, icon: ''}
+            name: hospitalCapacityLabel
+            layout_properties: {grid_position: 'FFCXSN,HOCYDB'}
+            event_bindings: {}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1}
+            name: hospitalCapacitySlider
+            layout_properties: {grid_position: 'GFVBTF,CPCRYT'}
+            event_bindings: {slide: onHospitalityRateChange}
+        - type: form:C6ZZPAPN4YYF5NVJ:Slider
+            properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
+                pips: false, pips_values: '', max: 100000, padding: '', enabled: true, pips_density: null,
+                limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
+                behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
+                step: 1000}
+            name: hospitalizationCostSlider
+            layout_properties: {grid_position: 'ILRKGG,GKAOCW'}
+            event_bindings: {slide: onHospitalizationCostChange}
+        event_bindings: {}
     event_bindings: {}
-  - type: ColumnPanel
-    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15,"KVEXYP":45,"MTEOIO":15}'}
-    name: interventionControlsColumnPanel
-    layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
-    components:
-    - type: Label
-      properties: {role: subheading, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Intervention Controls, font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-        underline: false, icon: ''}
-      name: interventionControlsLabel
-      layout_properties: {grid_position: 'YJWTHM,LIYUBV'}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Percentage of population which follows rules,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: ruleComplianceRateLabel
-      layout_properties: {grid_position: 'LEKQMR,GDUCUO'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: ruleComplianceRateSlider
-      layout_properties: {grid_position: 'ZYKONC,RXGEGX'}
-      event_bindings: {slide: onRuleComplianceRateChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Percentage of population which is vaccinated in a month,
-        border: '', foreground: '', visible: true, text: 'Vaccination: ', font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: vaccinationLabel
-      layout_properties: {grid_position: 'VUYFQP,OWKGTY'}
-    - type: form:C6ZZPAPN4YYF5NVJ:Switch
-      properties: {}
-      name: vaccinationSwitch
-      layout_properties: {grid_position: 'VUYFQP,GTEAGC'}
-      event_bindings: {change: onVaccinationChange}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 5, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 50, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '5',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: vaccinationRateSlider
-      layout_properties: {grid_position: 'LIYMDL,TCFOYM'}
-      event_bindings: {slide: onVaccinationRateChange}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 50}
-      name: vaccinationCostSlider
-      layout_properties: {grid_position: 'DNPITR,PQKWEQ'}
-      event_bindings: {slide: onVaccinationCostChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Percentage of infected population at which the cell is locked down,
-        border: '', foreground: '', visible: true, text: 'Lockdown: ', font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: lockdownLabel
-      layout_properties: {grid_position: 'PLSWUO,UPQTNJ'}
-      event_bindings: {}
-    - type: form:C6ZZPAPN4YYF5NVJ:Switch
-      properties: {}
-      name: lockdownSwitch
-      layout_properties: {grid_position: 'PLSWUO,KQHDKG'}
-      event_bindings: {change: onLockdownChange}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: lockdownSlider
-      layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
-      event_bindings: {slide: onLockdownLevelChange}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 50}
-      name: lockdownCostSlider
-      layout_properties: {grid_position: 'SJOBZE,OLNIKZ'}
-      event_bindings: {slide: onLockdownCostChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Reduces the chance of infection,
-        border: '', foreground: '', visible: true, text: 'Hygiene Measures: ', font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: hygieneLabel
-      layout_properties: {grid_position: 'RBBXOB,IBMFAV'}
-      event_bindings: {}
-    - type: form:C6ZZPAPN4YYF5NVJ:Switch
-      properties: {}
-      name: hygieneSwitch
-      layout_properties: {grid_position: 'RBBXOB,VHAZKC'}
-      event_bindings: {change: onHygieneChange}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 1000, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 10}
-      name: hygieneCostSlider
-      layout_properties: {grid_position: 'GHZZUH,WAAXJQ'}
-      event_bindings: {slide: onHygieneCostChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Restricts travel to and from locked down regions,
-        border: '', foreground: '', visible: true, text: Travel Restrictions, font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: travelLabel
-      layout_properties: {grid_position: 'DGQYQP,KVEXYP'}
-      event_bindings: {}
-    - type: form:C6ZZPAPN4YYF5NVJ:Switch
-      properties: {}
-      name: travelSwitch
-      layout_properties: {grid_position: 'DGQYQP,MTEOIO'}
-      event_bindings: {change: onTravelRestrictionsChange}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 5000, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 50}
-      name: travelRestrictionsCostSlider
-      layout_properties: {grid_position: 'HSLFPJ,QRNBOA'}
-      event_bindings: {slide: onTravelRestrictionsCostChange}
-    - type: Label
-      properties: {role: null, align: left, tooltip: Percentage of the population that hospitals can handle at a time,
-        border: '', foreground: '', visible: true, text: '', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: ''}
-      name: hospitalCapacityLabel
-      layout_properties: {grid_position: 'FFCXSN,HOCYDB'}
-      event_bindings: {}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
-      name: hospitalCapacitySlider
-      layout_properties: {grid_position: 'GFVBTF,CPCRYT'}
-      event_bindings: {slide: onHospitalityRateChange}
-    - type: form:C6ZZPAPN4YYF5NVJ:Slider
-      properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
-        pips: false, pips_values: '', max: 100000, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1000}
-      name: hospitalizationCostSlider
-      layout_properties: {grid_position: 'ILRKGG,GKAOCW'}
-      event_bindings: {slide: onHospitalizationCostChange}
-    event_bindings: {}
-  event_bindings: {}
 container:
-  type: ColumnPanel
-  properties: {col_widths: '{}'}
-  event_bindings: {}
-  data_bindings: []
+    type: ColumnPanel
+    properties: {col_widths: '{}'}
+    event_bindings: {}
+    data_bindings: []
 is_package: false

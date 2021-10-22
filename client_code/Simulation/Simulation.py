@@ -14,285 +14,285 @@ from Interventions import Interventions # type: ignore
 from Utils import Utils # type: ignore
 
 class Simulation:
-  '''Parameters and methods for the simulation.
+    '''Parameters and methods for the simulation.
 
-  Attributes
-  ----------
-  params : Params
-    The parameters of the simulation
-  interventionCost : int
-    The total cost of all interventions
-
-  Methods
-  -------
-  __init__()
-    Initialized the simulation with some properties
-  run()
-    Runs the current simulation
-  nextFrame(frame)
-    Calculates the next frame of the simulation
-  '''
-
-  def __init__(self, params):
-    '''Initialized the simulation
-
-    Intializes the simulation with some basic properties
-
-    Parameters
+    Attributes
     ----------
     params : Params
-      The parameters of the simulation
+        The parameters of the simulation
+    interventionCost : int
+        The total cost of all interventions
 
-    Returns
+    Methods
     -------
-    None
+    __init__()
+        Initialized the simulation with some properties
+    run()
+        Runs the current simulation
+    nextFrame(frame)
+        Calculates the next frame of the simulation
     '''
 
-    self.params = params
-    self.interventionCost = 0
+    def __init__(self, params):
+        '''Initialized the simulation
 
-  def run(self):
-    '''Run the simulation.
+        Intializes the simulation with some basic properties
 
-    Run an agent based simulation based on the
-    configuration of the current simulation.
+        Parameters
+        ----------
+        params : Params
+            The parameters of the simulation
 
-    Parameters
-    ----------
+        Returns
+        -------
+        None
+        '''
 
-    Yields
-    ------
-    Frame
-      Constantly yields frames of simulation as they are calculated
+        self.params = params
+        self.interventionCost = 0
 
-    Returns
-    -------
-    None
-    '''
+    def run(self):
+        '''Run the simulation.
 
-    # Create the probability matrix for the grid
-    self.params.GRID_PROBABILITIES = [random() for _ in range(self.params.GRID_SIZE ** 2)]
+        Run an agent based simulation based on the
+        configuration of the current simulation.
 
-    # Find the cumulative sum for each cell
-    for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
-      self.params.GRID_PROBABILITIES[i] += self.params.GRID_PROBABILITIES[i - 1]
+        Parameters
+        ----------
 
-    # Scale all probabilities by the sum of probabilities
-    for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
-      self.params.GRID_PROBABILITIES[i] /= self.params.GRID_PROBABILITIES[-1]
+        Yields
+        ------
+        Frame
+            Constantly yields frames of simulation as they are calculated
 
-    # Create the probability matrix for travel between cells
-    # If there is only one cell, there is no travel between cells
-    if self.params.GRID_SIZE == 1:
-      self.params.GRID_TRAVEL_PROBABILITIES = [[0]]
-    else:
-      # Otherwise, iterate through all cells to get the probability matrix
-      self.params.TRAVEL_PROBABILITES = []
-      for rowCount in range(self.params.GRID_SIZE):
-        self.params.TRAVEL_PROBABILITES.append([])
-        for colCount in range(self.params.GRID_SIZE):
-          # For each cell create probabilities
-          travelProbabilites = [random() for _ in range(self.params.GRID_SIZE ** 2)]
+        Returns
+        -------
+        None
+        '''
 
-          # The probability of travelling from a cell to itself is 0
-          travelProbabilites[rowCount * self.params.GRID_SIZE + colCount] = 0
+        # Create the probability matrix for the grid
+        self.params.GRID_PROBABILITIES = [random() for _ in range(self.params.GRID_SIZE ** 2)]
 
-          # Add probability factor to the probability matrix
-          for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
-            travelProbabilites[i] *= self.params.GRID_PROBABILITIES[i]
+        # Find the cumulative sum for each cell
+        for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
+            self.params.GRID_PROBABILITIES[i] += self.params.GRID_PROBABILITIES[i - 1]
 
-          # Find the cumulative sum for each cell
-          for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
-            travelProbabilites[i] += travelProbabilites[i - 1]
-          
-          # Scale all probabilities by the sum of probabilities
-          for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
-            travelProbabilites[i] /= travelProbabilites[-1]
-          
-          # Add the probabilities to the probability matrix
-          self.params.TRAVEL_PROBABILITES[rowCount].append(travelProbabilites)
+        # Scale all probabilities by the sum of probabilities
+        for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+            self.params.GRID_PROBABILITIES[i] /= self.params.GRID_PROBABILITIES[-1]
 
-    # Create the first frame
-    # Intialize the population list with people and whether they follow rules
-    grid = [[[] for i in range(self.params.GRID_SIZE)] for j in range(self.params.GRID_SIZE)]
-    for _ in range(self.params.POPULATION_SIZE):
-      # Find a random cell for the person
-      cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
+        # Create the probability matrix for travel between cells
+        # If there is only one cell, there is no travel between cells
+        if self.params.GRID_SIZE == 1:
+            self.params.GRID_TRAVEL_PROBABILITIES = [[0]]
+        else:
+            # Otherwise, iterate through all cells to get the probability matrix
+            self.params.TRAVEL_PROBABILITES = []
+            for rowCount in range(self.params.GRID_SIZE):
+                self.params.TRAVEL_PROBABILITES.append([])
+                for colCount in range(self.params.GRID_SIZE):
+                    # For each cell create probabilities
+                    travelProbabilites = [random() for _ in range(self.params.GRID_SIZE ** 2)]
 
-      # Add the person to the grid
-      grid[cellRow][cellCol].append(Person(
-        (cellRow, cellCol),
-        self.params.CELL_SIZE * cellCol + random() / self.params.GRID_SIZE,
-        self.params.CELL_SIZE * cellRow + random() / self.params.GRID_SIZE,
-        random() < self.params.RULE_COMPLIANCE_RATE,
-        Person.SUSCEPTIBLE,
-        insertLeft(self.params.POPULATION_DEMOGRAPHICS, random())
-      ))
+                    # The probability of travelling from a cell to itself is 0
+                    travelProbabilites[rowCount * self.params.GRID_SIZE + colCount] = 0
 
-    # There are some people who are exposed at the beginning
-    done = set()
-    for _ in range(self.params.INITIAL_INFECTED):
-      cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
-      personCount = randrange(len(grid[cellRow][cellCol]))
-      key = (cellRow, cellCol, personCount)
+                    # Add probability factor to the probability matrix
+                    for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+                        travelProbabilites[i] *= self.params.GRID_PROBABILITIES[i]
 
-      if key not in done:
-        done.add(key)
-        grid[cellRow][cellCol][personCount].state = Person.EXPOSED
+                    # Find the cumulative sum for each cell
+                    for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
+                        travelProbabilites[i] += travelProbabilites[i - 1]
+                    
+                    # Scale all probabilities by the sum of probabilities
+                    for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+                        travelProbabilites[i] /= travelProbabilites[-1]
+                    
+                    # Add the probabilities to the probability matrix
+                    self.params.TRAVEL_PROBABILITES[rowCount].append(travelProbabilites)
 
-    currFrame = Frame(grid, self.params)
-    yield currFrame
+        # Create the first frame
+        # Intialize the population list with people and whether they follow rules
+        grid = [[[] for i in range(self.params.GRID_SIZE)] for j in range(self.params.GRID_SIZE)]
+        for _ in range(self.params.POPULATION_SIZE):
+            # Find a random cell for the person
+            cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
 
-    for _ in range(self.params.SIMULATION_LENGTH):
-      # Then we need to build the Frame object to yield
-      currFrame = self.nextFrame(currFrame)
-      yield currFrame
+            # Add the person to the grid
+            grid[cellRow][cellCol].append(Person(
+                (cellRow, cellCol),
+                self.params.CELL_SIZE * cellCol + random() / self.params.GRID_SIZE,
+                self.params.CELL_SIZE * cellRow + random() / self.params.GRID_SIZE,
+                random() < self.params.RULE_COMPLIANCE_RATE,
+                Person.SUSCEPTIBLE,
+                insertLeft(self.params.POPULATION_DEMOGRAPHICS, random())
+            ))
 
-  def nextFrame(self, frame):
-    '''Calculate the next frame of the simulation.
+        # There are some people who are exposed at the beginning
+        done = set()
+        for _ in range(self.params.INITIAL_INFECTED):
+            cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
+            personCount = randrange(len(grid[cellRow][cellCol]))
+            key = (cellRow, cellCol, personCount)
 
-    Parameters
-    ----------
-    frame : Frame
-      The current frame of the simulation
+            if key not in done:
+                done.add(key)
+                grid[cellRow][cellCol][personCount].state = Person.EXPOSED
 
-    Returns
-    -------
-    Frame
-      The next frame in the simulation
-    '''
+        currFrame = Frame(grid, self.params)
+        yield currFrame
 
-    self.movePeople(frame)
+        for _ in range(self.params.SIMULATION_LENGTH):
+            # Then we need to build the Frame object to yield
+            currFrame = self.nextFrame(currFrame)
+            yield currFrame
 
-    # Run different intervention functions if they are enabled
-    if self.params.VACCINATION_ENABLED:
-      self.interventionCost += Interventions.vaccinate(frame, self.params)
-    if self.params.LOCKDOWN_ENABLED:
-      self.interventionCost += Interventions.lockdown(frame, self.params)
+    def nextFrame(self, frame):
+        '''Calculate the next frame of the simulation.
 
-    self.interventionCost += Transitions.findExposed(frame, self.params)
-    Transitions.findInfected(frame, self.params)
-    Transitions.findRecovered(frame, self.params)
-    Transitions.findSusceptible(frame, self.params)
+        Parameters
+        ----------
+        frame : Frame
+            The current frame of the simulation
 
-    # Iterate through all people and increment the frames since last state
-    for row in frame.grid:
-      for cell in row:
-        for person in cell:
-          person.framesSinceLastState += 1
-    
-    # Add to hospitalization cost
-    self.interventionCost += round(
-      len(frame.stateGroups[Person.INFECTED.id]) * 
-      self.params.HOSPITALIZATION_COST * 
-      self.params.HOSPITALIZATION_RATE
-    )
+        Returns
+        -------
+        Frame
+            The next frame in the simulation
+        '''
 
-    res = Frame(frame.grid, self.params)
-    res.isLockedDown = deepcopy(frame.isLockedDown)
+        self.movePeople(frame)
 
-    return res
-  
-  def movePeople(self, frame):
-    '''Move the people around
-    
-    Parameters
-    ----------
-    frame : Frame
-      The current frame of the simulation
-    
-    Returns
-    -------
-    None
-    '''
+        # Run different intervention functions if they are enabled
+        if self.params.VACCINATION_ENABLED:
+            self.interventionCost += Interventions.vaccinate(frame, self.params)
+        if self.params.LOCKDOWN_ENABLED:
+            self.interventionCost += Interventions.lockdown(frame, self.params)
 
-    # Clear the visiting grid
-    for rowCount in range(self.params.GRID_SIZE):
-      for colCount in range(self.params.GRID_SIZE):
-        frame.visitingGrid[rowCount][colCount].clear()
-    
-    # Find the number of cells not under lockdown
-    cellsToTravelTo = sum(len(row) - sum(row) for row in frame.isLockedDown)
+        self.interventionCost += Transitions.findExposed(frame, self.params)
+        Transitions.findInfected(frame, self.params)
+        Transitions.findRecovered(frame, self.params)
+        Transitions.findSusceptible(frame, self.params)
 
-    # Iterate through all cells
-    for rowCount, row in enumerate(frame.grid):
-      # Find the limits of the row
-      yMin = rowCount * self.params.CELL_SIZE
-      yMax = yMin + self.params.CELL_SIZE
-      
-      for colCount, cell in enumerate(row):
-        # Find the limits for the cell
-        xMin = colCount * self.params.CELL_SIZE
-        xMax = xMin + self.params.CELL_SIZE
+        # Iterate through all people and increment the frames since last state
+        for row in frame.grid:
+            for cell in row:
+                for person in cell:
+                    person.framesSinceLastState += 1
         
-        # Iterate through all people and move them to a random location in the same cell
-        for person in cell:
-          if person.state == Person.DEAD:
-            # Dead people do not move
-            continue
+        # Add to hospitalization cost
+        self.interventionCost += round(
+            len(frame.stateGroups[Person.INFECTED.id]) * 
+            self.params.HOSPITALIZATION_COST * 
+            self.params.HOSPITALIZATION_RATE
+        )
 
-          # Check if the person can travel
-          if (cellsToTravelTo - (not frame.isLockedDown[rowCount][colCount]) > 0 and 
-              random() < self.params.TRAVEL_RATE):
-              if person.followsRules and self.params.TRAVEL_RESTRICTIONS_ENABLED:
-                # The person cannot travel
-                # Update the cost
-                self.interventionCost += self.params.TRAVEL_RESTRICTIONS_COST
-                person.isVisiting = False
-              else:
-                # The person can travel
-                person.isVisiting = True
+        res = Frame(frame.grid, self.params)
+        res.isLockedDown = deepcopy(frame.isLockedDown)
 
-                # The person is travelling to a different cell
-                cellRow, cellCol = Utils.getRandomCell(
-                  self.params, 
-                  self.params.TRAVEL_PROBABILITES[rowCount][colCount]
-                )
-                if self.params.TRAVEL_RESTRICTIONS_ENABLED:
-                  while frame.isLockedDown[cellCol][cellRow]:
-                    cellRow, cellCol = Utils.getRandomCell(
-                      self.params, 
-                      self.params.TRAVEL_PROBABILITES[rowCount][colCount]
-                    )
+        return res
+    
+    def movePeople(self, frame):
+        '''Move the people around
+        
+        Parameters
+        ----------
+        frame : Frame
+            The current frame of the simulation
+        
+        Returns
+        -------
+        None
+        '''
+
+        # Clear the visiting grid
+        for rowCount in range(self.params.GRID_SIZE):
+            for colCount in range(self.params.GRID_SIZE):
+                frame.visitingGrid[rowCount][colCount].clear()
+        
+        # Find the number of cells not under lockdown
+        cellsToTravelTo = sum(len(row) - sum(row) for row in frame.isLockedDown)
+
+        # Iterate through all cells
+        for rowCount, row in enumerate(frame.grid):
+            # Find the limits of the row
+            yMin = rowCount * self.params.CELL_SIZE
+            yMax = yMin + self.params.CELL_SIZE
+            
+            for colCount, cell in enumerate(row):
+                # Find the limits for the cell
+                xMin = colCount * self.params.CELL_SIZE
+                xMax = xMin + self.params.CELL_SIZE
                 
-                # Move the person to a random position in the new cell
-                frame.visitingGrid[cellRow][cellCol].append(person)
-                person.x = uniform(xMin, xMax)
-                person.y = uniform(yMin, yMax)
+                # Iterate through all people and move them to a random location in the same cell
+                for person in cell:
+                    if person.state == Person.DEAD:
+                        # Dead people do not move
+                        continue
 
-                # Continue to the next cell, because there is no movement
-                continue
-          else:
-            # The person does not travel
-            person.isVisiting = False
-          # Reset the person's location to home
-          person.x, person.y = person.home
+                    # Check if the person can travel
+                    if (cellsToTravelTo - (not frame.isLockedDown[rowCount][colCount]) > 0 and 
+                            random() < self.params.TRAVEL_RATE):
+                            if person.followsRules and self.params.TRAVEL_RESTRICTIONS_ENABLED:
+                                # The person cannot travel
+                                # Update the cost
+                                self.interventionCost += self.params.TRAVEL_RESTRICTIONS_COST
+                                person.isVisiting = False
+                            else:
+                                # The person can travel
+                                person.isVisiting = True
 
-          # Change the position of the person by a random amount
-          person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
-          person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+                                # The person is travelling to a different cell
+                                cellRow, cellCol = Utils.getRandomCell(
+                                    self.params, 
+                                    self.params.TRAVEL_PROBABILITES[rowCount][colCount]
+                                )
+                                if self.params.TRAVEL_RESTRICTIONS_ENABLED:
+                                    while frame.isLockedDown[cellCol][cellRow]:
+                                        cellRow, cellCol = Utils.getRandomCell(
+                                            self.params, 
+                                            self.params.TRAVEL_PROBABILITES[rowCount][colCount]
+                                        )
+                                
+                                # Move the person to a random position in the new cell
+                                frame.visitingGrid[cellRow][cellCol].append(person)
+                                person.x = uniform(xMin, xMax)
+                                person.y = uniform(yMin, yMax)
 
-          person.x = min(xMax, max(xMin, person.x))
-          person.y = min(yMax, max(yMin, person.y))
+                                # Continue to the next cell, because there is no movement
+                                continue
+                    else:
+                        # The person does not travel
+                        person.isVisiting = False
+                    # Reset the person's location to home
+                    person.x, person.y = person.home
+
+                    # Change the position of the person by a random amount
+                    person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+                    person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+
+                    person.x = min(xMax, max(xMin, person.x))
+                    person.y = min(yMax, max(yMin, person.y))
 
 if __name__ == '__main__':
-  # Only performed when this file is run directly
-  # Used for testing locally
-  # Create a simulation object and runs the simulation
-  from time import time
+    # Only performed when this file is run directly
+    # Used for testing locally
+    # Create a simulation object and runs the simulation
+    from time import time
 
-  # Parameters for running the simulation
-  params = Params(
-    POPULATION_SIZE = 5000,
-    VACCINATION_ENABLED = False,
-    LOCKDOWN_ENABLED = True,
-    HYGIENE_ENABLED = False,
-    TRAVEL_RESTRICTIONS_ENABLED = False
-  )
-  
-  simulation = Simulation(params)
-  startTime = time()
-  frames = list(simulation.run())
-  print(f'Time taken: {time() - startTime:.2f}s')
+    # Parameters for running the simulation
+    params = Params(
+        POPULATION_SIZE = 5000,
+        VACCINATION_ENABLED = False,
+        LOCKDOWN_ENABLED = True,
+        HYGIENE_ENABLED = False,
+        TRAVEL_RESTRICTIONS_ENABLED = False
+    )
+    
+    simulation = Simulation(params)
+    startTime = time()
+    frames = list(simulation.run())
+    print(f'Time taken: {time() - startTime:.2f}s')
 
-  Utils.drawFramesMatplotlib(frames, params)
+    Utils.drawFramesMatplotlib(frames, params)

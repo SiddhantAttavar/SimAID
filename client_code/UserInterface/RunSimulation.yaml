@@ -1,48 +1,48 @@
 container:
-  type: ColumnPanel
-  properties: {col_widths: '{}'}
-  event_bindings: {}
+    type: ColumnPanel
+    properties: {col_widths: '{}'}
+    event_bindings: {}
 components:
 - type: ColumnPanel
-  properties: {col_widths: '{}'}
-  name: root
-  layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
-  components:
-  - type: Button
-    properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Run Simulation, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
-    name: runSimulationButton
-    layout_properties: {grid_position: 'RNILPH,KWCHVG'}
-    event_bindings: {click: onRunSimulationButtonClick}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Cost: Rs. 0', font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: ''}
-    name: costLabel
-    layout_properties: {grid_position: 'RNILPH,XAHWQP'}
+    properties: {col_widths: '{}'}
+    name: root
+    layout_properties: {grid_position: 'ZEMYEG,AZKHOH'}
+    components:
+    - type: Button
+        properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: true,
+            foreground: '', visible: true, text: Run Simulation, font_size: null, font: '',
+            spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+            background: '', bold: false, underline: false, icon: ''}
+        name: runSimulationButton
+        layout_properties: {grid_position: 'RNILPH,KWCHVG'}
+        event_bindings: {click: onRunSimulationButtonClick}
+    - type: Label
+        properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+            visible: true, text: 'Cost: Rs. 0', font_size: null, font: '', spacing_above: small,
+            icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+            underline: false, icon: ''}
+        name: costLabel
+        layout_properties: {grid_position: 'RNILPH,XAHWQP'}
+        event_bindings: {}
+    - type: Button
+        properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: false,
+            foreground: '', visible: true, text: Save Simulation, font_size: null, font: '',
+            spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+            background: '', bold: false, underline: false, icon: ''}
+        name: saveSimulationButton
+        layout_properties: {grid_position: 'RNILPH,TEPOLT'}
+        event_bindings: {click: onSaveSimulationButtonClick}
+    - type: Canvas
+        properties: {role: background-image, height: '466', tooltip: '', border: '', foreground: '',
+            visible: true, spacing_above: small, spacing_below: small, background: ''}
+        name: canvas
+        layout_properties: {grid_position: 'VFAJUZ,WALMOZ'}
+        event_bindings: {show: onCanvasShow}
+    - type: Plot
+        properties: {spacing_above: small, spacing_below: small, height: '466', visible: true,
+            tooltip: '', interactive: true}
+        name: graph
+        layout_properties: {grid_position: 'VFAJUZ,BJWFBJ'}
+        event_bindings: {}
     event_bindings: {}
-  - type: Button
-    properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: true, text: Save Simulation, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
-    name: saveSimulationButton
-    layout_properties: {grid_position: 'RNILPH,TEPOLT'}
-    event_bindings: {click: onSaveSimulationButtonClick}
-  - type: Canvas
-    properties: {role: background-image, height: '466', tooltip: '', border: '', foreground: '',
-      visible: true, spacing_above: small, spacing_below: small, background: ''}
-    name: canvas
-    layout_properties: {grid_position: 'VFAJUZ,WALMOZ'}
-    event_bindings: {show: onCanvasShow}
-  - type: Plot
-    properties: {spacing_above: small, spacing_below: small, height: '466', visible: true,
-      tooltip: '', interactive: true}
-    name: graph
-    layout_properties: {grid_position: 'VFAJUZ,BJWFBJ'}
-    event_bindings: {}
-  event_bindings: {}
 is_package: false
