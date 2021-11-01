@@ -1,4 +1,3 @@
-import json
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -16,7 +15,7 @@ class Frame:
     list of people in each cell of the grid who are visiting the cell
   isLockedDown : List[List[bool]]
     Whether the cell is under lockdown
-  stateGroupss : List[List[int]]
+  stateGroupss : List[List[Tuple[int, int, int]]]
     list of indexes of the people in each states
 
   Methods
@@ -49,6 +48,3 @@ class Frame:
       for col in range(params.GRID_SIZE):
         for personCount, person in enumerate(self.grid[row][col]):
           self.stateGroups[person.state.id].append((row, col, personCount))
-    
-  def __serialize__(self):
-    return json.dump(self, )

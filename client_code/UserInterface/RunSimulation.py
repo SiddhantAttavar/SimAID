@@ -6,6 +6,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from plotly import graph_objects as go
 from time import sleep
+import json
 
 from ..Simulation.Simulation import Simulation
 from ..Simulation.Person import Person
@@ -255,11 +256,17 @@ class RunSimulation(RunSimulationTemplate):
     if anvil.users.get_user() is None:
       return
     
+    print(json.dumps(self.simulationFrames))
+    
+    print(json.loads(
+      json.dumps(self.simulationFrames)
+    ))
+    
     # Save the simulation to the database
     row = app_tables.simulations.add_row(
-      user = anvil.users.get_user(),
+      user = anvil.users.get_user()['email'],
       params = self.params.__dict__,
       remarks = self.remarksTextBox.text,
-      simulationData = [frame.__dict__ for frame in self.simulationFrames]
+      simulationData = self.simulationFrames.__dict__
     )
     print(row)
