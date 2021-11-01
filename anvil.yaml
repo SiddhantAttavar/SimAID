@@ -86,4 +86,7 @@ db_schema:
     - name: time
       admin_ui: {width: 200}
       type: datetime
+    - name: randomSeed
+      admin_ui: {width: 200}
+      type: number
 renamed: true
