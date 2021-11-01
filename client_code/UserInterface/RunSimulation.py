@@ -262,6 +262,7 @@ class RunSimulation(RunSimulationTemplate):
     
     # Get current time
     time = datetime.now()
+    timeStr = time.strftime("%m/%d/%Y, %H:%M:%S")
     
     # Save the simulation to the database
     # user: the email of the user
@@ -285,9 +286,9 @@ class RunSimulation(RunSimulationTemplate):
       'params': self.params.__dict__,
       'simulationData': self.graphYData,
       'cost': self.interventionCost,
-      'time': str(time),
+      'time': timeStr,
     }
-    blobMedia = BlobMedia('text', json.dumps(jsonResults).encode('utf-8'), name = f'{time}.json')
+    blobMedia = BlobMedia('text', json.dumps(jsonResults).encode('utf-8'), name = f'{timeStr}.json')
     anvil.media.download(blobMedia)
     
     # Disable the save simulation button
