@@ -272,6 +272,11 @@ class RunSimulation(RunSimulationTemplate):
     # Get current time
     time = datetime.now()
     timeStr = time.strftime("%m/%d/%Y, %H:%M:%S")
+
+    # Get simulation data
+    stateNames = [state.name for state in Person.states]
+    simulationData = dict(zip(stateNames, self.graphYData))
+    print(simulationData)
     
     # Save the simulation to the database
     # user: the email of the user
@@ -283,7 +288,7 @@ class RunSimulation(RunSimulationTemplate):
       user = anvil.users.get_user()['email'],
       params = self.params.__dict__,
       remarks = self.remarksTextBox.text,
-      simulationData = self.graphYData,
+      simulationData = simulationData,
       cost = self.interventionCost,
       time = time,
       randomSeed = self.randomSeed
@@ -294,7 +299,7 @@ class RunSimulation(RunSimulationTemplate):
     jsonResults = {
       'user': anvil.users.get_user()['email'],
       'params': self.params.__dict__,
-      'simulationData': self.graphYData,
+      'simulationData': simulationData,
       'cost': self.interventionCost,
       'time': timeStr,
       'randomSeed': self.randomSeed
