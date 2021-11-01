@@ -276,7 +276,6 @@ class RunSimulation(RunSimulationTemplate):
     # Get simulation data
     stateNames = [state.name for state in Person.states]
     simulationData = dict(zip(stateNames, self.graphYData))
-    print(simulationData)
     
     # Save the simulation to the database
     # user: the email of the user
