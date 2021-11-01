@@ -79,22 +79,6 @@ class Main(MainTemplate):
     self.root.clear()
     self.root.add_component(RunSimulation(params = self.simulationControlsForm.params), full_width_row = True)
 
-  def onLoadSimulationLinkClick(self, **event_args):
-    '''This method is called when the load simulation link in the navbar is clicked
-    
-    Parameters
-    ----------
-    **event_args
-      Details about how the slider is moved
-    
-    Returns
-    -------
-    None
-    '''
-    
-    self.root.clear()
-    self.root.add_component(LoadSimulation(), full_width_row = True)
-
   def onSignInClick(self, **event_args):
     '''This method is called when the sign in button is clicked
     
