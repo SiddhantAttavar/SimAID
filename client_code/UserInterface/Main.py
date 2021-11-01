@@ -8,7 +8,6 @@ import anvil.users
 
 from .RunSimulation import RunSimulation
 from .SimulationControls import SimulationControls
-from .LoadSimulation import LoadSimulation
 
 class Main(MainTemplate):
   '''Class which changes the UI in the main page
