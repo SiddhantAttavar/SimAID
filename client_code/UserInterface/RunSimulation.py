@@ -235,7 +235,8 @@ class RunSimulation(RunSimulationTemplate):
       self.costLabel.text = f'Cost: Rs. {simulation.interventionCost}'
     
     # Once the simulation is over, allow the user to save it
-    self.saveSimulationButton.enabled = True
+    if anvil.users.get_user() is not None:
+      self.saveSimulationButton.enabled = True
 
   def onSaveSimulationButtonClick(self, **event_args):
     '''This method is called when the save simulation button is clicked
@@ -253,10 +254,12 @@ class RunSimulation(RunSimulationTemplate):
     # Check if the user is signed in
     if anvil.users.get_user() is None:
       return
-
+    
     # Save the simulation to the database
     row = app_tables.simulations.add_row(
-      anvil.users.get_user(),
-      self.params.__dict__,
-      self.simulationFrames
+      user = anvil.users.get_user(),
+      params = self.params.__dict__,
+      remarks = self.remarksTextBox.text,
+      simulationData = [frame.__dict__ for frame in self.simulationFrames]
     )
+    print(row)

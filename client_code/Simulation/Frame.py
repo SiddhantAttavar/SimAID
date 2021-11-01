@@ -1,3 +1,4 @@
+import json
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -48,3 +49,6 @@ class Frame:
       for col in range(params.GRID_SIZE):
         for personCount, person in enumerate(self.grid[row][col]):
           self.stateGroups[person.state.id].append((row, col, personCount))
+    
+  def __serialize__(self):
+    return json.dump(self, )
