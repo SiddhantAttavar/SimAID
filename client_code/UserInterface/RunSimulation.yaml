@@ -1,6 +1,6 @@
 container:
   type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"CKRHQJ":45,"HZDFXX":15}'}
   event_bindings: {}
 components:
 - type: ColumnPanel
@@ -14,7 +14,7 @@ components:
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '', bold: false, underline: false, icon: ''}
     name: runSimulationButton
-    layout_properties: {grid_position: 'RNILPH,KWCHVG'}
+    layout_properties: {grid_position: 'RYAGDS,IKTGKW'}
     event_bindings: {click: onRunSimulationButtonClick}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -22,16 +22,8 @@ components:
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
       underline: false, icon: ''}
     name: costLabel
-    layout_properties: {grid_position: 'RNILPH,XAHWQP'}
+    layout_properties: {grid_position: 'RYAGDS,AJIVPO'}
     event_bindings: {}
-  - type: Button
-    properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: true, text: Save Simulation, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
-    name: saveSimulationButton
-    layout_properties: {grid_position: 'RNILPH,TEPOLT'}
-    event_bindings: {click: onSaveSimulationButtonClick}
   - type: Canvas
     properties: {role: background-image, height: '466', tooltip: '', border: '', foreground: '',
       visible: true, spacing_above: small, spacing_below: small, background: ''}
@@ -52,4 +44,12 @@ components:
     background: '', bold: false, underline: false}
   name: remarksTextBox
   layout_properties: {grid_position: 'QHZEHR,CKRHQJ'}
+- type: Button
+  properties: {role: primary-color, align: center, tooltip: '', border: '', enabled: false,
+    foreground: '', visible: true, text: Save Simulation, font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '',
+    bold: false, underline: false, icon: ''}
+  name: saveSimulationButton
+  layout_properties: {grid_position: 'QHZEHR,HZDFXX'}
+  event_bindings: {click: onSaveSimulationButtonClick}
 is_package: false

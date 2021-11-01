@@ -80,4 +80,10 @@ db_schema:
     - name: simulationData
       admin_ui: {width: 200}
       type: simpleObject
+    - name: cost
+      admin_ui: {width: 200}
+      type: number
+    - name: time
+      admin_ui: {width: 200}
+      type: datetime
 renamed: true

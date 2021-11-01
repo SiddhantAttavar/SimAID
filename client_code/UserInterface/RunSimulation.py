@@ -4,9 +4,10 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import anvil.media
 from plotly import graph_objects as go
 from time import sleep
-import json
+from datetime import datetime
 
 from ..Simulation.Simulation import Simulation
 from ..Simulation.Person import Person
@@ -29,6 +30,8 @@ class RunSimulation(RunSimulationTemplate):
     The data in the Y axis of the graph
   params : Params
     The parameters of the simulation
+  interventionCost : int
+    The cost of the interntion measures in the simulation
 
   Methods
   -------
@@ -233,6 +236,7 @@ class RunSimulation(RunSimulationTemplate):
       self.drawFrame(frame, frameCount)
       sleep(self.params.TIME_PER_FRAME)
       self.costLabel.text = f'Cost: Rs. {simulation.interventionCost}'
+    self.interventionCost = simulation.interventionCost
     
     # Once the simulation is over, allow the user to save it
     if anvil.users.get_user() is not None:
@@ -255,12 +259,35 @@ class RunSimulation(RunSimulationTemplate):
     if anvil.users.get_user() is None:
       return
     
+    # Get current time
+    time = datetime.now()
+    
     # Save the simulation to the database
-    # User: the email of the user
-    # 
+    # user: the email of the user
+    # params: rhe simulation parameters as a python dictionary
+    # remarks: user remarks
+    # simulationData: results of the simulation
+    # cost: cost of the simulation in INR
     row = app_tables.simulations.add_row(
-      user = anvil.users.get_user().get_id(),
+      user = anvil.users.get_user()['email'],
       params = self.params.__dict__,
       remarks = self.remarksTextBox.text,
-      simulationData = self.graphYData
+      simulationData = self.graphYData,
+      cost = self.interventionCost,
+      time = time
     )
+    
+    # Downlaod the results as a json file
+    # Create BlobMedia object, write json data to it and download the file
+    jsonResults = {
+      'user': anvil.users.get_user()['email'],
+      'params': self.params.__dict__,
+      'simulationData': self.graphYData,
+      'cost': self.interventionCost,
+      'time': str(time),
+    }
+    blobMedia = BlobMedia('text', str(jsonResults).encode('utf-8'), name = f'{time}.json')
+    anvil.media.download(blobMedia)
+    
+    # Disable the save simulation button
+    self.saveSimulationButton.enabled = False
