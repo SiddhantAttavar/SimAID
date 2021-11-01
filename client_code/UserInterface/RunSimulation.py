@@ -8,6 +8,7 @@ import anvil.media
 from plotly import graph_objects as go
 from time import sleep
 from datetime import datetime
+import json
 
 from ..Simulation.Simulation import Simulation
 from ..Simulation.Person import Person
@@ -286,7 +287,7 @@ class RunSimulation(RunSimulationTemplate):
       'cost': self.interventionCost,
       'time': str(time),
     }
-    blobMedia = BlobMedia('text', str(jsonResults).encode('utf-8'), name = f'{time}.json')
+    blobMedia = BlobMedia('text', json.dumps(jsonResults).encode('utf-8'), name = f'{time}.json')
     anvil.media.download(blobMedia)
     
     # Disable the save simulation button
