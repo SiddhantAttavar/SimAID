@@ -227,7 +227,6 @@ class RunSimulation(RunSimulationTemplate):
     
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)
-    print(self.params.TRAVEL_PROBABILITES)
     self.simulationFrames = []
     for frameCount, frame in enumerate(simulation.run()):
       self.simulationFrames.append(frame)
@@ -256,17 +255,12 @@ class RunSimulation(RunSimulationTemplate):
     if anvil.users.get_user() is None:
       return
     
-    print(json.dumps(self.simulationFrames))
-    
-    print(json.loads(
-      json.dumps(self.simulationFrames)
-    ))
-    
     # Save the simulation to the database
+    # User: the email of the user
+    # 
     row = app_tables.simulations.add_row(
-      user = anvil.users.get_user()['email'],
+      user = anvil.users.get_user().get_id(),
       params = self.params.__dict__,
       remarks = self.remarksTextBox.text,
-      simulationData = self.simulationFrames.__dict__
+      simulationData = self.graphYData
     )
-    print(row)
