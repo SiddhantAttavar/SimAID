@@ -74,6 +74,9 @@ db_schema:
     - name: params
       admin_ui: {width: 200}
       type: simpleObject
+    - name: remarks
+      admin_ui: {width: 200}
+      type: string
     - name: simulationData
       admin_ui: {width: 200}
       type: simpleObject
