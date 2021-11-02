@@ -244,7 +244,6 @@ class RunSimulation(RunSimulationTemplate):
     for frameCount, frame in enumerate(simulation.run()):
       self.simulationFrames.append(frame)
       self.drawFrame(frame, frameCount)
-      sleep(self.params.TIME_PER_FRAME)
       self.costLabel.text = f'Cost: Rs. {simulation.interventionCost}'
     self.interventionCost = simulation.interventionCost
     
