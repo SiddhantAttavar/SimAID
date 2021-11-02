@@ -298,6 +298,7 @@ class RunSimulation(RunSimulationTemplate):
     jsonResults = {
       'user': anvil.users.get_user()['email'],
       'params': self.params.__dict__,
+      'remarks': self.remarksTextBox.text,
       'simulationData': simulationData,
       'cost': self.interventionCost,
       'time': timeStr,
