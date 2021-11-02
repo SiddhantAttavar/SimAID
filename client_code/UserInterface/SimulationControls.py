@@ -140,9 +140,9 @@ class SimulationControls(SimulationControlsTemplate):
   def onSimulationLengthChange(self, **event_args):
     '''This method is called when the simulation length slider is moved'''
 
-    self.params.SIMULATION_LENGTH = self.simulationLengthSlider.value
+    self.params.SIMULATION_LENGTH = int(round(self.simulationLengthSlider.value))
     self.diseaseTimelineSlider.max = self.params.SIMULATION_LENGTH
-    self.simulationLengthLabel.text = f'Simulation Length: {self.simulationLengthSlider.value} days'
+    self.simulationLengthLabel.text = f'Simulation Length: {int(round(self.simulationLengthSlider.value))} days'
   
   def onGridSizeChange(self, handle, **event_args):
     '''This method is called when the grid size slider is moved'''
