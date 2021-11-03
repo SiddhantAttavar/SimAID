@@ -110,7 +110,7 @@ class Params:
     self.POPULATION_DEMOGRAPHICS = [0.35, 0.8, 0.95, 1]
     self.SIMULATION_LENGTH = 50
     self.CONTACT_RADIUS = 0.1
-    self.TIME_PER_FRAME = 0.5
+    self.TIME_PER_FRAME = 0.2
     self.GRID_SIZE = 3
     self.CELL_SIZE = 1 / self.GRID_SIZE
     self.MAX_MOVEMENT = 0.05
