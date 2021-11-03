@@ -126,7 +126,7 @@ class Params:
     self.INCUBATION_PERIOD = 5
     self.INFECTION_PERIOD = 10
     self.MORTALITY_RATE = 0.3
-    self.IMMUNITY_PERIOD = 60
+    self.IMMUNITY_PERIOD = 30
 
     # Intervention related parameters
     self.RULE_COMPLIANCE_RATE = 1.0
