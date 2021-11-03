@@ -112,13 +112,13 @@ class Params:
     self.CONTACT_RADIUS = 0.1
     self.TIME_PER_FRAME = 0.5
     self.GRID_SIZE = 3
-    self.GRID_PROBABILITIES = []
     self.CELL_SIZE = 1 / self.GRID_SIZE
     self.MAX_MOVEMENT = 0.05
     self.TRAVEL_RATE = 0.2
-    self.TRAVEL_PROBABILITES = []
     self.COMORBIDITY_COEFFICIENTS = [0.5, 0.7, 0.9, 1]
     self.RANDOM_SEED = 0
+    self.GRID_PROBABILITIES = []
+    self.TRAVEL_PROBABILITES = []
 
     # State transition related parameters
     self.INITIAL_INFECTED = 2

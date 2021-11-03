@@ -71,50 +71,14 @@ class Simulation:
     None
     '''
     
-    # Set random seed to 2 for uniform randomness
-    seed(2)
+    # Initialize the population and travel matrix
+    self.initializePopulationAndTravelMatrix()
 
-    # Create the probability matrix for the grid
-    self.params.GRID_PROBABILITIES = [random() for _ in range(self.params.GRID_SIZE ** 2)]
-
-    # Find the cumulative sum for each cell
-    for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
-      self.params.GRID_PROBABILITIES[i] += self.params.GRID_PROBABILITIES[i - 1]
-
-    # Scale all probabilities by the sum of probabilities
-    for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
-      self.params.GRID_PROBABILITIES[i] /= self.params.GRID_PROBABILITIES[-1]
-
-    # Create the probability matrix for travel between cells
-    # If there is only one cell, there is no travel between cells
-    if self.params.GRID_SIZE == 1:
-      self.params.GRID_TRAVEL_PROBABILITIES = [[0]]
-    else:
-      # Otherwise, iterate through all cells to get the probability matrix
-      self.params.TRAVEL_PROBABILITES = []
-      for rowCount in range(self.params.GRID_SIZE):
-        self.params.TRAVEL_PROBABILITES.append([])
-        for colCount in range(self.params.GRID_SIZE):
-          # For each cell create probabilities
-          travelProbabilites = [random() for _ in range(self.params.GRID_SIZE ** 2)]
-
-          # The probability of travelling from a cell to itself is 0
-          travelProbabilites[rowCount * self.params.GRID_SIZE + colCount] = 0
-
-          # Add probability factor to the probability matrix
-          for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
-            travelProbabilites[i] *= self.params.GRID_PROBABILITIES[i]
-
-          # Find the cumulative sum for each cell
-          for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
-            travelProbabilites[i] += travelProbabilites[i - 1]
-          
-          # Scale all probabilities by the sum of probabilities
-          for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
-            travelProbabilites[i] /= travelProbabilites[-1]
-          
-          # Add the probabilities to the probability matrix
-          self.params.TRAVEL_PROBABILITES[rowCount].append(travelProbabilites)
+    # Reset random seed to current system time
+    # Initalize and save seed
+    startTime = datetime.now()
+    self.params.RANDOM_SEED = startTime.hour * 10000 + startTime.minute * 100 + startTime.second
+    seed(self.params.RANDOM_SEED)
 
     # Create the first frame
     # Intialize the population list with people and whether they follow rules
@@ -140,15 +104,10 @@ class Simulation:
       personCount = randrange(len(grid[cellRow][cellCol]))
       key = (cellRow, cellCol, personCount)
 
+      # Check for duplicates
       if key not in done:
         done.add(key)
         grid[cellRow][cellCol][personCount].state = Person.EXPOSED
-    
-    # Reset random seed to current system time
-    # Initalize and save seed
-    startTime = datetime.now()
-    self.params.RANDOM_SEED = startTime.hour * 10000 + startTime.minute * 100 + startTime.second
-    seed(self.params.RANDOM_SEED)
 
     currFrame = Frame(grid, self.params)
     yield currFrame
@@ -284,6 +243,63 @@ class Simulation:
 
           person.x = min(xMax, max(xMin, person.x))
           person.y = min(yMax, max(yMin, person.y))
+  
+  def initializePopulationAndTravelMatrix(self):
+    '''Initialize the population and travel matrix
+    
+    Parameters
+    ----------
+    None
+    
+    Returns
+    -------
+    None
+    '''
+
+    # Set random seed to 2 for uniform randomness
+    seed(2)
+
+    # Create the probability matrix for the grid
+    self.params.GRID_PROBABILITIES = [random() for _ in range(self.params.GRID_SIZE ** 2)]
+
+    # Find the cumulative sum for each cell
+    for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
+      self.params.GRID_PROBABILITIES[i] += self.params.GRID_PROBABILITIES[i - 1]
+
+    # Scale all probabilities by the sum of probabilities
+    for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+      self.params.GRID_PROBABILITIES[i] /= self.params.GRID_PROBABILITIES[-1]
+
+    # Create the probability matrix for travel between cells
+    # If there is only one cell, there is no travel between cells
+    if self.params.GRID_SIZE == 1:
+      self.params.GRID_TRAVEL_PROBABILITIES = [[0]]
+    else:
+      # Otherwise, iterate through all cells to get the probability matrix
+      self.params.TRAVEL_PROBABILITES = []
+      for rowCount in range(self.params.GRID_SIZE):
+        self.params.TRAVEL_PROBABILITES.append([])
+        for colCount in range(self.params.GRID_SIZE):
+          # For each cell create probabilities
+          travelProbabilites = [random() for _ in range(self.params.GRID_SIZE ** 2)]
+
+          # The probability of travelling from a cell to itself is 0
+          travelProbabilites[rowCount * self.params.GRID_SIZE + colCount] = 0
+
+          # Add probability factor to the probability matrix
+          for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+            travelProbabilites[i] *= self.params.GRID_PROBABILITIES[i]
+
+          # Find the cumulative sum for each cell
+          for i in range(1, self.params.GRID_SIZE * self.params.GRID_SIZE):
+            travelProbabilites[i] += travelProbabilites[i - 1]
+          
+          # Scale all probabilities by the sum of probabilities
+          for i in range(self.params.GRID_SIZE * self.params.GRID_SIZE):
+            travelProbabilites[i] /= travelProbabilites[-1]
+          
+          # Add the probabilities to the probability matrix
+          self.params.TRAVEL_PROBABILITES[rowCount].append(travelProbabilites)
 
 if __name__ == '__main__':
   # Only performed when this file is run directly
