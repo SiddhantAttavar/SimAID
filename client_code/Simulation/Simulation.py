@@ -2,9 +2,10 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from random import random, uniform, randrange
+from random import random, uniform, randrange, seed
 from bisect import bisect_left as insertLeft
 from copy import deepcopy
+from datetime import datetime
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
@@ -69,6 +70,9 @@ class Simulation:
     -------
     None
     '''
+    
+    # Set random seed to 2 for uniform randomness
+    seed(2)
 
     # Create the probability matrix for the grid
     self.params.GRID_PROBABILITIES = [random() for _ in range(self.params.GRID_SIZE ** 2)]
@@ -139,6 +143,12 @@ class Simulation:
       if key not in done:
         done.add(key)
         grid[cellRow][cellCol][personCount].state = Person.EXPOSED
+    
+    # Reset random seed to current system time
+    # Initalize and save seed
+    startTime = datetime.now()
+    self.params.RANDOM_SEED = startTime.hour * 10000 + startTime.minute * 100 + startTime.second
+    seed(self.params.RANDOM_SEED)
 
     currFrame = Frame(grid, self.params)
     yield currFrame

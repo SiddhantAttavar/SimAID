@@ -30,7 +30,9 @@ class Params:
     The probability of a person travelling to another cell
   TRAVEL_PROBABILITES : List[List[List[List[float]]]]
     The list of probabilities of going from one cell to another cell
-  
+  RANDOM_SEED : int
+    The seed for the random number generator used in the simulation
+
   Pathogen Parameters
   -------------------
   INFECTION_RATE : float
@@ -116,6 +118,7 @@ class Params:
     self.TRAVEL_RATE = 0.2
     self.TRAVEL_PROBABILITES = []
     self.COMORBIDITY_COEFFICIENTS = [0.5, 0.7, 0.9, 1]
+    self.RANDOM_SEED = 0
 
     # State transition related parameters
     self.INITIAL_INFECTED = 2

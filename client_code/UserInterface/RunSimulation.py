@@ -9,7 +9,6 @@ from plotly import graph_objects as go
 from time import sleep
 from datetime import datetime
 import json
-import random
 
 from ..Simulation.Simulation import Simulation
 from ..Simulation.Person import Person
@@ -226,11 +225,6 @@ class RunSimulation(RunSimulationTemplate):
     None
     '''
     
-    # Initalize and save seed
-    startTime = datetime.now()
-    self.randomSeed = startTime.hour * 10000 + startTime.minute * 100 + startTime.second
-    random.seed(self.randomSeed)
-    
     # Set seed to a previous value
     #random.seed(114914)
 
@@ -290,7 +284,7 @@ class RunSimulation(RunSimulationTemplate):
       simulationData = simulationData,
       cost = self.interventionCost,
       time = time,
-      randomSeed = self.randomSeed
+      randomSeed = self.params.randomSeed
     )
     
     # Downlaod the results as a json file
@@ -302,7 +296,7 @@ class RunSimulation(RunSimulationTemplate):
       'simulationData': simulationData,
       'cost': self.interventionCost,
       'time': timeStr,
-      'randomSeed': self.randomSeed
+      'randomSeed': self.params.randomSeed
     }
     blobMedia = BlobMedia('text', json.dumps(jsonResults).encode('utf-8'), name = f'{timeStr}.json')
     anvil.media.download(blobMedia)
