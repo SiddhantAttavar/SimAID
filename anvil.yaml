@@ -14,7 +14,7 @@ package_name: SimAID
 allow_embedding: true
 name: SimAID
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
-metadata: {}
+metadata: {logo_img: 'asset:temp-logo.png'}
 startup_form: UserInterface.Main
 native_deps: {head_html: "<style>\n.box{\n  padding: 10px;\n}\n\ninput[type=\"range\"\
     ]\n{\n    width: 100%;\n    margin: 0px;\n    padding: 8px 0px;\n    outline:\
