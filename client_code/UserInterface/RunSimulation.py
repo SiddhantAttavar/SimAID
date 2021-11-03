@@ -284,7 +284,7 @@ class RunSimulation(RunSimulationTemplate):
       simulationData = simulationData,
       cost = self.interventionCost,
       time = time,
-      randomSeed = self.params.randomSeed
+      randomSeed = self.params.RANDOM_SEED
     )
     
     # Downlaod the results as a json file
@@ -296,7 +296,7 @@ class RunSimulation(RunSimulationTemplate):
       'simulationData': simulationData,
       'cost': self.interventionCost,
       'time': timeStr,
-      'randomSeed': self.params.randomSeed
+      'randomSeed': self.params.RANDOM_SEED
     }
     blobMedia = BlobMedia('text', json.dumps(jsonResults).encode('utf-8'), name = f'{timeStr}.json')
     anvil.media.download(blobMedia)

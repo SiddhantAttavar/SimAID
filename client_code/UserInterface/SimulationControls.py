@@ -68,7 +68,7 @@ class SimulationControls(SimulationControlsTemplate):
     
     # Infection rate UI initialization
     self.infectionRateSlider.start = round(self.params.INFECTION_RATE * 100)
-    self.infectionRateLabel.text = f'Infection Rate: {self.infectionRateSlider.start}%'
+    self.infectionRateLabel.text = f'Infection Probability: {self.infectionRateSlider.start}%'
     
     # Disease timeline parameters UI initialization
     self.diseaseTimelineSlider.max = self.simulationLengthSlider.start
@@ -84,11 +84,11 @@ class SimulationControls(SimulationControlsTemplate):
     
     # Morality rate UI initialization
     self.mortalityRateSlider.start = round(self.params.MORTALITY_RATE * 100)
-    self.mortalityRateLabel.text = f'Mortality Rate: {self.mortalityRateSlider.start}%'
+    self.mortalityRateLabel.text = f'Mortality Probability: {self.mortalityRateSlider.start}%'
     
     # Rule compliance rate UI initialization
     self.ruleComplianceRateSlider.start = round(self.params.RULE_COMPLIANCE_RATE * 100)
-    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate: {self.ruleComplianceRateSlider.start}%'
+    self.ruleComplianceRateLabel.text = f'Rule Compliance Probability: {self.ruleComplianceRateSlider.start}%'
     
     # Vaccination UI initialization
     self.vaccinationSwitch.checked = self.params.VACCINATION_ENABLED
@@ -155,7 +155,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the infection rate slider is moved'''
 
     self.params.INFECTION_RATE = self.infectionRateSlider.value / 100
-    self.infectionRateLabel.text = f'Infection Rate: {int(round(self.infectionRateSlider.value))}%'
+    self.infectionRateLabel.text = f'Infection Probability: {int(round(self.infectionRateSlider.value))}%'
     
   def onDiseaseTimelineChange(self, **event_args):
     '''This method is called when the disease timline sliders are moved'''
@@ -173,13 +173,13 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the mortality rate slider is moved'''
     
     self.params.MORTALITY_RATE = self.mortalityRateSlider.value / 100
-    self.mortalityRateLabel.text = f'Mortality Rate: {int(round(self.mortalityRateSlider.value))}%'
+    self.mortalityRateLabel.text = f'Mortality Probability: {int(round(self.mortalityRateSlider.value))}%'
     
   def onRuleComplianceRateChange(self, handle, **event_args):
     '''This method is called when the rule compliance rate slider is moved'''
     
     self.params.RULE_COMPLIANCE_RATE = self.ruleComplianceRateSlider.value / 100
-    self.ruleComplianceRateLabel.text = f'Rule Compliance Rate: {int(round(self.ruleComplianceRateSlider.value))}%'
+    self.ruleComplianceRateLabel.text = f'Rule Compliance Probability: {int(round(self.ruleComplianceRateSlider.value))}%'
     
   def onVaccinationChange(self, **event_args):
     '''This method is called when the vaccination switch is checked or unchecked'''
@@ -216,7 +216,7 @@ class SimulationControls(SimulationControlsTemplate):
       self.lockdownLabel.text = 'Lockdown: '
 
   def onLockdownLevelChange(self, handle, **event_args):
-    '''This method is called when the lockdown rate slider is moved'''
+    '''This method is called when the lockdown level slider is moved'''
     
     self.params.LOCKDOWN_LEVEL = self.lockdownSlider.value / 100
     self.lockdownLabel.text = f'Lockdown Level: {int(round(self.lockdownSlider.value))}%, Cost: Rs. {int(round(self.lockdownCostSlider.value))}'
