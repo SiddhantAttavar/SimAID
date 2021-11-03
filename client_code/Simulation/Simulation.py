@@ -136,16 +136,17 @@ class Simulation:
     if self.params.LOCKDOWN_ENABLED:
       self.interventionCost += Interventions.lockdown(frame, self.params)
 
-    self.interventionCost += Transitions.findExposed(frame, self.params)
-    Transitions.findInfected(frame, self.params)
-    Transitions.findRecovered(frame, self.params)
-    Transitions.findSusceptible(frame, self.params)
-
     # Iterate through all people and increment the frames since last state
     for row in frame.grid:
       for cell in row:
         for person in cell:
           person.framesSinceLastState += 1
+    
+    # Find which agents can transition between infection states
+    self.interventionCost += Transitions.findExposed(frame, self.params)
+    Transitions.findInfected(frame, self.params)
+    Transitions.findRecovered(frame, self.params)
+    Transitions.findSusceptible(frame, self.params)
     
     # Add to hospitalization cost
     self.interventionCost += round(

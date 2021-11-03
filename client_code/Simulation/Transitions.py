@@ -132,7 +132,6 @@ class Transitions:
     # Find if they have no time left for disease
     for row, col, personCount in frame.stateGroups[Person.INFECTED.id]:
       person = frame.grid[row][col][personCount]
-      person.framesSinceLastState += 1
       if person.framesSinceLastState >= params.INFECTION_PERIOD:
         # Find if the person recovers or dies
         person.framesSinceLastState = 0
@@ -162,7 +161,6 @@ class Transitions:
     for row, col, personCount in (frame.stateGroups[Person.RECOVERED.id] + 
                                   frame.stateGroups[Person.VACCINATED.id]):
       person = frame.grid[row][col][personCount]
-      person.framesSinceLastState += 1
       if person.framesSinceLastState >= params.IMMUNITY_PERIOD:
         # The person loses immunity and becomes susceptible again
         person.state = Person.SUSCEPTIBLE
