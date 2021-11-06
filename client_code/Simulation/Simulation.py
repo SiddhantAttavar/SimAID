@@ -111,7 +111,7 @@ class Simulation:
       # Check for duplicates
       if key not in done:
         done.add(key)
-        grid[cellRow][cellCol][personCount].state = Person.EXPOSED
+        grid[cellRow][cellCol][personCount].state = Person.INFECTED
 
     currFrame = Frame(grid, self.params)
     yield currFrame
@@ -150,8 +150,7 @@ class Simulation:
           person.framesSinceLastState += 1
     
     # Find which agents can transition between infection states
-    self.interventionCost += Transitions.findExposed(frame, self.params)
-    Transitions.findInfected(frame, self.params)
+    self.interventionCost += Transitions.findInfected(frame, self.params)
     Transitions.findRecovered(frame, self.params)
     Transitions.findSusceptible(frame, self.params)
     
@@ -212,7 +211,6 @@ class Simulation:
                 # The person cannot travel
                 # Update the cost
                 self.interventionCost += self.params.TRAVEL_RESTRICTIONS_COST
-                person.isVisiting = False
               else:
                 # The person can travel
                 person.isVisiting = True
@@ -240,9 +238,9 @@ class Simulation:
 
                 # Continue to the next cell, because there is no movement
                 continue
-          else:
-            # The person does not travel
-            person.isVisiting = False
+
+          # The person does not travel
+          person.isVisiting = False
           # Reset the person's location to home
           person.x, person.y = person.home
 

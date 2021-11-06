@@ -73,12 +73,10 @@ class SimulationControls(SimulationControlsTemplate):
     # Disease timeline parameters UI initialization
     self.diseaseTimelineSlider.max = self.simulationLengthSlider.start
     self.diseaseTimelineSlider.start = [
-      self.params.INCUBATION_PERIOD,
-      self.params.INCUBATION_PERIOD + self.params.INFECTION_PERIOD,
-      self.params.INCUBATION_PERIOD + self.params.INFECTION_PERIOD + self.params.IMMUNITY_PERIOD
+      self.params.INFECTION_PERIOD,
+      self.params.INFECTION_PERIOD + self.params.IMMUNITY_PERIOD
     ]
     self.diseaseTimelineLabel.text = f'''Disease Timeline: 
-    Incubation Period: {self.params.INCUBATION_PERIOD} days
     Infection Period: {self.params.INFECTION_PERIOD} days
     Immunity Period: {self.params.IMMUNITY_PERIOD} days'''
     
@@ -161,11 +159,9 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the disease timline sliders are moved'''
     
     timeline = [int(round(i)) for i in self.diseaseTimelineSlider.values]
-    self.params.INCUBATION_PERIOD = max(1, timeline[0])
-    self.params.INFECTION_PERIOD = max(1, timeline[1] - timeline[0])
-    self.params.IMMUNITY_PERIOD = max(1, timeline[2] - timeline[1])
+    self.params.INFECTION_PERIOD = max(1, timeline[0])
+    self.params.IMMUNITY_PERIOD = max(1, timeline[1] - timeline[0])
     self.diseaseTimelineLabel.text = f'''Disease Timeline: 
-    Incubation Period: {int(round(self.params.INCUBATION_PERIOD))} days
     Infection Period: {int(round(self.params.INFECTION_PERIOD))} days
     Immunity Period: {int(round(self.params.IMMUNITY_PERIOD))} days'''
   

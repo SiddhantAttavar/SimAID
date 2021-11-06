@@ -26,7 +26,7 @@ class Transitions:
   '''
 
   @staticmethod
-  def findExposed(frame, params):
+  def findInfected(frame, params):
     '''Find out who will be exposed to the virus next
     
     Parameters
@@ -66,7 +66,7 @@ class Transitions:
         # Find when the infection is transmitted
         for susceptiblePerson in susceptibleGroup:
           for infectedPerson in infectedGroup:
-            dist = sqrt(
+            dist = (
               abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
               abs(infectedPerson.y - susceptiblePerson.y) ** 2
             )
@@ -76,9 +76,9 @@ class Transitions:
                 (susceptiblePerson.followsRules and infectedPerson.followsRules)):
               infectionRate *= params.HYGIENE_RATE
 
-            if dist <= params.CONTACT_RADIUS and random() < infectionRate:
-              # The disease spreads to the susceptible person and he becomes exposed
-              susceptiblePerson.state = Person.EXPOSED
+            if dist <= params.CONTACT_RADIUS ** 2 and random() < infectionRate:
+              # The disease spreads to the susceptible person and he becomes infected
+              susceptiblePerson.state = Person.INFECTED
               susceptiblePerson.framesSinceLastState = 0
 
               # Add to cost
@@ -87,31 +87,6 @@ class Transitions:
     # Return cost
     return cost
 
-  @staticmethod
-  def findInfected(frame, params):
-    '''Find out who will be infected in the next frame.
-
-    Parameters
-    ----------
-    frame : Frame
-      The current frame of the simulation
-    params : Params
-      The parameters of the simulation
-    
-    Returns
-    -------
-    None
-    '''
-
-    # Iterate through all people and find those who are exposed
-    # Find if they become infected
-    for row, col, personCount in frame.stateGroups[Person.EXPOSED.id]:
-      person = frame.grid[row][col][personCount]
-      if person.framesSinceLastState >= params.INCUBATION_PERIOD:
-        # The person becomes symptomatic
-        person.state = Person.INFECTED
-        person.framesSinceLastState = 0
-  
   @staticmethod
   def findRecovered(frame, params):
     '''Find out who will be recovered / dead next

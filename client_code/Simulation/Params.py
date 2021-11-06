@@ -37,8 +37,6 @@ class Params:
   -------------------
   INFECTION_RATE : float
     The chance of an infected person infecting a suseptible person
-  INCUBATION_PERIOD : int
-    The duration for which an infected person is asymptomatic
   INFECTION_PERIOD : int
     The duration for which an infected person has the disease
   MORTALITY_RATE : float
@@ -125,10 +123,9 @@ class Params:
     self.CONTACT_RADIUS = 3 / self.POPULATION_SIZE
 
     # State transition related parameters
-    self.INITIAL_INFECTED = 2
+    self.INITIAL_INFECTED = 1
     self.INFECTION_RATE = 0.5
-    self.INCUBATION_PERIOD = 5
-    self.INFECTION_PERIOD = 10
+    self.INFECTION_PERIOD = 15
     self.MORTALITY_RATE = 0.1
     self.IMMUNITY_PERIOD = 30
 
