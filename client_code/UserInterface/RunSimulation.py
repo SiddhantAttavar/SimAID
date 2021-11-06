@@ -10,6 +10,7 @@ from time import sleep
 from datetime import datetime
 import json
 from math import sqrt, pi
+from time import time
 
 from ..Simulation.Simulation import Simulation
 from ..Simulation.Person import Person
@@ -244,10 +245,13 @@ class RunSimulation(RunSimulationTemplate):
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)
     self.simulationFrames = []
+    startTime = time()
     for frameCount, frame in enumerate(simulation.run()):
       self.simulationFrames.append(frame)
       self.drawFrame(frame, frameCount)
-      sleep(self.params.TIME_PER_FRAME)
+      endTime = time()
+      sleep(max(0, self.params.TIME_PER_FRAME - (endTime - startTime)))
+      startTime = time()
       self.costLabel.text = f'Cost: Rs. {simulation.interventionCost}'
     self.interventionCost = simulation.interventionCost
     
