@@ -56,6 +56,7 @@ class Transitions:
               susceptibleGroup.append(person)
             elif person.state == Person.INFECTED:
               infectedGroup.append(person)
+        
         for person in frame.visitingGrid[rowCount][colCount]:
           if person.state == Person.SUSCEPTIBLE:
             susceptibleGroup.append(person)

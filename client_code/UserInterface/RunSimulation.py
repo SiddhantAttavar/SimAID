@@ -137,8 +137,9 @@ class RunSimulation(RunSimulationTemplate):
     self.graphXData.append(frameCount)
     self.graph.data = []
     for stateID, stateGroup in enumerate(frame.stateGroups):
-      if stateID == Person.VACCINATED.id and not self.params.VACCINATION_ENABLED:
-        # No need to show vaccination group if vaccination is not enabled
+      state = Person.states[stateID]
+      if not state.toGraph:
+        # Do not plot this infection state
         continue
 
       self.graphYData[stateID].append(len(stateGroup))
@@ -146,22 +147,23 @@ class RunSimulation(RunSimulationTemplate):
         x = self.graphXData,
         y = self.graphYData[stateID],
         marker = dict(
-          color = Person.states[stateID].color
+          color = state.color
         ),
-        name = Person.states[stateID].name
+        name = state.name
       )
       self.graph.data.append(figure)
     
     # Add the hospital capacity line
-    self.graph.data.append(go.Scatter(
-      x = self.graphXData,
-      y = [int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE) 
-            for _ in range(self.params.SIMULATION_LENGTH)],
-      marker = dict(
-        color = 'orange'
-      ),
-      name = 'HOSPITAL_CAPACITY'
-    ))
+    if self.params.HOSPITAL_CAPACITY > 0:
+      self.graph.data.append(go.Scatter(
+        x = self.graphXData,
+        y = [int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE) 
+              for _ in range(self.params.SIMULATION_LENGTH)],
+        marker = dict(
+          color = 'orange'
+        ),
+        name = 'HOSPITAL_CAPACITY'
+      ))
     
     self.graph.data = self.graph.data
     
@@ -241,6 +243,9 @@ class RunSimulation(RunSimulationTemplate):
     # Initialize arrays for graphing the results
     self.graphXData = []
     self.graphYData = [[] for _ in Person.states]
+    
+    # Set whether vaccinated agents are graphed based on whether it is enabled
+    Person.VACCINATED.toGraph = self.params.VACCINATED_ENABLED
     
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)

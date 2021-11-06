@@ -82,7 +82,7 @@ class Simulation:
     # The contact radius is a function of the population density
     # CONTACT_RADIUS = 3 / sqrt(POPULATION_DENSITY)
     pixelDensity = 1 / self.params.POPULATION_SIZE
-    self.params.CONTACT_RADIUS = 0.4 * sqrt(pixelDensity)
+    self.params.CONTACT_RADIUS = 0.5 * sqrt(pixelDensity)
 
     # Create the first frame
     # Intialize the population list with people and whether they follow rules

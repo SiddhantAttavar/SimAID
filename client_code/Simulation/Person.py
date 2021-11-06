@@ -64,6 +64,8 @@ class Person:
       The ID of the current state
     color : str
       The color of the current state
+    toGraph : bool
+      Whether the state is to be graphed
     
     Methods
     -------
@@ -75,7 +77,7 @@ class Person:
       Hashes the state
     '''
 
-    def __init__(self, name, stateID, color):
+    def __init__(self, name, stateID, color, toGraph):
       '''Sets some initial parameters for the state
       
       Parameters
@@ -91,6 +93,7 @@ class Person:
       self.name = name
       self.id = stateID
       self.color = color
+      self.toGraph = toGraph
     
     def __eq__(self, other):
       '''Checks if 2 states are equal
@@ -123,12 +126,12 @@ class Person:
       return self.id
   
   # Define the states
-  SUSCEPTIBLE = State('SUSCEPTIBLE', 0, 'green')
-  EXPOSED = State('EXPOSED', 1, 'orange')
-  INFECTED = State('INFECTED', 2, 'red')
-  RECOVERED = State('RECOVERED', 3, 'blue')
-  DEAD = State('DEAD', 4, 'gray')
-  VACCINATED = State('VACCINATED', 5, 'yellow')
+  SUSCEPTIBLE = State('SUSCEPTIBLE', 0, 'green', True)
+  EXPOSED = State('EXPOSED', 1, 'orange', False)
+  INFECTED = State('INFECTED', 2, 'red', True)
+  RECOVERED = State('RECOVERED', 3, 'blue', True)
+  DEAD = State('DEAD', 4, 'gray', True)
+  VACCINATED = State('VACCINATED', 5, 'yellow', False)
 
   states = [
     SUSCEPTIBLE,
