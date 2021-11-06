@@ -9,6 +9,7 @@ from plotly import graph_objects as go
 from time import sleep
 from datetime import datetime
 import json
+from math import sqrt, pi
 
 from ..Simulation.Simulation import Simulation
 from ..Simulation.Person import Person
@@ -127,7 +128,7 @@ class RunSimulation(RunSimulationTemplate):
         
         for person in cell:
           self.canvas.begin_path()
-          self.canvas.arc(person.x * self.canvasWidth, person.y * self.canvasHeight, 5)
+          self.canvas.arc(person.x * self.canvasWidth, person.y * self.canvasHeight, self.CELL_RADIUS)
           self.canvas.fill_style = person.state.color
           self.canvas.fill()
     
@@ -211,6 +212,14 @@ class RunSimulation(RunSimulationTemplate):
     self.canvasWidth = self.canvas.get_width()
     self.canvasHeight = self.canvas.get_height()
     self.canvas.background = 'black'
+    
+    # Set canvas cell render radius
+    # The pixel density is the amount of space occupied by one agent if they are uniformly distributed
+    # The agent size is 1 / 10 of the pixel density
+    pixelDensity = 1 / self.params.POPULATION_SIZE
+    cellArea = 0.5 * pixelDensity
+    simpleCellRadius = sqrt(cellArea / pi)
+    self.CELL_RADIUS = int(min(self.canvasWidth, self.canvasHeight) * simpleCellRadius) 
 
   def onRunSimulationButtonClick(self, **event_args):
     '''This method is called when the run simulation button is clicked

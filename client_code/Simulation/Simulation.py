@@ -6,6 +6,7 @@ from random import random, uniform, randrange, seed
 from bisect import bisect_left as insertLeft
 from copy import deepcopy
 from datetime import datetime
+from math import sqrt
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
@@ -76,6 +77,12 @@ class Simulation:
     startTime = datetime.now()
     self.params.RANDOM_SEED = startTime.hour * 10000 + startTime.minute * 100 + startTime.second
     seed(self.params.RANDOM_SEED)
+    
+    # Set the contact radius
+    # The contact radius is a function of the population density
+    # CONTACT_RADIUS = 3 / POPULATION_DENSITY
+    pixelDensity = 1 / self.params.POPULATION_SIZE
+    self.params.CONTACT_RADIUS = 2 * sqrt(pixelDensity)
 
     # Create the first frame
     # Intialize the population list with people and whether they follow rules
@@ -224,8 +231,12 @@ class Simulation:
                 
                 # Move the person to a random position in the new cell
                 frame.visitingGrid[cellRow][cellCol].append(person)
-                person.x = uniform(xMin, xMax)
-                person.y = uniform(yMin, yMax)
+                xMinNewCell = cellCol * self.params.CELL_SIZE
+                xMaxNewCell = xMinNewCell + self.params.CELL_SIZE
+                yMinNewCell = cellRow * self.params.CELL_SIZE
+                yMaxNewCell = yMinNewCell + self.params.CELL_SIZE
+                person.x = uniform(xMinNewCell, xMaxNewCell)
+                person.y = uniform(yMinNewCell, yMaxNewCell)
 
                 # Continue to the next cell, because there is no movement
                 continue
