@@ -36,6 +36,7 @@ class Person:
   STATES
   ------
     SUSCEPTIBLE : The person can contract the disease
+    EXPOSED : The person has contracted the disease but is asymptomatic
     INFECTED : The person has contracted the disease and is symptomatic
     RECOVERED - The person no longer has the disease and is immune
     DEAD - The person has died from the disease
@@ -123,13 +124,15 @@ class Person:
   
   # Define the states
   SUSCEPTIBLE = State('SUSCEPTIBLE', 0, 'green')
-  INFECTED = State('INFECTED', 1, 'red')
-  RECOVERED = State('RECOVERED', 2, 'blue')
-  DEAD = State('DEAD', 3, 'gray')
-  VACCINATED = State('VACCINATED', 4, 'yellow')
+  EXPOSED = State('EXPOSED', 1, 'orange')
+  INFECTED = State('INFECTED', 2, 'red')
+  RECOVERED = State('RECOVERED', 3, 'blue')
+  DEAD = State('DEAD', 4, 'gray')
+  VACCINATED = State('VACCINATED', 5, 'yellow')
 
   states = [
     SUSCEPTIBLE,
+    EXPOSED,
     INFECTED,
     RECOVERED,
     DEAD,
