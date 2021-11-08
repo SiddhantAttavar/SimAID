@@ -245,7 +245,7 @@ class RunSimulation(RunSimulationTemplate):
     self.graphYData = [[] for _ in Person.states]
     
     # Set whether vaccinated agents are graphed based on whether it is enabled
-    Person.VACCINATED.toGraph = self.params.VACCINATED_ENABLED
+    Person.VACCINATED.toGraph = self.params.VACCINATION_ENABLED
     
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)
@@ -257,7 +257,12 @@ class RunSimulation(RunSimulationTemplate):
       endTime = time()
       sleep(max(0, self.params.TIME_PER_FRAME - (endTime - startTime)))
       startTime = time()
-      self.costLabel.text = f'Cost: Rs. {simulation.interventionCost}'
+      self.costLabel.text = (
+        f'Cost: Rs. {simulation.interventionCost}; ' + 
+        f'Re: {frame.effectiveReproductionNumber:.2f}; ' + 
+        f'Td: {frame.doublingTime:.2f}; ' + 
+        f'Hospital occupancy: {int(frame.hospitalOccupancy * 100)}%'
+      )
     self.interventionCost = simulation.interventionCost
     
     # Once the simulation is over, allow the user to save it

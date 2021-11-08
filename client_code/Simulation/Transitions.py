@@ -81,6 +81,9 @@ class Transitions:
               # The disease spreads to the susceptible person and he becomes exposed
               susceptiblePerson.state = Person.EXPOSED
               susceptiblePerson.framesSinceLastState = 0
+              
+              # Increment the agents infected counter of the infected agent
+              infectedPerson.agentsInfected += 1
 
               # Add to cost
               cost += params.HYGIENE_COST
@@ -112,9 +115,10 @@ class Transitions:
         # The person becomes symptomatic
         person.state = Person.INFECTED
         person.framesSinceLastState = 0
+        person.agentsInfected = 0
   
   @staticmethod
-  def findRecovered(frame, params):
+  def findRemoved(frame, params):
     '''Find out who will be recovered / dead next
     
     Parameters
@@ -136,6 +140,12 @@ class Transitions:
       if person.framesSinceLastState >= params.INFECTION_PERIOD:
         # Find if the person recovers or dies
         person.framesSinceLastState = 0
+        
+        # Add to the total agents infected for this frame
+        frame.reproductiveSum += person.agentsInfected
+        frame.removedAgents += 1
+        
+        # Find if the person recovers or dies
         if random() < (params.MORTALITY_RATE * params.COMORBIDITY_COEFFICIENTS[person.age]):
           person.state = Person.DEAD
         else:

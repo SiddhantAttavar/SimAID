@@ -6,7 +6,7 @@ from random import random, uniform, randrange, seed
 from bisect import bisect_left as insertLeft
 from copy import deepcopy
 from datetime import datetime
-from math import sqrt
+from math import sqrt, log
 
 from Frame import Frame # type: ignore
 from Person import Person # type: ignore
@@ -24,6 +24,8 @@ class Simulation:
     The parameters of the simulation
   interventionCost : int
     The total cost of all interventions
+  infectionCountList : List[int]
+    The number of people infected at each frame (for calculating the doubling time)
 
   Methods
   -------
@@ -52,6 +54,7 @@ class Simulation:
 
     self.params = params
     self.interventionCost = 0
+    self.infectionCountList = []
 
   def run(self):
     '''Run the simulation.
@@ -135,7 +138,15 @@ class Simulation:
       The next frame in the simulation
     '''
 
+    # Move agents
     self.movePeople(frame)
+    
+    # Initialize metrics
+    frame.effectiveReproductionNumber = 0
+    frame.reproductiveSum = 0
+    frame.removedAgents = 0
+    frame.doublingTime = 0
+    frame.hospitalOccupancy = 0
 
     # Run different intervention functions if they are enabled
     if self.params.VACCINATION_ENABLED:
@@ -152,7 +163,7 @@ class Simulation:
     # Find which agents can transition between infection states
     self.interventionCost += Transitions.findExposed(frame, self.params)
     Transitions.findInfected(frame, self.params)
-    Transitions.findRecovered(frame, self.params)
+    Transitions.findRemoved(frame, self.params)
     Transitions.findSusceptible(frame, self.params)
     
     # Add to hospitalization cost
@@ -161,9 +172,37 @@ class Simulation:
       self.params.HOSPITALIZATION_COST * 
       self.params.HOSPITALIZATION_RATE
     )
+    
+    # Calculate metrics: Effective reproductive number, hospital occupancy and doubling time
+    # Effective reproductive number = number of infected agents per infected agent
+    if frame.removedAgents > 0:
+      frame.effectiveReproductionNumber = frame.reproductiveSum / frame.removedAgents
+    
+    # Hospital occupancy = number of infected agents in hospital / max hospital capacity
+    if self.params.HOSPITAL_CAPACITY > 0:
+      hospitalizedAgents = len(frame.stateGroups[Person.INFECTED.id]) * self.params.HOSPITALIZATION_RATE
+      frame.hospitalOccupancy = hospitalizedAgents / self.params.HOSPITAL_CAPACITY
+    
+    # Doubling time = time to double infected agents
+    # T = (window length * log(2)) / (log(infected agents / infected agents at t - window length))
+    currentInfectedCount = len(frame.stateGroups[Person.INFECTED.id])
+    self.infectionCountList.append(currentInfectedCount)
+    if len(self.infectionCountList) > self.params.DOUBLING_TIME_WINDOW_LENGTH:
+      pastInfectedCount = self.infectionCountList[- 1 - self.params.DOUBLING_TIME_WINDOW_LENGTH]
+      if (currentInfectedCount > 0 and pastInfectedCount > 0 and 
+          currentInfectedCount != pastInfectedCount):
+        frame.doublingTime = (
+          (self.params.DOUBLING_TIME_WINDOW_LENGTH * self.params.LOG_2) / (
+              log(currentInfectedCount / pastInfectedCount)
+            )
+        )
 
+    # Return the next frame
     res = Frame(frame.grid, self.params)
     res.isLockedDown = deepcopy(frame.isLockedDown)
+    res.effectiveReproductionNumber = frame.effectiveReproductionNumber
+    res.doublingTime = frame.doublingTime
+    res.hospitalOccupancy = frame.hospitalOccupancy
 
     return res
   

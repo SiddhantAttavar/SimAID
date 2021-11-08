@@ -17,6 +17,16 @@ class Frame:
     Whether the cell is under lockdown
   stateGroupss : List[List[Tuple[int, int, int]]]
     list of indexes of the people in each states
+  effectiveReproductionNumber : float
+    Effective reproduction number of the disease (Re)
+  reproductiveSum : int
+    Number of agents infected by agents that have stopped being infected
+  removedAgents : int
+    Number of infected agents that have recovered / died
+  doublingTime : float
+    Time it takes for the disease to double (Td)
+  hospitalOccupancy : float
+    Percentage of the population that is in the hospital
 
   Methods
   -------
@@ -42,6 +52,13 @@ class Frame:
     self.visitingGrid = [[[] for i in range(params.GRID_SIZE)] for j in range(params.GRID_SIZE)]
     self.isLockedDown = [[False for i in range(params.GRID_SIZE)] for j in range(params.GRID_SIZE)]
     self.stateGroups = [[] for _ in Person.states]
+
+    # Initialize metrics
+    self.effectiveReproductionNumber = 0
+    self.reproductiveSum = 0
+    self.removedAgents = 0
+    self.doublingTime = 0
+    self.hospitalOccupancy = 0
 
     # Iterate through the list and add the person to the state group
     for row in range(params.GRID_SIZE):

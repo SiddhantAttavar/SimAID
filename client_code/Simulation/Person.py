@@ -26,6 +26,8 @@ class Person:
     A variable which stores the current state of the person
   framesSinceLastState : int
     The number of days since the person was infected (default -1)
+  agentsInfected : int
+    The number of agents infected from start of infection
   followsRules : bool
     whether the person follows rules like social distancing and wearing mask
   isVisiting : bool
@@ -38,9 +40,9 @@ class Person:
     SUSCEPTIBLE : The person can contract the disease
     EXPOSED : The person has contracted the disease but is asymptomatic
     INFECTED : The person has contracted the disease and is symptomatic
-    RECOVERED - The person no longer has the disease and is immune
-    DEAD - The person has died from the disease
-    VACCINATED - The person has been vaccinated and is immune
+    RECOVERED : The person no longer has the disease and is immune
+    DEAD : The person has died from the disease
+    VACCINATED : The person has been vaccinated and is immune
 
   Methods
   -------
@@ -163,5 +165,6 @@ class Person:
     self.home = (self.x, self.y)
     self.state = state
     self.framesSinceLastState = 0
+    self.agentsInfected = 0
     self.followsRules = followsRules
     self.age = age

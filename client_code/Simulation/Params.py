@@ -2,6 +2,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from math import log
 
 class Params:
   '''Parameters for the simulation.
@@ -32,6 +33,13 @@ class Params:
     The list of probabilities of going from one cell to another cell
   RANDOM_SEED : int
     The seed for the random number generator used in the simulation
+  
+  Metrics Parameters
+  ------------------
+  DOUBLING_TIME_WINDOW_LENGTH : int
+    The number of frames in the window used to calculate doubling time
+  LOG_2 : float
+    The log of 2
 
   Pathogen Parameters
   -------------------
@@ -131,6 +139,10 @@ class Params:
     self.INFECTION_PERIOD = 10
     self.MORTALITY_RATE = 0.1
     self.IMMUNITY_PERIOD = 30
+    
+    # Metrics related parameters
+    self.DOUBLING_TIME_WINDOW_LENGTH = 3
+    self.LOG_2 = log(2)
 
     # Intervention related parameters
     self.RULE_COMPLIANCE_RATE = 1.0
