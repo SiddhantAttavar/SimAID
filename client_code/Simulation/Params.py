@@ -138,7 +138,7 @@ class Params:
 
     # State transition related parameters
     self.INITIAL_INFECTED = 2
-    self.INFECTION_RATE = 0.5
+    self.INFECTION_RATE = 0.2
     self.INCUBATION_PERIOD = 5
     self.INFECTION_PERIOD = 10
     self.MORTALITY_RATE = 0.1
