@@ -17,6 +17,9 @@ class Params:
     The number of frams in the simulation
   CONTACT_RADIUS : float
     The maximum distance between two individuals who are in contact
+  CONTACT_RADIUS_SQUARED : float
+    The square of the CONTACT_RADIUS for easier calculations
+  TIME_PER_FRAME : float
   TIME_PER_FRAME : float
     Time taken per frame
   GRID_SIZE : int
@@ -131,6 +134,7 @@ class Params:
     # The contact radius is a function of the population density
     # CONTACT_RADIUS = 3 / POPULATION_DENSITY
     self.CONTACT_RADIUS = 3 / self.POPULATION_SIZE
+    self.CONTACT_RADIUS_SQUARED = self.CONTACT_RADIUS ** 2
 
     # State transition related parameters
     self.INITIAL_INFECTED = 2

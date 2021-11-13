@@ -67,7 +67,7 @@ class Transitions:
         # Find when the infection is transmitted
         for susceptiblePerson in susceptibleGroup:
           for infectedPerson in infectedGroup:
-            dist = sqrt(
+            dist = (
               abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
               abs(infectedPerson.y - susceptiblePerson.y) ** 2
             )
@@ -77,7 +77,7 @@ class Transitions:
                 (susceptiblePerson.followsRules and infectedPerson.followsRules)):
               infectionRate *= params.HYGIENE_RATE
 
-            if dist <= params.CONTACT_RADIUS and random() < infectionRate:
+            if dist <= params.CONTACT_RADIUS_SQUARED and random() < infectionRate:
               # The disease spreads to the susceptible person and he becomes exposed
               susceptiblePerson.state = Person.EXPOSED
               susceptiblePerson.framesSinceLastState = 0
