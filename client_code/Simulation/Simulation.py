@@ -146,6 +146,7 @@ class Simulation:
     # Initialize metrics
     frame.effectiveReproductionNumber = 0
     frame.reproductiveSum = 0
+    frame.contactSum = 0
     frame.removedAgents = 0
     frame.doublingTime = 0
     frame.hospitalOccupancy = 0
@@ -180,6 +181,10 @@ class Simulation:
     if frame.removedAgents > 0:
       frame.effectiveReproductionNumber = frame.reproductiveSum / frame.removedAgents
     
+    # Average Contacts = number of contacted susceptible agents per infected agent
+    if frame.removedAgents > 0:
+      frame.averageContacts = frame.contactSum / frame.removedAgents
+    
     # Hospital occupancy = number of infected agents in hospital / max hospital capacity
     if self.params.HOSPITAL_CAPACITY > 0:
       hospitalizedAgents = len(frame.stateGroups[Person.INFECTED.id]) * self.params.HOSPITALIZATION_RATE
@@ -203,6 +208,7 @@ class Simulation:
     res = Frame(frame.grid, self.params)
     res.isLockedDown = deepcopy(frame.isLockedDown)
     res.effectiveReproductionNumber = frame.effectiveReproductionNumber
+    res.averageContacts = frame.averageContacts
     res.doublingTime = frame.doublingTime
     res.hospitalOccupancy = frame.hospitalOccupancy
 

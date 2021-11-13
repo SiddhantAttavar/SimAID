@@ -261,7 +261,8 @@ class RunSimulation(RunSimulationTemplate):
         f'Cost: Rs. {simulation.interventionCost}; ' + 
         f'Re: {frame.effectiveReproductionNumber:.2f}; ' + 
         f'Td: {frame.doublingTime:.2f}; ' + 
-        f'Hospital occupancy: {int(frame.hospitalOccupancy * 100)}%'
+        f'Hospital occupancy: {int(frame.hospitalOccupancy * 100)}%; '
+        f'Agents contacted: {frame.averageContacts:.2f}'
       )
     self.interventionCost = simulation.interventionCost
     

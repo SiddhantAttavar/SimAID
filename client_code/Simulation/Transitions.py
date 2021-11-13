@@ -77,16 +77,20 @@ class Transitions:
                 (susceptiblePerson.followsRules and infectedPerson.followsRules)):
               infectionRate *= params.HYGIENE_RATE
 
-            if dist <= params.CONTACT_RADIUS_SQUARED and random() < infectionRate:
-              # The disease spreads to the susceptible person and he becomes exposed
-              susceptiblePerson.state = Person.EXPOSED
-              susceptiblePerson.framesSinceLastState = 0
-              
-              # Increment the agents infected counter of the infected agent
-              infectedPerson.agentsInfected += 1
+            if dist <= params.CONTACT_RADIUS_SQUARED:
+              # Increment the agents contacted counter of the infected agent
+              infectedPerson.agentsContacted += 1
 
-              # Add to cost
-              cost += params.HYGIENE_COST
+              if random() < infectionRate:
+                # The disease spreads to the susceptible person and he becomes exposed
+                susceptiblePerson.state = Person.EXPOSED
+                susceptiblePerson.framesSinceLastState = 0
+                
+                # Increment the agents infected counter of the infected agent
+                infectedPerson.agentsInfected += 1
+
+                # Add to cost
+                cost += params.HYGIENE_COST
     
     # Return cost
     return cost
@@ -116,6 +120,7 @@ class Transitions:
         person.state = Person.INFECTED
         person.framesSinceLastState = 0
         person.agentsInfected = 0
+        person.agentsContacted = 0
   
   @staticmethod
   def findRemoved(frame, params):
@@ -143,6 +148,7 @@ class Transitions:
         
         # Add to the total agents infected for this frame
         frame.reproductiveSum += person.agentsInfected
+        frame.contactSum += person.agentsContacted
         frame.removedAgents += 1
         
         # Find if the person recovers or dies

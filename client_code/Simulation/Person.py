@@ -28,6 +28,9 @@ class Person:
     The number of days since the person was infected (default -1)
   agentsInfected : int
     The number of agents infected from start of infection
+  agentsContacted : int
+    The number of susceptible agents contacted from start of infection
+  followsRules : bool
   followsRules : bool
     whether the person follows rules like social distancing and wearing mask
   isVisiting : bool
@@ -166,5 +169,6 @@ class Person:
     self.state = state
     self.framesSinceLastState = 0
     self.agentsInfected = 0
+    self.agentsContacted = 0
     self.followsRules = followsRules
     self.age = age

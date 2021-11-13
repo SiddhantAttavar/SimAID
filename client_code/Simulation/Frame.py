@@ -19,10 +19,17 @@ class Frame:
     list of indexes of the people in each states
   effectiveReproductionNumber : float
     Effective reproduction number of the disease (Re)
+  averageContacts : float
+    Average number of susceptible contacts per infected person
+  reproductiveSum : int
   reproductiveSum : int
     Number of agents infected by agents that have stopped being infected
+  contactSum : int
+    Number of susceptible agents contacted by infected agents
+  removedAgents : int
   removedAgents : int
     Number of infected agents that have recovered / died
+  doublingTime : float
   doublingTime : float
     Time it takes for the disease to double (Td)
   hospitalOccupancy : float
@@ -55,7 +62,9 @@ class Frame:
 
     # Initialize metrics
     self.effectiveReproductionNumber = 0
+    self.averageContacts = 0
     self.reproductiveSum = 0
+    self.contactSum = 0
     self.removedAgents = 0
     self.doublingTime = 0
     self.hospitalOccupancy = 0
