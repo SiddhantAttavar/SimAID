@@ -50,6 +50,8 @@ class Transitions:
         susceptibleGroup = []
         infectedGroup = []
 
+        # Find all susceptible and infected people from the current cell 
+        # in the grid and visiting grid
         for person in cell:
           if not person.isVisiting:
             if person.state == Person.SUSCEPTIBLE:
@@ -62,14 +64,38 @@ class Transitions:
             susceptibleGroup.append(person)
           elif person.state == Person.INFECTED:
             infectedGroup.append(person)
+        
+        # Sort the groups by the x coordinate to implement the two pointer method
+        susceptibleGroup.sort(key = lambda person: person.x)
+        infectedGroup.sort(key = lambda person: person.x)
+        
+        # Use the two pointer method to find the exposed agents
+        # Maintain two pointers such that all susceptible agents between the two pointers
+        # are in the x contact radius of the current infected agent
+        leftPointer = 0
+        rightPointer = 0
+        susceptibleCount = len(susceptibleGroup)
 
-        # Iterate through all pairs of infected and susceptible movePeople
-        # Find when the infection is transmitted
-        for susceptiblePerson in susceptibleGroup:
-          for infectedPerson in infectedGroup:
+        for infectedPerson in infectedGroup:
+          # Move the right pointer to the first susceptible agent 
+          # that is not in the x contact radius
+          while (rightPointer < susceptibleCount and 
+                  susceptibleGroup[rightPointer].x <= infectedPerson.x + params.CONTACT_RADIUS):
+            rightPointer += 1
+          
+          # Similarly, move the left pointer to the first susceptible agent
+          # that is in the x contact radius
+          while (leftPointer < susceptibleCount and
+                  susceptibleGroup[leftPointer].x < infectedPerson.x - params.CONTACT_RADIUS):
+            leftPointer += 1
+          
+          # The infected agent is in contact with 
+          # all susceptible agents between the two pointers
+          for susceptiblePerson in susceptibleGroup[leftPointer: rightPointer]:
+            # Calculate the distance between the two agents to check the y contact radius
             dist = (
-              abs(infectedPerson.x - susceptiblePerson.x) ** 2 + 
-              abs(infectedPerson.y - susceptiblePerson.y) ** 2
+              abs(susceptiblePerson.x - infectedPerson.x) ** 2 +
+              abs(susceptiblePerson.y - infectedPerson.y) ** 2
             )
 
             infectionRate = params.INFECTION_RATE
