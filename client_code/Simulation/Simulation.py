@@ -307,13 +307,7 @@ if __name__ == '__main__':
   from time import time
 
   # Parameters for running the simulation
-  params = Params(
-    POPULATION_SIZE = 5000,
-    VACCINATION_ENABLED = False,
-    LOCKDOWN_ENABLED = True,
-    HYGIENE_ENABLED = False,
-    TRAVEL_RESTRICTIONS_ENABLED = False
-  )
+  params = Params()
   
   simulation = Simulation(params)
   startTime = time()
