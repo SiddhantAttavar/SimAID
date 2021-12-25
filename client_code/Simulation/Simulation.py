@@ -313,11 +313,7 @@ if __name__ == '__main__':
   from time import time
 
   # Parameters for running the simulation
-  params = Params(
-    LOCKDOWN_ENABLED = True,
-    RULE_COMPLIANCE_RATE = .7,
-    LOCKDOWN_STRATEGY = Interventions.blockLockdown
-  )
+  params = Params()
   
   simulation = Simulation(params)
   startTime = time()

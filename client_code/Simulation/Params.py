@@ -22,7 +22,6 @@ class Params:
   CONTACT_RADIUS_SQUARED : float
     The square of the CONTACT_RADIUS for easier calculations
   TIME_PER_FRAME : float
-  TIME_PER_FRAME : float
     Time taken per frame
   GRID_SIZE : int
     The number of rows and columns of the grid
