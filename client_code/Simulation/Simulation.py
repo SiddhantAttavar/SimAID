@@ -158,7 +158,8 @@ class Simulation:
       self.interventionCost += Interventions.lockdown(
         frame, 
         len(self.infectionCountList), 
-        self.params
+        self.params,
+        Params.LOCKDOWN_STRATEGIES
       )
 
     # Iterate through all people and increment the frames since last state
@@ -298,7 +299,7 @@ class Simulation:
           # Reset the person's location to home
           person.x, person.y = person.home
 
-          if (not person.followsRules) or (not self.params.LOCKDOWN_ENABLED):
+          if (not person.followsRules) or (not frame.isLockedDown[rowCount][colCount]):
             # Change the position of the person by a random amount
             person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
             person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)

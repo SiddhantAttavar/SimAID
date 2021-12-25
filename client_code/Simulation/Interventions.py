@@ -51,7 +51,7 @@ class Interventions:
     return cost
   
   @staticmethod
-  def lockdown(frame, frameCount, params):
+  def lockdown(frame, frameCount, params, lockdownStrategies):
     '''Find out which cells are under lockdown
 
     Each cell is under lockdown if its infected population 
@@ -65,6 +65,8 @@ class Interventions:
       The current frame count of the simulation
     params : Params
       The parameters of the simulation
+    lockdownStrategies : Dict[str, func]
+      Dictionary of all lockdown strategies
     
     Returns
     -------
@@ -73,7 +75,7 @@ class Interventions:
     '''
 
     # For global lockdowns, find if there is a lockdown
-    lockdownStrategy = Params.LOCKDOWN_STRATEGIES[params.LOCKDOWN_STRATEGY]
+    lockdownStrategy = lockdownStrategies[params.LOCKDOWN_STRATEGY]
     lockdownStatus = lockdownStrategy(params, frameCount)
 
     # Iterate through all cells and find out which are under lockdown
@@ -190,4 +192,5 @@ class Interventions:
     stop = params.LOCKDOWN_STOP
 
     # Check if the current frameCount is in the [start, stop] range
-    return start <= frameCount <= stop
+    print(frameCount, start <= frameCount <= stop)
+    return start <= frameCount and frameCount <= stop

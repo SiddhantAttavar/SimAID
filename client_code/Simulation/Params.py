@@ -178,7 +178,7 @@ class Params:
     self.LOG_2 = log(2)
 
     # Intervention related parameters
-    self.RULE_COMPLIANCE_RATE = 1.0
+    self.RULE_COMPLIANCE_RATE = 0.9
     self.HOSPITAL_CAPACITY = 0.0
     self.HOSPITALIZATION_RATE = 5 * self.MORTALITY_RATE
     self.HOSPITALIZATION_COST = 5000
