@@ -69,6 +69,11 @@ class RunSimulation(RunSimulationTemplate):
     # Any code you write here will run when the form opens.
     self.params = params
     
+    # Change debugging setting here
+    self.params.TIME_PER_FRAME = 0
+    # self.params.LOCKDOWN_ENABLED = True
+    # self.params.LOCKDOWN_STRATEGY = 'block'
+    
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
     

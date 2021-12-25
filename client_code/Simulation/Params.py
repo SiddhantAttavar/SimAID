@@ -88,8 +88,10 @@ class Params:
     The days on which a global lockdown are enabled
   LOCAL_LOCKDOWN : bool
     Whether the lockdown is local or global
-  LOCKDOWN_STRATEGY : Func
+  LOCKDOWN_STRATEGY : func
     The strategy used for deciding which days are lockdown
+  LOCKDOWN_STRATEGIES : Dict[str, func]
+    Dictionary of all lockdown strategies
   
   Lockdown strategy Parameters
   ----------------------------
@@ -191,7 +193,7 @@ class Params:
     self.LOCKDOWN_COST = 500
     self.LOCKDOWN_DAYS = []
     self.LOCAL_LOCKDOWN = False
-    self.LOCKDOWN_STRATEGY = Interventions.alternatingLockdown
+    self.LOCKDOWN_STRATEGY = 'alternating'
     
     # Lockdown strategy related parameters
     self.LOCKDOWN_LEVEL = 0.5
