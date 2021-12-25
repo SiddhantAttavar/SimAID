@@ -123,6 +123,13 @@ class Params:
     Cost of travel restrictions per person who doesnt travel per day
   '''
   
+  # Set lockdown strategies
+  LOCKDOWN_STRATEGIES = {
+    'alternating': Interventions.alternatingLockdown,
+    'days-of-the-week': Interventions.daysOfWeekLockdown,
+    'block': Interventions.blockLockdown
+  }
+  
   def __init__(self, **kwargs):
     '''Initializes the parameters.
 

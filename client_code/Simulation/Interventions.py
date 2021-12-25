@@ -73,7 +73,8 @@ class Interventions:
     '''
 
     # For global lockdowns, find if there is a lockdown
-    lockdownStatus = params.LOCKDOWN_STRATEGY(params, frameCount)
+    lockdownStrategy = Params.LOCKDOWN_STRATEGIES[params.LOCKDOWN_STRATEGY]
+    lockdownStatus = lockdownStrategy(params, frameCount)
 
     # Iterate through all cells and find out which are under lockdown
     cost = 0
