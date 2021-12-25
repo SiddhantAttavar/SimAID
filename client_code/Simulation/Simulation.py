@@ -296,16 +296,16 @@ class Simulation:
             # The person does not travel
             person.isVisiting = False
           
-          # Reset the person's location to home
-          person.x, person.y = person.home
+            # Reset the person's location to home
+            person.x, person.y = person.home
 
-          if (not person.followsRules) or (not frame.isLockedDown[rowCount][colCount]):
-            # Change the position of the person by a random amount
-            person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
-            person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+            if (not person.followsRules) or (not frame.isLockedDown[rowCount][colCount]):
+              # Change the position of the person by a random amount
+              person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+              person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
 
-            person.x = min(xMax, max(xMin, person.x))
-            person.y = min(yMax, max(yMin, person.y))
+              person.x = min(xMax, max(xMin, person.x))
+              person.y = min(yMax, max(yMin, person.y))
   
 if __name__ == '__main__':
   # Only performed when this file is run directly

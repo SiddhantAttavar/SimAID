@@ -92,6 +92,11 @@ class Transitions:
           # The infected agent is in contact with 
           # all susceptible agents between the two pointers
           for susceptiblePerson in susceptibleGroup[leftPointer: rightPointer]:
+            # Check for lockdown
+            if (frame.isLockedDown[rowCount][colCount] and 
+                infectedPerson.followsRules and susceptiblePerson.followsRules):
+                continue
+
             # Calculate the distance between the two agents to check the y contact radius
             dist = (
               abs(susceptiblePerson.x - infectedPerson.x) ** 2 +

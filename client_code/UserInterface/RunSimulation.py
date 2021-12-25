@@ -71,8 +71,11 @@ class RunSimulation(RunSimulationTemplate):
     
     # Change debugging setting here
     self.params.TIME_PER_FRAME = 0
-    # self.params.LOCKDOWN_ENABLED = True
-    # self.params.LOCKDOWN_STRATEGY = 'block'
+    self.params.LOCAL_LOCKDOWN = False
+    self.params.LOCKDOWN_ENABLED = True
+    self.params.LOCKDOWN_STRATEGY = 'block'
+    self.params.LOCKDOWN_START = 0
+    self.params.LOCKDOWN_STOP = 75
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
