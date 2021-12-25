@@ -51,21 +51,29 @@ class Interventions:
     return cost
   
   @staticmethod
-  def lockdown(frame, params):
+  def lockdown(frame, frameCount, params):
     '''Find out which cells are under lockdown
+
+    Each cell is under lockdown if its infected population 
+    is greater than a certain percentage
     
     Parameters
     ----------
     frame : Frame
       The current frame of the simulation
+    frameCount : int
+      The current frame count of the simulation
     params : Params
       The parameters of the simulation
     
     Returns
     -------
-    cost : int
+    int
       Cost of the lockdown of cells in the frame
     '''
+
+    # For global lockdowns, find if there is a lockdown
+    lockdownStatus = params.LOCKDOWN_STRATEGY(params, frameCount)
 
     # Iterate through all cells and find out which are under lockdown
     cost = 0
@@ -77,14 +85,108 @@ class Interventions:
           infectedCount += person.state == Person.INFECTED
         
         # Check whether the cell should be under lockdown
-        frame.isLockedDown[rowCount][colCount] = (
-          len(cell) > 0 and
-          infectedCount / len(cell) >= params.LOCKDOWN_LEVEL
-        )
+        if params.LOCAL_LOCKDOWN:
+          frame.isLockedDown[rowCount][colCount] = (
+            len(cell) > 0 and
+            infectedCount / len(cell) >= params.LOCKDOWN_LEVEL
+          )
+        else:
+          frame.isLockedDown[rowCount][colCount] = lockdownStatus
 
         # Add to the cost if the cell is under lockdown
         if frame.isLockedDown[rowCount][colCount]:
-          cost += params.LOCKDOWN_COST * len(cell)
+          cost += params.LOCKDOWN_COST * params.RULE_COMPLIANCE_RATE * len(cell)
     
     # Return cost
     return cost
+    
+  @staticmethod
+  def alternatingLockdown(params, frameCount):
+    '''Lockdown strategy: Alternating lockdown
+
+    The entire simulation is on lockdown for framesOn frames, 
+    and then free to move for framesOff frames, between the [start, stop] range
+
+    Parameters
+    ----------
+    params : Params
+      The parameters of the simulation
+    frameCount : int
+      The current frame count of the simulation
+
+    Returns
+    -------
+    bool
+      Whether there is a lockdown
+    '''
+
+    # Get start, stop values
+    start = params.LOCKDOWN_START
+    stop = params.LOCKDOWN_STOP
+    framesOn = params.ALT_LOCKDOWN_FRAMES_ON
+    framesOff = params.ALT_LOCKDOWN_FRAMES_OFF
+
+    # Check if the current frameCount is in the [start, stop] range
+    if frameCount < start or stop < frameCount:
+      return False
+    
+    # Check if frameCount is in the lockdown phase
+    return (frameCount - start) % (framesOn + framesOff) < framesOn
+  
+  @staticmethod
+  def daysOfWeekLockdown(params, frameCount):
+    '''Lockdown strategy: Alternating lockdown
+
+    The entire simulation is on lockdown for certain days of the week
+    in a given [start, stop] range, assuming Monday is the first day of the simulation
+
+    Parameters
+    ----------
+    params : Params
+      The parameters of the simulation
+    frameCount : int
+      The current frame count of the simulation
+
+    Returns
+    -------
+    bool
+      Whether there is a lockdown
+    '''
+
+    # Get start, stop values
+    start = params.LOCKDOWN_START
+    stop = params.LOCKDOWN_STOP
+
+    # Check if the current frameCount is in the [start, stop] range
+    if frameCount < start or stop < frameCount:
+      return False
+    
+    # Check if frameCount is in the lockdown day of the week
+    day = frameCount % 7
+    return params.DAY_LOCKDOWN[day]
+    
+  @staticmethod
+  def blockLockdown(params, frameCount):
+    '''Lockdown strategy: Alternating lockdown
+
+    The entire simulation is on lockdown in the [start, stop] range
+
+    Parameters
+    ----------
+    params : Params
+      The parameters of the simulation
+    frameCount : int
+      The current frame count of the simulation
+
+    Returns
+    -------
+    bool
+      Whether there is a lockdown
+    '''
+
+    # Get start, stop values
+    start = params.LOCKDOWN_START
+    stop = params.LOCKDOWN_STOP
+
+    # Check if the current frameCount is in the [start, stop] range
+    return start <= frameCount <= stop

@@ -155,7 +155,11 @@ class Simulation:
     if self.params.VACCINATION_ENABLED:
       self.interventionCost += Interventions.vaccinate(frame, self.params)
     if self.params.LOCKDOWN_ENABLED:
-      self.interventionCost += Interventions.lockdown(frame, self.params)
+      self.interventionCost += Interventions.lockdown(
+        frame, 
+        len(self.infectionCountList), 
+        self.params
+      )
 
     # Iterate through all people and increment the frames since last state
     for row in frame.grid:
@@ -290,15 +294,17 @@ class Simulation:
           else:
             # The person does not travel
             person.isVisiting = False
+          
           # Reset the person's location to home
           person.x, person.y = person.home
 
-          # Change the position of the person by a random amount
-          person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
-          person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+          if (not person.followsRules) or (not self.params.LOCKDOWN_ENABLED):
+            # Change the position of the person by a random amount
+            person.x += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
+            person.y += uniform(-self.params.MAX_MOVEMENT, self.params.MAX_MOVEMENT)
 
-          person.x = min(xMax, max(xMin, person.x))
-          person.y = min(yMax, max(yMin, person.y))
+            person.x = min(xMax, max(xMin, person.x))
+            person.y = min(yMax, max(yMin, person.y))
   
 if __name__ == '__main__':
   # Only performed when this file is run directly
@@ -307,7 +313,11 @@ if __name__ == '__main__':
   from time import time
 
   # Parameters for running the simulation
-  params = Params()
+  params = Params(
+    LOCKDOWN_ENABLED = True,
+    RULE_COMPLIANCE_RATE = .7,
+  )
+  params.LOCKDOWN_STRATEGY = Interventions.blockLockdown
   
   simulation = Simulation(params)
   startTime = time()

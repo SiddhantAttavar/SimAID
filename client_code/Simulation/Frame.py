@@ -22,14 +22,11 @@ class Frame:
   averageContacts : float
     Average number of susceptible contacts per infected person
   reproductiveSum : int
-  reproductiveSum : int
     Number of agents infected by agents that have stopped being infected
   contactSum : int
     Number of susceptible agents contacted by infected agents
   removedAgents : int
-  removedAgents : int
     Number of infected agents that have recovered / died
-  doublingTime : float
   doublingTime : float
     Time it takes for the disease to double (Td)
   hospitalOccupancy : float

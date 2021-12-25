@@ -4,6 +4,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from math import log
 
+from Interventions import Interventions # type: ignore
+
 class Params:
   '''Parameters for the simulation.
   
@@ -81,10 +83,29 @@ class Params:
   ---------------------
   LOCKDOWN_ENABLED : bool
     Whether lockdown is enabled
-  LOCKDOWN_LEVEL : float
-    The percentage of infected population at which lockdown is enabled
   LOCKDOWN_COST : int
     The cost of lockdown per person per day
+  LOCKDOWN_DAYS : List[int]
+    The days on which a global lockdown are enabled
+  LOCAL_LOCKDOWN : bool
+    Whether the lockdown is local or global
+  LOCKDOWN_STRATEGY : Func
+    The strategy used for deciding which days are lockdown
+  
+  Lockdown strategy Parameters
+  ----------------------------
+  LOCKDOWN_LEVEL : float
+    The percentage of infected population at which lockdown is enabled
+  LOCKDOWN_START : int
+    When the lockdown strategy starts
+  LOCKDOWN_STOP : int
+    When the lockdown strategy stops
+  ALT_LOCKDOWN_FRAMES_ON : int
+    How long the lockdown is kept on for
+  ALT_LOCKDOWN_FRAMES_OFF : int
+    How long the lockdown is kept off for
+  DAY_LOCKDOWN : List[bool]
+    Which days of the week lockdown is enabled
   
   Hygiene measures Parameters
   ---------------------------
@@ -102,7 +123,7 @@ class Params:
   TRAVEL_RESTRICTIONS_COST : int
     Cost of travel restrictions per person who doesnt travel per day
   '''
-
+  
   def __init__(self, **kwargs):
     '''Initializes the parameters.
 
@@ -161,8 +182,18 @@ class Params:
 
     # Lockdown related parameters
     self.LOCKDOWN_ENABLED = False
-    self.LOCKDOWN_LEVEL = 0.5
     self.LOCKDOWN_COST = 500
+    self.LOCKDOWN_DAYS = []
+    self.LOCAL_LOCKDOWN = False
+    self.LOCKDOWN_STRATEGY = Interventions.alternatingLockdown
+    
+    # Lockdown strategy related parameters
+    self.LOCKDOWN_LEVEL = 0.5
+    self.LOCKDOWN_START = 50
+    self.LOCKDOWN_STOP = 100
+    self.ALT_LOCKDOWN_FRAMES_ON = 20
+    self.ALT_LOCKDOWN_FRAMES_OFF = 10
+    self.DAY_LOCKDOWN = [True, True, True, True, True, False, False]
 
     # Hygiene related parameters
     self.HYGIENE_ENABLED = False
