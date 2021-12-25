@@ -92,11 +92,6 @@ class Transitions:
           # The infected agent is in contact with 
           # all susceptible agents between the two pointers
           for susceptiblePerson in susceptibleGroup[leftPointer: rightPointer]:
-            # Check for lockdown
-            if (frame.isLockedDown[rowCount][colCount] and 
-                infectedPerson.followsRules and susceptiblePerson.followsRules):
-                continue
-
             # Calculate the distance between the two agents to check the y contact radius
             dist = (
               abs(susceptiblePerson.x - infectedPerson.x) ** 2 +
@@ -107,6 +102,11 @@ class Transitions:
             if (params.HYGIENE_ENABLED and 
                 (susceptiblePerson.followsRules and infectedPerson.followsRules)):
               infectionRate *= params.HYGIENE_RATE
+            
+            # Check for lockdown
+            if (frame.isLockedDown[rowCount][colCount] and 
+                infectedPerson.followsRules and susceptiblePerson.followsRules):
+                pass
 
             if dist <= params.CONTACT_RADIUS_SQUARED:
               # Increment the agents contacted counter of the infected agent
