@@ -206,4 +206,4 @@ class Params:
 
     # Change the value for each parameter in kwargs from default
     for param, value in kwargs.items():
-      exec(f'self.{param} = {value}')
+      setattr(self, str(param), value)

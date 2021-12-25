@@ -316,8 +316,8 @@ if __name__ == '__main__':
   params = Params(
     LOCKDOWN_ENABLED = True,
     RULE_COMPLIANCE_RATE = .7,
+    LOCKDOWN_STRATEGY = Interventions.blockLockdown
   )
-  params.LOCKDOWN_STRATEGY = Interventions.blockLockdown
   
   simulation = Simulation(params)
   startTime = time()
