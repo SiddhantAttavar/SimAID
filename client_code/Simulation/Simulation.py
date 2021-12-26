@@ -181,7 +181,11 @@ class Simulation:
       self.params.HOSPITALIZATION_RATE
     )
     
-    # Calculate metrics: Effective reproductive number, hospital occupancy and doubling time
+    # Calculate metrics: 
+    # - Effective reproductive number
+    # - Hospital occupancy
+    # - Doubling time
+    # - Peak of hospitalization
     # Effective reproductive number = number of infected agents per infected agent
     if frame.removedAgents > 0:
       frame.effectiveReproductionNumber = frame.reproductiveSum / frame.removedAgents
@@ -194,6 +198,12 @@ class Simulation:
     if self.params.HOSPITAL_CAPACITY > 0:
       hospitalizedAgents = len(frame.stateGroups[Person.INFECTED.id]) * self.params.HOSPITALIZATION_RATE
       frame.hospitalOccupancy = hospitalizedAgents / self.params.HOSPITAL_CAPACITY
+      
+    # Peak Hospitalization = max(Peak hospitalization, number of infected agents in hospital)
+    frame.peakHospitalization = max(
+      frame.peakHospitalization, 
+      int(len(frame.stateGroups[Person.INFECTED.id]) * self.params.HOSPITALIZATION_RATE)
+    )
     
     # Doubling time = time to double infected agents
     # T = (window length * log(2)) / (log(infected agents / infected agents at t - window length))
@@ -216,6 +226,7 @@ class Simulation:
     res.averageContacts = frame.averageContacts
     res.doublingTime = frame.doublingTime
     res.hospitalOccupancy = frame.hospitalOccupancy
+    res.peakHospitalization = frame.peakHospitalization
 
     return res
   

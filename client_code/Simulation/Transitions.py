@@ -106,7 +106,7 @@ class Transitions:
             # Check for lockdown
             if (frame.isLockedDown[rowCount][colCount] and 
                 infectedPerson.followsRules and susceptiblePerson.followsRules):
-                pass
+                continue
 
             if dist <= params.CONTACT_RADIUS_SQUARED:
               # Increment the agents contacted counter of the infected agent

@@ -31,6 +31,8 @@ class Frame:
     Time it takes for the disease to double (Td)
   hospitalOccupancy : float
     Percentage of the population that is in the hospital
+  peakHospitalization : int
+    Maximum hospitalized patients
 
   Methods
   -------
@@ -65,6 +67,7 @@ class Frame:
     self.removedAgents = 0
     self.doublingTime = 0
     self.hospitalOccupancy = 0
+    self.peakHospitalization = 0
 
     # Iterate through the list and add the person to the state group
     for row in range(params.GRID_SIZE):

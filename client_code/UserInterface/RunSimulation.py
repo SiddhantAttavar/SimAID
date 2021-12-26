@@ -69,13 +69,18 @@ class RunSimulation(RunSimulationTemplate):
     # Any code you write here will run when the form opens.
     self.params = params
     
-    # Change debugging setting here
+    # Change debugging settings here
     self.params.TIME_PER_FRAME = 0
     self.params.LOCAL_LOCKDOWN = False
-    self.params.LOCKDOWN_ENABLED = True
+    self.params.LOCKDOWN_ENABLED = False
     self.params.LOCKDOWN_STRATEGY = 'block'
-    self.params.LOCKDOWN_START = 0
-    self.params.LOCKDOWN_STOP = 75
+    self.params.LOCKDOWN_START = 50
+    self.params.LOCKDOWN_STOP = 100
+    self.params.RULE_COMPLIANCE_RATE = 0.9
+    self.params.SIMULATION_LENGTH = 180
+    # self.params.INCUBATION_PERIOD = 10
+    # self.params.INFECTION_PERIOD = 20
+    # self.params.IMMUNITY_PERIOD = 90
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
@@ -265,13 +270,14 @@ class RunSimulation(RunSimulationTemplate):
       endTime = time()
       sleep(max(0, self.params.TIME_PER_FRAME - (endTime - startTime)))
       startTime = time()
-      self.costLabel.text = (
-        f'Cost: Rs. {simulation.interventionCost}; ' + 
-        f'Re: {frame.effectiveReproductionNumber:.2f}; ' + 
-        f'Td: {frame.doublingTime:.2f}; ' + 
-        f'Hospital occupancy: {int(frame.hospitalOccupancy * 100)}%; '
-        f'Agents contacted: {frame.averageContacts:.2f}'
-      )
+      self.costLabel.text = '; '.join([
+        f'Cost: Rs. {simulation.interventionCost}',
+        f'Re: {frame.effectiveReproductionNumber:.2f}',
+        f'Td: {frame.doublingTime:.2f}',
+        f'Hospital occupancy: {int(frame.hospitalOccupancy * 100)}%',
+        f'Agents contacted: {frame.averageContacts:.2f}',
+        f'Peak hospitalization: {frame.peakHospitalization}'
+      ])
     self.interventionCost = simulation.interventionCost
     
     # Once the simulation is over, allow the user to save it
