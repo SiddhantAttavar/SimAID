@@ -168,9 +168,10 @@ class Params:
     # State transition related parameters
     self.INITIAL_INFECTED = 2
     self.INFECTION_RATE = 0.2
+    self.HOSPITALIZATION_RATE = 0.5
+    self.MORTALITY_RATE = 0.2 * self.HOSPITALIZATION_RATE
     self.INCUBATION_PERIOD = 5
     self.INFECTION_PERIOD = 10
-    self.MORTALITY_RATE = 0.1
     self.IMMUNITY_PERIOD = 30
     
     # Metrics related parameters
@@ -180,7 +181,6 @@ class Params:
     # Intervention related parameters
     self.RULE_COMPLIANCE_RATE = 0.9
     self.HOSPITAL_CAPACITY = 0.0
-    self.HOSPITALIZATION_RATE = 5 * self.MORTALITY_RATE
     self.HOSPITALIZATION_COST = 5000
 
     # Vaccination related parameters

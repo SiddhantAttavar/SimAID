@@ -74,13 +74,10 @@ class RunSimulation(RunSimulationTemplate):
     self.params.LOCAL_LOCKDOWN = False
     self.params.LOCKDOWN_ENABLED = True
     self.params.LOCKDOWN_STRATEGY = 'block'
-    self.params.LOCKDOWN_START = 70 - 20
-    self.params.LOCKDOWN_STOP = self.params.LOCKDOWN_START + 75
+    self.params.LOCKDOWN_START = 71 - 10
+    self.params.LOCKDOWN_STOP = self.params.LOCKDOWN_START + 15
     self.params.RULE_COMPLIANCE_RATE = 0.9
-    self.params.SIMULATION_LENGTH = 120
-    # self.params.INCUBATION_PERIOD = 10
-    # self.params.INFECTION_PERIOD = 20
-    # self.params.IMMUNITY_PERIOD = 90
+    self.params.INFECTION_RATE = 0.2
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.

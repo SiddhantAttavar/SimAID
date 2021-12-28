@@ -173,6 +173,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the mortality rate slider is moved'''
     
     self.params.MORTALITY_RATE = self.mortalityRateSlider.value / 100
+    self.params.HOSPITALIZATION_RATE = 5 * self.params.MORTALITY_RATE
     self.mortalityRateLabel.text = f'Mortality Probability: {int(round(self.mortalityRateSlider.value))}%'
     
   def onRuleComplianceRateChange(self, handle, **event_args):
