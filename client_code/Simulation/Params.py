@@ -67,10 +67,16 @@ class Params:
   -----------------------
   RULE_COMPLIANCE_RATE : float
     The percentage of the population that follows rules
+  
+  
+  Hospital Parameters
+  -------------------
   HOSPITAL_CAPACITY : float
     The percentage of the population that can be supported by hospitals
   HOSPITALIZATION_COST : int
     The cost of a person being in hospital per person per day
+  HOSPITAL_ENABLED : bool
+    Whether we are tracking hospital cases
   
   Vaccination Parameters
   ----------------------
@@ -184,8 +190,11 @@ class Params:
 
     # Intervention related parameters
     self.RULE_COMPLIANCE_RATE = 0.9
+
+    # Hospital related paramters
     self.HOSPITAL_CAPACITY = 0.2
     self.HOSPITALIZATION_COST = 5000
+    self.HOSPITAL_ENABLED = False
 
     # Vaccination related parameters
     self.VACCINATION_ENABLED = False

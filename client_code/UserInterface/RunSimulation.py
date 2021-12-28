@@ -74,10 +74,12 @@ class RunSimulation(RunSimulationTemplate):
     self.params.LOCAL_LOCKDOWN = False
     # self.params.LOCKDOWN_ENABLED = True
     self.params.LOCKDOWN_STRATEGY = 'block'
-    self.params.LOCKDOWN_START = 71 - 10
-    self.params.LOCKDOWN_STOP = self.params.LOCKDOWN_START + 15
+    self.params.LOCKDOWN_START = 50
+    self.params.LOCKDOWN_STOP = 100
     self.params.RULE_COMPLIANCE_RATE = 0.9
-    self.params.INFECTION_RATE = 0.8
+    self.params.INFECTION_RATE = 0.2
+    self.params.CONTACT_RADIUS = 3 / self.params.POPULATION_SIZE * (2 ** 0.5)
+    self.params.CONTACT_RADIUS_SQUARED = self.params.CONTACT_RADIUS ** 2
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
@@ -159,7 +161,7 @@ class RunSimulation(RunSimulationTemplate):
       currPlot += 1
     
     # Add the hospital capacity data
-    if self.params.HOSPITAL_CAPACITY > 0:
+    if self.params.HOSPITAL_ENABLED:
       self.graph.data[currPlot].x.append(frameCount)
       self.graph.data[currPlot].y.append(
         int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE)
@@ -264,7 +266,7 @@ class RunSimulation(RunSimulationTemplate):
       ))
     
     # Add the hospital capacity line
-    if self.params.HOSPITAL_CAPACITY > 0:
+    if self.params.HOSPITAL_ENABLED:
       self.graph.data.append(go.Scatter(
         x = [],
         y = [],
