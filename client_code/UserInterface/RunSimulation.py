@@ -145,39 +145,28 @@ class RunSimulation(RunSimulationTemplate):
     
     # Plot the result on the graph
     self.graphXData.append(frameCount)
-    self.graph.data = []
+    currPlot = 0
     for stateID, stateGroup in enumerate(frame.stateGroups):
       state = Person.states[stateID]
       if not state.toGraph:
         # Do not plot this infection state
         continue
 
+      # Add the new data
       self.graphYData[stateID].append(len(stateGroup))
-      figure = go.Scatter(
-        x = self.graphXData,
-        y = self.graphYData[stateID],
-        marker = dict(
-          color = state.color
-        ),
-        name = state.name,
-        mode = 'lines'
-      )
-      self.graph.data.append(figure)
+      self.graph.data[currPlot].x.append(frameCount)
+      self.graph.data[currPlot].y.append(len(stateGroup))
+      currPlot += 1
     
-    # Add the hospital capacity line
+    # Add the hospital capacity data
     if self.params.HOSPITAL_CAPACITY > 0:
-      self.graph.data.append(go.Scatter(
-        x = self.graphXData,
-        y = [int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE) 
-              for _ in range(self.params.SIMULATION_LENGTH)],
-        marker = dict(
-          color = 'orange'
-        ),
-        name = 'HOSPITAL_CAPACITY',
-        mode = 'lines'
-      ))
+      self.graph.data[currPlot].x.append(frameCount)
+      self.graph.data[currPlot].y.append(
+        int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE)
+      )
     
-    self.graph.data = self.graph.data
+    # Render the updates
+    self.graph.redraw()
     
     # Draw a box for the daily counts in the corner
     if frameCount > 0:
@@ -250,11 +239,44 @@ class RunSimulation(RunSimulationTemplate):
     '''
     
     # Set seed to a previous value
-    #random.seed(114914)
+    # random.seed(114914)
 
     # Initialize arrays for graphing the results
     self.graphXData = []
     self.graphYData = [[] for _ in Person.states]
+
+    # Intialize graph
+    # Plot the result on the graph
+    self.graph.data = []
+    for state in Person.states:
+      if not state.toGraph:
+        # Do not plot this infection state
+        continue
+
+      self.graph.data.append(go.Scatter(
+        x = [],
+        y = [],
+        marker = dict(
+          color = state.color
+        ),
+        name = state.name,
+        mode = 'lines'
+      ))
+    
+    # Add the hospital capacity line
+    if self.params.HOSPITAL_CAPACITY > 0:
+      self.graph.data.append(go.Scatter(
+        x = [],
+        y = [],
+        marker = dict(
+          color = 'orange'
+        ),
+        name = 'HOSPITAL_CAPACITY',
+        mode = 'lines'
+      ))
+    
+    # Render the graph
+    self.graph.redraw()
     
     # Set whether vaccinated agents are graphed based on whether it is enabled
     Person.VACCINATED.toGraph = self.params.VACCINATION_ENABLED

@@ -123,6 +123,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the population size slider is moved'''
     
     self.params.POPULATION_SIZE = int(round(self.populationSizeSlider.value))
+    self.params.HOSPITAL_CAPACITY = 0.2
     self.populationSizeLabel.text = f'Population Size: {int(round(self.populationSizeSlider.value))} people'
   
   def onPopulationDemographicsChange(self, handle, **event_args):
