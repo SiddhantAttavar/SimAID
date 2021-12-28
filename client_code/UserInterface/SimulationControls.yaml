@@ -143,7 +143,7 @@ components:
       event_bindings: {slide: onDiseaseTimelineChange}
     event_bindings: {}
   - type: ColumnPanel
-    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"UPQTNJ":45,"KQHDKG":15,"IBMFAV":45,"VHAZKC":15,"KVEXYP":45,"MTEOIO":15}'}
+    properties: {col_widths: '{"OWKGTY":45,"GTEAGC":15,"KQHDKG":10,"IBMFAV":45,"VHAZKC":15,"KVEXYP":45,"MTEOIO":15,"EIHYWI":37}'}
     name: interventionControlsColumnPanel
     layout_properties: {grid_position: 'UFDNSY,UJJMNW'}
     components:
@@ -206,7 +206,7 @@ components:
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '', bold: false, underline: false, icon: ''}
       name: lockdownLabel
-      layout_properties: {grid_position: 'PLSWUO,UPQTNJ'}
+      layout_properties: {grid_position: 'PLSWUO,EIHYWI'}
       event_bindings: {}
     - type: form:C6ZZPAPN4YYF5NVJ:Switch
       properties: {}
@@ -224,9 +224,9 @@ components:
     - type: form:C6ZZPAPN4YYF5NVJ:Slider
       properties: {pips_mode: '', min: 0, tooltips: null, margin: null, pips_stepped: true,
         pips: false, pips_values: '', max: 100, padding: '', enabled: true, pips_density: null,
-        limit: null, animate: true, visible: true, connect: 'True, False', start: '0',
-        behaviour: tap, spacing_above: small, spacing_below: small, color: null, format: .2f,
-        step: 1}
+        limit: null, animate: true, visible: true, connect: 'False, True, False',
+        start: '50, 100', behaviour: tap, spacing_above: small, spacing_below: small,
+        color: null, format: .2f, step: 1}
       name: lockdownSlider
       layout_properties: {grid_position: 'LJOZHV,MSBUCS'}
       event_bindings: {slide: onLockdownRangesChange}

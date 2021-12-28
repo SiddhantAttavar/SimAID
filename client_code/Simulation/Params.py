@@ -198,7 +198,7 @@ class Params:
     self.LOCKDOWN_DAYS = []
     self.LOCAL_LOCKDOWN = False
     self.LOCKDOWN_STRATEGY = 'block'
-    self.LOCKDOWN_COUNT = 0
+    self.LOCKDOWN_COUNT = 1
     self.LOCKDOWN_RANGES = [50, 100]
     
     # Lockdown strategy related parameters

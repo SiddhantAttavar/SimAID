@@ -101,9 +101,9 @@ class SimulationControls(SimulationControlsTemplate):
     self.lockdownSwitch.checked = self.params.LOCKDOWN_ENABLED
     self.lockdownCountTextBox.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
+    self.lockdownSlider.max = self.params.SIMULATION_LENGTH
     self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
     self.lockdownSlider.start = self.params.LOCKDOWN_RANGES
-    self.lockdownSlider.max = self.params.SIMULATION_LENGTH
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.start = self.params.LOCKDOWN_COST
     
@@ -220,7 +220,7 @@ class SimulationControls(SimulationControlsTemplate):
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     if self.params.LOCKDOWN_ENABLED:
-      self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: Rs. {self.lockdownCostSlider.value}'
+      self.lockdownLabel.text = f'Lockdown Cost: Rs. {self.lockdownCostSlider.value}'
     else:
       self.lockdownLabel.text = 'Lockdown: '
   
@@ -232,14 +232,14 @@ class SimulationControls(SimulationControlsTemplate):
     
     self.params.LOCKDOWN_COUNT = int(self.lockdownCountTextBox.text)
     self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
-    self.lockdownSlider.values = []
+    newValues = []
     numValues = 2 * self.params.LOCKDOWN_COUNT
-    avgValue = self.params.SIMULATION_LENGTH // numValues
+    avgValue = self.params.SIMULATION_LENGTH // (numValues + 1)
     curr = 0
     for i in range(numValues):
       curr += avgValue
-      self.lockdownSlider.values.append(curr)
-    self.lockdownSlider.values = self.lockdownSlider.values
+      newValues.append(curr)
+    self.lockdownSlider.values = newValues.copy()
     
 
   def onLockdownRangesChange(self, handle, **event_args):
@@ -256,7 +256,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the lockdown cost slider is moved'''
 
     self.params.LOCKDOWN_COST = int(round(self.lockdownCostSlider.value))
-    self.lockdownLabel.text = f'Lockdown Level: {int(round(self.lockdownSlider.value))}%, Cost: Rs. {int(round(self.lockdownCostSlider.value))}'
+    self.lockdownLabel.text = f'Lockdown Cost: Rs. {int(round(self.lockdownCostSlider.value))}'
 
   def onHygieneChange(self, **event_args):
     '''This method is called when the hygiene switch is checked or unchecked'''
