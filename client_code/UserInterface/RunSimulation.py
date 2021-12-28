@@ -72,12 +72,12 @@ class RunSimulation(RunSimulationTemplate):
     # Change debugging settings here
     self.params.TIME_PER_FRAME = 0
     self.params.LOCAL_LOCKDOWN = False
-    self.params.LOCKDOWN_ENABLED = True
+    # self.params.LOCKDOWN_ENABLED = True
     self.params.LOCKDOWN_STRATEGY = 'block'
     self.params.LOCKDOWN_START = 71 - 10
     self.params.LOCKDOWN_STOP = self.params.LOCKDOWN_START + 15
     self.params.RULE_COMPLIANCE_RATE = 0.9
-    self.params.INFECTION_RATE = 0.2
+    self.params.INFECTION_RATE = 0.8
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
@@ -159,7 +159,8 @@ class RunSimulation(RunSimulationTemplate):
         marker = dict(
           color = state.color
         ),
-        name = state.name
+        name = state.name,
+        mode = 'lines'
       )
       self.graph.data.append(figure)
     
@@ -172,7 +173,8 @@ class RunSimulation(RunSimulationTemplate):
         marker = dict(
           color = 'orange'
         ),
-        name = 'HOSPITAL_CAPACITY'
+        name = 'HOSPITAL_CAPACITY',
+        mode = 'lines'
       ))
     
     self.graph.data = self.graph.data

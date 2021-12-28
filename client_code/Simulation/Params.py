@@ -67,7 +67,7 @@ class Params:
   -----------------------
   RULE_COMPLIANCE_RATE : float
     The percentage of the population that follows rules
-  HOSPITALITY_CAPACITY : float
+  HOSPITAL_CAPACITY : float
     The percentage of the population that can be supported by hospitals
   HOSPITALIZATION_COST : int
     The cost of a person being in hospital per person per day
@@ -173,7 +173,7 @@ class Params:
     self.INFECTION_RATE = 0.2
     self.HOSPITALIZATION_RATE = 0.5
     self.MORTALITY_RATE = 0.2 * self.HOSPITALIZATION_RATE
-    self.MORTALITY_COEFFICIENT = 3
+    self.MORTALITY_COEFFICIENT = 2
     self.INCUBATION_PERIOD = 5
     self.INFECTION_PERIOD = 10
     self.IMMUNITY_PERIOD = 30
@@ -184,7 +184,7 @@ class Params:
 
     # Intervention related parameters
     self.RULE_COMPLIANCE_RATE = 0.9
-    self.HOSPITAL_CAPACITY = 0.0
+    self.HOSPITAL_CAPACITY = 0.2
     self.HOSPITALIZATION_COST = 5000
 
     # Vaccination related parameters

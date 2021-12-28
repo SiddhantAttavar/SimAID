@@ -173,13 +173,14 @@ class Transitions:
     # Increase the mortality rate
     numInfected = len(frame.stateGroups[Person.INFECTED.id])
     numHospitalized = int(numInfected * params.HOSPITALIZATION_RATE)
-    if numHospitalized > params.HOSPITAL_CAPACITY:
+    totalHospitalCapacity = int(params.HOSPITAL_CAPACITY * params.POPULATION_SIZE)
+    if numHospitalized > totalHospitalCapacity:
       # If there are x hospitalized people, y is hospital capacity
       # k is the mortality coefficient, and m is the mortality rate then
       # (y + (x - y) * k) / x * m is the new mortality rate
       mortalityRate = params.MORTALITY_RATE * (
-        params.HOSPITAL_CAPACITY + 
-        (numHospitalized - params.HOSPITAL_CAPACITY) * params.MORTALITY_COEFFICIENT
+        totalHospitalCapacity + 
+        (numHospitalized - totalHospitalCapacity) * params.MORTALITY_COEFFICIENT
       ) / numHospitalized
     else:
       mortalityRate = params.MORTALITY_RATE
