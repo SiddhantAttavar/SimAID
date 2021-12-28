@@ -99,11 +99,6 @@ class SimulationControls(SimulationControlsTemplate):
     
     # Lockdown UI initialization
     self.lockdownSwitch.checked = self.params.LOCKDOWN_ENABLED
-    self.lockdownCountTextBox.visible = self.params.LOCKDOWN_ENABLED
-    self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
-    self.lockdownSlider.max = self.params.SIMULATION_LENGTH
-    self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
-    self.lockdownSlider.start = self.params.LOCKDOWN_RANGES
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.start = self.params.LOCKDOWN_COST
     
@@ -146,9 +141,6 @@ class SimulationControls(SimulationControlsTemplate):
 
     self.params.SIMULATION_LENGTH = int(round(self.simulationLengthSlider.value))
     self.diseaseTimelineSlider.max = self.params.SIMULATION_LENGTH
-    self.lockdownSlider.max = self.params.SIMULATION_LENGTH
-    for i in range(len(self.lockdownCostSlider.values)):
-      self.lockdownCostSlider.values[i] = min(self.lockdownCostSlider.values, self.lockdownSlider.max)
     self.simulationLengthLabel.text = f'Simulation Length: {int(round(self.simulationLengthSlider.value))} days'
   
   def onGridSizeChange(self, handle, **event_args):
@@ -216,41 +208,11 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the lockdown switch is checked or unchecked'''
     
     self.params.LOCKDOWN_ENABLED = self.lockdownSwitch.checked
-    self.lockdownCountTextBox.visible = self.params.LOCKDOWN_ENABLED
-    self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     if self.params.LOCKDOWN_ENABLED:
       self.lockdownLabel.text = f'Lockdown Cost: Rs. {self.lockdownCostSlider.value}'
     else:
       self.lockdownLabel.text = 'Lockdown: '
-  
-  def onLockdownCountChange(self, **event_args):
-    '''This method is called when the lockdown count text box value has changed'''
-    
-    if not self.lockdownCountTextBox.text:
-      return
-    
-    self.params.LOCKDOWN_COUNT = int(self.lockdownCountTextBox.text)
-    self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
-    newValues = []
-    numValues = 2 * self.params.LOCKDOWN_COUNT
-    avgValue = self.params.SIMULATION_LENGTH // (numValues + 1)
-    curr = 0
-    for i in range(numValues):
-      curr += avgValue
-      newValues.append(curr)
-    self.lockdownSlider.values = newValues.copy()
-    
-
-  def onLockdownRangesChange(self, handle, **event_args):
-    '''This method is called when the lockdown ranges slider is moved'''
-    
-    self.params.LOCKDOWN_RANGES = []
-    for i in range(0, len(self.lockdownSlider.values), 2):
-      self.params.LOCKDOWN_RANGES.append([
-        self.lockdownSlider.values[i],
-        self.lockdownSlider.values[i + 1]
-      ])
   
   def onLockdownCostChange(self, handle, **event_args):
     '''This method is called when the lockdown cost slider is moved'''
