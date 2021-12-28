@@ -197,7 +197,9 @@ class Params:
     self.LOCKDOWN_COST = 500
     self.LOCKDOWN_DAYS = []
     self.LOCAL_LOCKDOWN = False
-    self.LOCKDOWN_STRATEGY = 'alternating'
+    self.LOCKDOWN_STRATEGY = 'block'
+    self.LOCKDOWN_COUNT = 0
+    self.LOCKDOWN_RANGES = []
     
     # Lockdown strategy related parameters
     self.LOCKDOWN_LEVEL = 0.5

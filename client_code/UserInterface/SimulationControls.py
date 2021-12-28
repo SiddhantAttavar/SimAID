@@ -100,6 +100,8 @@ class SimulationControls(SimulationControlsTemplate):
     # Lockdown UI initialization
     self.lockdownSwitch.checked = self.params.LOCKDOWN_ENABLED
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
+    self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
+    self.lockdownSlider.values = self.params.LOCKDOWN_RANGES
     self.lockdownSlider.start = round(self.params.LOCKDOWN_LEVEL * 100)
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.start = self.params.LOCKDOWN_COST
@@ -216,12 +218,33 @@ class SimulationControls(SimulationControlsTemplate):
       self.lockdownLabel.text = f'Lockdown Level: {self.lockdownSlider.value}%, Cost: Rs. {self.lockdownCostSlider.value}'
     else:
       self.lockdownLabel.text = 'Lockdown: '
-
-  def onLockdownLevelChange(self, handle, **event_args):
-    '''This method is called when the lockdown level slider is moved'''
+  
+  def onLockdownCountChange(self, **event_args):
+    '''This method is called when the lockdown count text box value has changed'''
     
-    self.params.LOCKDOWN_LEVEL = self.lockdownSlider.value / 100
-    self.lockdownLabel.text = f'Lockdown Level: {int(round(self.lockdownSlider.value))}%, Cost: Rs. {int(round(self.lockdownCostSlider.value))}'
+    if not self.lockdownCountTextBox.text.isnumeric():
+      return
+    
+    self.params.LOCKDOWN_COUNT = int(self.lockdownCountTextBox.text)
+    self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
+    self.lockdownSlider.values = []
+    numValues = 2 * self.params.LOCKDOWN_COUNT
+    avgValue = self.params.SIMULATION_LENGTH // numValues
+    curr = 0
+    for i in range(numValues):
+      curr += avgValue
+      self.lockdownSlider.values.append(curr)
+    
+
+  def onLockdownRangesChange(self, handle, **event_args):
+    '''This method is called when the lockdown ranges slider is moved'''
+    
+    self.params.LOCKDOWN_RANGES = []
+    for i in range(0, len(self.lockdownSlider.values), 2):
+      self.params.LOCKDOWN_RANGES.append([
+        self.lockdownSlider.values[i],
+        self.lockdownSlider.values[i + 1]
+      ])
   
   def onLockdownCostChange(self, handle, **event_args):
     '''This method is called when the lockdown cost slider is moved'''
