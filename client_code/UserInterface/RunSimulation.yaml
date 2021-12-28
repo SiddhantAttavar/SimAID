@@ -28,13 +28,13 @@ components:
     properties: {role: background-image, height: '466', tooltip: '', border: '', foreground: '',
       visible: true, spacing_above: small, spacing_below: small, background: ''}
     name: canvas
-    layout_properties: {grid_position: 'VFAJUZ,WALMOZ'}
+    layout_properties: {grid_position: 'VFAJUZ,WALMOZ', full_width_row: true}
     event_bindings: {show: onCanvasShow}
   - type: Plot
-    properties: {spacing_above: small, spacing_below: small, height: '466', visible: true,
+    properties: {spacing_above: none, spacing_below: none, height: '466', visible: true,
       tooltip: '', interactive: true}
     name: graph
-    layout_properties: {grid_position: 'VFAJUZ,BJWFBJ'}
+    layout_properties: {grid_position: 'VFAJUZ,BJWFBJ', full_width_row: true}
     event_bindings: {}
   event_bindings: {}
 - type: TextArea
