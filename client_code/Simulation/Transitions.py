@@ -168,6 +168,21 @@ class Transitions:
     -------
     None
     '''
+    
+    # If no. of hospitalized agents is more than hospital capacity
+    # Increase the mortality rate
+    numInfected = len(frame.stateGroups[Person.INFECTED.id])
+    numHospitalized = int(numInfected * params.HOSPITALIZATION_RATE)
+    if numHospitalized > params.HOSPITAL_CAPACITY:
+      # If there are x hospitalized people, y is hospital capacity
+      # k is the mortality coefficient, and m is the mortality rate then
+      # (y + (x - y) * k) / x * m is the new mortality rate
+      mortalityRate = params.MORTALITY_RATE * (
+        params.HOSPITAL_CAPACITY + 
+        (numHospitalized - params.HOSPITAL_CAPACITY) * params.MORTALITY_COEFFICIENT
+      ) / numHospitalized
+    else:
+      mortalityRate = params.MORTALITY_RATE
 
     # Iterate through all people and find those who are infected
     # Find if they have no time left for disease
@@ -183,7 +198,7 @@ class Transitions:
         frame.removedAgents += 1
         
         # Find if the person recovers or dies
-        if random() < (params.MORTALITY_RATE * params.COMORBIDITY_COEFFICIENTS[person.age]):
+        if random() < (mortalityRate * params.COMORBIDITY_COEFFICIENTS[person.age]):
           person.state = Person.DEAD
         else:
           person.state = Person.RECOVERED

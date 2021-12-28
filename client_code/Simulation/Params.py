@@ -55,6 +55,11 @@ class Params:
     The duration for which an infected person has the disease
   MORTALITY_RATE : float
     The chance of an infected person dying
+  HOSPITALIZATION_RATE : float
+    The percentage of the infected population that is hospitalised
+  MORTALITY_COEFFICIENT : float
+    The amount by which the mortality rate increases when the 
+    hospitalized patients exceed hospital capacity
   INITIAL_INFECTED : int
     The number of people who are infected at the beginning
   
@@ -64,8 +69,6 @@ class Params:
     The percentage of the population that follows rules
   HOSPITALITY_CAPACITY : float
     The percentage of the population that can be supported by hospitals
-  HOSPITALIZATION_RATE : float
-    The percentage of the infected population that is hospitalised
   HOSPITALIZATION_COST : int
     The cost of a person being in hospital per person per day
   
@@ -170,6 +173,7 @@ class Params:
     self.INFECTION_RATE = 0.2
     self.HOSPITALIZATION_RATE = 0.5
     self.MORTALITY_RATE = 0.2 * self.HOSPITALIZATION_RATE
+    self.MORTALITY_COEFFICIENT = 3
     self.INCUBATION_PERIOD = 5
     self.INFECTION_PERIOD = 10
     self.IMMUNITY_PERIOD = 30
