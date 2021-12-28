@@ -230,7 +230,6 @@ class SimulationControls(SimulationControlsTemplate):
     if not self.lockdownCountTextBox.text:
       return
     
-    print(type(self.lockdownCountTextBox.text))
     self.params.LOCKDOWN_COUNT = int(self.lockdownCountTextBox.text)
     self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
     self.lockdownSlider.values = []
@@ -240,6 +239,7 @@ class SimulationControls(SimulationControlsTemplate):
     for i in range(numValues):
       curr += avgValue
       self.lockdownSlider.values.append(curr)
+    self.lockdownSlider.values = self.lockdownSlider.values
     
 
   def onLockdownRangesChange(self, handle, **event_args):
