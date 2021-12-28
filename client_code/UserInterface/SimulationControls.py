@@ -99,10 +99,11 @@ class SimulationControls(SimulationControlsTemplate):
     
     # Lockdown UI initialization
     self.lockdownSwitch.checked = self.params.LOCKDOWN_ENABLED
+    self.lockdownCountTextBox.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
-    self.lockdownSlider.values = self.params.LOCKDOWN_RANGES
-    self.lockdownSlider.start = round(self.params.LOCKDOWN_LEVEL * 100)
+    self.lockdownSlider.start = self.params.LOCKDOWN_RANGES
+    self.lockdownSlider.max = self.params.SIMULATION_LENGTH
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.start = self.params.LOCKDOWN_COST
     
@@ -145,6 +146,9 @@ class SimulationControls(SimulationControlsTemplate):
 
     self.params.SIMULATION_LENGTH = int(round(self.simulationLengthSlider.value))
     self.diseaseTimelineSlider.max = self.params.SIMULATION_LENGTH
+    self.lockdownSlider.max = self.params.SIMULATION_LENGTH
+    for i in range(len(self.lockdownCostSlider.values)):
+      self.lockdownCostSlider.values[i] = min(self.lockdownCostSlider.values, self.lockdownSlider.max)
     self.simulationLengthLabel.text = f'Simulation Length: {int(round(self.simulationLengthSlider.value))} days'
   
   def onGridSizeChange(self, handle, **event_args):
@@ -212,6 +216,7 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the lockdown switch is checked or unchecked'''
     
     self.params.LOCKDOWN_ENABLED = self.lockdownSwitch.checked
+    self.lockdownCountTextBox.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     if self.params.LOCKDOWN_ENABLED:
@@ -222,9 +227,10 @@ class SimulationControls(SimulationControlsTemplate):
   def onLockdownCountChange(self, **event_args):
     '''This method is called when the lockdown count text box value has changed'''
     
-    if not self.lockdownCountTextBox.text.isnumeric():
+    if not self.lockdownCountTextBox.text:
       return
     
+    print(type(self.lockdownCountTextBox.text))
     self.params.LOCKDOWN_COUNT = int(self.lockdownCountTextBox.text)
     self.lockdownSlider.connect = [False, True] * self.params.LOCKDOWN_COUNT + [False]
     self.lockdownSlider.values = []

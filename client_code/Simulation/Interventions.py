@@ -192,5 +192,4 @@ class Interventions:
     stop = params.LOCKDOWN_STOP
 
     # Check if the current frameCount is in the [start, stop] range
-    print(frameCount, start <= frameCount <= stop)
     return start <= frameCount and frameCount <= stop
