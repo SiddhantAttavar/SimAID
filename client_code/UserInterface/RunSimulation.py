@@ -71,15 +71,6 @@ class RunSimulation(RunSimulationTemplate):
     
     # Change debugging settings here
     self.params.TIME_PER_FRAME = 0
-    self.params.LOCAL_LOCKDOWN = False
-    # self.params.LOCKDOWN_ENABLED = True
-    self.params.LOCKDOWN_STRATEGY = 'block'
-    self.params.LOCKDOWN_START = 50
-    self.params.LOCKDOWN_STOP = 100
-    self.params.RULE_COMPLIANCE_RATE = 0.9
-    self.params.INFECTION_RATE = 0.2
-    self.params.CONTACT_RADIUS = 3 / self.params.POPULATION_SIZE * (2 ** 0.5)
-    self.params.CONTACT_RADIUS_SQUARED = self.params.CONTACT_RADIUS ** 2
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
@@ -299,7 +290,7 @@ class RunSimulation(RunSimulationTemplate):
         f'Td: {frame.doublingTime:.2f}',
         f'Hospital occupancy: {int(frame.hospitalOccupancy * 100)}%',
         f'Agents contacted: {frame.averageContacts:.2f}',
-        f'Peak hospitalization: {frame.peakHospitalization}'
+        f'Peak infection: {frame.peakInfection}'
       ])
     self.interventionCost = simulation.interventionCost
     
