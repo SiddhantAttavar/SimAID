@@ -200,9 +200,9 @@ class Simulation:
       frame.hospitalOccupancy = hospitalizedAgents / self.params.HOSPITAL_CAPACITY
       
     # Peak Hospitalization = max(Peak hospitalization, number of infected agents in hospital)
-    frame.peakHospitalization = max(
-      frame.peakHospitalization, 
-      int(len(frame.stateGroups[Person.INFECTED.id]) * self.params.HOSPITALIZATION_RATE)
+    frame.peakInfection = max(
+      frame.peakInfection, 
+      len(frame.stateGroups[Person.INFECTED.id])
     )
     
     # Doubling time = time to double infected agents
@@ -226,7 +226,7 @@ class Simulation:
     res.averageContacts = frame.averageContacts
     res.doublingTime = frame.doublingTime
     res.hospitalOccupancy = frame.hospitalOccupancy
-    res.peakHospitalization = frame.peakHospitalization
+    res.peakInfection = frame.peakInfection
 
     return res
   
