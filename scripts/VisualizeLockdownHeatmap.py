@@ -25,19 +25,18 @@ def displayHeatMap(xAxis, yAxis, zAxis, msg):
 	plt.show()
 
 # Read data from input file
-inputFile = input('Enter file path: ')
-with open(inputFile) as f:
+with open('output.csv', 'r') as f:
 	csvReader = reader(f)
 	fileData = list(csvReader)
 	xAxis = list(map(int, fileData[0][1:]))
 	yAxis = [int(row[0]) for row in fileData[1:]]
-	data = [list(map(float, row[1:])) for row in fileData[1:]]
+	data = [list(map(int, row[1:])) for row in fileData[1:]]
 	data = data[::-1]
-	print(data)
 
 # Calculate values
 # Percentage reduction in peak hospitalization
-baseline = float(input('Enter baseline value: '))
+if 'baseline' not in globals():
+	baseline = float(input('Enter baseline value: '))
 zAxis1 = [[(baseline - x) / baseline * 100 for x in row] for row in data]
 displayHeatMap(
 	xAxis,
