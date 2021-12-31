@@ -71,6 +71,16 @@ class RunSimulation(RunSimulationTemplate):
     
     # Change debugging settings here
     self.params.TIME_PER_FRAME = 0
+    # self.params.INITIAL_INFECTED = 5
+    # self.params.HOSPITAL_ENABLED = True
+    # self.params.HOSPITALIZATION_RATE = 0.5
+    # self.params.IMMUNITY_PERIOD = 45
+    # self.params.INCUBATION_PERIOD = 5
+    # self.params.INFECTION_RATE *= 2.1 / 2.5
+    # self.params.LOCKDOWN_ENABLED = False
+    # self.params.LOCKDOWN_START = 47
+    # self.params.LOCKDOWN_STOP = 47 + 30
+    # self.params.RULE_COMPLIANCE_RATE = 0.70
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
@@ -156,6 +166,12 @@ class RunSimulation(RunSimulationTemplate):
       self.graph.data[currPlot].x.append(frameCount)
       self.graph.data[currPlot].y.append(
         int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE)
+      )
+      currPlot += 1
+      
+      self.graph.data[currPlot].x.append(frameCount)
+      self.graph.data[currPlot].y.append(
+        int(self.params.HOSPITALIZATION_RATE * len(frame.stateGroups[Person.INFECTED.id]))
       )
     
     # Render the updates
@@ -253,7 +269,7 @@ class RunSimulation(RunSimulationTemplate):
           color = state.color
         ),
         name = state.name,
-        mode = 'lines'
+        mode = 'lines',
       ))
     
     # Add the hospital capacity line
@@ -264,11 +280,23 @@ class RunSimulation(RunSimulationTemplate):
         marker = dict(
           color = 'orange'
         ),
-        name = 'HOSPITAL_CAPACITY',
+        name = 'HOSPITAL CAPACITY',
+        mode = 'lines',
+      ))
+      
+      self.graph.data.append(go.Scatter(
+        x = [],
+        y = [],
+        marker = dict(
+          color = 'black'
+        ),
+        name = 'HOSPITAL CASES',
         mode = 'lines'
       ))
     
     # Render the graph
+    self.graph.layout.yaxis.range = [0, self.params.POPULATION_SIZE]
+    self.graph.layout.legend.orientation = 'h'
     self.graph.redraw()
     
     # Set whether vaccinated agents are graphed based on whether it is enabled
@@ -285,14 +313,36 @@ class RunSimulation(RunSimulationTemplate):
       sleep(max(0, self.params.TIME_PER_FRAME - (endTime - startTime)))
       startTime = time()
       self.costLabel.text = '; '.join([
-        f'Cost: Rs. {simulation.interventionCost}',
+        # f'Cost: Rs. {simulation.interventionCost}',
         f'Re: {frame.effectiveReproductionNumber:.2f}',
         f'Td: {frame.doublingTime:.2f}',
         f'Hospital occupancy: {int(frame.hospitalOccupancy * 100)}%',
-        f'Agents contacted: {frame.averageContacts:.2f}',
+        # f'Agents contacted: {frame.averageContacts:.2f}',
         f'Peak infection: {frame.peakInfection}'
       ])
     self.interventionCost = simulation.interventionCost
+    
+    # Add lockdown box
+    if self.params.LOCKDOWN_ENABLED:
+      self.graph.layout.shapes = [
+        dict(
+          type = 'rect',
+          xref = 'x',
+          yref = 'y',
+          x0 = self.params.LOCKDOWN_START,
+          x1 = self.params.LOCKDOWN_STOP,
+          y0 = 0,
+          y1 = self.graph.layout.yaxis.range[1],
+          fillcolor = 'lightblue',
+          opacity = 0.4,
+          line = dict(
+            color = 'rgb(0, 0, 0, 0)',
+            width = 0
+          ),
+          layer = 'below'
+        )
+      ]
+      self.graph.redraw()
     
     # Once the simulation is over, allow the user to save it
     if anvil.users.get_user() is not None:
