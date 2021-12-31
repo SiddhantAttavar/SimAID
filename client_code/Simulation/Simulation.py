@@ -197,7 +197,8 @@ class Simulation:
     # Hospital occupancy = number of infected agents in hospital / max hospital capacity
     if self.params.HOSPITAL_CAPACITY > 0:
       hospitalizedAgents = len(frame.stateGroups[Person.INFECTED.id]) * self.params.HOSPITALIZATION_RATE
-      frame.hospitalOccupancy = hospitalizedAgents / self.params.HOSPITAL_CAPACITY
+      frame.hospitalOccupancy = hospitalizedAgents / (
+                                int(self.params.HOSPITAL_CAPACITY * self.params.POPULATION_SIZE))
       
     # Peak Hospitalization = max(Peak hospitalization, number of infected agents in hospital)
     frame.peakInfection = max(

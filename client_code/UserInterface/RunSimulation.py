@@ -71,16 +71,6 @@ class RunSimulation(RunSimulationTemplate):
     
     # Change debugging settings here
     self.params.TIME_PER_FRAME = 0
-    # self.params.INITIAL_INFECTED = 5
-    # self.params.HOSPITAL_ENABLED = True
-    # self.params.HOSPITALIZATION_RATE = 0.5
-    # self.params.IMMUNITY_PERIOD = 45
-    # self.params.INCUBATION_PERIOD = 5
-    # self.params.INFECTION_RATE *= 2.1 / 2.5
-    # self.params.LOCKDOWN_ENABLED = False
-    # self.params.LOCKDOWN_START = 47
-    # self.params.LOCKDOWN_STOP = 47 + 30
-    # self.params.RULE_COMPLIANCE_RATE = 0.70
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
