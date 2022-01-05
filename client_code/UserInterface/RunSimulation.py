@@ -71,6 +71,9 @@ class RunSimulation(RunSimulationTemplate):
     
     # Change debugging settings here
     self.params.TIME_PER_FRAME = 0
+    self.params.PLOT_EFFECTIVE_REPRODUCTIVE_NUMBER = True
+    Person.SUSCEPTIBLE.toGraph = False
+    Person.DEAD.toGraph = False
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
@@ -163,6 +166,14 @@ class RunSimulation(RunSimulationTemplate):
       self.graph.data[currPlot].y.append(
         int(self.params.HOSPITALIZATION_RATE * len(frame.stateGroups[Person.INFECTED.id]))
       )
+      currPlot += 1
+      
+    if self.params.PLOT_EFFECTIVE_REPRODUCTIVE_NUMBER:
+      # Add effective reproductive number
+      self.graph.data[currPlot].x.append(frameCount)
+      self.graph.data[currPlot].y.append(
+        max(0.1, frame.effectiveReproductionNumber)
+      )
     
     # Render the updates
     self.graph.redraw()
@@ -182,18 +193,27 @@ class RunSimulation(RunSimulationTemplate):
       self.canvas.text_align = 'center'
       self.canvas.text_baseline = 'center'
       
-      newInfected = self.graphYData[Person.INFECTED.id][-1] - self.graphYData[Person.INFECTED.id][-2]
-      newDead = self.graphYData[Person.DEAD.id][-1] - self.graphYData[Person.DEAD.id][-2]
-      self.canvas.fill_text(
-        f'Daily Infected: {newInfected}',
-        self.canvasWidth - 20 - 50,
-        20 + 15
-      )
-      self.canvas.fill_text(
-        f'Daily Dead: {newDead}',
-        self.canvasWidth - 20 - 50,
-        20 + 30
-      )
+      # Add daily infected and dead counts to the grid
+      if Person.INFECTED.toGraph:
+        newInfected = (
+          self.graphYData[Person.INFECTED.id][-1] - self.graphYData[Person.INFECTED.id][-2]
+        )
+
+        self.canvas.fill_text(
+          f'Daily Infected: {newInfected}',
+          self.canvasWidth - 20 - 50,
+          20 + 15
+        )
+      
+      # Add daily infected and dead counts to the grid
+      if Person.DEAD.toGraph:
+        newDead = self.graphYData[Person.DEAD.id][-1] - self.graphYData[Person.DEAD.id][-2]
+      
+        self.canvas.fill_text(
+          f'Daily Dead: {newDead}',
+          self.canvasWidth - 20 - 50,
+          20 + 30
+        )
       
       self.canvas.fill()
       
@@ -283,6 +303,26 @@ class RunSimulation(RunSimulationTemplate):
         name = 'HOSPITAL CASES',
         mode = 'lines'
       ))
+    
+    if self.params.PLOT_EFFECTIVE_REPRODUCTIVE_NUMBER:
+      # Plot the effective reproductive number
+      self.graph.data.append(go.Scatter(
+        x = [],
+        y = [],
+        marker = dict(
+          color = 'orange'
+        ),
+        name = 'EFFECTIVE REPRODUCTIVE NUMBER',
+        mode = 'lines',
+        yaxis = 'y2',
+      ))
+
+      # Initialize second y axis
+      # self.graph.layout.yaxis2.type = 'log'
+      self.graph.layout.yaxis2.anchor = 'x'
+      self.graph.layout.yaxis2.side = 'right'
+      self.graph.layout.yaxis2.showgrid = False
+      self.graph.layout.yaxis2.overlaying = 'y'
     
     # Render the graph
     self.graph.layout.yaxis.range = [0, self.params.POPULATION_SIZE]

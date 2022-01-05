@@ -44,6 +44,8 @@ class Params:
     The number of frames in the window used to calculate doubling time
   LOG_2 : float
     The log of 2
+  PLOT_EFFECTIVE_REPRODUCTIVE_NUMBER : bool
+    Whether to plot the effective reproductive number
 
   Pathogen Parameters
   -------------------
@@ -187,6 +189,7 @@ class Params:
     # Metrics related parameters
     self.DOUBLING_TIME_WINDOW_LENGTH = 3
     self.LOG_2 = log(2)
+    self.PLOT_EFFECTIVE_REPRODUCTIVE_NUMBER = False
 
     # Intervention related parameters
     self.RULE_COMPLIANCE_RATE = 0.9
