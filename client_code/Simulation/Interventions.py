@@ -94,6 +94,7 @@ class Interventions:
             infectedCount / len(cell) >= params.LOCKDOWN_LEVEL
           )
         else:
+          params.LOCKDOWN_DAYS[frameCount] = lockdownStatus
           frame.isLockedDown[rowCount][colCount] = lockdownStatus
 
         # Add to the cost if the cell is under lockdown

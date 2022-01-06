@@ -88,6 +88,7 @@ class Simulation:
     pixelDensity = 1 / self.params.POPULATION_SIZE
     self.params.CONTACT_RADIUS = 0.7 * sqrt(pixelDensity)
     self.params.CONTACT_RADIUS_SQUARED = self.params.CONTACT_RADIUS ** 2
+    self.params.LOCKDOWN_DAYS = [False] * self.params.SIMULATION_LENGTH
 
     # Create the first frame
     # Intialize the population list with people and whether they follow rules
