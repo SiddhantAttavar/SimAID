@@ -75,8 +75,10 @@ class Interventions:
     '''
 
     # For global lockdowns, find if there is a lockdown
-    lockdownStrategy = lockdownStrategies[params.LOCKDOWN_STRATEGY]
-    lockdownStatus = lockdownStrategy(params, frameCount)
+    if not params.LOCAL_LOCKDOWN:
+      lockdownStrategy = lockdownStrategies[params.LOCKDOWN_STRATEGY]
+      lockdownStatus = lockdownStrategy(params, frameCount)
+      params.LOCKDOWN_DAYS[frameCount] = lockdownStatus
 
     # Iterate through all cells and find out which are under lockdown
     cost = 0
@@ -94,7 +96,6 @@ class Interventions:
             infectedCount / len(cell) >= params.LOCKDOWN_LEVEL
           )
         else:
-          params.LOCKDOWN_DAYS[frameCount] = lockdownStatus
           frame.isLockedDown[rowCount][colCount] = lockdownStatus
 
         # Add to the cost if the cell is under lockdown
