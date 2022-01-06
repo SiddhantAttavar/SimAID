@@ -71,9 +71,23 @@ class RunSimulation(RunSimulationTemplate):
     
     # Change debugging settings here
     self.params.TIME_PER_FRAME = 0
-    self.params.PLOT_EFFECTIVE_REPRODUCTIVE_NUMBER = True
+    # self.params.SIMULATION_LENGTH = 250
+    # self.params.INCUBATION_PERIOD = 10
+    self.params.INFECTION_PERIOD = 20
+    self.params.INFECTION_RATE *= 2.1 / 2.5
+    self.params.LOCKDOWN_ENABLED = True
+    self.params.HOSPITAL_ENABLED = True
     Person.SUSCEPTIBLE.toGraph = False
+    Person.RECOVERED.toGraph = False
     Person.DEAD.toGraph = False
+    self.params.LOCKDOWN_STRATEGY = 'alternating'
+    self.params.LOCKDOWN_START = 55
+    self.params.LOCKDOWN_STOP = 175
+    self.params.ALT_LOCKDOWN_FRAMES_ON = 20
+    self.params.ALT_LOCKDOWN_FRAMES_OFF = 20
+    # self.params.LOCKDOWN_STRATEGY = 'block'
+    # self.params.LOCKDOWN_START = 55
+    # self.params.LOCKDOWN_STOP = 55 + 60
     
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
@@ -310,7 +324,7 @@ class RunSimulation(RunSimulationTemplate):
         x = [],
         y = [],
         marker = dict(
-          color = 'orange'
+          color = 'purple'
         ),
         name = 'EFFECTIVE REPRODUCTIVE NUMBER',
         mode = 'lines',
@@ -325,7 +339,7 @@ class RunSimulation(RunSimulationTemplate):
       self.graph.layout.yaxis2.overlaying = 'y'
     
     # Render the graph
-    self.graph.layout.yaxis.range = [0, self.params.POPULATION_SIZE]
+    self.graph.layout.yaxis.range = [0, 1500]
     self.graph.layout.legend.orientation = 'h'
     self.graph.redraw()
     
@@ -354,24 +368,41 @@ class RunSimulation(RunSimulationTemplate):
     
     # Add lockdown box
     if self.params.LOCKDOWN_ENABLED:
-      self.graph.layout.shapes = [
-        dict(
-          type = 'rect',
-          xref = 'x',
-          yref = 'y',
-          x0 = self.params.LOCKDOWN_START,
-          x1 = self.params.LOCKDOWN_STOP,
-          y0 = 0,
-          y1 = self.graph.layout.yaxis.range[1],
-          fillcolor = 'lightblue',
-          opacity = 0.4,
-          line = dict(
-            color = 'rgb(0, 0, 0, 0)',
-            width = 0
-          ),
-          layer = 'below'
+      # Get the lockdown periods
+      lockdownPeriods = []
+      curr = False
+      for frameCount, lockdown in enumerate(self.params.LOCKDOWN_DAYS):
+        if (not curr) and lockdown:
+          lockdownPeriods.append([frameCount, 0])
+        elif curr and (not lockdown):
+          if (frameCount - lockdownPeriods[-1][0]) <= 5:
+            lockdownPeriods.pop()
+          else:
+            lockdownPeriods[-1][1] = frameCount
+        curr = lockdown
+      print(lockdownPeriods)
+
+      # Create the shapes for display of the lockdown periods
+      self.graph.layout.shapes = []
+      for startFrame, endFrame in lockdownPeriods:
+        self.graph.layout.shapes.append(
+          dict(
+            type = 'rect',
+            xref = 'x',
+            yref = 'y',
+            x0 = startFrame,
+            x1 = endFrame,
+            y0 = 0,
+            y1 = self.graph.layout.yaxis.range[1],
+            fillcolor = 'lightblue',
+            opacity = 0.4,
+            line = dict(
+              color = 'rgb(0, 0, 0, 0)',
+              width = 0
+            ),
+            layer = 'below'
+          )
         )
-      ]
       self.graph.redraw()
     
     # Once the simulation is over, allow the user to save it
