@@ -15,7 +15,7 @@ A web app which allows local policy makers to run simulations of numerous epidem
 ## Explainer video: <a name = "explainer-video"></a>
 
 <p align = "center">
-  <a href = "https://youtu.be/LHN6Q6uYSKg">
-    <img src = "https://img.youtube.com/vi/LHN6Q6uYSKg/0.jpg">
+  <a href = "https://youtu.be/wsO8-pZ50V8">
+    <img src = "https://img.youtube.com/vi/wsO8-pZ50V8/0.jpg">
   </a>
 </p>
