@@ -69,26 +69,6 @@ class RunSimulation(RunSimulationTemplate):
     # Any code you write here will run when the form opens.
     self.params = params
     
-    # Change debugging settings here
-    self.params.TIME_PER_FRAME = 0
-    # self.params.SIMULATION_LENGTH = 250
-    # self.params.INCUBATION_PERIOD = 10
-    self.params.INFECTION_PERIOD = 20
-    self.params.INFECTION_RATE *= 2.1 / 2.5
-    self.params.LOCKDOWN_ENABLED = True
-    self.params.HOSPITAL_ENABLED = True
-    Person.SUSCEPTIBLE.toGraph = False
-    Person.RECOVERED.toGraph = False
-    Person.DEAD.toGraph = False
-    self.params.LOCKDOWN_STRATEGY = 'alternating'
-    self.params.LOCKDOWN_START = 55
-    self.params.LOCKDOWN_STOP = 175
-    self.params.ALT_LOCKDOWN_FRAMES_ON = 20
-    self.params.ALT_LOCKDOWN_FRAMES_OFF = 20
-    # self.params.LOCKDOWN_STRATEGY = 'block'
-    # self.params.LOCKDOWN_START = 55
-    # self.params.LOCKDOWN_STOP = 55 + 60
-    
   def drawFrame(self, frame, frameCount):
     '''This method draws a frame on the canvas.
     
@@ -339,7 +319,7 @@ class RunSimulation(RunSimulationTemplate):
       self.graph.layout.yaxis2.overlaying = 'y'
     
     # Render the graph
-    self.graph.layout.yaxis.range = [0, 1500]
+    self.graph.layout.yaxis.range = [0, self.params.POPULATION_SIZE]
     self.graph.layout.legend.orientation = 'h'
     self.graph.redraw()
     
