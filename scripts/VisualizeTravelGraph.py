@@ -20,6 +20,11 @@ travelProbabilites = [[[0.0, 0.04396231995215526, 0.118947362397652, 0.170234327
 graph = nx.DiGraph()
 cellSize = len(travelProbabilites)
 
+for i in range(cellSize):
+    for j in range(cellSize):
+        for k in range(cellSize * cellSize - 1, 0, -1):
+            travelProbabilites[i][j][k] -= travelProbabilites[i][j][k - 1]
+
 # Create nodes
 for i in range(cellSize):
     for j in range(cellSize):
@@ -40,7 +45,7 @@ positions = nx.get_node_attributes(graph, 'pos')
 edge_labels = nx.get_edge_attributes(graph, 'weight')
 nx.draw(graph, positions, node_color = 'black', node_size = 400)
 nx.draw_networkx_edge_labels(graph, positions, edge_labels = edge_labels, font_size = 16)
-#plt.show()
+# plt.show()
 
 # Save the graph
 figure = plt.gcf()
