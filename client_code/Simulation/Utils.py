@@ -87,5 +87,9 @@ class Utils:
     cellNum = insertLeft(probabilities, random())
     cellRow = cellNum // params.GRID_SIZE
     cellCol = cellNum % params.GRID_SIZE
+    while cellRow >= params.CELL_SIZE or cellCol >= params.CELL_SIZE:
+      cellNum = insertLeft(probabilities, random())
+      cellRow = cellNum // params.GRID_SIZE
+      cellCol = cellNum % params.GRID_SIZE
 
     return cellRow, cellCol

@@ -31,7 +31,6 @@ class Person:
   agentsContacted : int
     The number of susceptible agents contacted from start of infection
   followsRules : bool
-  followsRules : bool
     whether the person follows rules like social distancing and wearing mask
   isVisiting : bool
     Whether the person is visiting another cell
