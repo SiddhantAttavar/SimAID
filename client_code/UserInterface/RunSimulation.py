@@ -257,6 +257,9 @@ class RunSimulation(RunSimulationTemplate):
     # Initialize arrays for graphing the results
     self.graphXData = []
     self.graphYData = [[] for _ in Person.states]
+    
+    # Set whether vaccinated agents are graphed based on whether it is enabled
+    Person.VACCINATED.toGraph = self.params.VACCINATION_ENABLED
 
     # Intialize graph
     # Plot the result on the graph
@@ -322,9 +325,6 @@ class RunSimulation(RunSimulationTemplate):
     self.graph.layout.yaxis.range = [0, self.params.POPULATION_SIZE]
     self.graph.layout.legend.orientation = 'h'
     self.graph.redraw()
-    
-    # Set whether vaccinated agents are graphed based on whether it is enabled
-    Person.VACCINATED.toGraph = self.params.VACCINATION_ENABLED
     
     # Created a simulation object and runs the simulation
     simulation = Simulation(self.params)
