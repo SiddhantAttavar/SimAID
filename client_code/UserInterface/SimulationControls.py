@@ -99,6 +99,8 @@ class SimulationControls(SimulationControlsTemplate):
     
     # Lockdown UI initialization
     self.lockdownSwitch.checked = self.params.LOCKDOWN_ENABLED
+    self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
+    self.lockdownSlider.start = [self.params.LOCKDOWN_START, self.params.LOCKDOWN_STOP]
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.start = self.params.LOCKDOWN_COST
     
@@ -208,17 +210,25 @@ class SimulationControls(SimulationControlsTemplate):
     '''This method is called when the lockdown switch is checked or unchecked'''
     
     self.params.LOCKDOWN_ENABLED = self.lockdownSwitch.checked
+    self.lockdownSlider.visible = self.params.LOCKDOWN_ENABLED
     self.lockdownCostSlider.visible = self.params.LOCKDOWN_ENABLED
     if self.params.LOCKDOWN_ENABLED:
-      self.lockdownLabel.text = f'Lockdown Cost: Rs. {self.lockdownCostSlider.value}'
+      self.lockdownLabel.text = f'Lockdown - {list(map(lambda x: int(round(x)), self.lockdownSlider.values))}, Cost: Rs. {self.lockdownCostSlider.value}'
     else:
       self.lockdownLabel.text = 'Lockdown: '
+    
+  def onLockdownSliderChange(self, handle, **event_args):
+    '''This method is called when the lockdown slider is moved'''
+
+    self.params.LOCKDOWN_START, self.params.LOCKDOWN_STOP = self.lockdownSlider.values
+    self.lockdownLabel.text = f'Lockdown - {list(map(lambda x: int(round(x)), self.lockdownSlider.values))}, Cost: Rs. {self.lockdownCostSlider.value}'
+      
   
   def onLockdownCostChange(self, handle, **event_args):
     '''This method is called when the lockdown cost slider is moved'''
 
     self.params.LOCKDOWN_COST = int(round(self.lockdownCostSlider.value))
-    self.lockdownLabel.text = f'Lockdown Cost: Rs. {int(round(self.lockdownCostSlider.value))}'
+    self.lockdownLabel.text = f'Lockdown - {list(map(lambda x: int(round(x)), self.lockdownSlider.values))}, Cost: Rs. {self.lockdownCostSlider.value}'
 
   def onHygieneChange(self, **event_args):
     '''This method is called when the hygiene switch is checked or unchecked'''
