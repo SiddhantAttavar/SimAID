@@ -360,7 +360,6 @@ class RunSimulation(RunSimulationTemplate):
           else:
             lockdownPeriods[-1][1] = frameCount
         curr = lockdown
-      print(lockdownPeriods)
 
       # Create the shapes for display of the lockdown periods
       self.graph.layout.shapes = []
