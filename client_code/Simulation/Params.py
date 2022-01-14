@@ -84,6 +84,8 @@ class Params:
   ----------------------
   VACCINATION_ENABLED : bool
     Whether vaccination is enabled
+  VACCINATION_START : bool
+    The day vaccination starts
   VACCINATION_RATE : float
     The percentage of suseptible population which gets vaccinated in a day
   VACCINATION_COST : int
@@ -201,6 +203,7 @@ class Params:
 
     # Vaccination related parameters
     self.VACCINATION_ENABLED = False
+    self.VACCINATION_START = 60
     self.VACCINATION_RATE = 0.01
     self.VACCINATION_COST = 1000
 

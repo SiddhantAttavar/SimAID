@@ -153,7 +153,8 @@ class Simulation:
     frame.hospitalOccupancy = 0
 
     # Run different intervention functions if they are enabled
-    if self.params.VACCINATION_ENABLED:
+    if (self.params.VACCINATION_ENABLED and 
+        len(self.infectionCountList) >= self.params.VACCINATION_START):
       self.interventionCost += Interventions.vaccinate(frame, self.params)
     if self.params.LOCKDOWN_ENABLED:
       self.interventionCost += Interventions.lockdown(
