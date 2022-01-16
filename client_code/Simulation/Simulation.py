@@ -115,9 +115,29 @@ class Simulation:
       key = (cellRow, cellCol, personCount)
 
       # Check for duplicates
-      if key not in done:
-        done.add(key)
-        grid[cellRow][cellCol][personCount].state = Person.EXPOSED
+      while key in done:
+        cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
+        personCount = randrange(len(grid[cellRow][cellCol]))
+        key = (cellRow, cellCol, personCount)
+      
+      # Add the key
+      done.add(key)
+      grid[cellRow][cellCol][personCount].state = Person.EXPOSED
+    
+    for _ in range(self.params.INITIAL_VACCINATED):
+      cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
+      personCount = randrange(len(grid[cellRow][cellCol]))
+      key = (cellRow, cellCol, personCount)
+
+      # Check for duplicates
+      while key in done:
+        cellRow, cellCol = Utils.getRandomCell(self.params, self.params.GRID_PROBABILITIES)
+        personCount = randrange(len(grid[cellRow][cellCol]))
+        key = (cellRow, cellCol, personCount)
+      
+      # Add the key
+      done.add(key)
+      grid[cellRow][cellCol][personCount].state = Person.VACCINATED
 
     currFrame = Frame(grid, self.params)
     yield currFrame

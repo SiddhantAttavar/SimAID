@@ -90,6 +90,8 @@ class Params:
     The percentage of suseptible population which gets vaccinated in a day
   VACCINATION_COST : int
     The cost of one vaccination
+  INITIAL_VACCINATED : int
+    The number of people who are vaccinated at the begining
 
   Lockdown Parameters
   ---------------------
@@ -206,6 +208,7 @@ class Params:
     self.VACCINATION_START = 60
     self.VACCINATION_RATE = 0.01
     self.VACCINATION_COST = 1000
+    self.INITIAL_VACCINATED = 0
 
     # Lockdown related parameters
     self.LOCKDOWN_ENABLED = False
