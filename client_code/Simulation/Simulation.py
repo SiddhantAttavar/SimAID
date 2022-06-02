@@ -1,7 +1,3 @@
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
 from random import random, uniform, randrange, seed
 from bisect import bisect_left as insertLeft
 from copy import deepcopy
@@ -348,7 +344,9 @@ if __name__ == '__main__':
   from time import time
 
   # Parameters for running the simulation
-  params = Params()
+  params = Params(
+    POPULATION_SIZE=10000
+  )
   
   simulation = Simulation(params)
   startTime = time()

@@ -1,7 +1,3 @@
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
 from random import random
 from bisect import bisect_left as insertLeft
 
