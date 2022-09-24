@@ -1,5 +1,7 @@
 # SimAID
-A web app which allows local policy makers to run simulations of numerous epidemics and find out the best intervention strategies to use
+A web app which allows local policy makers to run simulations of numerous epidemics and find out the best intervention strategies to use.
+
+[Live Demo](https://njspopjbwljexuwd.anvil.app/MZZ4EVCYXSTIDTGCDBR4E5DI)
 
 ## Dependencies: <a name = "dependencies"></a>
  - [Python 3.x](https://www.python.org/downloads/)
